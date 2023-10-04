@@ -30,14 +30,17 @@ public class MainCharacter : MonoBehaviour
     {
         float directionH = Input.GetAxisRaw("Horizontal");
         float directionV = Input.GetAxisRaw("Vertical");
-        print(90 / 100);
         movePlayer(directionH,directionV);
         animationPlayer();
         if (isWater)
         {
             Death();
         }
-        
+        if(life <= 0)
+        {
+             mp.SetActive(false);
+            resuscitate();
+        }
     }
 
     private void Death()
@@ -49,6 +52,14 @@ public class MainCharacter : MonoBehaviour
     {
         float speed = Mathf.Abs(rb.velocity.x);
         animation.SetFloat("speed", speed);
+    }
+
+    private void resuscitate()
+    {
+        life = 100;
+        transform.position = new Vector3(-2.63765f, -0.75f, 0f);
+        isWater = false;
+        mp.SetActive(true);
     }
 
     public int getLife()
@@ -70,28 +81,22 @@ public class MainCharacter : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow) && isLander)
         {
-            print("ok");
             transform.Translate(Vector2.up * speed * Time.deltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.DownArrow) && isLander)
         {
             transform.Translate(Vector2.down * speed * Time.deltaTime, Space.World);
         }
-
-
-        print(isLander + " , " +isGround);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "ground")
         {
-            print("ground ok");
             isGround = true;
         }
         if (col.gameObject.tag == "water")
         {
-            print("ground ok");
             isWater = true;
         }
 
@@ -101,34 +106,21 @@ public class MainCharacter : MonoBehaviour
     {
         if (col.CompareTag("echelle"))
         {
-            print("echelle ok");
             isLander = true;
         }
-        if (col.CompareTag("ground"))
-        {
-
-        }
-        /*if (col.CompareTag("Ground"))
-        {
-            print("ground ok");
-            isGround = true;
-            isWalk = true;
-        }*/
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("echelle"))
         {
-            print("echelle nok");
             isLander = false;
         }
-        /*if (col.CompareTag("Ground"))
-        {
-            print("ground nok");
-            isGround = false;
-            isWalk = false;
-        }*/
+    }
+
+    public void Attack(int degat)
+    {
+        life = life - degat;
     }
 
 }

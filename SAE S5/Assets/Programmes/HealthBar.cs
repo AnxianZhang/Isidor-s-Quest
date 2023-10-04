@@ -24,11 +24,11 @@ public class HealthBar : MonoBehaviour
     private float CalculatePlayerLife()
     {
         int life = lifePlayer.getLife();
-            if (life != 0)
+        if (life != 0)
             {
-                float lifeActual = life / life;
-                print(lifeActual);
-                return lifeActual;
+                float lifeActual = life;
+                float lifeFinal = lifeActual * 0.01f;
+                return lifeFinal;
             }
         return 0.0f;
     }
