@@ -9,12 +9,17 @@ public class enemy : MonoBehaviour
     private int life = 60;
     private int degat = 5;
     private float speed = 5.0f;
+    private float posX;
+    private float posY;
     private Transform target;
     private bool isAttack = false;
+    private bool isDeath = false;
     // Start is called before the first frame update
     void Start()
     {
         target = mainPlayer.transform;
+        posX = transform.position.x;
+        posY = transform.position.y;
     }
 
     private void moveEnemy()
@@ -36,6 +41,28 @@ public class enemy : MonoBehaviour
             print("attaquer");
             AttackPlayer();
         }
+        /*if(mainPlayer.getLife() <= 0){
+            print("mort");
+            ReBorn();
+        }*/
+        if(isDeath == true){
+            Death();
+        }
+        
+    }
+
+    private void Death()
+    {
+        life = life - life;
+        snake.SetActive(false);
+    }
+
+     private void ReBorn()
+    {
+        life = 60;
+        transform.position = new Vector3(posX, posY, 0f);
+        isDeath = false;
+        snake.SetActive(true);
     }
 
     public void AttackPlayer()
@@ -48,6 +75,10 @@ public class enemy : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             isAttack = true;
+        }
+        if (col.gameObject.tag == "water")
+        {
+            isDeath = true;
         }
         
 

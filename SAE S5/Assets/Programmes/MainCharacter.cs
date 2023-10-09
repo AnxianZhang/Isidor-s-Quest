@@ -46,6 +46,7 @@ public class MainCharacter : MonoBehaviour
     private void Death()
     {
         life = life - life;
+        print(life);
         mp.SetActive(false);
     }
     private void animationPlayer()
