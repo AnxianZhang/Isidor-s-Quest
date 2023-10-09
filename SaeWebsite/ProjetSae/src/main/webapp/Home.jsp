@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/Connexion.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/HomeStyle.css" />
     <title>Insert title here</title>
 </head>
 <style>
@@ -26,7 +26,7 @@
                 </a>
             </div>
 			<div class="connect">
-                <a href="Connexion.html">
+                <a href="/ProjetSae/connexion">
                 	<p>Se connecter</p>
             	</a>
             </div>
@@ -37,20 +37,16 @@
             </div>
         </div>
     </div>
-     <div class="page">
-     	<div class="GlobalForm">
-     		<p>Inscription</p>
-    		<form action="http://localhost:8080/ProjetSae/Connexion" method="get">
-  				<label>Email:</label>
-  				<input type="email" name="email">
-  				<label>Mot de passe: </label>
-  				<input type="text" name="password">
-  				<input type="submit" value="Submit">
-  				<a href="Register.html">
-  					<p>Pas de compte ?</p>
-  				</a>
-			</form>
-		</div>
+    <div class="page">
+    	<div class="flex-container-center">
+    		<p>Isidor's Quest: <br>Chasing the Glow</p>
+    	</div>
+    </div>
+    <div class="endPageContainer">
+    		<a href="#"><p><img src="Assets/Play.png" >Jouer</p></a>
+    </div>
+    <div class="goBack">
+    		<a href="#"><img src="Assets/previous.png"></a>
     </div>
 </body>
 

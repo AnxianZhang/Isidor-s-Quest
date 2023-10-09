@@ -40,8 +40,12 @@ public class Connexion extends HttpServlet {
 			String password = request.getParameter("password");
 			boolean validate = VerifyElementInDatabase(email, password, conn);
 			if(validate) {
-				ServletContext sc = getServletContext();
-				sc.getRequestDispatcher("/Home.html").forward(request, response);
+				//mettre les variables dans session
+				response.sendRedirect("/ProjetSae/home");
+			}
+			else {
+				//rajouter un truc dans la session pour dire erreur
+				response.sendRedirect("/ProjetSae/connexion");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

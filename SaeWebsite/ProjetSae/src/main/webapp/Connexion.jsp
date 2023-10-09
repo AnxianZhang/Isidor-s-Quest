@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/Register.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/Connexion.css" />
     <title>Insert title here</title>
 </head>
 <style>
@@ -26,7 +26,7 @@
                 </a>
             </div>
 			<div class="connect">
-                <a href="Connexion.html">
+                <a href="/ProjetSae/connexion">
                 	<p>Se connecter</p>
             	</a>
             </div>
@@ -39,17 +39,15 @@
     </div>
      <div class="page">
      	<div class="GlobalForm">
-     		<p>Inscription</p>
-    		<form action="http://localhost:8080/ProjetSae/Inscription" method="get">
-  				<label>Nom d'utilisateur: </label>
-  				<input type="text" name="username">
+     		<p>Connexion</p>
+    		<form action="/ProjetSae/Connexion" method="get">
   				<label>Email:</label>
   				<input type="email" name="email">
   				<label>Mot de passe: </label>
   				<input type="text" name="password">
   				<input type="submit" value="Submit">
-  				<a href="Connexion.html">
-  					<p>Déja un compte ?</p>
+  				<a href="/ProjetSae/register">
+  					<p>Pas de compte ?</p>
   				</a>
 			</form>
 		</div>

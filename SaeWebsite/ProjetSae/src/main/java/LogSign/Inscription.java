@@ -43,8 +43,8 @@ public class Inscription extends HttpServlet {
 			boolean validate = VerifyElementInDatabase(email, conn);
 			if(validate) {
 				DataInsert(userName, email, password, conn);
-				ServletContext sc = getServletContext();
-				sc.getRequestDispatcher("/Home.html").forward(request, response);
+				//mettre la variable username dans la session
+				response.sendRedirect("/ProjetSae/home");
 			}
 			
 		} catch (SQLException | ClassNotFoundException e) {
