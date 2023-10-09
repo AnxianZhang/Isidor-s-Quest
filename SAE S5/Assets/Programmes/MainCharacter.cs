@@ -14,6 +14,7 @@ public class MainCharacter : MonoBehaviour
     private int degat = 20;
     private Vector3 jump;
     private bool isGround;
+    private bool isJump = false;
     private bool isWater = false;
     private bool isLander = false;
     private Vector2 velocity = Vector2.zero;
@@ -38,9 +39,10 @@ public class MainCharacter : MonoBehaviour
         }
         if(life <= 0)
         {
-             mp.SetActive(false);
+            mp.SetActive(false);
             resuscitate();
         }
+
     }
 
     private void Death()
@@ -53,6 +55,8 @@ public class MainCharacter : MonoBehaviour
     {
         float speed = Mathf.Abs(rb.velocity.x);
         animation.SetFloat("speed", speed);
+        animation.SetBool("isLander", isLander);
+        animation.SetBool("isJump", isJump);
     }
 
     private void resuscitate()
@@ -78,8 +82,12 @@ public class MainCharacter : MonoBehaviour
         {
             rb.AddForce(jump * jumpForce, UnityEngine.ForceMode2D.Impulse);
             isGround = false;
+            isJump = true;
         }
-
+        else
+        {
+            isJump = false;
+        }
         if (Input.GetKey(KeyCode.UpArrow) && isLander)
         {
             transform.Translate(Vector2.up * speed * Time.deltaTime, Space.World);
@@ -119,9 +127,11 @@ public class MainCharacter : MonoBehaviour
         }
     }
 
-    public void Attack(int degat)
+    public void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
+        Vector2 direction = (enemyPosition - transform.position) * -1;
+        rb.AddForce(new Vector3(direction.x * 100.0f,250.0f,0f));
     }
 
 }

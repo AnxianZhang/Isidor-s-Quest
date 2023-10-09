@@ -6,17 +6,20 @@ public class enemy : MonoBehaviour
 {
     [SerializeField] private GameObject snake;
     [SerializeField] private MainCharacter mainPlayer;
+    private Rigidbody2D rb;
     private int life = 60;
     private int degat = 5;
-    private float speed = 5.0f;
     private float posX;
     private float posY;
     private Transform target;
     private bool isAttack = false;
     private bool isDeath = false;
+    private float speedSnake = 7.0f;
+    private Vector2 velocity = Vector2.zero;
     // Start is called before the first frame update
     void Start()
     {
+        rb = snake.GetComponent<Rigidbody2D>();
         target = mainPlayer.transform;
         posX = transform.position.x;
         posY = transform.position.y;
@@ -24,9 +27,9 @@ public class enemy : MonoBehaviour
 
     private void moveEnemy()
     {
-        Vector3 displacement = target.position - transform.position;
+        Vector2 displacement = target.position - transform.position;
         displacement = displacement.normalized;
-        transform.position += (displacement * speed * Time.deltaTime);
+        rb.velocity = Vector2.SmoothDamp(rb.velocity, displacement*speedSnake, ref velocity, 0.5f);
     }
 
     // Update is called once per frame
@@ -48,7 +51,6 @@ public class enemy : MonoBehaviour
         if(isDeath == true){
             Death();
         }
-        
     }
 
     private void Death()
@@ -67,7 +69,7 @@ public class enemy : MonoBehaviour
 
     public void AttackPlayer()
     {
-        mainPlayer.Attack(degat);
+        mainPlayer.Attack(degat,transform.position);
         isAttack = false;
     }
     void OnCollisionEnter2D(Collision2D col)
