@@ -6,6 +6,7 @@ import { Dimensions} from 'react-native';
 import { useState, useEffect } from 'react';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -31,7 +32,7 @@ const ConnexionScreen = ()=>{
             password : password
         }
         try {
-            const response = await fetch('http://192.168.1.15:3005/connexion', {
+            const response = await fetch('http://localhost:3005/connexion', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -46,29 +47,26 @@ const ConnexionScreen = ()=>{
                 setErrorPseudo(TextResponse);
                 setErrorPassword(TextResponse);
             }
-            else{
-                setErrorPseudo("");
-                setErrorPassword("");
-            }
             if(result === 402){
                 setPseudo("");
                 setPassword("")
                 setErrorPseudo(TextResponse);
                 setErrorPassword(TextResponse);
             }
-            else{
-                setErrorPseudo("");
+            if(result !== 401 && result !== 402){
                 setErrorPassword("");
+                setErrorPseudo("");
             }
             console.log(result);
             if(result === 200){
                 console.log("naviguer");
+                await AsyncStorage.setItem("user", JSON.stringify({pseudo : pseudo, isConnect : true}));
                 setErrorPassword("");
                 setErrorPseudo("");
                 navigation.navigate("Home");
             }
         }
-        catch(e){
+        catch(error){
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
     }
@@ -129,7 +127,6 @@ FormulaireBox : {
     width : windowWidth * 0.6,
     borderRadius : 50,
     backgroundColor : "#443955"
-
 },
 ConnexionTitle : {
     alignItems : "center",

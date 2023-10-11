@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Dimensions} from 'react-native';
 import Header from '../component/Header';
 import { useState, useEffect } from 'react';
 import Field from '../component/Field';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Seperator from '../component/Seperator';
 import { ScrollView } from 'react-native-web';
 import { useNavigation } from '@react-navigation/native';
@@ -22,7 +23,7 @@ const RegisterScreen = () => {
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
     const [disable, setDisable] = useState(true)
     useEffect(()=>{
-        if(prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === ""){
+        if(prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || !email.includes("@") || !email.includes(".")){
             setDisable(true);
         }
         else{
@@ -30,27 +31,13 @@ const RegisterScreen = () => {
         }
     })
 
-    const verifyForm = ()=>{
-        if(!email.includes("@") && !email.includes(".")){
-            setEmail("");
-            setErrorEmail("Entrez un mail valide");
-        }
-        else{
-            setErrorEmail("");
-        }
+    const sendDataToDatabase = async()=>{
         if(password !== confirmPassword){
             setConfirmPassword("");
             setErrorConfirmPassword("Le mot de passe ne correspond pas");
         }
         else{
-            setErrorConfirmPassword("")
-        }
-        if(errorConfirmPassword === "" || errorEmail === ""){
-            sendDataToDatabase();
-        }
-    }
-
-    const sendDataToDatabase = async()=>{
+        setErrorConfirmPassword("")
         const data = {
             prenom : prenom,
             nomFamille : nomFamille,
@@ -59,7 +46,7 @@ const RegisterScreen = () => {
             password : password
         }
         try {
-            const response = await fetch('http://192.168.1.15:3005/inscription', {
+            const response = await fetch('http://localhost:3005/inscription', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -83,16 +70,18 @@ const RegisterScreen = () => {
                 setErrorPseudo("");
             }
             if(result === 200){
-                console.log("naviguer");
+                await AsyncStorage.setItem("user", JSON.stringify({pseudo : pseudo, isConnect : true}));
                 setErrorEmail("");
                 setErrorPseudo("");
                 navigation.navigate("Home");
             }
         }
-        catch(e){
+        catch(error){
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
     }
+    }
+
     return (
         <View style={styles.backcolor}>
             <ScrollView>
@@ -113,7 +102,7 @@ const RegisterScreen = () => {
                     </View>
                     <Seperator />
                     <View style={styles.ButtonContainer}>
-                        <TouchableOpacity onPress={()=>verifyForm()} disabled={disable}>
+                        <TouchableOpacity onPress={()=>sendDataToDatabase()} disabled={disable}>
                             <View style={[styles.NewUserButtonConnectContainer, {backgroundColor : disable ? "#a9a9a9" : "#5BD94C"}]}>
                                 <Text style={styles.NewUserButtonText}>S'inscrire</Text>
                             </View>

@@ -1,37 +1,80 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import ImageGame from "../assets/ImageGame.png"
 import BackgroundPicture from '../component/Background';
-import LogoSae from "../assets/LogoSae.png";
 import Header from '../component/Header';
 import {Dimensions} from 'react-native';
 import Play from "../assets/Play.png";
 import Previous from "../assets/previous.png";
 import ButtonImage from '../component/ButtonImage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState, useRef } from 'react';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { ScrollView } from 'react-native-web';
+import BackgroundGame from "../assets/Background1.png"
+import BackgrounGameSecond from "../assets/Background3.png"
+
 const windowHeight = Dimensions.get('window').height;
-const HomeScreen = ()=>{    
+const HomeScreen = ()=>{
+    const isFocused = useIsFocused();
+    const navigation = useNavigation();
+    const [isConnect, setIsConnect] = useState(false);
+    const firstItemRef = useRef(null);
+    useEffect(()=>{
+        getData()
+    },[isFocused])
+
+    const getData = async ()=>{
+        const response = await AsyncStorage.getItem("user");
+        const responseJSON = JSON.parse(response);
+        if(responseJSON !== null){
+            setIsConnect(responseJSON.isConnect);
+        }
+    }
     return(
-        <BackgroundPicture source={ImageGame} resize="cover" style={styles.image}>
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
+        <BackgroundPicture source={BackgroundGame} resize="cover" style={styles.image}>
+            <ScrollView>
             <Header />
             <View style={styles.gameTitle}>
                 <Text style={styles.gameTitleText}>Isidor's Quest:</Text>
                 <Text style={styles.gameTitleText}>Chasing the Glow</Text>
             </View>
             <View style={styles.containButtonPlay}>
-                <TouchableOpacity onPress={() => console.log("ok")}>
+                <TouchableOpacity onPress={() => {isConnect ? console.log("ok") : navigation.navigate("Connexion")}}>
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
                             <Text style={styles.headerText}>Jouer</Text>
                     </View>
                 </TouchableOpacity>
-                <ButtonImage onPress={() => console.log("toucher")} source={{ uri: Previous }} style={styles.previousLogo} />
+                <ButtonImage onPress={() => firstItemRef.current.scrollIntoView()} source={{ uri: Previous }} style={styles.previousLogo} />
             </View>
+            <View style={styles.SecondPartContainer}>
+            <View style={styles.GameDescriptionContainer} ref={firstItemRef}>
+                <Text style={styles.gameDescriptionTitleText}>Isidor’s Quest : le jeu fantastique de plateforme</Text>
+                <Text style={styles.gameDescriptionFirstPartText}>Cher joueur,  dans un lointain royaume, règne un puissant dieu respecté de tous, nommé Disanskrit, le seigneur sacré. Il a créé des labyrinthes ainsi que des énigmes à travers ses régions.</Text>
+                <Text style={styles.gameDescriptionSecondPartText}>De nombreux aventuriers ont été malencontreusement aspirés dans son royaume mais aucun n'en est jamais revenu. Enfermé à votre tour dans ce monde, vous, Isidor, doit entreprendre l'exploration des régions pour espérer retrouver sa liberté et obtenir des réponses...</Text>
+            </View>
+            </View>
+            </ScrollView>
         </BackgroundPicture>
+        <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}>
+
+
+        </BackgroundPicture>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
-image : {
+scrollView: {
     flex: 1,
+},
+scrollViewContent: {
+    flexGrow: 1,
+    backgroundColor: "#7094CB"
+},
+image : {
+    width: '100%', 
+    minHeight: 1800,
 },
 gameTitle : {
     flexDirection: 'column',
@@ -54,7 +97,6 @@ buttonContent: {
     paddingRight : 30,
     paddingLeft : 30,
     borderRadius : 10
-
 },
 playLogo: {
     width: 25,
@@ -70,6 +112,41 @@ previousLogo: {
     width: 25,
     height: 33,
 },
+GameDescriptionContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: "10%",
+    paddingTop : '40%',
+    marginLeft : '20%'
+  },
+gameDescriptionTitleText:{
+    fontSize : 32,
+    fontFamily : "Bold",
+    color : "#FFFFFF"
+},
+SecondPartContainer: {
+    flex: 1,
+    paddingHorizontal: "3%",
+},
+gameDescriptionFirstPartText:{
+    paddingTop : 20,
+    paddingBottom : 20,
+    fontSize : 19, 
+    fontFamily : "Light", 
+    color : "white",
+    textAlign : "left",
+    paddingRight : 200,
+    paddingLeft : 200
+},
+gameDescriptionSecondPartText:{
+    fontSize : 19, 
+    fontFamily : "Light", 
+    color : "white",
+    paddingRight : 200,
+    textAlign : "left",
+    paddingLeft : 200,
+}
 });
 
 export default HomeScreen;

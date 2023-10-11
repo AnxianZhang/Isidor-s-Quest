@@ -6,9 +6,31 @@ import ButtonText from './ButtonText';
 import ButtonImage from './ButtonImage';
 import { useNavigation } from '@react-navigation/native';
 import Play from "../assets/Play.png";
-
+import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from 'react';
 const Header = (props) => {
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
+    const [isConnect, setIsConnect] = useState(false);
+
+    useEffect(()=>{
+        getData()
+    },[isFocused])
+
+    const getData = async ()=>{
+        const response = await AsyncStorage.getItem("user");
+        const responseJSON = JSON.parse(response);
+        if(responseJSON !== null){
+            setIsConnect(responseJSON.isConnect);
+        }
+    }
+
+    const disconnection = async()=>{
+        setIsConnect(false);
+        await AsyncStorage.setItem("user", JSON.stringify({pseudo : null, isConnect : false}));
+    }
+
     return (
         <View style={props.style ? props.style : styles.header}>
             <View style={styles.headerLogo}>
@@ -22,10 +44,10 @@ const Header = (props) => {
                     <ButtonImage onPress={() => console.log("toucher")} source={{ uri: World }} style={styles.worldPicture} />
                 </View>
                 <View style={styles.containConnect}>
-                    <ButtonText onPress={() => navigation.navigate("Connexion")} text={"Se connecter"} styleText={styles.headerText} />
+                    <ButtonText onPress={() => {isConnect ? disconnection(): navigation.navigate("Connexion")}} text={isConnect ? "se deconnecter" : "Se connecter"} styleText={styles.headerText} />
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => console.log("ok")}>
+                    <TouchableOpacity onPress={() => {isConnect ? console.log("ok") : navigation.navigate("Connexion")}}>
                         <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
                                 <Text style={styles.headerText}>Jouer</Text>

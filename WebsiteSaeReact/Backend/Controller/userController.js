@@ -18,7 +18,7 @@ const Inscription  = async(req, res) =>{
         await newUser.save();
         return res.status(200).send('Données enregistrées avec succès');
       } catch (error) {
-        console.error('erreur durant l inscription', e);
+        console.error('erreur durant l inscription', error);
         res.status(500).send("erreur lors de l'inscription/erreur au niveau du backend");
       }
 }
@@ -31,13 +31,12 @@ const Connexion  = async(req, res) =>{
         if(findUserPseudo === null){
             return res.status(401).send("Nom d'utilisateur/Mot de passe incorrect");
         }
-
         if(findUserPseudo.password !== data.password){
             return res.status(402).send("Nom d'utilisateur/Mot de passe incorrect");
         }
         return res.status(200).send("connexion reussie");
       } catch (error) {
-        console.error('erreur durant la connexion', e);
+        console.error('erreur durant la connexion', error);
         res.status(500).send("erreur lors de l'inscription/erreur au niveau du backend");
       }
 }
