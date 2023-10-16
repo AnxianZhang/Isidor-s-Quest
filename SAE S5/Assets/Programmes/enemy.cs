@@ -6,6 +6,7 @@ public class enemy : MonoBehaviour
 {
     [SerializeField] private GameObject snake;
     [SerializeField] private MainCharacter mainPlayer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private int life = 60;
     private int degat = 5;
@@ -35,6 +36,7 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        flip(rb.velocity.x);
         float res = target.position.y - transform.position.y;
         if (Vector2.Distance(target.position, transform.position) < 10.0f && res < 0.2f)
         {
@@ -50,6 +52,15 @@ public class enemy : MonoBehaviour
         }*/
         if(isDeath == true){
             Death();
+        }
+    }
+
+    private void flip(float _velocity){
+        if(_velocity > 0.1f){
+            spriteRenderer.flipX = false;
+        }
+        else if(_velocity < -0.1f){
+            spriteRenderer.flipX = true;
         }
     }
 

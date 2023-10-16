@@ -7,6 +7,7 @@ public class MainCharacter : MonoBehaviour
 {
     [SerializeField] private GameObject mp;
     [SerializeField] private Animator animation;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private float speed = 10.0f;
     private float jumpForce = 5.0f;    
@@ -44,7 +45,6 @@ public class MainCharacter : MonoBehaviour
         }
 
     }
-
     private void Death()
     {
         life = life - life;
@@ -53,12 +53,20 @@ public class MainCharacter : MonoBehaviour
     }
     private void animationPlayer()
     {
+        flip(rb.velocity.x);
         float speed = Mathf.Abs(rb.velocity.x);
         animation.SetFloat("speed", speed);
         animation.SetBool("isLander", isLander);
         animation.SetBool("isJump", isJump);
     }
-
+    private void flip(float _velocity){
+        if(_velocity > 0.1f){
+            spriteRenderer.flipX = false;
+        }
+        else if(_velocity < -0.1f){
+            spriteRenderer.flipX = true;
+        }
+    }
     private void resuscitate()
     {
         life = 100;
