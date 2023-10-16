@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-web';
 import BackgroundGame from "../assets/Background1.png"
 import BackgrounGameSecond from "../assets/Background3.png"
 
+
 const windowHeight = Dimensions.get('window').height;
 const HomeScreen = ()=>{
     const isFocused = useIsFocused();
@@ -40,7 +41,7 @@ const HomeScreen = ()=>{
                 <Text style={styles.gameTitleText}>Chasing the Glow</Text>
             </View>
             <View style={styles.containButtonPlay}>
-                <TouchableOpacity onPress={() => {isConnect ? console.log("ok") : navigation.navigate("Connexion")}}>
+                <TouchableOpacity onPress={() => {isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion")}}>
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
                             <Text style={styles.headerText}>Jouer</Text>

@@ -47,7 +47,7 @@ const Header = (props) => {
                     <ButtonText onPress={() => {isConnect ? disconnection(): navigation.navigate("Connexion")}} text={isConnect ? "se deconnecter" : "Se connecter"} styleText={styles.headerText} />
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => {isConnect ? console.log("ok") : navigation.navigate("Connexion")}}>
+                    <TouchableOpacity onPress={() => {isConnect ?  navigation.navigate("Game") : navigation.navigate("Connexion")}}>
                         <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
                                 <Text style={styles.headerText}>Jouer</Text>
