@@ -8,13 +8,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Seperator from '../component/Seperator';
 import { ScrollView } from 'react-native-web';
 import { useNavigation } from '@react-navigation/native';
+import { getLanguage } from '../function/languageSelect';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-const RegisterScreen = () => {
+const RegisterScreen = ({ language }) => {
     const navigation = useNavigation();
     const [prenom, setPrenom] = useState("");
     const [nomFamille, setNomFamille] = useState("");
+    const [selectLanguage, setSelectLanguage] = useState(language); 
     const [email, setEmail] = useState("");
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
@@ -33,11 +35,14 @@ const RegisterScreen = () => {
         }
     })
 
+    useEffect(()=>{
+        setSelectLanguage(getLanguage);
+    })
     
     const sendDataToDatabase = async () => {
         if (password !== confirmPassword) {
             setConfirmPassword("");
-            setErrorConfirmPassword("Le mot de passe ne correspond pas");
+            setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
         }
         else {
             setErrorConfirmPassword("")
@@ -57,17 +62,16 @@ const RegisterScreen = () => {
                     body: JSON.stringify(data)
                 });
                 const result = await response.status;
-                const TextResponse = await response.text();
                 if (result === 401) {
                     setEmail("");
-                    setErrorEmail(TextResponse);
+                    setErrorEmail(selectLanguage.Register.haveAnAccount);
                 }
                 else {
                     setErrorEmail("");
                 }
                 if (result === 402) {
                     setPseudo("");
-                    setErrorPseudo(TextResponse);
+                    setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
                 }
                 else {
                     setErrorPseudo("");
@@ -88,26 +92,26 @@ const RegisterScreen = () => {
     return (
         <View style={styles.backcolor}>
             <ScrollView>
-                <Header style={styles.header} />
+                <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
                 <View style={styles.FormContainer}>
                     <View style={styles.FormulaireBox}>
                         <View style={styles.InscriptionTitle}>
-                            <Text style={styles.InscriptionText}>S'inscrire</Text>
+                            <Text style={styles.InscriptionText}>{selectLanguage.Register.register}</Text>
                         </View>
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder='Prénom' onChangeText={setPrenom} value={prenom} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder='Nom de famille' onChangeText={setNomFamille} value={nomFamille} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorEmail.length > 0 && "#E55839", borderWidth: errorEmail.length > 0 && 1 }]} placeholder={errorEmail.length > 0 ? errorEmail : 'Adresse e-mail'} placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"} onChangeText={setEmail} value={email} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1 }]} placeholder={errorPseudo.length > 0 ? errorPseudo : 'Pseudo'} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder='Mot de passe' onChangeText={setPassword} value={password} secureTextEntry={true} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1 }]} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : 'Confirmer mot de passe'} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder={selectLanguage.Register.name} onChangeText={setPrenom} value={prenom} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder={selectLanguage.Register.familyName} onChangeText={setNomFamille} value={nomFamille} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorEmail.length > 0 && "#E55839", borderWidth: errorEmail.length > 0 && 1 }]} placeholder={errorEmail.length > 0 ? errorEmail : selectLanguage.Register.email} placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"} onChangeText={setEmail} value={email} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1 }]} placeholder={errorPseudo.length > 0 ? errorPseudo : selectLanguage.Register.pseudo} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={styles.fields} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1 }]} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : selectLanguage.Register.confirmPassword} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
                         <View style={styles.generalContidionBox}>
-                            <Text style={styles.generalContidionText}>En cliquant sur S’inscrire, vous acceptez nos Conditions générales</Text>
+                            <Text style={styles.generalContidionText}>{selectLanguage.Register.generalCondition}</Text>
                         </View>
                         <Seperator />
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
                                 <View style={[styles.NewUserButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" }]}>
-                                    <Text style={styles.NewUserButtonText}>S'inscrire</Text>
+                                    <Text style={styles.NewUserButtonText}>{selectLanguage.Register.register}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

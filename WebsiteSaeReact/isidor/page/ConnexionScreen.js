@@ -7,16 +7,22 @@ import { useState, useEffect } from 'react';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { getLanguage } from '../function/languageSelect';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
-const ConnexionScreen = ()=>{    
+const ConnexionScreen = ({language})=>{    
+    const [selectLanguage, setSelectLanguage] = useState(language); 
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
     const [errorPseudo, setErrorPseudo] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
     const [disable, setDisable] =  useState(true);
     const navigation = useNavigation();
+
+    useEffect(()=>{
+        setSelectLanguage(getLanguage);
+    })
+
     useEffect(()=>{
         if(pseudo === "" || password === ""){
             setDisable(true);
@@ -40,18 +46,17 @@ const ConnexionScreen = ()=>{
               body: JSON.stringify(data)
             });
             const result = await response.status;
-            const TextResponse = await response.text();
             if(result === 401){
                 setPseudo("");
                 setPassword("")
-                setErrorPseudo(TextResponse);
-                setErrorPassword(TextResponse);
+                setErrorPseudo(selectLanguage.connexion.errorConnection);
+                setErrorPassword(selectLanguage.connexion.errorConnection);
             }
             if(result === 402){
                 setPseudo("");
-                setPassword("")
-                setErrorPseudo(TextResponse);
-                setErrorPassword(TextResponse);
+                setPassword("");
+                setErrorPseudo(selectLanguage.connexion.errorConnection);
+                setErrorPassword(selectLanguage.connexion.errorConnection);
             }
             if(result !== 401 && result !== 402){
                 setErrorPassword("");
@@ -72,31 +77,31 @@ const ConnexionScreen = ()=>{
     }
     return(
         <View style={styles.backcolor}>
-          <Header style={styles.header} />
+          <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
           <View style={styles.FormContainer}>
                 <View style={styles.FormulaireBox}>
                     <View style={styles.ConnexionTitle}>
-                        <Text style={styles.ConnexionText}>Connexion</Text>
+                        <Text style={styles.ConnexionText}>{selectLanguage.connexion.connection}</Text>
                     </View>
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, {borderColor : errorPseudo.length > 0 && "#E55839", borderWidh : errorPseudo.length > 0 && 1}]} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : 'Pseudo'} onChangeText={setPseudo} value={pseudo} secureTextEntry={false}/>
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, {borderColor : errorPassword.length > 0 && "#E55839", borderWidh : errorPassword.length > 0 && 1}]} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : 'Mot de passe'} onChangeText={setPassword} value={password} secureTextEntry={true}/>
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, {borderColor : errorPseudo.length > 0 && "#E55839", borderWidh : errorPseudo.length > 0 && 1}]} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false}/>
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[styles.fields, {borderColor : errorPassword.length > 0 && "#E55839", borderWidh : errorPassword.length > 0 && 1}]} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true}/>
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={()=>sendDataToDatabase()} disabled={disable}>
                             <View style={[styles.ButtonConnectContainer, {backgroundColor : disable ? "#a9a9a9" : "#E55839"}]}>
-                                <Text style={styles.ConnexionButtonText}>Se connecter</Text>
+                                <Text style={styles.ConnexionButtonText}>{selectLanguage.connexion.connect}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={()=>console.log("ok")}>
                     <View style={styles.forgetPassword}>
-                        <Text style={styles.forgetPasswordText}>Mot de passe oublié ?</Text>
+                        <Text style={styles.forgetPasswordText}>{selectLanguage.connexion.forgotPassword}</Text>
                     </View>
                     </TouchableOpacity>
                     <Seperator />
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={()=>navigation.navigate("Register")}>
                             <View style={styles.NewAccountButtonConnectContainer}>
-                                <Text style={styles.NewAccountButtonText}>Créer nouveau compte</Text>
+                                <Text style={styles.NewAccountButtonText}>{selectLanguage.connexion.createNewAccount}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

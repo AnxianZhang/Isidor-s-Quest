@@ -9,7 +9,7 @@ const Inscription  = async(req, res) =>{
         const findUserMail = await User.findOne({email : data.email}).exec();
         const findUserPseudo = await User.findOne({pseudo : data.pseudo}).exec();
         if(findUserMail !== null){
-            return res.status(401).send("Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez e reinitialisé");
+            return res.status(401).send("Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé");
         }
         if(findUserPseudo !== null){
            return res.status(402).send("Ce nom d'utilisateur est déja pris");

@@ -9,48 +9,59 @@ import Play from "../assets/Play.png";
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
+import List from './List';
+import { getLanguage } from '../function/languageSelect';
+
 const Header = (props) => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
+    const [open, setOpen] = useState(false);
     const [isConnect, setIsConnect] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         getData()
-    },[isFocused])
+    }, [isFocused])
 
-    const getData = async ()=>{
+    useEffect(()=>{
+        props.setLanguage(getLanguage);
+    })
+
+    const getData = async () => {
         const response = await AsyncStorage.getItem("user");
         const responseJSON = JSON.parse(response);
-        if(responseJSON !== null){
+        if (responseJSON !== null) {
             setIsConnect(responseJSON.isConnect);
         }
     }
 
-    const disconnection = async()=>{
+    const disconnection = async () => {
         setIsConnect(false);
-        await AsyncStorage.setItem("user", JSON.stringify({pseudo : null, isConnect : false}));
+        props.setIsConnect(false);
+        await AsyncStorage.setItem("user", JSON.stringify({ pseudo: null, isConnect: false }));
     }
-
     return (
         <View style={props.style ? props.style : styles.header}>
             <View style={styles.headerLogo}>
                 <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={styles.logoPicture} />
             </View>
             <View style={styles.containPropos}>
-                <ButtonText onPress={() => console.log("toucher")} text={"A propos"} styleText={styles.headerText} />
+                <ButtonText onPress={() => console.log("toucher")} text={props.language.Header.about} styleText={styles.headerText} />
             </View>
             <View style={styles.headerLastElement}>
                 <View style={styles.containeWorldPicture}>
-                    <ButtonImage onPress={() => console.log("toucher")} source={{ uri: World }} style={styles.worldPicture} />
+                    <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
+                    {open &&
+                    <List />
+                    }
                 </View>
                 <View style={styles.containConnect}>
-                    <ButtonText onPress={() => {isConnect ? disconnection(): navigation.navigate("Connexion")}} text={isConnect ? "se deconnecter" : "Se connecter"} styleText={styles.headerText} />
+                    <ButtonText onPress={() => { isConnect ? disconnection() : navigation.navigate("Connexion") }} text={isConnect ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} />
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => {isConnect ?  navigation.navigate("Game") : navigation.navigate("Connexion")}}>
+                    <TouchableOpacity onPress={() => { isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
                         <View style={styles.buttonContent}>
-                                <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>Jouer</Text>
+                            <Image source={{ uri: Play }} style={styles.playLogo} />
+                            <Text style={styles.headerText}>{props.language.Home.buttonPlay}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 24,
-        fontFamily:"regular",
+        fontFamily: "regular",
         color: "white",
     },
     headerLastElement: {
@@ -96,22 +107,22 @@ const styles = StyleSheet.create({
         paddingRight: 50,
     },
     buttonContent: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        backgroundColor : "#EE8A45",
-        paddingTop : 5,
-        paddingBottom : 5,
-        paddingRight : 30,
-        paddingLeft : 30,
-        borderRadius : 10
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: "#EE8A45",
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingRight: 30,
+        paddingLeft: 30,
+        borderRadius: 10
 
     },
     playLogo: {
         width: 25,
         height: 33,
-        marginRight : 20
+        marginRight: 20
     },
-    
+
 });
 
 export default Header;

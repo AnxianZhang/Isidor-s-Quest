@@ -12,10 +12,11 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { ScrollView } from 'react-native-web';
 import BackgroundGame from "../assets/Background1.png"
 import BackgrounGameSecond from "../assets/Background3.png"
-
+import { getLanguage } from '../function/languageSelect';
 
 const windowHeight = Dimensions.get('window').height;
-const HomeScreen = ()=>{
+const HomeScreen = ({language})=>{
+    const [selectLanguage, setSelectLanguage] = useState(language); 
     const isFocused = useIsFocused();
     const navigation = useNavigation();
     const [isConnect, setIsConnect] = useState(false);
@@ -24,18 +25,24 @@ const HomeScreen = ()=>{
         getData()
     },[isFocused])
 
+    useEffect(()=>{
+        setSelectLanguage(getLanguage);
+    })
+
+
     const getData = async ()=>{
         const response = await AsyncStorage.getItem("user");
         const responseJSON = JSON.parse(response);
         if(responseJSON !== null){
             setIsConnect(responseJSON.isConnect);
         }
+        console.log("connexion : " + isConnect);
     }
     return(
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
         <BackgroundPicture source={BackgroundGame} resize="cover" style={styles.image}>
             <ScrollView>
-            <Header />
+            <Header setIsConnect={setIsConnect} setLanguage={setSelectLanguage} language={selectLanguage}/>
             <View style={styles.gameTitle}>
                 <Text style={styles.gameTitleText}>Isidor's Quest:</Text>
                 <Text style={styles.gameTitleText}>Chasing the Glow</Text>
@@ -44,16 +51,16 @@ const HomeScreen = ()=>{
                 <TouchableOpacity onPress={() => {isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion")}}>
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
-                            <Text style={styles.headerText}>Jouer</Text>
+                            <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
                     </View>
                 </TouchableOpacity>
                 <ButtonImage onPress={() => firstItemRef.current.scrollIntoView()} source={{ uri: Previous }} style={styles.previousLogo} />
             </View>
             <View style={styles.SecondPartContainer}>
             <View style={styles.GameDescriptionContainer} ref={firstItemRef}>
-                <Text style={styles.gameDescriptionTitleText}>Isidor’s Quest : le jeu fantastique de plateforme</Text>
-                <Text style={styles.gameDescriptionFirstPartText}>Cher joueur,  dans un lointain royaume, règne un puissant dieu respecté de tous, nommé Disanskrit, le seigneur sacré. Il a créé des labyrinthes ainsi que des énigmes à travers ses régions.</Text>
-                <Text style={styles.gameDescriptionSecondPartText}>De nombreux aventuriers ont été malencontreusement aspirés dans son royaume mais aucun n'en est jamais revenu. Enfermé à votre tour dans ce monde, vous, Isidor, doit entreprendre l'exploration des régions pour espérer retrouver sa liberté et obtenir des réponses...</Text>
+                <Text style={styles.gameDescriptionTitleText}>{selectLanguage.Home.gameTitle}</Text>
+                <Text style={styles.gameDescriptionFirstPartText}>{selectLanguage.Home.gameDescPartOne}</Text>
+                <Text style={styles.gameDescriptionSecondPartText}>{selectLanguage.Home.gameDescPartTwo}</Text>
             </View>
             </View>
             </ScrollView>
@@ -147,7 +154,12 @@ gameDescriptionSecondPartText:{
     paddingRight : 200,
     textAlign : "left",
     paddingLeft : 200,
-}
+},
+headerText: {
+    fontSize: 24,
+    fontFamily: "regular",
+    color: "white",
+},
 });
 
 export default HomeScreen;
