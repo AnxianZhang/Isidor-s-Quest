@@ -2,13 +2,17 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const {Inscription, Connexion} = require("./Controller/userController");
+const {SendCode, VerifyCode} = require("./Controller/codeController");
 app.use(cors({
     allowedHeaders: ['Content-Type'] 
-  }));
+}));
   
 app.use(express.json());
 app.post("/inscription", Inscription);
 app.post("/connexion", Connexion)
+app.post("/SendCode", SendCode);
+app.post("/VerifyCode", VerifyCode);
+
 const port = 3005
 
 app.listen(port, () => {

@@ -51,7 +51,7 @@ const Header = (props) => {
                 <View style={styles.containeWorldPicture}>
                     <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
                     {open &&
-                    <List />
+                    <View style={styles.listContainer}><List /></View>
                     }
                 </View>
                 <View style={styles.containConnect}>
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     },
     headerLastElement: {
         flex: 1,
+        position: 'relative',
         flexDirection: "row",
         justifyContent: "flex-end",
         paddingRight: 60
@@ -115,14 +116,17 @@ const styles = StyleSheet.create({
         paddingRight: 30,
         paddingLeft: 30,
         borderRadius: 10
-
     },
     playLogo: {
         width: 25,
         height: 33,
         marginRight: 20
     },
-
+    listContainer: {
+        position: 'absolute',
+        top : '100%'
+    },
+    
 });
 
 export default Header;

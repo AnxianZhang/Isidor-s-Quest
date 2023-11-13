@@ -54,7 +54,7 @@ const RegisterScreen = ({ language }) => {
                 password: password
             }
             try {
-                const response = await fetch('http://localhost:3005/inscription', {
+                const response = await fetch('http://localhost:3005/SendCode', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -77,10 +77,9 @@ const RegisterScreen = ({ language }) => {
                     setErrorPseudo("");
                 }
                 if (result === 200) {
-                    await AsyncStorage.setItem("user", JSON.stringify({ pseudo: pseudo, isConnect: true }));
                     setErrorEmail("");
                     setErrorPseudo("");
-                    navigation.navigate("Home");
+                    navigation.navigate("VerifyCode", {data : data});
                 }
             }
             catch (error) {
@@ -111,7 +110,7 @@ const RegisterScreen = ({ language }) => {
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
                                 <View style={[styles.NewUserButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" }]}>
-                                    <Text style={styles.NewUserButtonText}>{selectLanguage.Register.register}</Text>
+                                    <Text style={styles.NewUserButtonText}>{selectLanguage.Register.next}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

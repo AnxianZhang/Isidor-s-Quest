@@ -31,8 +31,16 @@
         "generalCondition" : "En cliquant sur S’inscrire, vous acceptez nos Conditions générales",
         "errorPasswordCaseOne" : "Le mot de passe ne correspond pas",
         "haveAnAccount" : "Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé",
-        "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris"
-
+        "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
+        "next" : "Continuer"
+    },
+    "Code" : {
+        "codeText" : "Entrez le code",
+        "confirmCodeText" : "confirmer le code",
+        "codeVerification" : "Verification du code",
+        "register" : "S'inscrire",
+        "errorCodeCaseOne" : "Le code entré ne correspond pas",
+        "errorExpireDate" : "Votre code est expiré",
+        "errorCode" : "Code incorrect"
     }
-
 }

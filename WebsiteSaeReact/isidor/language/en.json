@@ -31,7 +31,16 @@
         "generalCondition": "By clicking Sign Up, you agree to our Terms and Conditions",
         "errorPasswordCaseOne": "Password doesn't match",
         "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
-        "pseudoAlreadyExist" :"This username is already taken"
+        "pseudoAlreadyExist" :"This username is already taken",
+        "next" : "Next"
+    },
+    "Code" : {
+        "codeText" : "Enter the code",
+        "confirmCodeText" : "Confirm the code",
+        "codeVerification" : "Code verification",
+        "register": "Register",
+        "errorCodeCaseOne" : "Code doesn't match",
+        "errorExpireDate" : "Your code has expired",
         "errorCode" : "Incorrect code"
     }
 }
