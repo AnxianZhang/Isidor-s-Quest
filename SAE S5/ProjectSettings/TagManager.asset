@@ -8,6 +8,7 @@ TagManager:
   - ground
   - water
   - enemy
+  - snake
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,6 @@ public class Camera : MonoBehaviour
 {
     [SerializeField] private GameObject player;        //Public variable to store a reference to the player game object
 
-
     [SerializeField] private Vector3 offset;            //Private variable to store the offset distance between the player and camera
 
     [SerializeField] private Vector3 velocity;

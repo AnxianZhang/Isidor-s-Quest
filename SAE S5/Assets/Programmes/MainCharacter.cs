@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MainCharacter : MonoBehaviour
 {
     [SerializeField] private GameObject mp;
     [SerializeField] private Animator animation;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private enemy enemy;
     private Rigidbody2D rb;
     private float speed = 10.0f;
     private float jumpForce = 5.0f;    
     private int life = 100;
+    private int lifeMax = 100;
     private int degat = 20;
     private Vector3 jump;
     private bool isGround;
     private bool isJump = false;
     private bool isWater = false;
     private bool isLander = false;
+    private bool isDeath = false;
+    private bool isAttackSnake = false;
     private Vector2 velocity = Vector2.zero;
     //private bool isWalk = false;
     // Start is called before the first frame update
@@ -38,26 +42,56 @@ public class MainCharacter : MonoBehaviour
         {
             Death();
         }
+        print(isAttackSnake);
         if(life <= 0)
         {
-            mp.SetActive(false);
-            resuscitate();
+            Death();
+            if(Input.GetKey(KeyCode.R)){
+                resuscitate();
+            }
+        }
+        if(isAttackSnake == true){
+            AttackSnake();
         }
 
     }
+    public void AttackSnake()
+    {
+        if(Input.GetKey(KeyCode.S)){
+            enemy.Attack(degat, transform.position);
+            isAttackSnake = false;
+        }
+    }
     private void Death()
     {
+        rb.bodyType = RigidbodyType2D.Static;
         life = life - life;
-        print(life);
-        mp.SetActive(false);
+        isDeath = true;
+    }
+
+    public bool getDeath(){
+        return isDeath;
     }
     private void animationPlayer()
     {
         flip(rb.velocity.x);
-        float speed = Mathf.Abs(rb.velocity.x);
-        animation.SetFloat("speed", speed);
-        animation.SetBool("isLander", isLander);
+        if(isGround){
+            float speed = Mathf.Abs(rb.velocity.x);
+            animation.SetFloat("speed", speed);
+        }
+        else{
+            animation.SetFloat("speed", 0.0f);
+        }
+        if (Input.GetKey(KeyCode.UpArrow) && isLander || Input.GetKey(KeyCode.DownArrow) && isLander)
+        {
+            animation.SetBool("isLander", true);
+        }
+        else
+        {
+            animation.SetBool("isLander", false);
+        }
         animation.SetBool("isJump", isJump);
+        animation.SetBool("isDeath", isDeath);
     }
     private void flip(float _velocity){
         if(_velocity > 0.1f){
@@ -69,19 +103,21 @@ public class MainCharacter : MonoBehaviour
     }
     private void resuscitate()
     {
-        life = 100;
-        transform.position = new Vector3(-2.63765f, -0.75f, 0f);
-        isWater = false;
-        mp.SetActive(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public int getLife()
     {
         return life;
     }
+
+     public int getLifeMax()
+    {
+        return lifeMax;
+    }
     private void movePlayer(float directionH, float directionV)
     {
-        if (directionH != 0)
+        if (directionH != 0 && !isJump && isGround)
         {
             Vector2 targetVelocity = new Vector2(directionH * speed, 0f);
             rb.velocity = Vector2.SmoothDamp(rb.velocity, targetVelocity, ref velocity, 0.5f);
@@ -112,13 +148,30 @@ public class MainCharacter : MonoBehaviour
         {
             isGround = true;
         }
+        if (col.gameObject.tag != "ground")
+        {
+            isGround = false;
+        }
         if (col.gameObject.tag == "water")
         {
             isWater = true;
         }
+         if (col.gameObject.tag == "enemy")
+        {
+            isAttackSnake = true;
+            enemy = GameObject.Find(col.gameObject.name).GetComponent<enemy>();
+        }
 
     }
-
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "enemy")
+        {
+            isAttackSnake = false;
+            isGround = true;
+        }
+    }
+    
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("echelle"))
@@ -138,8 +191,11 @@ public class MainCharacter : MonoBehaviour
     public void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
-        Vector2 direction = (enemyPosition - transform.position) * -1;
-        rb.AddForce(new Vector3(direction.x * 100.0f,250.0f,0f));
+        if(!isJump){
+            Vector2 direction = (enemyPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 100.0f,250.0f,0f));
+        }
+        isGround = false;
     }
 
 }

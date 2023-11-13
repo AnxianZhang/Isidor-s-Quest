@@ -32,5 +32,6 @@
         "errorPasswordCaseOne": "Password doesn't match",
         "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
         "pseudoAlreadyExist" :"This username is already taken"
+        "errorCode" : "Incorrect code"
     }
 }

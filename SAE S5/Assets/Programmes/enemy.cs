@@ -5,10 +5,14 @@ using UnityEngine;
 public class enemy : MonoBehaviour
 {
     [SerializeField] private GameObject snake;
+    [SerializeField] private Animator animation;
     [SerializeField] private MainCharacter mainPlayer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private int life = 60;
+    private float cooldown = 2f; //seconds
+    private float lastAttackedAt = 0f;
+    private int lifeMax = 60;
     private int degat = 5;
     private float posX;
     private float posY;
@@ -16,6 +20,8 @@ public class enemy : MonoBehaviour
     private bool isAttack = false;
     private bool isDeath = false;
     private float speedSnake = 7.0f;
+
+
     private Vector2 velocity = Vector2.zero;
     // Start is called before the first frame update
     void Start()
@@ -36,25 +42,28 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        flip(rb.velocity.x);
+        animationSnake();
         float res = target.position.y - transform.position.y;
         if (Vector2.Distance(target.position, transform.position) < 10.0f && res < 0.2f)
         {
             moveEnemy();
         }
         if(isAttack == true){
-            print("attaquer");
-            AttackPlayer();
+            if(Time.time > lastAttackedAt + cooldown){
+                AttackPlayer();
+            }
         }
-        /*if(mainPlayer.getLife() <= 0){
-            print("mort");
-            ReBorn();
-        }*/
-        if(isDeath == true){
+        if(life <= 0 ||isDeath){
             Death();
         }
     }
 
+    private void animationSnake()
+    {
+        flip(rb.velocity.x);
+        float speed = Mathf.Abs(rb.velocity.x);
+        animation.SetFloat("speed", speed);
+    }
     private void flip(float _velocity){
         if(_velocity > 0.1f){
             spriteRenderer.flipX = false;
@@ -68,20 +77,14 @@ public class enemy : MonoBehaviour
     {
         life = life - life;
         snake.SetActive(false);
-    }
-
-     private void ReBorn()
-    {
-        life = 60;
-        transform.position = new Vector3(posX, posY, 0f);
-        isDeath = false;
-        snake.SetActive(true);
+        isDeath = true;
     }
 
     public void AttackPlayer()
     {
         mainPlayer.Attack(degat,transform.position);
-        isAttack = false;
+        isAttack = false;   
+        lastAttackedAt = Time.time;
     }
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -95,5 +98,28 @@ public class enemy : MonoBehaviour
         }
         
 
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            isAttack = false;
+        }
+
+    }
+
+    public void Attack(int degat, Vector3 playerPosition)
+    {
+        life = life - degat;
+        Vector2 direction = (playerPosition - transform.position) * -1;
+        rb.AddForce(new Vector3(direction.x * 200.0f,100.0f,0f));
+    }
+    public int getLife(){
+        return life;
+    }
+
+    public int getLifeMax(){
+        return lifeMax;
     }
 }
