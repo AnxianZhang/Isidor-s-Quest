@@ -9,11 +9,13 @@ public class Warrior : MonoBehaviour
     public float time;
     
     private Renderer myRender;
+    private ScreenFlash sf;
 
     // Start is called before the first frame update
     void Start()
     {
         myRender = GetComponent<Renderer>();
+        sf=GetComponent<ScreenFlash>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class Warrior : MonoBehaviour
 
     public void PlayerHarmed(int damageE)
     {
+        sf.FlashScreen();
         health = health - damageE;
         if (health <= 0) 
         {

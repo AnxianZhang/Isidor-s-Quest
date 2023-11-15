@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class ScreenFlash : MonoBehaviour
 {
-    public Image hurtImage; 
+    public Image img; 
     public float time;
-    private Color flashColor = new Color(1f, 0f, 0f, 1f);
+    public Color flashColor = Color.red;
+
     private Color defaultColor;
     // Start is called before the first frame update
     void Start()
     {
-        defaultColor = hurtImage.color;
+        defaultColor = img.color;
     }
 
     // Update is called once per frame
@@ -26,8 +27,8 @@ public class ScreenFlash : MonoBehaviour
     }
 
     IEnumerator Flash(){
-        hurtImage.color=flashColor;
+        img.color=flashColor;
         yield return new WaitForSeconds(time);
-        hurtImage.color=defaultColor;
+        img.color=defaultColor;
     }
 }
