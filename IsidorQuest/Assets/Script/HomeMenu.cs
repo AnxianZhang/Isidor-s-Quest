@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HomeMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private const string LVL_TO_LOAD = "WorldOneLvl1";
+
+    [SerializeField] private GameObject settingsWindow;
+
+
+    public void startGame()
     {
-        
+        SceneManager.LoadScene(LVL_TO_LOAD);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void showSettingMenu()
     {
-        
+        settingsWindow.SetActive(true);
+    }
+
+    public void quitGame()
+    {
+        Application.Quit();
     }
 }
