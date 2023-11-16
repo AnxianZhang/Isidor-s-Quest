@@ -1553,7 +1553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed1ea98c7b301641a25dfb564a98adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2036422105}
   offSet: 0.5
   posOffSet: {x: 1, y: 2.5, z: -10}
 --- !u!1 &677635246

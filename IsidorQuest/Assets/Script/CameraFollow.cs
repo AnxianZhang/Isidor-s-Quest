@@ -1,21 +1,22 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
-    public string sceneToChage;
-    public void startGameButton()
+    private GameObject player;
+    [SerializeField] private float offSet;
+    [SerializeField] public Vector3 posOffSet;
+
+    private Vector3 velocity;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        SceneManager.LoadScene(sceneToChage);
+        this.player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void settingsButton()
+    // Update is called once per frame
+    void Update()
     {
-
-    }
-
-    public void quitGameButton()
-    {
-        Application.Quit();
+        this.transform.position = Vector3.SmoothDamp(this.transform.position, this.player.transform.position + this.posOffSet, ref this.velocity, this.offSet);
     }
 }
