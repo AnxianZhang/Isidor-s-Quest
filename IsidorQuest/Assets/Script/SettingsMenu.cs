@@ -17,4 +17,9 @@ public class Settings : MonoBehaviour
         Debug.Log(isFullSreen);
         Screen.fullScreen = isFullSreen;
     }
+
+    public void quitSettings()
+    {
+        gameObject.SetActive(false);
+    }
 }
