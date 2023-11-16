@@ -7,6 +7,7 @@ public class HomeMenu : MonoBehaviour
 
     [SerializeField] private GameObject settingsWindow;
 
+
     public void startGame()
     {
         SceneManager.LoadScene(LVL_TO_LOAD);
@@ -14,7 +15,7 @@ public class HomeMenu : MonoBehaviour
 
     public void showSettingMenu()
     {
-        this.settingsWindow.SetActive(true);
+        settingsWindow.SetActive(true);
     }
 
     public void quitGame()
