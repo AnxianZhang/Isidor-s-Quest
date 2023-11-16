@@ -40,7 +40,7 @@ public class EnemySnake : Enemy
                     int randomInt = random.Next(2);
                     movingRight = (randomInt == 1);
 
-                    Debug.Log("right?"+movingRight);
+                    // Debug.Log("right?"+movingRight);
                     if(Vector2.Distance(transform.position, movePos[1].position) <= 0.1f){movingRight=true;}
                     if(Vector2.Distance(transform.position, movePos[0].position) <= 0.1f){movingRight=false;}
                     randomTimer = 1.0f;
