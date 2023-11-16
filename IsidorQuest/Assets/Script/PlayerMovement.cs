@@ -4,82 +4,157 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private const float GROUND_CHECK_RADIUS = .5f;
-
-    [Header("Move parameters")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
-
-    [Header("Player states")]
-    [SerializeField] private bool isJumping;
-    [SerializeField] private bool isOnGround;
-    [Tooltip("Used for the groundCheck, ignore player rigid body component")]
-    [Space(10)]
-    [SerializeField] private LayerMask ignoreLayer;
-    [SerializeField] private Transform groundCheck;
-
-    private Rigidbody2D rigidBody;
-
-    private Animator animator;
+    private Animator animation;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
+    [SerializeField]  private float speed;
+    [SerializeField]  private float jumpForce;
+    private Vector3 jump;
+    [SerializeField] private LayerMask ignoreLayer;
+    [SerializeField] private bool isGround;
+    [SerializeField] private bool isJump = false;
+    private bool isLander = false;
+    private bool isDeath = false;
+    private bool isAttackSnake = false;
+    private bool isLanderUp = false;
+    private bool isLanderDown = false;
+    [SerializeField] private Transform GroundCheck;
+    private Vector2 velocity = Vector2.zero;
 
-    private float hMovement;
-
+    // Start is called before the first frame update
     void Start()
     {
-        this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
-        this.animator = gameObject.GetComponent<Animator>();
+        animation = gameObject.GetComponent<Animator>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        this.hMovement = Input.GetAxis("Horizontal") * moveSpeed;
-
-        //Inputs are always ine uptade function
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isOnGround)
+        float directionH = Input.GetAxisRaw("Horizontal");
+        float directionV = Input.GetAxisRaw("Vertical");
+        movePlayer(directionH, directionV);
+        animationPlayer();
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
-            this.isJumping = true;
+            isJump = true;
         }
-
-        flip();
-
-        this.animator.SetFloat("Speed", Mathf.Abs(this.rigidBody.velocity.x));
+        if (Input.GetKey(KeyCode.UpArrow) && isLander)
+        {
+            isLanderUp = true;
+        }
+        else
+        {
+            isLanderUp = false;
+        }
+        if (Input.GetKey(KeyCode.DownArrow) && isLander)
+        {
+            isLanderDown = true;
+        }
+        else
+        {
+            isLanderDown = false;
+        }
     }
 
-    /*
-     * Call every 0.02s, usually used for physics calculations
-     */
     private void FixedUpdate()
     {
         // create a circle on the groundCheck position, with a radius
-        this.isOnGround = Physics2D.OverlapCircle(this.groundCheck.position, GROUND_CHECK_RADIUS, ignoreLayer);
-
-        movePlayer();
+        this.isGround = Physics2D.OverlapCircle(this.GroundCheck.position, GROUND_CHECK_RADIUS, ignoreLayer);
+    }
+    private void animationPlayer()
+    {
+        flip(rb.velocity.x);
+        if (isGround)
+        {
+            float speed = Mathf.Abs(rb.velocity.x);
+            animation.SetFloat("Speed", speed);
+        }
+        else
+        {
+            animation.SetFloat("Speed", 0.0f);
+        }
+        if (isLanderUp || isLanderDown)
+        {
+            animation.SetBool("isLander", true);
+        }
+        else
+        {
+            animation.SetBool("isLander", false);
+        }
+        animation.SetBool("isJump", isJump);
     }
 
-
-    private void movePlayer()
+    private void flip(float _velocity)
     {
-        if (this.isJumping && this.isOnGround)
+        if (_velocity > 0.1f)
         {
-            this.rigidBody.AddForce(new Vector2(0f, this.jumpForce));
-            this.isJumping = false;
+            spriteRenderer.flipX = false;
+        }
+        else if (_velocity < -0.1f)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+    private void movePlayer(float directionH, float directionV)
+    {
+        this.rb.velocity = new Vector2(directionH * speed, this.rb.velocity.y); // move a player in a new position
+        if (isJump && isGround)
+        {
+            rb.AddForce(jump * jumpForce, UnityEngine.ForceMode2D.Impulse);
+            isJump = false;
+        }
+        if (isLanderUp)
+        {
+            transform.Translate(Vector2.up * 25.0f * Time.deltaTime, Space.World);
+        }
+        if (isLanderDown)
+        {
+            transform.Translate(Vector2.down * 25.0f * Time.deltaTime, Space.World);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            isAttackSnake = true;
         }
 
-        this.rigidBody.velocity = new Vector2(this.hMovement, this.rigidBody.velocity.y); // move a player in a new position
     }
 
-    private void flip()
+    void OnCollisionExit2D(Collision2D col)
     {
-        if (this.rigidBody.velocity.x < -.25f)
-            this.spriteRenderer.flipX = true;
-        else if (this.rigidBody.velocity.x > .25f)
-            this.spriteRenderer.flipX = false;
+        if (col.gameObject.tag == "Enemy")
+        {
+            isAttackSnake = false;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("echelle"))
+        {
+            isLander = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("echelle"))
+        {
+            isLander = false;
+            isLanderDown = false;
+            isLanderUp = false;
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(this.groundCheck.position, GROUND_CHECK_RADIUS);
+        Gizmos.DrawWireSphere(this.GroundCheck.position, GROUND_CHECK_RADIUS);
     }
 }
