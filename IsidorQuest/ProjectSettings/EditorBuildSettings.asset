@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/WebSiteHomeGB.unity
     guid: 88869130bdce5cc45a0c358367740cc6
   - enabled: 1
-    path: Assets/Scenes/WorldOneLvl1s.unity
+    path: Assets/Scenes/WorldOneLvl1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/WorldOneLvl2.unity
