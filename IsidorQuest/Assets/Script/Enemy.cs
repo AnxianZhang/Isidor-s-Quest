@@ -6,7 +6,6 @@ public abstract class Enemy : MonoBehaviour
 {
     public int health;
     public int damage;
-    public GameObject dropCoin;
 
     public float flashTime;
 
@@ -26,7 +25,6 @@ public abstract class Enemy : MonoBehaviour
     public void Update()
     {
         if(health <= 0){
-            Instantiate(dropCoin,transform.position,Quaternion.identity);
             Destroy(gameObject);
         }
     }
