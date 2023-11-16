@@ -2,52 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public abstract class enemy : MonoBehaviour
 {
-    [SerializeField] private GameObject snake;
-    [SerializeField] private Animator animation;
     [SerializeField] private MainCharacter mainPlayer;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-    private int life = 60;
-    private float cooldown = 2f; //seconds
+    [SerializeField] private int life;
+    private float cooldown = 2f; 
     private float lastAttackedAt = 0f;
-    private int lifeMax = 60;
-    private int degat = 5;
-    private float posX;
-    private float posY;
+    private int lifeMax;
+    [SerializeField] private int degat;
     private Transform target;
     private bool isAttack = false;
+    [SerializeField] private float flashTime;
     private bool isDeath = false;
-    private float speedSnake = 7.0f;
-
-
-    private Vector2 velocity = Vector2.zero;
+    private Color originalColor;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        rb = snake.GetComponent<Rigidbody2D>();
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         target = mainPlayer.transform;
-        posX = transform.position.x;
-        posY = transform.position.y;
-    }
-
-    private void moveEnemy()
-    {
-        Vector2 displacement = target.position - transform.position;
-        displacement = displacement.normalized;
-        rb.velocity = Vector2.SmoothDamp(rb.velocity, displacement*speedSnake, ref velocity, 0.5f);
+        originalColor = spriteRenderer.color;
+        this.lifeMax = life;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        animationSnake();
-        float res = target.position.y - transform.position.y;
-        if (Vector2.Distance(target.position, transform.position) < 10.0f && res < 0.2f)
-        {
-            moveEnemy();
-        }
         if(isAttack == true){
             if(Time.time > lastAttackedAt + cooldown){
                 AttackPlayer();
@@ -58,25 +40,19 @@ public class enemy : MonoBehaviour
         }
     }
 
-    private void animationSnake()
-    {
-        flip(rb.velocity.x);
-        float speed = Mathf.Abs(rb.velocity.x);
-        animation.SetFloat("speed", speed);
-    }
-    private void flip(float _velocity){
-        if(_velocity > 0.1f){
-            spriteRenderer.flipX = false;
-        }
-        else if(_velocity < -0.1f){
-            spriteRenderer.flipX = true;
-        }
+    private void FlashColor(float time){
+     spriteRenderer.color = Color.red;
+     Invoke("ResetColor",time);
+ }
+ 
+    private void ResetColor(){
+         spriteRenderer.color = originalColor;
     }
 
     private void Death()
     {
         life = life - life;
-        snake.SetActive(false);
+        gameObject.SetActive(false);
         isDeath = true;
     }
 
@@ -114,6 +90,7 @@ public class enemy : MonoBehaviour
         life = life - degat;
         Vector2 direction = (playerPosition - transform.position) * -1;
         rb.AddForce(new Vector3(direction.x * 200.0f,100.0f,0f));
+        FlashColor(flashTime);
     }
     public int getLife(){
         return life;

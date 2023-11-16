@@ -8,8 +8,8 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-      user: 'kaladevi549@gmail.com',
-      pass: 'ewjxeayihuvveper',
+      user: 'isidorquest@gmail.com',
+      pass: 'qbimqevwqdqgviaz',
     },
     tls: {
       rejectUnauthorized: false
@@ -33,7 +33,7 @@ const SendCode = async(req, res)=>{
     let expireDate = today.setHours(today.getHours() + 1);
     console.log(code);
     await transporter.sendMail({
-      from: 'kaladevi549@gmail.com', 
+      from: '"no-reply" <foo@example.com>', 
       to: data.email, // list of receivers
       subject: "Code de verification", // Subject line
       text: "Voici le code à entrer sur le site : " + code, // plain text body
