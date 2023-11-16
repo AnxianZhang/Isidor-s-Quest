@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject player;
-    public float offSet;
-    public Vector3 posOffSet;
+    private GameObject player;
+    [SerializeField] private float offSet;
+    [SerializeField] public Vector3 posOffSet;
 
     private Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
