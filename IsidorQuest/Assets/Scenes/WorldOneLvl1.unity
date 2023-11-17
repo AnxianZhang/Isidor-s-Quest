@@ -348,14 +348,12 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: 7.001492, y: 4.516979}
-  - {x: 6.995592, y: 4.825259}
-  - {x: 7.1200314, y: 4.999195}
-  - {x: 11.082409, y: 5.013422}
-  - {x: 11.010244, y: 5.8117394}
-  - {x: 11.132015, y: 6.0268784}
-  - {x: 13.870584, y: 6.014821}
-  - {x: 13.978736, y: 5.529056}
+  - {x: 7.67955, y: 4.986864}
+  - {x: 7.6740303, y: 4.991894}
+  - {x: 7.123701, y: 5.008891}
+  - {x: 7.0062633, y: 4.7401986}
+  - {x: 7.0568924, y: 4.3908086}
+  - {x: 7.0606933, y: 2.7111528}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -406,6 +404,85 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &792880564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792880565}
+  - component: {fileID: 792880566}
+  m_Layer: 0
+  m_Name: Platform5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792880565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792880564}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1815416280}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &792880566
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792880564}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 9.0949135, y: 5.032306}
+  - {x: 9.6004505, y: 5.0443907}
+  - {x: 11.108498, y: 5.035924}
+  - {x: 10.969968, y: 5.749899}
+  - {x: 11.134042, y: 6.027858}
+  - {x: 13.748784, y: 6.0241623}
+  - {x: 13.966161, y: 5.8914332}
+  - {x: 13.985314, y: 5.410588}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!114 &1044633271 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 611386257315679741, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
@@ -2143,6 +2220,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5554920392620529831, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1050703883}
+    - targetCorrespondingSourceObject: {fileID: 5554920392620529831, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 792880565}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4149959790783069864, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
       insertIndex: -1
