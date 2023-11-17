@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Warrior : MonoBehaviour
 {
-    private Animator animation;
+    private Animator animator;
     private SpriteRenderer spriteRenderer;
     private int blinks = 2;
     private float time = 0.02f;
@@ -22,7 +22,7 @@ public class Warrior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animation = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -73,7 +73,7 @@ public class Warrior : MonoBehaviour
     }
     private void animationPlayer()
     {
-        animation.SetBool("isDeath", isDeath);
+        animator.SetBool("isDeath", isDeath);
     }
 
     private void resuscitate()
