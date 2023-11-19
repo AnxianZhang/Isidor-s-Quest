@@ -17,7 +17,7 @@ public class CoinItem : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.GetType().ToString());
+        // Debug.Log(other.GetType().ToString());
         if(other.tag == "Player" && other.GetType().ToString()=="UnityEngine.CapsuleCollider2D"){
             CoinUI.CurrentCoinQuantity=CoinUI.CurrentCoinQuantity+1;
             Destroy(gameObject);

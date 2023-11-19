@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float hMovement;
     private float vMovement;
+    private float originalGravityScale;
 
     void Start()
     {
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
         this.animator = gameObject.GetComponent<Animator>();
         this.playerCollider= GetComponent<CapsuleCollider2D>();
+        this.originalGravityScale= this.rigidBody.gravityScale;
     }
 
     private void Update()
@@ -123,17 +125,18 @@ public class PlayerMovement : MonoBehaviour
             float moveY=Input.GetAxis("Vertical");
             if(moveY>0.5f||moveY<-0.5f){
                 animator.SetBool("isLander",true);
-                // rigidBody.gravityScale=0.0f;
+                rigidBody.gravityScale = originalGravityScale;
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x,moveY*climbSpeed);
             }
             else{
                 animator.SetBool("isLander",false);
+                rigidBody.gravityScale=0.0f;
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x,0.0f);
             }
         }
         else{
             animator.SetBool("isLander",false);
-
+            rigidBody.gravityScale = originalGravityScale;
         }
     }
 
