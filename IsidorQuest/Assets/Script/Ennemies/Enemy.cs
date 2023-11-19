@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private Warrior mainPlayer;
+    public GameObject dropCoin;
     public SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     [SerializeField] private int life;
@@ -39,6 +40,7 @@ public abstract class Enemy : MonoBehaviour
         }
         if (life <= 0 || isDeath)
         {
+            Instantiate(dropCoin,transform.position,Quaternion.identity);
             Death();
         }
     }
