@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Move parameters")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private float climbSpeed;
 
     [Tooltip("Used for the groundCheck, ignore player rigid body component")]
     [Space(10)]
@@ -15,26 +16,33 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
 
     [Header("Player states")]
+
     private bool isJumping;
     private bool isOnGround;
     private bool isAttackSnake;
+    private bool isLadder;
+    private bool climbing;
     public bool isClimbing;
     public bool isUnmoveble;
 
 
     private Rigidbody2D rigidBody;
+    private CapsuleCollider2D playerCollider;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     private float hMovement;
     private float vMovement;
+    private float originalGravityScale;
 
     void Start()
     {
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
         this.animator = gameObject.GetComponent<Animator>();
+        this.playerCollider= GetComponent<CapsuleCollider2D>();
+        this.originalGravityScale= this.rigidBody.gravityScale;
     }
 
     private void Update()
@@ -54,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
         flip();
 
         this.animator.SetFloat("Speed", Mathf.Abs(this.rigidBody.velocity.x));
+        CheckLadder();
+        Climb();
+        CheckStatus();
     }
 
     /*
@@ -105,6 +116,33 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireSphere(this.groundCheck.position, GROUND_CHECK_RADIUS);
     }
 
+    private void CheckLadder(){
+        isLadder=Physics2D.IsTouchingLayers(playerCollider, LayerMask.GetMask("Ladder"));
+    }
+
+    void Climb(){
+        if(isLadder){
+            float moveY=Input.GetAxis("Vertical");
+            if(moveY>0.5f||moveY<-0.5f){
+                animator.SetBool("isLander",true);
+                rigidBody.gravityScale = originalGravityScale;
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x,moveY*climbSpeed);
+            }
+            else{
+                animator.SetBool("isLander",false);
+                rigidBody.gravityScale=0.0f;
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x,0.0f);
+            }
+        }
+        else{
+            animator.SetBool("isLander",false);
+            rigidBody.gravityScale = originalGravityScale;
+        }
+    }
+
+    void CheckStatus(){
+        climbing=animator.GetBool("isLander");
+    }
     //void OnCollisionEnter2D(Collision2D col)
     //{
     //    if (col.gameObject.tag == "Enemy")
