@@ -1,0 +1,46 @@
+{
+    "Home" : {
+        "buttonPlay" : "Jouer",
+        "gameTitle" : "Isidor’s Quest : le jeu fantastique de plateforme",
+        "gameDescPartOne" : "Cher joueur,  dans un lointain royaume, règne un puissant dieu respecté de tous, nommé Disanskrit, le seigneur sacré. Il a créé des labyrinthes ainsi que des énigmes à travers ses régions.",
+        "gameDescPartTwo" : "De nombreux aventuriers ont été malencontreusement aspirés dans son royaume mais aucun n'en est jamais revenu. Enfermé à votre tour dans ce monde, vous, Isidor, doit entreprendre l'exploration des régions pour espérer retrouver sa liberté et obtenir des réponses..."
+    },
+    "Header" : {
+        "about" : "A propos",
+        "connect" : "Se connecter",
+        "disconnect" : "Se deconnecter",
+        "buttonPlay" : "Jouer"
+    },
+    "connexion" : {
+        "connection" : "Connexion",
+        "connect" : "Se connecter",
+        "forgotPassword" : "Mot de passe oublié ?",
+        "createNewAccount" : "Créer nouveau compte",
+        "pseudo" : "Pseudo",
+        "password" : "Mot de passe",
+        "errorConnection" : "Nom d'utilisateur/Mot de passe incorrect"
+    },
+    "Register" : {
+        "register" : "S'inscrire",
+        "name" : "Prénom",
+        "familyName" : "Nom de famille",
+        "email" : "Adresse e-mail",
+        "pseudo" : "Pseudo",
+        "password" : "Mot de passe",
+        "confirmPassword" : "Confirmer mot de passe",
+        "generalCondition" : "En cliquant sur S’inscrire, vous acceptez nos Conditions générales",
+        "errorPasswordCaseOne" : "Le mot de passe ne correspond pas",
+        "haveAnAccount" : "Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé",
+        "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
+        "next" : "Continuer"
+    },
+    "Code" : {
+        "codeText" : "Entrez le code",
+        "confirmCodeText" : "confirmer le code",
+        "codeVerification" : "Verification du code",
+        "register" : "S'inscrire",
+        "errorCodeCaseOne" : "Le code entré ne correspond pas",
+        "errorExpireDate" : "Votre code est expiré",
+        "errorCode" : "Code incorrect"
+    }
+}

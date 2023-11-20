@@ -1,0 +1,46 @@
+{
+    "Home": {
+        "buttonPlay": "Play",
+        "gameTitle": "Isidor's Quest: The Fantasy Platformer",
+        "gameDescPartOne": "Dear Gambler, in a distant realm, there reigns a powerful god respected by all, named Disanskrit, the sacred lord. He created mazes as well as puzzles across his regions.",
+        "gameDescPartTwo": "Many adventurers have been inadvertently sucked into his kingdom, but none have ever returned. Locked in this world, you, Isidor, must begin exploring the regions in order to regain his freedom and obtain answers..."
+    },
+    "Header": {
+        "about": "About Us",
+        "connect": "Sign in",
+        "disconnect": "Log out",
+        "buttonPlay": "Play"
+    },
+    "connexion": {
+        "connection": "Connection",
+        "connect": "Sign in",
+        "forgotPassword": "Forgot your password?",
+        "createNewAccount": "Create a new account",
+        "pseudo": "Nickname",
+        "password": "Password",
+        "errorConnection" : "Incorrect username/password"
+    },
+    "Register": {
+        "register": "Register",
+        "name": "Name",
+        "familyName": "Last Name",
+        "email": "E-mail address",
+        "pseudo": "Nickname",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "generalCondition": "By clicking Sign Up, you agree to our Terms and Conditions",
+        "errorPasswordCaseOne": "Password doesn't match",
+        "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
+        "pseudoAlreadyExist" :"This username is already taken",
+        "next" : "Next"
+    },
+    "Code" : {
+        "codeText" : "Enter the code",
+        "confirmCodeText" : "Confirm the code",
+        "codeVerification" : "Code verification",
+        "register": "Register",
+        "errorCodeCaseOne" : "Code doesn't match",
+        "errorExpireDate" : "Your code has expired",
+        "errorCode" : "Incorrect code"
+    }
+}
