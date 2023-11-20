@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Warrior : MonoBehaviour
 {
-    private Animator animator;
     private SpriteRenderer spriteRenderer;
     private int blinks = 2;
     private float time = 0.02f;
@@ -22,7 +21,6 @@ public class Warrior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
@@ -30,7 +28,6 @@ public class Warrior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animationPlayer();
         if (isWater)
         {
             Death();
@@ -38,13 +35,6 @@ public class Warrior : MonoBehaviour
         if (life <= 0)
         {
             Death();
-            if (Input.GetKey(KeyCode.R))
-            {
-                resuscitate();
-            }
-            if(Input.GetKey(KeyCode.B)){
-                WebSiteHome();
-            }
         }
         if (isAttackSnake == true)
         {
@@ -62,30 +52,15 @@ public class Warrior : MonoBehaviour
     }
     private void Death()
     {
-        rb.bodyType = RigidbodyType2D.Static;
         life = life - life;
         isDeath = true;
+        Destroy(gameObject);
     }
 
     public bool getDeath()
     {
         return isDeath;
     }
-    private void animationPlayer()
-    {
-        animator.SetBool("isDeath", isDeath);
-    }
-
-    private void resuscitate()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    private void WebSiteHome()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
-
     public int getLife()
     {
         return life;
