@@ -110,10 +110,11 @@ public class Warrior : MonoBehaviour
     public void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
-        //if(!isJump){
-        Vector2 direction = (enemyPosition - transform.position) * -1;
-        rb.AddForce(new Vector3(direction.x * 100.0f, 250.0f, 0f));
-        //}
+        float res = enemyPosition.y - transform.position.y;
+        if(res > 0.30f){
+            Vector2 direction = (enemyPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 100.0f, 250.0f, 0f));
+        }
         BlinkPlayer(blinks, time);
     }
 }
