@@ -432,8 +432,6 @@ GameObject:
   - component: {fileID: 6279062582608349232}
   - component: {fileID: 2969967362440610166}
   - component: {fileID: 7682791106024739941}
-  - component: {fileID: 6056205584155299938}
-  - component: {fileID: 6799442954349928261}
   m_Layer: 7
   m_Name: Snake5
   m_TagString: Enemy
@@ -684,64 +682,6 @@ CircleCollider2D:
   m_Offset: {x: -0.018811226, y: -0.7788563}
   serializedVersion: 2
   m_Radius: 0.33025646
---- !u!114 &6056205584155299938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547031195204217975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 1805800831621408459}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 83101209335581217}
-  - {fileID: 2869759921851100317}
---- !u!58 &6799442954349928261
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547031195204217975}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.018811226, y: -0.7788563}
-  serializedVersion: 2
-  m_Radius: 0.33025646
 --- !u!1 &2589234180594944845
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,8 +761,6 @@ GameObject:
   - component: {fileID: 8187976676603169010}
   - component: {fileID: 3318921978005930551}
   - component: {fileID: 2112353056001672361}
-  - component: {fileID: 8108516957022527339}
-  - component: {fileID: 3992784727552403270}
   m_Layer: 7
   m_Name: Snake4
   m_TagString: Enemy
@@ -1073,64 +1011,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.78262043}
   serializedVersion: 2
   m_Radius: 0.2851076
---- !u!114 &8108516957022527339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631504142709822582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7141891626004984617}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 659456662676661081}
-  - {fileID: 8341426337080666395}
---- !u!58 &3992784727552403270
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631504142709822582}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.78262043}
-  serializedVersion: 2
-  m_Radius: 0.2851076
 --- !u!1 &2841043120511321139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,8 +1154,6 @@ GameObject:
   - component: {fileID: 2800450611144519705}
   - component: {fileID: 8552926645417602920}
   - component: {fileID: 3824532547653803285}
-  - component: {fileID: 6398720177917922247}
-  - component: {fileID: 4256186028874570598}
   m_Layer: 7
   m_Name: Snake7
   m_TagString: Enemy
@@ -1526,64 +1404,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.82777023}
   serializedVersion: 2
   m_Radius: 0.30768394
---- !u!114 &6398720177917922247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4203114114603466413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7062341373482703668}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 8120469538370181795}
-  - {fileID: 7928134508545660301}
---- !u!58 &4256186028874570598
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4203114114603466413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.82777023}
-  serializedVersion: 2
-  m_Radius: 0.30768394
 --- !u!1 &4344297838904741223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,8 +1420,6 @@ GameObject:
   - component: {fileID: 1231441904845415250}
   - component: {fileID: 2291190946667677336}
   - component: {fileID: 9126695830240999668}
-  - component: {fileID: 6239231378189429933}
-  - component: {fileID: 769508238392333331}
   m_Layer: 7
   m_Name: Snake3
   m_TagString: Enemy
@@ -1830,64 +1648,6 @@ CircleCollider2D:
   serializedVersion: 2
   m_Radius: 0.28134537
 --- !u!114 &9126695830240999668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4344297838904741223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7262801123131891695}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 3431481254942163026}
-  - {fileID: 7383176300395650104}
---- !u!58 &6239231378189429933
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4344297838904741223}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.8089571}
-  serializedVersion: 2
-  m_Radius: 0.28134537
---- !u!114 &769508238392333331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2446,8 +2206,6 @@ GameObject:
   - component: {fileID: 6412273051237672319}
   - component: {fileID: 6031580365215333219}
   - component: {fileID: 1288100905773019308}
-  - component: {fileID: 856425870548400822}
-  - component: {fileID: 4398284398264319878}
   m_Layer: 7
   m_Name: Snake2
   m_TagString: Enemy
@@ -2676,64 +2434,6 @@ CircleCollider2D:
   serializedVersion: 2
   m_Radius: 0.3079437
 --- !u!114 &1288100905773019308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563287104815064827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 8808268894040016102}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 660982168895462581}
-  - {fileID: 3642461938547363082}
---- !u!58 &856425870548400822
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563287104815064827}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03233874, y: -0.79554105}
-  serializedVersion: 2
-  m_Radius: 0.3079437
---- !u!114 &4398284398264319878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3088,8 +2788,6 @@ GameObject:
   - component: {fileID: 5602187221171596161}
   - component: {fileID: 8096508493529843812}
   - component: {fileID: 6917425068482604910}
-  - component: {fileID: 836938492138244768}
-  - component: {fileID: 8076816372290973185}
   m_Layer: 7
   m_Name: Snake6
   m_TagString: Enemy
@@ -3306,64 +3004,6 @@ MonoBehaviour:
   - {fileID: 4757424342614968542}
   - {fileID: 5512236893450388521}
 --- !u!58 &6917425068482604910
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165761823426022556}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.80895805}
-  serializedVersion: 2
-  m_Radius: 0.3490715
---- !u!114 &836938492138244768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165761823426022556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7683380289252649358}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
-  waitTime: 0.5
-  movePos:
-  - {fileID: 4757424342614968542}
-  - {fileID: 5512236893450388521}
---- !u!58 &8076816372290973185
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

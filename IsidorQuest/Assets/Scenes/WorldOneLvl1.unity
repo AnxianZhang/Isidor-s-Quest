@@ -853,6 +853,14 @@ PrefabInstance:
       propertyPath: mainPlayer
       value: 
       objectReference: {fileID: 2036422109}
+    - target: {fileID: 6917425068482604910, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076816372290973185, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8096508493529843812, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
       propertyPath: mainPlayer
       value: 
