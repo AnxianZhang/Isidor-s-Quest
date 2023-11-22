@@ -107,8 +107,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2073114869
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: -1803424191, guid: 686da664108cb75489eba609acb189aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,14 +133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9330192a8ffd964994e535a2d4d9a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
-  jumpForce: 500
-  isJumping: 0
-  isOnGround: 0
+  moveSpeed: 10
+  jumpForce: 300
+  climbSpeed: 5
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 3643314712215295026}
+  isClimbing: 0
+  isUnmoveble: 0
 --- !u!114 &7670638258378611615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,9 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c25dbe34dbe33a47a32b874325f0505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  blinks: 2
-  time: 0.05
 --- !u!50 &2196278742933219784
 Rigidbody2D:
   serializedVersion: 4

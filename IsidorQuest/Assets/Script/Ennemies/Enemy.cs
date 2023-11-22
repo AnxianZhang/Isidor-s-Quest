@@ -7,18 +7,20 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private Warrior mainPlayer;
     public GameObject dropCoin;
     public SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
     [SerializeField] private int life;
     private float cooldown = 2f;
     private float lastAttackedAt = 0f;
     private int lifeMax;
     [SerializeField] private int degat;
-    private Transform target;
     private bool isAttack = false;
     [SerializeField] private float flashTime;
     private bool isDeath = false;
     private Color originalColor;
-    // Start is called before the first frame update
+
+    protected Rigidbody2D rb;
+    protected Transform target;
+
+
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();

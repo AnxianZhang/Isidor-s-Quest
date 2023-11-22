@@ -8,12 +8,12 @@ public class EnemySnake : Enemy
     private const float GROUND_CHECK_RADIUS = .4f;
     [SerializeField] private LayerMask ignoreLayer;
     [SerializeField] private Transform groundCheck;
-    private Rigidbody2D rb;
-    private Animator animation;
+    //private Rigidbody2D rb;
+    private Animator animator;
     private CircleCollider2D ennemyCollider;
     private bool isLadder = false;
     private bool isOnGround;
-    [SerializeField] private Transform target;
+    //[SerializeField] private Transform target;
     private float speedSnake = 3.0f;
     private Vector2 velocity = Vector2.zero;
     private EnemySnakeMoveAutomatic enSnakeMove;
@@ -21,8 +21,8 @@ public class EnemySnake : Enemy
     public new void Start()
     {
         base.Start();
-        animation = gameObject.GetComponent<Animator>();
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
+        //rb = gameObject.GetComponent<Rigidbody2D>();
         enSnakeMove = gameObject.GetComponent<EnemySnakeMoveAutomatic>();
          this.ennemyCollider= GetComponent<CircleCollider2D>();
     }
@@ -81,7 +81,7 @@ public class EnemySnake : Enemy
     {
         flip(rb.velocity.x);
         float speed = Mathf.Abs(rb.velocity.x);
-        animation.SetFloat("speed", speed);
+        animator.SetFloat("speed", speed);
     }
 
     private void flip(float _velocity)
