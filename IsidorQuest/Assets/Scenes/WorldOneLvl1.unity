@@ -1125,6 +1125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1955108012273554376, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3762062685736986055, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.000061035156
