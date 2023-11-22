@@ -54,10 +54,11 @@ public class Warrior : MonoBehaviour
     {
         life = life - life;
         isDeath = true;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 
-    public bool getDeath()
+    public bool getIsDeath()
     {
         return isDeath;
     }

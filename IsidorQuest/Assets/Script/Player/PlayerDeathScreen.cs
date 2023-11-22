@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeathScreen : MonoBehaviour
 {
-    [SerializeField] private Canvas playerDeathScreen;
-    [SerializeField] private Warrior lifePlayer;
+    //[SerializeField] private Canvas playerDeathScreen;
+    private Warrior player;
+    private GameObject deathMenu;
+    private bool isDisplayBoxCalled;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        playerDeathScreen.enabled = false;
+        this.player = GameObject.FindWithTag("Player").GetComponent<Warrior>();
+        this.deathMenu = gameObject.transform.GetChild(1).gameObject;
     }
 
     // Update is called once per frame
@@ -20,9 +20,25 @@ public class PlayerDeathScreen : MonoBehaviour
         DisplayBox();
     }
 
-    private void DisplayBox(){
-        if(lifePlayer.getLife() <= 0){
-            playerDeathScreen.enabled = true;
+    private void DisplayBox()
+    {
+        if (player.getIsDeath() && !this.isDisplayBoxCalled)
+        {
+            Time.timeScale = .0f;
+            this.deathMenu.SetActive(true);
+            this.isDisplayBoxCalled = true;
         }
+    }
+
+    public void retryButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void mainMenuButton()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("HomeMenu");
     }
 }
