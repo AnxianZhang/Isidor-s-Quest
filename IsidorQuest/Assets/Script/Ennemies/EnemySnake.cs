@@ -14,7 +14,7 @@ public class EnemySnake : Enemy
     private bool isLadder = false;
     private bool isOnGround;
     //[SerializeField] private Transform target;
-    private float speedSnake = 3.0f;
+    [SerializeField] private float speedSnake;
     private Vector2 velocity = Vector2.zero;
     private EnemySnakeMoveAutomatic enSnakeMove;
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class EnemySnake : Enemy
         animator = gameObject.GetComponent<Animator>();
         //rb = gameObject.GetComponent<Rigidbody2D>();
         enSnakeMove = gameObject.GetComponent<EnemySnakeMoveAutomatic>();
-         this.ennemyCollider= GetComponent<CircleCollider2D>();
+        this.ennemyCollider= GetComponent<CircleCollider2D>();
     }
 
     private void moveEnemy()
