@@ -44,8 +44,8 @@ const Header = (props) => {
             <View style={styles.headerLogo}>
                 <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={styles.logoPicture} />
             </View>
-            <View style={styles.containPropos}>
-                <ButtonText onPress={() => console.log("toucher")} text={props.language.Header.about} styleText={styles.headerText} />
+            <View style={props.inProps? styles.containProposUnderLine : styles.containProps}>
+                <ButtonText onPress={() => navigation.navigate("APropos")} text={props.language.Header.about} styleText={styles.headerText} />
             </View>
             <View style={styles.headerLastElement}>
                 <View style={styles.containeWorldPicture}>
@@ -126,7 +126,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top : '100%'
     },
-    
+
+    containProposUnderLine:{
+        borderBottomWidth: 5,
+        borderBlockColor: "#282034",
+    },
 });
 
 export default Header;
