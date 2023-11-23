@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isJumping;
     private bool isOnGround;
-    private bool isAttackSnake;
     private bool isLadder;
     private bool climbing;
     public bool isClimbing;

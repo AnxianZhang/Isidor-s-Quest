@@ -96,7 +96,6 @@ public abstract class Enemy : MonoBehaviour
 
     public void Attack(int degat, Vector3 playerPosition)
     {
-        print("ok");
         life = life - degat;
         Vector2 direction = (playerPosition - transform.position) * -1;
         rb.AddForce(new Vector3(direction.x * 200.0f, 100.0f, 0f));

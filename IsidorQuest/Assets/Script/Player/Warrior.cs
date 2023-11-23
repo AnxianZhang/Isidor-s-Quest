@@ -10,19 +10,21 @@ public class Warrior : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private int blinks = 2;
     private float time = 0.02f;
-    private Enemy enemy;
     private Rigidbody2D rb;
     private int life = 100;
     private int lifeMax = 100;
     private int degat = 20;
     private bool isWater = false;
     private bool isDeath = false;
-    private bool isAttackSnake = false;
+    private float cooldown = 2f;
+    private float lastAttackedAt = 0f;
     // Start is called before the first frame update
+    private GameObject[] enemys;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");    
     }
 
     // Update is called once per frame
@@ -36,7 +38,7 @@ public class Warrior : MonoBehaviour
         {
             Death();
         }
-        if (isAttackSnake == true)
+        if (Input.GetKeyDown(KeyCode.S) && Time.time > lastAttackedAt + cooldown)
         {
             AttackSnake();
         }
@@ -44,12 +46,17 @@ public class Warrior : MonoBehaviour
     }
     public void AttackSnake()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            enemy.Attack(degat, transform.position);
-            isAttackSnake = false;
+        for(int i = 0; i < enemys.Length; i++){
+            float res = enemys[i].transform.position.y - transform.position.y;
+            float resSprite = enemys[i].transform.position.x - transform.position.x;
+            bool tourner = resSprite < 0 && spriteRenderer.flipX ||  resSprite >= 0 && !spriteRenderer.flipX ? true : false;           
+            if(Vector2.Distance(enemys[i].transform.position, transform.position) < 2.0f && res < 0.25f && res > -0.25f && tourner){
+                enemys[i].GetComponent<Enemy>().Attack(degat, transform.position);
+                lastAttackedAt = Time.time;
+            }
         }
     }
+
     private void Death()
     {
         life = life - life;
@@ -93,28 +100,21 @@ public class Warrior : MonoBehaviour
         {
             isWater = true;
         }
-        if (col.gameObject.tag == "Enemy")
-        {
-            isAttackSnake = true;
-            enemy = GameObject.Find(col.gameObject.name).GetComponent<Enemy>();
-        }
+    }
 
-    }
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        {
-            isAttackSnake = false;
-        }
-    }
 
     public void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
-        float res = enemyPosition.y - transform.position.y;
-        if(res > 0.30f){
+        float res = enemyPosition.x - transform.position.x;
+        print(res);
+        if(this.rb.velocity.y == 0f){
             Vector2 direction = (enemyPosition - transform.position) * -1;
-            rb.AddForce(new Vector3(direction.x * 100.0f, 250.0f, 0f));
+            rb.AddForce(new Vector3(direction.x * 1000f, 100f, 0f));
+        }
+        if(res >= -0.5f && res < 0.5f){
+            Vector2 direction = (enemyPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 1000f, 200f, 0f));
         }
         BlinkPlayer(blinks, time);
     }

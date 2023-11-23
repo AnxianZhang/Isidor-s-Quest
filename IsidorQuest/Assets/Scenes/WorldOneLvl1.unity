@@ -351,6 +351,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2367274394371625757, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
+      propertyPath: jumpForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2367274394371625757, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
       propertyPath: GroundCheck
       value: 
       objectReference: {fileID: 514143338}
@@ -821,6 +825,10 @@ PrefabInstance:
       propertyPath: mainPlayer
       value: 
       objectReference: {fileID: 2036422109}
+    - target: {fileID: 5964649410367211819, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5964649410367211819, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
       propertyPath: mainPlayer
       value: 
