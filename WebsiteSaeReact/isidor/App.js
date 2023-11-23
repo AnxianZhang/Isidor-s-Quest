@@ -7,6 +7,7 @@ import UnityCompile from './page/UnityCompilerScreen';
 import { useState} from 'react';
 import fr from "./language/fr.json"
 import VerificationScreen from './page/VerificationUserCodeScreen';
+import ContactUsScreen from './page/ContactUsScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage,setSelectLanguage] = useState(fr);
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Game" component={UnityCompile} />
         <Stack.Screen name="VerifyCode" options={{headerShown: false}}>{()=>(<VerificationScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

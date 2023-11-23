@@ -42,5 +42,15 @@
         "errorCodeCaseOne" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
         "errorCode" : "Code incorrect"
+    },
+    "Contact" : {
+        "name" : "Entrez votre nom",
+        "email" : "Entre votre mail",
+        "emailFormatWrong" : "Ce n'es pas la format valide",
+        "send" : "Envoyer",
+        "content" : "Decrire ta besoin",
+        "contentLong" : "Description long que 500",
+        "contentVide" : "Description vice ne peut pas envoyé"
     }
+
 }

@@ -65,6 +65,12 @@ const HomeScreen = ({language})=>{
                 <Text style={styles.gameTitleText}>Chasing the Glow</Text>
             </View>
             <View style={styles.containButtonPlay}>
+                <TouchableOpacity onPress={() => {navigation.navigate("Contact")}}>
+                    <View style={styles.buttonContent}>
+                        <Image source={{ uri: Play }} style={styles.playLogo} />
+                            <Text style={styles.headerText}>contact</Text>
+                    </View>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => {isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion")}}>
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
