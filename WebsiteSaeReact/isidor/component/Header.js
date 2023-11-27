@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
 
     containProposUnderLine:{
         borderBottomWidth: 5,
-        borderBlockColor: "#282034",
+        borderBlockColor: "white",
     },
 });
 
