@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions} from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,17 +18,75 @@ const ContactUsScreen = ({language}) => {
         setSelectLanguage(getLanguage);
     })
 
+    const [status, setStatus] = useState("Submit");
+    const handleSubmit = async () => {
+
+        try {
+            const name = nameRef.current?.value;
+            const email = emailRef.current?.value;
+            const message = messageRef.current?.value;
+
+            if (!name || !email || !message) {
+                Alert.alert("Please fill in all fields");
+                return;
+            }
+
+            setStatus("Sending...");
+            let response = await fetch("http://localhost:5000/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({ name, email, message }),
+            });
+            setStatus("Submit");
+
+            let result = await response.json();
+            Alert.alert(result.status);
+        } catch (error) {
+            console.error("ContactUsScreen Error submitting form:", error);
+            setStatus("Submit");
+            Alert.alert("Failed to send message");
+        }
+    };
+
+    
+    const nameRef = useRef(null);
+    const emailRef = useRef(null);
+    const messageRef = useRef(null);
+
     return (
         <View style={styles.backcolor}>
             <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
+            <View style={styles.FormContainerBlue}>
+                <View>
+                    <Text>Name:</Text>
+                    <TextInput style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
+                     ref={nameRef} />
+                </View>
+                <View>
+                    <Text>Email:</Text>
+                    <TextInput style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
+                     ref={emailRef} />
+                </View>
+                <View>
+                    <Text>Message:</Text>
+                    <TextInput style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
+                     ref={messageRef} multiline={true} />
+                </View>
+                <TouchableOpacity onPress={handleSubmit} style={{ backgroundColor: 'orange', padding: 10, marginTop: 10 }}>
+                    <Text>{status}</Text>
+                </TouchableOpacity>
+            </View>
             
         </View>
-    );
-};
+    )
+    
+}
 const styles = StyleSheet.create({
 backcolor : {
     flex: 1,
-    backgroundColor : "#7094CB"
+    backgroundColor : "#7094CB",
 },
 header: {
     flexDirection: 'row',
@@ -37,75 +95,11 @@ header: {
     height: 100,
     backgroundColor : "#443955"
 },
-FormContainer : {
+FormContainerBlue : {
     alignItems: "center",
-    justifyContent : "center",
-    height: windowHeight*0.85,
-},
-FormulaireBox : {
-    height : windowHeight * 0.7,
-    width : windowWidth * 0.6,
-    borderRadius : 50,
-    backgroundColor : "#443955"
-},
-ConnexionTitle : {
-    alignItems : "center",
-    paddingTop : 15
-},
-ConnexionText:{
-    color:"white",
-    fontSize:24,
-    fontFamily:"ExtraBold"
-},
-InputStyle : {
-    alignItems : "center",
-    paddingTop : 40
-},
-fields : {
-    backgroundColor : "white",
-    width : 450,
-    height : 55,
-    borderRadius : 20,
-    padding : 20,
-    fontSize : 20,
-    color : "#000000"
-},
-ButtonContainer:{
-    alignItems : "center",
-    paddingTop : 40
-},
-ConnexionButtonText : {
-    fontSize : 28,
-    color : "#FFFFFF",
-    fontFamily : "Light",
-    textAlign : "center"
-},
-ButtonConnectContainer : {
-    width : 450,
-    height : 42,
-    borderRadius : 20
-},
-forgetPassword : {
-    alignItems : "center",
-    paddingTop : 10
-},
-forgetPasswordText : {
-    fontSize : 16,
-    color : "#E55839",
-    fontFamily : "regular",
-    paddingBottom : 30,
-},
-NewAccountButtonConnectContainer : {
-    width : 310,
-    height : 42,
-    backgroundColor : "#5BD94C",
-    borderRadius : 20
-},
-NewAccountButtonText:{
-    fontSize : 24,
-    color : "#FFFFFF",
-    fontFamily : "regular",
-    textAlign : "center"
+    maxWidth : "80%",
+    minWidth:"50%",
+    marginHorizontal:"auto",
 }
 });
 export default ContactUsScreen;

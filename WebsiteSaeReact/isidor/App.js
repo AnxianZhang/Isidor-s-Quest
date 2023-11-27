@@ -14,12 +14,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{headerShown: false}}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Game" component={UnityCompile} />
         <Stack.Screen name="VerifyCode" options={{headerShown: false}}>{()=>(<VerificationScreen language={selectLanguage} />)}</Stack.Screen>
-        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
