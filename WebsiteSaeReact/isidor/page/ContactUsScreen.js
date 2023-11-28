@@ -17,20 +17,27 @@ const ContactUsScreen = ({language}) => {
     useEffect(()=>{
         setSelectLanguage(getLanguage);
     })
-
+    const [disable, setDisable] = useState(true)
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    
     const [status, setStatus] = useState("Submit");
+    
     const handleSubmit = async () => {
-
+        
         try {
             const name = nameRef.current?.value;
             const email = emailRef.current?.value;
             const message = messageRef.current?.value;
-
-            if (!name || !email || !message) {
-                Alert.alert("Please fill in all fields");
-                return;
-            }
-
+            
+            // useEffect(() => {
+            //     if (name === "" || email === "" || message === "" || reg.test(email) === false) {
+            //         setDisable(true);
+            //     }
+            //     else {
+            //         setDisable(false);
+            //     }
+            // })
+            
             setStatus("Sending...");
             let response = await fetch("http://localhost:5000/contact", {
             method: "POST",
@@ -74,7 +81,9 @@ const ContactUsScreen = ({language}) => {
                     <TextInput style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
                      ref={messageRef} multiline={true} />
                 </View>
-                <TouchableOpacity onPress={handleSubmit} style={{ backgroundColor: 'orange', padding: 10, marginTop: 10 }}>
+                <TouchableOpacity onPress={handleSubmit} 
+                                    disabled={disable}
+                                style={[{ padding: 10, marginTop: 10 },{ backgroundColor: disable ? "#a9a9a9" : "orange" }]}>
                     <Text>{status}</Text>
                 </TouchableOpacity>
             </View>

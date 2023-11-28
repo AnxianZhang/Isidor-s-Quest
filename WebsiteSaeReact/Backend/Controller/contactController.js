@@ -5,10 +5,13 @@ const contactEmail = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-        user: 'isidorquest@gmail.com',
-        pass: 'qbimqevwqdqgviaz',
+        // user: 'isidorquest@gmail.com',
+        // pass: 'qbimqevwqdqgviaz',
+        user: 'xingtonglin011016@gmail.com',
+        pass: 'afzf kclj qoml wwry',
     },
     tls: {
+    // more security avec true (certificat TLS)
     rejectUnauthorized: false
     }
 });
@@ -27,8 +30,9 @@ const mailSend = async(req, res) => {
     const email = req.body.email;
     const message = req.body.message; 
     const mail = {
-        from: name,
-        to: "isidorquest@gmail.com",
+        from: '"no-reply" <foo@example.com>',
+        // to: "isidorquest@gmail.com",
+        to: "xingtonglin011016@gmail.com",
         subject: "Contact Form Submission",
         html: `<p>Name: ${name}</p>
                 <p>Email: ${email}</p>
