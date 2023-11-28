@@ -16,14 +16,14 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float flashTime;
     private bool isDeath = false;
     private Color originalColor;
-
     protected Rigidbody2D rb;
     protected Transform target;
-
-
+    private bool isHit;
+    protected Animator animator;
     public void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         target = mainPlayer.GetComponent<Transform>();
         originalColor = spriteRenderer.color;
@@ -33,12 +33,20 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        animationAttackEnemy();
         if (isAttack == true)
         {
             if (Time.time > lastAttackedAt + cooldown)
             {
+                isHit = true;
                 AttackPlayer();
             }
+            else{
+                isHit = false;
+            }
+        }
+        else{
+            isHit = false;
         }
         if (life <= 0 || isDeath)
         {
@@ -47,6 +55,9 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    private void animationAttackEnemy(){
+        animator.SetBool("isHit", isHit);
+    }
     private void FlashColor(float time)
     {
         spriteRenderer.color = Color.red;

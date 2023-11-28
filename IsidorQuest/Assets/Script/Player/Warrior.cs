@@ -15,21 +15,26 @@ public class Warrior : MonoBehaviour
     private int lifeMax = 100;
     private int degat = 20;
     private bool isWater = false;
+    private Animator animator;
     private bool isDeath = false;
     private float cooldown = 2f;
     private float lastAttackedAt = 0f;
     // Start is called before the first frame update
     private GameObject[] enemys;
+    private bool isHit = false;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        enemys = GameObject.FindGameObjectsWithTag("Enemy");    
+        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        this.animator = gameObject.GetComponent<Animator>();    
     }
 
     // Update is called once per frame
     void Update()
     {
+        AttackAnimation();
         if (isWater)
         {
             Death();
@@ -38,21 +43,29 @@ public class Warrior : MonoBehaviour
         {
             Death();
         }
-        if (Input.GetKeyDown(KeyCode.S) && Time.time > lastAttackedAt + cooldown)
+        if (Input.GetKeyDown(KeyCode.S) && Time.time > lastAttackedAt + cooldown || Input.GetKeyDown(KeyCode.S) && lastAttackedAt == 0f)
         {
-            AttackSnake();
+            AttackEnemy();
+        }
+        else{
+            isHit = false;
         }
 
     }
-    public void AttackSnake()
+
+    private void AttackAnimation(){
+        this.animator.SetBool("isHit", isHit);
+    }
+    public void AttackEnemy()
     {
         for(int i = 0; i < enemys.Length; i++){
             float res = enemys[i].transform.position.y - transform.position.y;
             float resSprite = enemys[i].transform.position.x - transform.position.x;
-            bool tourner = resSprite < 0 && spriteRenderer.flipX ||  resSprite >= 0 && !spriteRenderer.flipX ? true : false;           
+            bool tourner = resSprite < 0 && spriteRenderer.flipX ||  resSprite >= 0 && !spriteRenderer.flipX ? true : false; 
             if(Vector2.Distance(enemys[i].transform.position, transform.position) < 2.0f && res < 0.25f && res > -0.25f && tourner){
                 enemys[i].GetComponent<Enemy>().Attack(degat, transform.position);
                 lastAttackedAt = Time.time;
+                isHit = true;
             }
         }
     }
@@ -79,6 +92,18 @@ public class Warrior : MonoBehaviour
         return lifeMax;
     }
 
+    public float getCooldown(){
+        return cooldown;
+    }
+
+    public float getCooldownNow(){
+        if(Time.time <= lastAttackedAt + cooldown && lastAttackedAt != 0f)
+            return (lastAttackedAt + cooldown) - Time.time;
+        else{
+            return 0f;
+        }
+    }
+
     void BlinkPlayer(int numBlinks, float seconds)
     {
         StartCoroutine(DoBlinks(numBlinks, seconds));
@@ -103,12 +128,12 @@ public class Warrior : MonoBehaviour
     }
 
 
+
     public void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
         float res = enemyPosition.x - transform.position.x;
-        print(res);
-        if(this.rb.velocity.y == 0f){
+        if(this.rb.velocity.y <= 0f){
             Vector2 direction = (enemyPosition - transform.position) * -1;
             rb.AddForce(new Vector3(direction.x * 1000f, 100f, 0f));
         }

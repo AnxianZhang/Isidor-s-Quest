@@ -9,7 +9,6 @@ public class EnemySnake : Enemy
     [SerializeField] private LayerMask ignoreLayer;
     [SerializeField] private Transform groundCheck;
     //private Rigidbody2D rb;
-    private Animator animator;
     private CircleCollider2D ennemyCollider;
     private bool isLadder = false;
     private bool isOnGround;
@@ -21,7 +20,6 @@ public class EnemySnake : Enemy
     public new void Start()
     {
         base.Start();
-        animator = gameObject.GetComponent<Animator>();
         //rb = gameObject.GetComponent<Rigidbody2D>();
         enSnakeMove = gameObject.GetComponent<EnemySnakeMoveAutomatic>();
         this.ennemyCollider= GetComponent<CircleCollider2D>();
