@@ -71,7 +71,7 @@ const HomeScreen = ({language})=>{
                             <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => Payer()}>
+                <TouchableOpacity onPress={() => navigation.navigate("PaymentCard")}>
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
                             <Text style={styles.headerText}>test</Text>
