@@ -8,12 +8,9 @@ import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 const windowHeight = Dimensions.get('window').height;
-const windowWidth = Dimensions.get('window').width;
-const PaymentCardScreen = ({language})=>{    
+
+const SucessPaymentScreen = ({language})=>{    
     const [selectLanguage, setSelectLanguage] = useState(language); 
-    const [nom, setNom] = useState("");
-    const [email, setEmail] = useState("");
-    const [disable, setDisable] =  useState(true);
     const navigation = useNavigation();
 
     useEffect(()=>{
@@ -45,40 +42,12 @@ const PaymentCardScreen = ({language})=>{
     }
     }
 
-     const Payer = async ()=>{
-        try {
-            const response = await fetch('http://localhost:3005/pay', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const result = await response.status;
-            const TextResponse = await response.text();
-            window.location = JSON.parse(TextResponse).forwardLink;
-        }
-        catch (error){
-
-        }
-    }
+    
     return(
         <View style={styles.backcolor}>
           <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
           <View style={styles.FormContainer}>
-                    <View style={styles.ButtonContainer}>
-                        <TouchableOpacity onPress={()=>Payer()}>
-                            <View style={[styles.ButtonPaymentContainer, {backgroundColor : "#E55839"}]}>
-                                <Text style={styles.PaymentButtonText}>Payer par paypal</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.ButtonContainer}>
-                        <TouchableOpacity onPress={()=>sendDataToDatabase()}>
-                            <View style={[styles.ButtonPaymentContainer, {backgroundColor : "#E55839"}]}>
-                                <Text style={styles.PaymentButtonText}>Payer par carte bancaire</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                    <Text>Paiement reussi</Text>
            </View>
         </View>
     )
@@ -100,21 +69,6 @@ FormContainer : {
     justifyContent : "center",
     height: windowHeight*0.85,
 },
-ButtonContainer:{
-    alignItems : "center",
-    paddingTop : 40
-},
-PaymentButtonText : {
-    fontSize : 28,
-    color : "#FFFFFF",
-    fontFamily : "Light",
-    textAlign : "center"
-},
-ButtonPaymentContainer : {
-    width : 450,
-    height : 42,
-    borderRadius : 20
-},
 });
 
-export default PaymentCardScreen;
+export default SucessPaymentScreen;

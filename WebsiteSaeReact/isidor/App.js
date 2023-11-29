@@ -8,6 +8,8 @@ import { useState} from 'react';
 import fr from "./language/fr.json"
 import PaymentCardScreen from './page/PaymentCardScreen';
 import VerificationScreen from './page/VerificationUserCodeScreen';
+import SucessPaymentScreen from './page/SuccessPaymentScreen';
+import CancelPaymentScreen from './page/CancelPaymentScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage,setSelectLanguage] = useState(fr);
@@ -20,6 +22,8 @@ export default function App() {
         <Stack.Screen name="Game" component={UnityCompile} />
         <Stack.Screen name="VerifyCode" options={{headerShown: false}}>{()=>(<VerificationScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="PaymentCard" options={{headerShown: false}}>{()=>(<PaymentCardScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="Success" options={{headerShown: false}}>{()=>(<SucessPaymentScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="Cancel" options={{headerShown: false}}>{()=>(<CancelPaymentScreen language={selectLanguage} />)}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

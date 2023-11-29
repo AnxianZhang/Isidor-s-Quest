@@ -29,24 +29,6 @@ const HomeScreen = ({language})=>{
         setSelectLanguage(getLanguage);
     })
 
-    const Payer = async ()=>{
-        try {
-            const response = await fetch('http://localhost:3005/pay', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const result = await response.status;
-            const TextResponse = await response.text();
-            window.location = JSON.parse(TextResponse).forwardLink;
-        }
-        catch (error){
-
-        }
-    }
-
-
     const getData = async ()=>{
         const response = await AsyncStorage.getItem("user");
         const responseJSON = JSON.parse(response);
@@ -75,6 +57,12 @@ const HomeScreen = ({language})=>{
                     <View style={styles.buttonContent}>
                         <Image source={{ uri: Play }} style={styles.playLogo} />
                             <Text style={styles.headerText}>test</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Cancel")}>
+                    <View style={styles.buttonContent}>
+                        <Image source={{ uri: Play }} style={styles.playLogo} />
+                            <Text style={styles.headerText}>testCancel</Text>
                     </View>
                 </TouchableOpacity>
                 <ButtonImage onPress={() => firstItemRef.current.scrollIntoView()} source={{ uri: Previous }} style={styles.previousLogo} />
