@@ -73,7 +73,7 @@ const pageStyles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        alignItems: "center",
+        alignItems: 'center',
         height: 100,
         backgroundColor: "#7094CB",
     },
