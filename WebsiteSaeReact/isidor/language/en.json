@@ -42,5 +42,15 @@
         "errorCodeCaseOne" : "Code doesn't match",
         "errorExpireDate" : "Your code has expired",
         "errorCode" : "Incorrect code"
+    },
+    "propos": {
+        "nav": "Table of contents :",
+        "title": "About us",
+        "contextTitle": "Project background",
+        "contextPara": "This project was carried out as part of our third year in the BUT informatique program at IUT Paris Rives de Seine. The aim was to develop an application that would meet both our professional and personal goals. We therefore decided to develop a game using the Unity game engine, and to make it available on a site to be set up using React Native and NodeJS. These two packages will enable us to acquire skills in two completely different fields.",
+        "consisteTitle": "What does the promotional site consist of?",
+        "consistePara": "The site is a place for users to purchase the game, which will be accessible via a browser. If they encounter difficulties, they can contact us for help.",
+        "getDataTitle": "Does the site collect user data?",
+        "getDataPara": "The data entered in our forms is stored in our databases. This concerns the registration and contact forms."
     }
 }

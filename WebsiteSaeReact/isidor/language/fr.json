@@ -42,5 +42,15 @@
         "errorCodeCaseOne" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
         "errorCode" : "Code incorrect"
+    },
+    "propos": {
+        "nav": "Table des contenus :",
+        "title": "À Propos",
+        "contextTitle": "Contexte du projet",
+        "contextPara": "Ce projet a été réalisé dans le cadre de notre troisième année en BUT informatique à l'IUT de Paris Rives de Seine. Le but étant de développer une application répondant à notre projet professionnel, mais aussi personnel. Nous avons donc décidé de développer un jeu avec le moteur de jeu Unity, et de mettre à disposition sur un site qui sera mis en place avec React Native et NodeJS. Ces deux lots, nous permet ainsi d'acquérir des compétences dans deux domaines qui sont complètement différents.",
+        "consisteTitle": "À quoi consiste le site promotionnel ?",
+        "consistePara": "Le site est un lieu qui permet aux utilisateurs d'acheter le jeu, qui sera accessible via un navigateur. Lorsqu'ils rencontrent des difficultés, celles-ci peuvent nous contacter afin solliciter de l'aide.",
+        "getDataTitle": "Est-ce que le site recueille les données des utilisateurs ?",
+        "getDataPara": "Les données entrées dans nos formulaires sont stockées dans sur nos bases de données. Cela concernent le formulaire d'inscription et de contact."
     }
 }

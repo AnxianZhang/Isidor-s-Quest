@@ -4,6 +4,7 @@ import HomeScreen from './page/HomeScreen';
 import RegisterScreen from './page/RegisterScreen';
 import ConnexionScreen from './page/ConnexionScreen';
 import UnityCompile from './page/UnityCompilerScreen';
+import APropos from './page/APropos';
 import { useState} from 'react';
 import fr from "./language/fr.json"
 import PaymentCardScreen from './page/PaymentCardScreen';
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="APropos" options={{headerShown: false}}>{()=>(<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
         <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{headerShown: false}}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
