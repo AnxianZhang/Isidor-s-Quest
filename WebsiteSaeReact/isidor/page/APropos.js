@@ -1,62 +1,72 @@
-import React, { useRef, useState } from 'react';
-import { Button, RootTagContext, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../component/Header';
-import { useNavigation } from '@react-navigation/native';
-import APropposNav from '../component/APropposNav';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import { getLanguage } from '../function/languageSelect';
+
+const APropposNav = ({ targetRef, language}) => {
+    const scrollToAnchor = (sectionId) => {
+        if (targetRef.current) {
+            targetRef.current.scrollTo({ y: sectionId * 200, animated: true });
+        }
+    };
+
+    return (
+        <View style={navStyles.nav}>
+            <Text style={[navStyles.border, navStyles.title]}>{language.propos.nav}</Text>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(2)}>
+                <Text style={navStyles.touchableColor}>{language.propos.contextTitle}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3)}>
+                <Text style={navStyles.touchableColor}>{language.propos.consisteTitle}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[navStyles.border, { borderBottomColor: "#7094CB" }]} onPress={() => scrollToAnchor(10)}>
+                <Text style={navStyles.touchableColor}>{language.propos.getDataTitle}</Text>
+            </TouchableOpacity>
+        </View>
+    );
+};
 
 const APropos = ({ language }) => {
     const targetRef = useRef();
     const [selectLanguage, setSelectLanguage] = useState(language);
     const screenWidth = useScreenWidthDimention();
 
+    useEffect(() => {
+        setSelectLanguage(getLanguage)
+    })
+
     const flexDirectionStyle = screenWidth <= 1024 ? "column" : "row"
     const marginStyle = screenWidth <= 1024 ? 0 : 50
 
-
     return (
-        <ScrollView style={styles.backColor} ref={targetRef}>
-            <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage} inProps />
-            <View style={styles.toCenter}>
-                {/* <View style={[styles.content, {}]}> */}
-                {/* <ScrollView > */}
-                <View style={[styles.content, { flexDirection: flexDirectionStyle, marginTop: marginStyle, }]}>
-                    <APropposNav targetRef={targetRef}></APropposNav>
-                    <View style={styles.allParagraph}>
-                        <Text style={[styles.title, styles.colorText]}>À Propos</Text>
-                        <View style={styles.paragraph}>
-                            <Text style={[styles.paragraphTitle, styles.colorText]}>Contexte du projet</Text>
-                            <Text style={styles.colorText}>
-                                Ce projet a été réalisé dans le cadre de notre troisième année en BUT informatique à l'IUT de Paris Rives de Seine.
-                                Le but étant de développer une application répondant à notre projet professionnel, mais aussi personnel.
-                                Nous avons donc décidé de développer un jeu avec le moteur de jeu Unity, et de mettre à disposition sur un site qui sera mis en place avec React Native et NodeJS.
-                                Ces deux lots, nous permet ainsi d'acquérir des compétences dans deux domaines qui sont complètement différents.
-                            </Text>
+        <ScrollView style={pageStyles.backColor} ref={targetRef}>
+            <Header style={pageStyles.header} setLanguage={setSelectLanguage} language={selectLanguage} inProps />
+            <View style={pageStyles.toCenter}>
+                <View style={[pageStyles.content, { flexDirection: flexDirectionStyle, marginTop: marginStyle, }]}>
+                    <APropposNav targetRef={targetRef} language={selectLanguage}></APropposNav>
+                    <View style={pageStyles.allParagraph}>
+                        <Text style={[pageStyles.title, pageStyles.colorText]}>{selectLanguage.propos.title}</Text>
+                        <View style={pageStyles.paragraph}>
+                            <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.contextTitle}</Text>
+                            <Text style={pageStyles.colorText}>{selectLanguage.propos.contextPara}</Text>
                         </View>
-                        <View style={styles.paragraph}>
-                            <Text style={[styles.paragraphTitle, styles.colorText]}>À quoi consiste le site promotionnel ?</Text>
-                            <Text style={styles.colorText}>
-                                Le site est un lieu qui permet aux utilisateurs d'acheter le jeu, qui sera accessible via un navigateur. Lorsqu'ils rencontrent
-                                des difficultés, celles-ci peuvent nous contacter afin solliciter de l'aide.
-                            </Text>
+                        <View style={pageStyles.paragraph}>
+                            <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.consisteTitle}</Text>
+                            <Text style={pageStyles.colorText}>{selectLanguage.propos.consistePara}</Text>
                         </View>
-                        <View style={styles.paragraph}>
-                            <Text style={[styles.paragraphTitle, styles.colorText]}>Est-ce que le site recueille les données des utilisateurs ?</Text>
-                            <Text style={styles.colorText}>
-                                Les données entrées dans nos formulaires sont stockées dans sur nos bases de données.
-                                Cela concernent le formulaire d'inscription et de contact.
-                            </Text>
+                        <View style={pageStyles.paragraph}>
+                            <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.getDataTitle}</Text>
+                            <Text style={pageStyles.colorText}>{selectLanguage.propos.getDataPara}</Text>
                         </View>
                     </View>
                 </View>
-                {/* </ScrollView> */}
             </View>
-            {/* </View> */}
         </ScrollView>
     );
 };
 
-const styles = StyleSheet.create({
+const pageStyles = StyleSheet.create({
     colorText: {
         color: "#DCDCDC",
         // textAlign: "justify"
@@ -106,6 +116,31 @@ const styles = StyleSheet.create({
         // backgroundColor: "pink",
         flexDirection: "row",
         width: "80%",
+    },
+})
+
+const navStyles = StyleSheet.create({
+    nav: {
+        flex: 0.5,
+        paddingVertical: 50,
+        maxHeight: 300,
+    },
+
+    border: {
+        borderWidth: 1,
+        borderColor: "#7094CB",
+        width: 270,
+        padding: 10,
+        borderBottomColor: "transparent",
+    },
+
+    title: {
+        fontSize: 20,
+        color: "#DCDCDC",
+    },
+
+    touchableColor: {
+        color: "#EE8A45",
     },
 })
 
