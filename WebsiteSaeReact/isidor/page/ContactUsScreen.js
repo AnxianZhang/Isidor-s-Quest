@@ -23,7 +23,7 @@ const ContactUsScreen = ({language}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [status, setStatus] = useState("Submit");
+    const [status, setStatus] = useState(selectLanguage.Contact.send);
 
     const [notif, setNotif] = useState('');
     
@@ -53,7 +53,7 @@ const ContactUsScreen = ({language}) => {
 
     const handleSubmit = async () => {
         try {
-            setStatus("Sending...");
+            setStatus(selectLanguage.Contact.sending);
             let response = await fetch("http://localhost:5000/contact", {
                 method: "POST",
                 headers: {
@@ -61,7 +61,7 @@ const ContactUsScreen = ({language}) => {
                 },
                 body: JSON.stringify({ name, email, message }),
             });
-            setStatus("Submit");
+            setStatus(selectLanguage.Contact.send);
 
             let result = await response.json();
             console.log(result.status);
@@ -70,12 +70,11 @@ const ContactUsScreen = ({language}) => {
             setEmail('');
             setMessage('');
 
-            setNotif("Message sent successfully! / Votre message est déjà envoyé!");
-            console.log("Message sent successfully! / Votre message est déjà envoyé!");
+            setNotif(selectLanguage.Contact.sendOK);
         } catch (error) {
             console.error("ContactUsScreen Error submitting form:", error);
-            setStatus("Submit");
-            console.log("Failed to send message");
+            setStatus(selectLanguage.Contact.send);
+            setNotif(selectLanguage.Contact.sendErr);
         }
     };
 
@@ -84,7 +83,7 @@ const ContactUsScreen = ({language}) => {
             <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
             <View style={styles.FormContainerBlue}>
                 <View>
-                    <Text>Name:</Text>
+                    <Text>{selectLanguage.Contact.name}</Text>
                     <TextInput
                         style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
                         value={name}
@@ -92,7 +91,7 @@ const ContactUsScreen = ({language}) => {
                     />
                 </View>
                 <View>
-                    <Text>Email:</Text>
+                    <Text>{selectLanguage.Contact.email}</Text>
                     <TextInput
                         style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
                         value={email}
@@ -100,7 +99,7 @@ const ContactUsScreen = ({language}) => {
                     />
                 </View>
                 <View>
-                    <Text>Message:</Text>
+                    <Text>{selectLanguage.Contact.message}</Text>
                     <TextInput
                         style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
                         value={message}

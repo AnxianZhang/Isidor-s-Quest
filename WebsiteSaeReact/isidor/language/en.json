@@ -52,5 +52,14 @@
         "consistePara": "The site is a place for users to purchase the game, which will be accessible via a browser. If they encounter difficulties, they can contact us for help.",
         "getDataTitle": "Does the site collect user data?",
         "getDataPara": "The data entered in our forms is stored in our databases. This concerns the registration and contact forms."
+    },
+    "Contact" : {
+        "name" : "Name:",
+        "email" : "Email:",
+        "message" : "Message:",
+        "sendOK" : "Message sent successfully!",
+        "send" : "Send",
+        "sending" : "Sending",
+        "sendErr" : "Failed to send message"
     }
 }
