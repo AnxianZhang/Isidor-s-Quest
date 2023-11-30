@@ -6,11 +6,11 @@ const Seperator = (props) => {
     const windowWidth = useScreenWidthDimention()
     // const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
 
-    const seperatorWidthStyle = windowWidth > 750 ? windowWidth > 900 ? windowWidth > 1300 ? 600 : 450 : 400 : 200 ;
+    const seperatorWidthStyle = windowWidth > 750 ? windowWidth > 1300 ? 600 : 400 : 200 ;
 
     return (
         <View style={styles.containSeperator}>
-            <View style={[styles.seperator, {width: seperatorWidthStyle}]} />
+            <View style={StyleSheet.compose(styles.seperator, {width: seperatorWidthStyle})} />
         </View>
     );
 }

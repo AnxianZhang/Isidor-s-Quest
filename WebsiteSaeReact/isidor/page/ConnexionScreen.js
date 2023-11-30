@@ -85,15 +85,15 @@ const ConnexionScreen = ({ language }) => {
         <View style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
             <View style={styles.FormContainer}>
-                <View style={[styles.FormulaireBox, { width: formulaireBoxWidthStyle, }]}>
+                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.connexion.connection}</Text>
                     </View>
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1 }]} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1 }]} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1 })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1 })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
-                            <View style={[styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" }]}>
+                            <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}>
                                 <Text style={styles.ConnexionButtonText}>{selectLanguage.connexion.connect}</Text>
                             </View>
                         </TouchableOpacity>
@@ -117,17 +117,6 @@ const ConnexionScreen = ({ language }) => {
     )
 }
 const styles = StyleSheet.create({
-    // backcolor: { //
-    //     flex: 1,
-    //     backgroundColor: "#7094CB",
-    // },
-    // header: { //
-    //     flexDirection: 'row',
-    //     alignItems: "center",
-    //     paddingTop: 10,
-    //     height: 100,
-    //     backgroundColor: "#443955"
-    // },
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
@@ -141,28 +130,10 @@ const styles = StyleSheet.create({
         flex: .75,
         alignItems: "center"
     },
-    // ConnexionTitle: { //
-    //     alignItems: "center",
-    //     paddingTop: 15
-    // },
-    // ConnexionText: { //
-    //     color: "white",
-    //     fontSize: 40,
-    //     fontFamily: "ExtraBold"
-    // },
     InputStyle: {
         // alignItems : "center",
         paddingTop: 40
     },
-    // fields: { ///
-    //     backgroundColor: "white",
-    //     width: 400,
-    //     height: 55,
-    //     borderRadius: 20,
-    //     padding: 20,
-    //     fontSize: 20,
-    //     color: "#000000"
-    // },
     ButtonContainer: {
         alignItems: "center",
         paddingTop: 40,
