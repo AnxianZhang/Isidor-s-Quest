@@ -11,6 +11,9 @@ public class Archer : PlayerMovement
     [SerializeField] private int lifeMax;
     [SerializeField] private int degat;
     private bool isWater = false;
+    [SerializeField] private ProjecfileShot projectile;
+    [SerializeField] private Transform launchRight;
+    [SerializeField] private Transform launchLeft;
     private bool isDeath = false;
     [SerializeField] private float cooldown;
     private float lastAttackedAt = 0f;
@@ -34,6 +37,19 @@ public class Archer : PlayerMovement
         if (life <= 0)
         {
             Death();
+        }
+        if (Input.GetKeyDown(KeyCode.S) && Time.time > lastAttackedAt + cooldown || Input.GetKeyDown(KeyCode.S) && lastAttackedAt == 0f)
+        {
+            ProjectileSpawn();
+        }
+    }
+
+    private void ProjectileSpawn(){
+        if(spriteRenderer.flipX == true){
+            Instantiate(projectile, new Vector3(launchLeft.position.x, launchLeft.position.y, 1.0f), transform.rotation);
+        }
+        else{
+            Instantiate(projectile, launchRight.position, transform.rotation);
         }
     }
 
@@ -104,5 +120,12 @@ public class Archer : PlayerMovement
         {
             isWater = true;
         }
+    }
+
+    public override void AttackEnemy(GameObject enemy)
+    {
+        base.AttackEnemy(enemy);
+        enemy.GetComponent<Enemy>().Attack(degat, transform.position);
+        lastAttackedAt = Time.time;
     }
 }

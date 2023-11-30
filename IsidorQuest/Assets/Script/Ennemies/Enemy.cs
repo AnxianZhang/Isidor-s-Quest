@@ -110,8 +110,14 @@ public abstract class Enemy : MonoBehaviour
     public void Attack(int degat, Vector3 playerPosition)
     {
         life = life - degat;
-        Vector2 direction = (playerPosition - transform.position) * -1;
-        rb.AddForce(new Vector3(direction.x * 200.0f, 100.0f, 0f));
+        if(playerPosition.x - transform.position.x <= 2.0f && playerPosition.x - transform.position.x >= -2.0f){
+            Vector2 direction = (playerPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 200.0f, 100.0f, 0f));
+        }
+        else{
+            Vector2 direction = (playerPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 20.0f, 100.0f, 0f));
+        }
         FlashColor(flashTime);
     }
 

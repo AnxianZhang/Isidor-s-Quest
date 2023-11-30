@@ -155,6 +155,10 @@ public abstract class PlayerMovement : MonoBehaviour
 
     public abstract int getLifeMax();
 
+    public virtual void AttackEnemy(GameObject enemy){
+
+    }
+
     //void OnCollisionEnter2D(Collision2D col)
     //{
     //    if (col.gameObject.tag == "Enemy")
