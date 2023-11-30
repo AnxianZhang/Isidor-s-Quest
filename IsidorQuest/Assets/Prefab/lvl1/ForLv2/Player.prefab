@@ -41,11 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5735346321844106836}
   - component: {fileID: 6334854519315581394}
-  - component: {fileID: 2367274394371625757}
-  - component: {fileID: 7670638258378611615}
   - component: {fileID: 2196278742933219784}
   - component: {fileID: 3054904951505925230}
   - component: {fileID: 7122868433552174688}
+  - component: {fileID: 3555281460400516396}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -121,39 +120,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2367274394371625757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436269770958201739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9330192a8ffd964994e535a2d4d9a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 300
-  climbSpeed: 5
-  ignoreLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  groundCheck: {fileID: 3643314712215295026}
-  isClimbing: 0
-  isUnmoveble: 0
---- !u!114 &7670638258378611615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436269770958201739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c25dbe34dbe33a47a32b874325f0505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &2196278742933219784
 Rigidbody2D:
   serializedVersion: 4
@@ -237,3 +203,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3555281460400516396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436269770958201739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c25dbe34dbe33a47a32b874325f0505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  jumpForce: 0
+  climbSpeed: 0
+  ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
+  isClimbing: 0
+  isUnmoveble: 0

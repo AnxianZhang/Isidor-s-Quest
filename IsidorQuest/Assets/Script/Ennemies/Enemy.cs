@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private Warrior mainPlayer;
+    private PlayerMovement mainPlayer;
     public GameObject dropCoin;
     public SpriteRenderer spriteRenderer;
     [SerializeField] private int life;
@@ -22,6 +22,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     public void Start()
     {
+        this.mainPlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -33,6 +34,7 @@ public abstract class Enemy : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+
         animationAttackEnemy();
         if (isAttack == true)
         {

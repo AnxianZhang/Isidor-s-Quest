@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class PlayerDeathScreen : MonoBehaviour
 {
     //[SerializeField] private Canvas playerDeathScreen;
-    private Warrior player;
+    private PlayerMovement player;
     private GameObject deathMenu;
     private bool isDisplayBoxCalled;
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Warrior>();
+        this.player = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
         this.deathMenu = gameObject.transform.GetChild(1).gameObject;
     }
 

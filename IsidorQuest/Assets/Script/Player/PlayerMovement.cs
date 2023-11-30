@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public abstract class PlayerMovement : MonoBehaviour
 {
     private const float GROUND_CHECK_RADIUS = .5f;
 
@@ -28,14 +28,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidBody;
     private CapsuleCollider2D playerCollider;
 
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
 
     private float hMovement;
     private float vMovement;
     private float originalGravityScale;
 
-    void Start()
+     public void Start()
     {
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         this.originalGravityScale= this.rigidBody.gravityScale;
     }
 
-    private void Update()
+     public void Update()
     {
         this.hMovement = Input.GetAxis("Horizontal") * moveSpeed;
 
@@ -142,6 +142,19 @@ public class PlayerMovement : MonoBehaviour
     void CheckStatus(){
         climbing=animator.GetBool("isLander");
     }
+
+    public abstract void Attack(int damage, Vector3 enemyPosition);
+
+    public abstract float getCooldown();
+        
+    public abstract float getCooldownNow();
+        
+    public abstract bool getIsDeath();
+
+    public abstract int getLife();
+
+    public abstract int getLifeMax();
+
     //void OnCollisionEnter2D(Collision2D col)
     //{
     //    if (col.gameObject.tag == "Enemy")

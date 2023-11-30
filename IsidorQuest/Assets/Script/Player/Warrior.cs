@@ -5,9 +5,8 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Warrior : MonoBehaviour
+public class Warrior : PlayerMovement
 {
-    private SpriteRenderer spriteRenderer;
     private int blinks = 2;
     private float time = 0.02f;
     private Rigidbody2D rb;
@@ -15,7 +14,6 @@ public class Warrior : MonoBehaviour
     private int lifeMax = 100;
     private int degat = 20;
     private bool isWater = false;
-    private Animator animator;
     private bool isDeath = false;
     private float cooldown = 2f;
     private float lastAttackedAt = 0f;
@@ -23,17 +21,17 @@ public class Warrior : MonoBehaviour
     private GameObject[] enemys;
     private bool isHit = false;
 
-    void Start()
+    public new void Start()
     {
+        base.Start();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        this.animator = gameObject.GetComponent<Animator>();    
     }
 
     // Update is called once per frame
-    void Update()
+    public new void Update()
     {
+        base.Update();
         AttackAnimation();
         if (isWater)
         {
@@ -78,25 +76,25 @@ public class Warrior : MonoBehaviour
         //Destroy(gameObject);
     }
 
-    public bool getIsDeath()
+    public override bool getIsDeath()
     {
         return isDeath;
     }
-    public int getLife()
+    public override int getLife()
     {
         return life;
     }
 
-    public int getLifeMax()
+    public override int getLifeMax()
     {
         return lifeMax;
     }
 
-    public float getCooldown(){
+    public override float getCooldown(){
         return cooldown;
     }
 
-    public float getCooldownNow(){
+    public override float getCooldownNow(){
         if(Time.time <= lastAttackedAt + cooldown && lastAttackedAt != 0f)
             return (lastAttackedAt + cooldown) - Time.time;
         else{
@@ -127,9 +125,7 @@ public class Warrior : MonoBehaviour
         }
     }
 
-
-
-    public void Attack(int degat, Vector3 enemyPosition)
+    public override void Attack(int degat, Vector3 enemyPosition)
     {
         life = life - degat;
         float res = enemyPosition.x - transform.position.x;

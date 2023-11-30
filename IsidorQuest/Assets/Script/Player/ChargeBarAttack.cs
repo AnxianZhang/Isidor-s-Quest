@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ChargeBarAttack : MonoBehaviour
 {
     // Start is called before the first frame update
-[SerializeField] private Warrior AttackChargePlayer;
+private PlayerMovement AttackChargePlayer;
 [SerializeField] private Image ChargeBar;
 
 [SerializeField] private Canvas chargeBarCanvas;
@@ -14,6 +14,7 @@ private float posXInitial;
 private float posYInitial;
 void Start()
 {
+    this.AttackChargePlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
     posXInitial= AttackChargePlayer.transform.position.x;
     posYInitial= AttackChargePlayer.transform.position.y;
 }

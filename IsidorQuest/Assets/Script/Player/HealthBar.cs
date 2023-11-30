@@ -7,12 +7,13 @@ using UnityEngine;
 public class HealthBar : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private Warrior lifePlayer;
+    private PlayerMovement lifePlayer;
     [SerializeField] private Image healthBar;
 
 
     void Start()
     {
+        this.lifePlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
         //transform.position = camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0,1,0));        
     }
 
