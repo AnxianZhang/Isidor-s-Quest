@@ -8,6 +8,7 @@ import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
+import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 const ConnexionScreen = ({language})=>{    
@@ -75,11 +76,15 @@ const ConnexionScreen = ({language})=>{
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
     }
+
+    const windowWidthByHook = useScreenWidthDimention()
+    const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
+
     return(
         <View style={styles.backcolor}>
           <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
           <View style={styles.FormContainer}>
-                <View style={styles.FormulaireBox}>
+                <View style={[styles.FormulaireBox, {width: formulaireBoxWidthStyle,}]}>
                     <View style={styles.ConnexionTitle}>
                         <Text style={styles.ConnexionText}>{selectLanguage.connexion.connection}</Text>
                     </View>
@@ -113,7 +118,8 @@ const ConnexionScreen = ({language})=>{
 const styles = StyleSheet.create({
 backcolor : {
     flex: 1,
-    backgroundColor : "#7094CB"
+    backgroundColor : "#7094CB",
+    // alignItems: 'center',
 },
 header: {
     flexDirection: 'row',
@@ -126,12 +132,15 @@ FormContainer : {
     alignItems: "center",
     justifyContent : "center",
     height: windowHeight*0.85,
+    // width: 1000,
 },
 FormulaireBox : {
     height : windowHeight * 0.7,
-    width : windowWidth * 0.6,
+    // width : windowWidth * 0.6, // <=========================
     borderRadius : 50,
-    backgroundColor : "#443955"
+    backgroundColor : "#443955",
+    flex: .75,
+    alignItems: "center"
 },
 ConnexionTitle : {
     alignItems : "center",
@@ -139,16 +148,16 @@ ConnexionTitle : {
 },
 ConnexionText:{
     color:"white",
-    fontSize:24,
+    fontSize: 40,
     fontFamily:"ExtraBold"
 },
 InputStyle : {
-    alignItems : "center",
+    // alignItems : "center",
     paddingTop : 40
 },
 fields : {
     backgroundColor : "white",
-    width : 450,
+    width : 400,
     height : 55,
     borderRadius : 20,
     padding : 20,
@@ -157,18 +166,20 @@ fields : {
 },
 ButtonContainer:{
     alignItems : "center",
-    paddingTop : 40
+    paddingTop : 40,
 },
 ConnexionButtonText : {
-    fontSize : 28,
+    fontSize : 25,
     color : "#FFFFFF",
     fontFamily : "Light",
-    textAlign : "center"
+    // height: "100%",
+    // textAlign : "center",
+    margin: "auto",
 },
 ButtonConnectContainer : {
-    width : 450,
+    width : 400,
     height : 42,
-    borderRadius : 20
+    borderRadius : 20,
 },
 forgetPassword : {
     alignItems : "center",
@@ -187,10 +198,12 @@ NewAccountButtonConnectContainer : {
     borderRadius : 20
 },
 NewAccountButtonText:{
-    fontSize : 24,
+    fontSize : 25,
     color : "#FFFFFF",
     fontFamily : "regular",
-    textAlign : "center"
+    // textAlign : "center"
+    margin: "auto",
+
 }
 });
 

@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
     InscriptionText: {
         color: "white",
-        fontSize: 24,
+        fontSize: 40,
         fontFamily: "ExtraBold"
     },
     InputStyle: {

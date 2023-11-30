@@ -17,9 +17,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="APropos" options={{headerShown: false}}>{()=>(<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
-        <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{headerShown: false}}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="APropos" options={{headerShown: false}}>{()=>(<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Game" component={UnityCompile} />
         <Stack.Screen name="VerifyCode" options={{headerShown: false}}>{()=>(<VerificationScreen language={selectLanguage} />)}</Stack.Screen>
