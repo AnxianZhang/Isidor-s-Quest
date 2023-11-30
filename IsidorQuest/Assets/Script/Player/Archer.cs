@@ -86,7 +86,17 @@ public class Archer : PlayerMovement
         spriteRenderer.enabled = true;
     }
     public override void Attack(int degat, Vector3 enemyPosition){
-
+        life = life - degat;
+        float res = enemyPosition.x - transform.position.x;
+        if(this.rb.velocity.y <= 0f){
+            Vector2 direction = (enemyPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 1000f, 100f, 0f));
+        }
+        if(res >= -0.5f && res < 0.5f){
+            Vector2 direction = (enemyPosition - transform.position) * -1;
+            rb.AddForce(new Vector3(direction.x * 1000f, 200f, 0f));
+        }
+        BlinkPlayer(blinks, time);
     } 
     void OnCollisionEnter2D(Collision2D col)
     {

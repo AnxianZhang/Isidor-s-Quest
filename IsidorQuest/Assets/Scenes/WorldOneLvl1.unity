@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: climbSpeed
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: groundCheck
@@ -333,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_TagString
@@ -803,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1436269770958201739, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303441015353289008, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
       propertyPath: jumpForce
