@@ -11,12 +11,14 @@ import PaymentCardScreen from './page/PaymentCardScreen';
 import VerificationScreen from './page/VerificationUserCodeScreen';
 import SucessPaymentScreen from './page/SuccessPaymentScreen';
 import CancelPaymentScreen from './page/CancelPaymentScreen';
+import ContactUsScreen from './page/ContactUsScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage,setSelectLanguage] = useState(fr);
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{headerShown: false}}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>

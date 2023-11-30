@@ -52,5 +52,15 @@
         "consistePara": "Le site est un lieu qui permet aux utilisateurs d'acheter le jeu, qui sera accessible via un navigateur. Lorsqu'ils rencontrent des difficultés, celles-ci peuvent nous contacter afin solliciter de l'aide.",
         "getDataTitle": "Est-ce que le site recueille les données des utilisateurs ?",
         "getDataPara": "Les données entrées dans nos formulaires sont stockées dans sur nos bases de données. Cela concernent le formulaire d'inscription et de contact."
+    },
+    "Contact" : {
+        "name" : "Entrez votre nom",
+        "email" : "Entre votre mail",
+        "emailFormatWrong" : "Ce n'es pas la format valide",
+        "send" : "Envoyer",
+        "content" : "Decrire ta besoin",
+        "contentLong" : "Description long que 500",
+        "contentVide" : "Description vice ne peut pas envoyé"
     }
+
 }
