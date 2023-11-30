@@ -18,7 +18,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{headerShown: false}}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Register" options={{headerShown: false}}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
@@ -28,6 +27,7 @@ export default function App() {
         <Stack.Screen name="PaymentCard" options={{headerShown: false}}>{()=>(<PaymentCardScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Success" options={{headerShown: false}}>{()=>(<SucessPaymentScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Cancel" options={{headerShown: false}}>{()=>(<CancelPaymentScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="Contact" options={{headerShown: false}}>{()=>(<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
