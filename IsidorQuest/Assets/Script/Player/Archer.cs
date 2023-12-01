@@ -51,6 +51,7 @@ public class Archer : PlayerMovement
         else{
             Instantiate(projectile, launchRight.position, transform.rotation);
         }
+        lastAttackedAt = Time.time;
     }
 
     private void Death()
@@ -126,6 +127,5 @@ public class Archer : PlayerMovement
     {
         base.AttackEnemy(enemy);
         enemy.GetComponent<Enemy>().Attack(degat, transform.position);
-        lastAttackedAt = Time.time;
     }
 }
