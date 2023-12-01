@@ -37,7 +37,6 @@ const PaymentCardScreen = ({language})=>{
             const TextResponse = await response.text();
             if(status === 200){
                 window.location = (JSON.parse(TextResponse).url);
-                navigation.navigate("Home")
             }
     }
     catch(error){

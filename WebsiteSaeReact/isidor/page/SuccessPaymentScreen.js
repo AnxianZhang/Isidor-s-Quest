@@ -4,15 +4,19 @@ import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions} from 'react-native';
 import { useState, useEffect } from 'react';
-
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 const windowHeight = Dimensions.get('window').height;
 
 const SucessPaymentScreen = ({language})=>{    
     const [selectLanguage, setSelectLanguage] = useState(language); 
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
 
+    useEffect(() => {
+        setTimeout(() => navigation.navigate("Home"), 5000)
+    }, [isFocused])
+    
     useEffect(()=>{
         setSelectLanguage(getLanguage);
     })
@@ -47,7 +51,7 @@ const SucessPaymentScreen = ({language})=>{
         <View style={styles.backcolor}>
           <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
           <View style={styles.FormContainer}>
-                    <Text>Paiement reussi</Text>
+                    <Text style={styles.SuccessText}>Paiement reussi</Text>
            </View>
         </View>
     )
@@ -69,6 +73,11 @@ FormContainer : {
     justifyContent : "center",
     height: windowHeight*0.85,
 },
+SuccessText : {
+    fontSize : 40,
+    fontWeight: 'bold',
+    color : "#08f26e"
+}
 });
 
 export default SucessPaymentScreen;

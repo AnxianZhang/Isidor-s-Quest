@@ -15,8 +15,12 @@ import ContactUsScreen from './page/ContactUsScreen';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage,setSelectLanguage] = useState(fr);
+
+  const linking = {
+    
+  };
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Stack.Navigator>
         <Stack.Screen name="Home" options={{headerShown: false}}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="APropos" options={{headerShown: false}}>{()=>(<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
