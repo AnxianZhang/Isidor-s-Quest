@@ -115,8 +115,8 @@ const RegisterScreen = ({ language }) => {
                         <Seperator />
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
-                                <View style={StyleSheet.compose(styles.NewUserButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" })}>
-                                    <Text style={styles.NewUserButtonText}>{selectLanguage.Register.next}</Text>
+                                <View style={StyleSheet.compose(GLOBAL_STYLES.form.buttonContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" })}>
+                                    <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Register.next}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -157,19 +157,19 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 20
     },
-    NewUserButtonConnectContainer: {
-        width: 310,
-        height: 42,
-        backgroundColor: "#5BD94C",
-        borderRadius: 20
-    },
-    NewUserButtonText: {
-        fontSize: 24,
-        color: "#FFFFFF",
-        fontFamily: "regular",
-        // textAlign: "center"
-        margin: "auto",
-    }
+    // NewUserButtonConnectContainer: {
+    //     width: 310,
+    //     height: 42,
+    //     backgroundColor: "#5BD94C",
+    //     borderRadius: 20
+    // },
+    // NewUserButtonText: {
+    //     fontSize: 25,
+    //     color: "#FFFFFF",
+    //     fontFamily: "regular",
+    //     // textAlign: "center"
+    //     margin: "auto",
+    // }
 });
 
 export default RegisterScreen;

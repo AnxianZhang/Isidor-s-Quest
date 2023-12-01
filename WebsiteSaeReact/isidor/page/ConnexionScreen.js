@@ -106,8 +106,8 @@ const ConnexionScreen = ({ language }) => {
                     <Seperator />
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-                            <View style={styles.NewAccountButtonConnectContainer}>
-                                <Text style={styles.NewAccountButtonText}>{selectLanguage.connexion.createNewAccount}</Text>
+                            <View style={GLOBAL_STYLES.form.buttonContainer}>
+                                <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.connexion.createNewAccount}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -161,20 +161,20 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         paddingBottom: 30,
     },
-    NewAccountButtonConnectContainer: {
-        width: 310,
-        height: 42,
-        backgroundColor: "#5BD94C",
-        borderRadius: 20
-    },
-    NewAccountButtonText: {
-        fontSize: 25,
-        color: "#FFFFFF",
-        fontFamily: "regular",
-        // textAlign : "center"
-        margin: "auto",
+    // NewAccountButtonConnectContainer: {
+    //     width: 310,
+    //     height: 42,
+    //     backgroundColor: "#5BD94C",
+    //     borderRadius: 20
+    // },
+    // NewAccountButtonText: {
+    //     fontSize: 25,
+    //     color: "#FFFFFF",
+    //     fontFamily: "regular",
+    //     // textAlign : "center"
+    //     margin: "auto",
 
-    }
+    // }
 });
 
 export default ConnexionScreen;
