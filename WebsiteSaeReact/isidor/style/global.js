@@ -52,5 +52,12 @@ export const GLOBAL_STYLES = StyleSheet.create({
             fontFamily: "regular",
             margin: "auto",
         },
+        notification:{
+            color: "white",
+            fontSize: 30,
+            fontFamily: "ExtraBold",
+            alignItems: "center",
+            paddingTop: 40,
+        },
     }
 })

@@ -1,21 +1,16 @@
 import * as React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Header from '../component/Header';
-import Field from '../component/Field';
 import { Dimensions} from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import Seperator from '../component/Seperator';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
 const windowHeight = Dimensions.get('window').height;
-const windowWidth = Dimensions.get('window').width;
+// const windowWidth = Dimensions.get('window').width;
 
 const ContactUsScreen = ({language}) => {
     const [selectLanguage, setSelectLanguage] = useState(language); 
-    const navigation = useNavigation();
     useEffect(()=>{
         setSelectLanguage(getLanguage);
     })
@@ -117,13 +112,13 @@ const ContactUsScreen = ({language}) => {
                         <TouchableOpacity 
                             onPress={handleSubmit} 
                             disabled={disable}
-                            style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
+                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
                         >
-                            <Text style={styles.ConnexionButtonText}>{status}</Text>
+                            <Text style={styles.EnvoyerButtonText}>{status}</Text>
                         </TouchableOpacity>
                     </View>
                     
-                    {notif && <Text style={GLOBAL_STYLES.form.text}>{notif}</Text>} 
+                    {notif && <Text style={GLOBAL_STYLES.form.notification}>{notif}</Text>} 
                 </View>
                 
             </View>
@@ -156,7 +151,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 40,
     },
-    ConnexionButtonText: {
+    EnvoyerButtonText: {
         fontSize: 25,
         color: "#FFFFFF",
         fontFamily: "Light",
@@ -164,19 +159,9 @@ const styles = StyleSheet.create({
         // textAlign : "center",
         margin: "auto",
     },
-    ButtonConnectContainer: {
+    ButtonEnvoyerContainer: {
         width: 400,
         height: 42,
         borderRadius: 20,
-    },
-    forgetPassword: {
-        alignItems: "center",
-        paddingTop: 10
-    },
-    forgetPasswordText: {
-        fontSize: 16,
-        color: "#E55839",
-        fontFamily: "regular",
-        paddingBottom: 30,
     }
 });
