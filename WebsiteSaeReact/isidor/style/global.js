@@ -31,6 +31,15 @@ export const GLOBAL_STYLES = StyleSheet.create({
             fontSize: 20,
             color: "#000000"
         },
+        textarea: {
+            backgroundColor: "white",
+            width: 400,
+            height: 110,
+            borderRadius: 20,
+            padding: 20,
+            fontSize: 20,
+            color: "#000000",
+        },
         buttonContainer:{
             width: 310,
             height: 42,
@@ -42,6 +51,6 @@ export const GLOBAL_STYLES = StyleSheet.create({
             color: "#FFFFFF",
             fontFamily: "regular",
             margin: "auto",
-        }
+        },
     }
 })
