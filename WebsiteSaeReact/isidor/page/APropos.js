@@ -49,15 +49,15 @@ const APropos = ({ language }) => {
                         <Text style={[pageStyles.title, pageStyles.colorText]}>{selectLanguage.propos.title}</Text>
                         <View style={pageStyles.paragraph}>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.contextTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.contextPara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.contextPara}</Text>
                         </View>
                         <View style={pageStyles.paragraph}>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.consisteTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.consistePara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.consistePara}</Text>
                         </View>
                         <View style={pageStyles.paragraph}>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.getDataTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.getDataPara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.getDataPara}</Text>
                         </View>
                     </View>
                 </View>
@@ -102,13 +102,17 @@ const pageStyles = StyleSheet.create({
     },
 
     paragraphTitle: {
-        fontSize: 30,
+        fontSize: 40,
         marginTop: 50,
     },
 
     paragraph: {
         //marginBottom: 50,
         // backgroundColor: "red",
+    },
+
+    paragraphText:{
+        fontSize: 20,
     },
 
     content: {
@@ -129,17 +133,18 @@ const navStyles = StyleSheet.create({
     border: {
         borderWidth: 1,
         borderColor: "#7094CB",
-        width: 270,
+        width: 355,
         padding: 10,
         borderBottomColor: "transparent",
     },
 
     title: {
-        fontSize: 20,
+        fontSize: 30,
         color: "#DCDCDC",
     },
 
     touchableColor: {
+        fontSize: 20,
         color: "#EE8A45",
     },
 })
