@@ -1,20 +1,17 @@
 import * as React from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import Header from '../component/Header';
-import Field from '../component/Field';
 import { Dimensions} from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import Seperator from '../component/Seperator';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import Footer from '../component/Footer';
+import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import { GLOBAL_STYLES } from '../style/global';
 const windowHeight = Dimensions.get('window').height;
-const windowWidth = Dimensions.get('window').width;
+// const windowWidth = Dimensions.get('window').width;
 
 const ContactUsScreen = ({language}) => {
     const [selectLanguage, setSelectLanguage] = useState(language); 
-    const navigation = useNavigation();
     useEffect(()=>{
         setSelectLanguage(getLanguage);
     })
@@ -79,43 +76,52 @@ const ContactUsScreen = ({language}) => {
         }
     };
 
+    const windowWidthByHook = useScreenWidthDimention()
+    const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
+
     return (
-        <View style={styles.backcolor}>
-            <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
-            <View style={styles.FormContainerBlue}>
-                <View>
-                    <Text>{selectLanguage.Contact.name}</Text>
-                    <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
-                        value={name}
-                        onChangeText={(text) => handleInputChange('name', text)}
-                    />
+        <View style={GLOBAL_STYLES.backcolor}>
+            <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
+            <View style={styles.FormContainer}>
+                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
+                    <View style={styles.InputStyle}>
+                        <TextInput
+                            style={GLOBAL_STYLES.form.fields}
+                            value={name}
+                            placeholder={selectLanguage.Contact.name}
+                            onChangeText={(text) => handleInputChange('name', text)}
+                        />
+                    </View>
+                    <View style={styles.InputStyle}>
+                        <TextInput
+                            style={GLOBAL_STYLES.form.fields}
+                            value={email}
+                            placeholder={selectLanguage.Contact.email}
+                            onChangeText={(text) => handleInputChange('email', text)}
+                        />
+                    </View>
+                    <View style={styles.InputStyle}>
+                        <TextInput
+                            style={GLOBAL_STYLES.form.textarea}
+                            value={message}
+                            placeholder={selectLanguage.Contact.message}
+                            onChangeText={(text) => handleInputChange('message', text)}
+                            multiline={true}
+                        />
+                    </View>
+                    <View style={styles.ButtonContainer}>
+                        <TouchableOpacity 
+                            onPress={handleSubmit} 
+                            disabled={disable}
+                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
+                        >
+                            <Text style={styles.EnvoyerButtonText}>{status}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    {notif && <Text style={GLOBAL_STYLES.form.notification}>{notif}</Text>} 
                 </View>
-                <View>
-                    <Text>{selectLanguage.Contact.email}</Text>
-                    <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
-                        value={email}
-                        onChangeText={(text) => handleInputChange('email', text)}
-                    />
-                </View>
-                <View>
-                    <Text>{selectLanguage.Contact.message}</Text>
-                    <TextInput
-                        style={{ borderWidth: 1, borderColor: 'black', padding: 8 }}
-                        value={message}
-                        onChangeText={(text) => handleInputChange('message', text)}
-                        multiline={true}
-                    />
-                </View>
-                <TouchableOpacity 
-                    onPress={handleSubmit} 
-                    disabled={disable}
-                    style={[{ padding: 10, marginTop: 10 },{ backgroundColor: disable ? "#a9a9a9" : "orange" }]}
-                >
-                    <Text>{status}</Text>
-                </TouchableOpacity>
-                {notif && <Text>{notif}</Text>}
+                
             </View>
             <View>
                 <Footer backColor="#443955"></Footer>
@@ -127,21 +133,38 @@ const ContactUsScreen = ({language}) => {
 export default ContactUsScreen;
 
 const styles = StyleSheet.create({
-backcolor : {
-    flex: 1,
-    backgroundColor : "#7094CB",
-},
-header: {
-    flexDirection: 'row',
-    alignItems: "center",
-    paddingTop: 10,
-    height: 100,
-    backgroundColor : "#443955"
-},
-FormContainerBlue : {
-    alignItems: "center",
-    maxWidth : "80%",
-    minWidth:"50%",
-    marginHorizontal:"auto",
-}
+    FormContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: windowHeight * 0.85,
+    },
+    FormulaireBox: {
+        height: windowHeight * 0.7,
+        // width : windowWidth * 0.6, // <=========================
+        borderRadius: 50,
+        backgroundColor: "#443955",
+        flex: .75,
+        alignItems: "center"
+    },
+    InputStyle: {
+        // alignItems : "center",
+        paddingTop: 40
+    },
+    ButtonContainer: {
+        alignItems: "center",
+        paddingTop: 40,
+    },
+    EnvoyerButtonText: {
+        fontSize: 25,
+        color: "#FFFFFF",
+        fontFamily: "Light",
+        // height: "100%",
+        // textAlign : "center",
+        margin: "auto",
+    },
+    ButtonEnvoyerContainer: {
+        width: 400,
+        height: 42,
+        borderRadius: 20,
+    }
 });

@@ -54,9 +54,9 @@
         "getDataPara": "Les données entrées dans nos formulaires sont stockées dans sur nos bases de données. Cela concernent le formulaire d'inscription et de contact."
     },
     "Contact" : {
-        "name" : "Nom:",
-        "email" : "Email:",
-        "message" : "Message:",
+        "name" : "Nom",
+        "email" : "Email",
+        "message" : "Message",
         "sendOK" : "Votre message est déjà envoyé!",
         "send" : "Envoyer",
         "sending" : "En cours",

@@ -4,7 +4,7 @@ import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions} from 'react-native';
 import { useState, useEffect } from 'react';
-
+import { useIsFocused } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 const windowHeight = Dimensions.get('window').height;
@@ -12,6 +12,11 @@ const windowWidth = Dimensions.get('window').width;
 const CancelPaymentScreen = ({language})=>{    
     const [selectLanguage, setSelectLanguage] = useState(language); 
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+        setTimeout(() => navigation.navigate("Home"), 5000)
+    }, [isFocused])
 
     useEffect(()=>{
         setSelectLanguage(getLanguage);
@@ -47,7 +52,7 @@ const CancelPaymentScreen = ({language})=>{
         <View style={styles.backcolor}>
           <Header style={styles.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
           <View style={styles.FormContainer}>
-                    <Text>Paiement réfusé</Text>
+                    <Text style={styles.CancelText}>Paiement réfusé</Text>
            </View>
         </View>
     )
@@ -69,6 +74,11 @@ FormContainer : {
     justifyContent : "center",
     height: windowHeight*0.85,
 },
+CancelText : {
+    fontSize : 40,
+    fontWeight: 'bold',
+    color : "#ff3b3b"
+}
 });
 
 export default CancelPaymentScreen;

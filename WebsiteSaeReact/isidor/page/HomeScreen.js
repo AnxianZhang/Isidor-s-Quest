@@ -72,12 +72,6 @@ const HomeScreen = ({ language }) => {
                                 <Text style={styles.headerText}>test</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate("Cancel")}>
-                            <View style={styles.buttonContent}>
-                                <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>testCancel</Text>
-                            </View>
-                        </TouchableOpacity>
                         <ButtonImage onPress={() => firstItemRef.current.scrollIntoView()} source={{ uri: Previous }} style={styles.previousLogo} />
                     </View>
                     <View style={StyleSheet.compose(styles.SecondPartContainer, { paddingHorizontal: SecondPartContainerPaddingHorizontalStyle, })}>

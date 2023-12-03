@@ -54,9 +54,9 @@
         "getDataPara": "The data entered in our forms is stored in our databases. This concerns the registration and contact forms."
     },
     "Contact" : {
-        "name" : "Name:",
-        "email" : "Email:",
-        "message" : "Message:",
+        "name" : "Name",
+        "email" : "Email",
+        "message" : "Message",
         "sendOK" : "Message sent successfully!",
         "send" : "Send",
         "sending" : "Sending",
