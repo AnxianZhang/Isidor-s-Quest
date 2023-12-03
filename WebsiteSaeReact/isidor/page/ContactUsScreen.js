@@ -8,6 +8,7 @@ import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
+import Footer from '../component/Footer';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -116,7 +117,9 @@ const ContactUsScreen = ({language}) => {
                 </TouchableOpacity>
                 {notif && <Text>{notif}</Text>}
             </View>
-            
+            <View>
+                <Footer backColor="#443955"></Footer>
+            </View>
         </View>
     )
     

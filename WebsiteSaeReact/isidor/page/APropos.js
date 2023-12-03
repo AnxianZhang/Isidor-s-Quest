@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView } from 'react-native-web';
 import Header from '../component/Header';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { getLanguage } from '../function/languageSelect';
+import Footer from '../component/Footer';
 
-const APropposNav = ({ targetRef, language}) => {
+const APropposNav = ({ targetRef, language }) => {
     const scrollToAnchor = (sectionId) => {
         if (targetRef.current) {
             targetRef.current.scrollTo({ y: sectionId * 200, animated: true });
@@ -62,6 +64,9 @@ const APropos = ({ language }) => {
                     </View>
                 </View>
             </View>
+            <View style={{marginTop: 100}}>
+                <Footer backColor={"#7094CB"}></Footer>
+            </View>
         </ScrollView>
     );
 };
@@ -86,6 +91,7 @@ const pageStyles = StyleSheet.create({
     toCenter: {
         flex: 1,
         alignItems: "center",
+        marginVertical: 100,
     },
 
     title: {
@@ -111,7 +117,7 @@ const pageStyles = StyleSheet.create({
         // backgroundColor: "red",
     },
 
-    paragraphText:{
+    paragraphText: {
         fontSize: 20,
     },
 

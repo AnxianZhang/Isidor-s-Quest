@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import List from './List';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import { GLOBAL_STYLES } from '../style/global';
 
 const Header = (props) => {
     const navigation = useNavigation();
@@ -46,7 +47,7 @@ const Header = (props) => {
         <View style={[props.style ? props.style : styles.header, {paddingHorizontal: 50}]}>
             <View style = {{flex: 1, flexDirection: "row", alignItems: 'center', /*backgroundColor: "cyan",*/ justifyContent: 'flex-start', gap: 50,}}>
                 <View>
-                    <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={styles.logoPicture} />
+                    <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={GLOBAL_STYLES.projectLogo} />
                 </View>
                 {windowWidth > 750 && <View style={props.inProps? styles.containProposUnderLine : styles.containProps}>
                     <ButtonText onPress={() => navigation.navigate("APropos")} text={props.language.Header.about} styleText={styles.headerText} />
@@ -87,10 +88,10 @@ const styles = StyleSheet.create({
     //     // paddingLeft: 60,
     //     // paddingRight: 50
     // },
-    logoPicture: {
-        width: 72,
-        height: 64
-    },
+    // logoPicture: {
+    //     width: 72,
+    //     height: 64
+    // },
     headerText: {
         fontSize: 24,
         fontFamily: "regular",

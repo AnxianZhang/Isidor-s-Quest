@@ -12,12 +12,16 @@ export const GLOBAL_STYLES = StyleSheet.create({
         height: 100,
         backgroundColor: "#443955"
     },
+    projectLogo: {
+        width: 72,
+        height: 64
+    },
     form: {
-        title:{
+        title: {
             alignItems: "center",
             paddingTop: 15,
         },
-        text:{
+        text: {
             color: "white",
             fontSize: 40,
             fontFamily: "ExtraBold",
@@ -31,13 +35,13 @@ export const GLOBAL_STYLES = StyleSheet.create({
             fontSize: 20,
             color: "#000000"
         },
-        buttonContainer:{
+        buttonContainer: {
             width: 310,
             height: 42,
             backgroundColor: "#5BD94C",
             borderRadius: 20
         },
-        buttonText:{
+        buttonText: {
             fontSize: 25,
             color: "#FFFFFF",
             fontFamily: "regular",

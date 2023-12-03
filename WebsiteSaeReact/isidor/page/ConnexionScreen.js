@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions } from 'react-native';
@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
+import Footer from '../component/Footer';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 const ConnexionScreen = ({ language }) => {
@@ -82,10 +83,10 @@ const ConnexionScreen = ({ language }) => {
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
 
     return (
-        <View style={GLOBAL_STYLES.backcolor}>
+        <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
             <View style={styles.FormContainer}>
-                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
+                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle })}>
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.connexion.connection}</Text>
                     </View>
@@ -113,7 +114,10 @@ const ConnexionScreen = ({ language }) => {
                     </View>
                 </View>
             </View>
-        </View>
+            <View>
+                <Footer backColor={"#443955"}></Footer>
+            </View>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({

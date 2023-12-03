@@ -14,6 +14,7 @@ import BackgroundGame from "../assets/Background1.png"
 import BackgrounGameSecond from "../assets/Background3.png"
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import Footer from '../component/Footer';
 
 const windowHeight = Dimensions.get('window').height;
 const HomeScreen = ({ language }) => {
@@ -88,6 +89,9 @@ const HomeScreen = ({ language }) => {
                     </View>
                 </ScrollView>
             </BackgroundPicture>
+            <View>
+                <Footer backColor={"#7094CB"}></Footer>
+            </View>
             {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
         </ScrollView>
     )
