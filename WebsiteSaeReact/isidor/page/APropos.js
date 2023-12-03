@@ -6,6 +6,9 @@ import { getLanguage } from '../function/languageSelect';
 import Footer from '../component/Footer';
 
 const APropposNav = ({ targetRef, language }) => {
+    const screenWidth = useScreenWidthDimention();
+    const [titleFontSizeStyle, touchableColorFontSizeStyle, borderWidthStyle] = screenWidth <= 460 ? [20, 14] : [30, 20, 355]
+
     const scrollToAnchor = (sectionId) => {
         if (targetRef.current) {
             targetRef.current.scrollTo({ y: sectionId * 200, animated: true });
@@ -14,15 +17,15 @@ const APropposNav = ({ targetRef, language }) => {
 
     return (
         <View style={navStyles.nav}>
-            <Text style={[navStyles.border, navStyles.title]}>{language.propos.nav}</Text>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3.25)}>
-                <Text style={navStyles.touchableColor}>{language.propos.contextTitle}</Text>
+            <Text style={[navStyles.border, navStyles.title, {fontSize: titleFontSizeStyle, width: borderWidthStyle}]}>{language.propos.nav}</Text>
+            <TouchableOpacity style={[navStyles.border, {width: borderWidthStyle}]} onPress={() => scrollToAnchor(3.25)}>
+                <Text style={[navStyles.touchableColor, {fontSize: touchableColorFontSizeStyle}]}>{language.propos.contextTitle}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(5.25)}>
-                <Text style={navStyles.touchableColor}>{language.propos.consisteTitle}</Text>
+            <TouchableOpacity style={[navStyles.border, {width: borderWidthStyle}]} onPress={() => scrollToAnchor(5.25)}>
+                <Text style={[navStyles.touchableColor, {fontSize: touchableColorFontSizeStyle}]}>{language.propos.consisteTitle}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[navStyles.border, { borderBottomColor: "#7094CB" }]} onPress={() => scrollToAnchor(10)}>
-                <Text style={navStyles.touchableColor}>{language.propos.getDataTitle}</Text>
+            <TouchableOpacity style={[navStyles.border, {width: borderWidthStyle, borderBottomColor: "#7094CB" }]} onPress={() => scrollToAnchor(8)}>
+                <Text style={[navStyles.touchableColor, {fontSize: touchableColorFontSizeStyle}]}>{language.propos.getDataTitle}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -112,7 +115,6 @@ const pageStyles = StyleSheet.create({
 
     content: {
         flex: 1,
-        // backgroundColor: "pink",
         flexDirection: "row",
         width: "80%",
     },
@@ -128,18 +130,15 @@ const navStyles = StyleSheet.create({
     border: {
         borderWidth: 1,
         borderColor: "#7094CB",
-        width: 355,
         padding: 10,
         borderBottomColor: "transparent",
     },
 
     title: {
-        fontSize: 30,
         color: "#DCDCDC",
     },
 
     touchableColor: {
-        fontSize: 20,
         color: "#EE8A45",
     },
 })
