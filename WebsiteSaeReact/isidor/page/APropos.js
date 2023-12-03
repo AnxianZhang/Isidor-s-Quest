@@ -3,8 +3,9 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import Header from '../component/Header';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { getLanguage } from '../function/languageSelect';
+import Footer from '../component/Footer';
 
-const APropposNav = ({ targetRef, language}) => {
+const APropposNav = ({ targetRef, language }) => {
     const scrollToAnchor = (sectionId) => {
         if (targetRef.current) {
             targetRef.current.scrollTo({ y: sectionId * 200, animated: true });
@@ -14,10 +15,10 @@ const APropposNav = ({ targetRef, language}) => {
     return (
         <View style={navStyles.nav}>
             <Text style={[navStyles.border, navStyles.title]}>{language.propos.nav}</Text>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(2)}>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3.25)}>
                 <Text style={navStyles.touchableColor}>{language.propos.contextTitle}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3)}>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(5.25)}>
                 <Text style={navStyles.touchableColor}>{language.propos.consisteTitle}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[navStyles.border, { borderBottomColor: "#7094CB" }]} onPress={() => scrollToAnchor(10)}>
@@ -36,7 +37,7 @@ const APropos = ({ language }) => {
         setSelectLanguage(getLanguage)
     })
 
-    const flexDirectionStyle = screenWidth <= 1024 ? "column" : "row"
+    const flexDirectionStyle = screenWidth <= 1400 ? "column" : "row"
     const marginStyle = screenWidth <= 1024 ? 0 : 50
 
     return (
@@ -47,21 +48,22 @@ const APropos = ({ language }) => {
                     <APropposNav targetRef={targetRef} language={selectLanguage}></APropposNav>
                     <View style={pageStyles.allParagraph}>
                         <Text style={[pageStyles.title, pageStyles.colorText]}>{selectLanguage.propos.title}</Text>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.contextTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.contextPara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.contextPara}</Text>
                         </View>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.consisteTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.consistePara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.consistePara}</Text>
                         </View>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.getDataTitle}</Text>
-                            <Text style={pageStyles.colorText}>{selectLanguage.propos.getDataPara}</Text>
+                            <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.getDataPara}</Text>
                         </View>
                     </View>
                 </View>
             </View>
+            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     );
 };
@@ -69,7 +71,6 @@ const APropos = ({ language }) => {
 const pageStyles = StyleSheet.create({
     colorText: {
         color: "#DCDCDC",
-        // textAlign: "justify"
     },
     header: {
         flexDirection: 'row',
@@ -86,11 +87,11 @@ const pageStyles = StyleSheet.create({
     toCenter: {
         flex: 1,
         alignItems: "center",
+        marginVertical: 100,
     },
 
     title: {
         fontSize: 60,
-        // marginBottom: 10,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
         borderColor: "#7094CB",
@@ -98,17 +99,15 @@ const pageStyles = StyleSheet.create({
 
     allParagraph: {
         flex: 1,
-        // flexDirection: "row",
     },
 
     paragraphTitle: {
-        fontSize: 30,
+        fontSize: 40,
         marginTop: 50,
     },
 
-    paragraph: {
-        //marginBottom: 50,
-        // backgroundColor: "red",
+    paragraphText: {
+        fontSize: 20,
     },
 
     content: {
@@ -129,17 +128,18 @@ const navStyles = StyleSheet.create({
     border: {
         borderWidth: 1,
         borderColor: "#7094CB",
-        width: 270,
+        width: 355,
         padding: 10,
         borderBottomColor: "transparent",
     },
 
     title: {
-        fontSize: 20,
+        fontSize: 30,
         color: "#DCDCDC",
     },
 
     touchableColor: {
+        fontSize: 20,
         color: "#EE8A45",
     },
 })

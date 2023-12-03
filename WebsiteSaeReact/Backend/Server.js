@@ -34,5 +34,3 @@ app.listen(port, () => {
 app.listen(contactPort, () => {
   console.log(`Server is running on port ${contactPort}`);
 });
-
-

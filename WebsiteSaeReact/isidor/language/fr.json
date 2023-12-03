@@ -61,6 +61,10 @@
         "send" : "Envoyer",
         "sending" : "En cours",
         "sendErr" : "Échec de l'envoi du message"
+    },
+    "Footer" :{
+        "aPropos": "À propos",
+        "gcu": "CGU & Mentions légales",
+        "copyRight": "Tous droits réservés"
     }
-
 }
