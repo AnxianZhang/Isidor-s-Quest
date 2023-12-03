@@ -43,8 +43,9 @@ const Header = (props) => {
         props.setIsConnect(false);
         await AsyncStorage.setItem("user", JSON.stringify({ pseudo: null, isConnect: false }));
     }
+    
     return (
-        <View style={[props.style ? props.style : styles.header, {paddingHorizontal: 50}]}>
+        <View style={[props.style ? props.style : styles.header, {paddingHorizontal: windowWidth <= 450 ? 10 : 50}]}>
             <View style = {{flex: 1, flexDirection: "row", alignItems: 'center', /*backgroundColor: "cyan",*/ justifyContent: 'flex-start', gap: 50,}}>
                 <View>
                     <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={GLOBAL_STYLES.projectLogo} />

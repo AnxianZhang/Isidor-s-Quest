@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import Footer from '../component/Footer';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -122,6 +123,7 @@ const RegisterScreen = ({ language }) => {
                         </View>
                     </View>
                 </View>
+                <Footer backColor={"#443955"}></Footer>
             </ScrollView>
         </View>
     )

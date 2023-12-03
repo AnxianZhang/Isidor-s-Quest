@@ -5,21 +5,25 @@ import { useNavigation } from '@react-navigation/native';
 import LogoSae from "../assets/LogoSae.png";
 import { GLOBAL_STYLES } from '../style/global';
 import ButtonText from './ButtonText';
+import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 
 const Footer = ({backColor}) => {
     const navigation = useNavigation()
+    const windowWidth = useScreenWidthDimention()
+
+    const contentFlexDirectionStyle = windowWidth
 
     return (
         <View style={[styles.container, {backgroundColor: backColor}]}>
             <View style={styles.content}>
-                <View>
+                <View style={{margin: 10}}>
                     <ButtonImage onPress={() => navigation.navigate("Home")} source={{ uri: LogoSae }} style={GLOBAL_STYLES.projectLogo} />
                 </View>
                 <View style={styles.links}>
                     <View>
                         <ButtonText onPress={()=> navigation.navigate("Contact")} styleText={styles.text} text="Contact"></ButtonText>
+                        <ButtonText onPress={()=> navigation.navigate("APropos")} styleText={styles.text} text="À propos"></ButtonText>
                         <ButtonText onPress={()=> console.log("CGU & Mentions légales")} styleText={styles.text} text="CGU & Mentions légales"></ButtonText>
-                        <ButtonText onPress={()=> console.log("Presse")} styleText={styles.text} text="Presse"></ButtonText>
                     </View>
                     <View>
                         <ButtonText onPress={()=> console.log("Twitter")} styleText={styles.text} text="Twitter"></ButtonText>
@@ -29,7 +33,7 @@ const Footer = ({backColor}) => {
                 </View>
             </View>
             <View style={styles.copyRight}>
-                <Text style={[styles.text, {marginVertical: 25}]}>&copy; Isidor's Quest - 2023 -- Tous droits réservés.</Text>
+                <Text style={[styles.text, {marginVertical: 25, textAlign: "center"}]}>&copy; Isidor's Quest - 2023 -- Tous droits réservés.</Text>
             </View>
         </View>
     );
@@ -43,16 +47,16 @@ const styles = StyleSheet.create({
     },
     content:{
         flex: 1,
-        flexDirection: "row",
+        // flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: "center",
         marginVertical: 50,
         marginHorizontal: 70,
     },
     links:{
-        flex: .25,
         flexDirection: "row",
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        // width: 400,
     },
     text:{
         fontSize: 20,
