@@ -77,7 +77,7 @@ const HomeScreen = ({ language }) => {
                     </View>
                 </ScrollView>
             </BackgroundPicture>
-            <Footer backColor={"#7094CB"}></Footer>
+            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
             {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
         </ScrollView>
     )

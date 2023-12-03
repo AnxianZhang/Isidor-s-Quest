@@ -81,7 +81,7 @@ const PaymentCardScreen = ({ language }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Footer backColor={"#443955"}></Footer>
+            <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     )
 }

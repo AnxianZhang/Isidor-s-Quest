@@ -23,7 +23,7 @@ const VerificationScreen = ({ language }) => {
     const [disable, setDisable] = useState(true);
     const navigation = useNavigation();
     const route = useRoute();
-    
+
     let number = /^(0|[1-9][0-9]*)$/
     useEffect(() => {
         setSelectLanguage(getLanguage);
@@ -38,31 +38,31 @@ const VerificationScreen = ({ language }) => {
         }
     })
 
-    const RegisterUser = async() => {
+    const RegisterUser = async () => {
         const data = {
             prenom: route.params.data.prenom,
             nomFamille: route.params.data.nomFamille,
             email: route.params.data.email,
             pseudo: route.params.data.pseudo,
             password: route.params.data.password
-       }
-       try {
-           const response = await fetch('http://localhost:3005/inscription', {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(data)
-           });
-           const result = await response.status;
-           if (result === 200) {
-               await AsyncStorage.setItem("user", JSON.stringify({ pseudo: route.params.data.pseudo, isConnect: true }));
-               navigation.navigate("Home");
-           }
-       }
-       catch (error) {
-           console.error('Erreur lors de l\'envoi des données au backend', error);
-       }
+        }
+        try {
+            const response = await fetch('http://localhost:3005/inscription', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.status;
+            if (result === 200) {
+                await AsyncStorage.setItem("user", JSON.stringify({ pseudo: route.params.data.pseudo, isConnect: true }));
+                navigation.navigate("Home");
+            }
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des données au backend', error);
+        }
     }
 
     const sendDataToDatabase = async () => {
@@ -73,8 +73,8 @@ const VerificationScreen = ({ language }) => {
         else {
             setErrorConfirmCode("");
             const data = {
-                 email : route.params.data.email,
-                 code : parseInt(code)
+                email: route.params.data.email,
+                code: parseInt(code)
             }
             try {
                 const response = await fetch('http://localhost:3005/VerifyCode', {
@@ -114,7 +114,7 @@ const VerificationScreen = ({ language }) => {
             }
             catch (error) {
                 console.error('Erreur lors de l\'envoi des données au backend', error);
-            }       
+            }
         }
     }
 
@@ -125,7 +125,7 @@ const VerificationScreen = ({ language }) => {
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
             <View style={styles.FormContainer}>
-                <View style={StyleSheet.compose(styles.FormulaireBox, {width: formulaireBoxWidthStyle})}>
+                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle })}>
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Code.codeVerification}</Text>
                     </View>
@@ -143,7 +143,7 @@ const VerificationScreen = ({ language }) => {
                     </View>
                 </View>
             </View>
-            <Footer backColor="#443955"></Footer>
+            <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     )
 }

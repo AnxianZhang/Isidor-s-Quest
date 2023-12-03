@@ -61,5 +61,10 @@
         "send" : "Send",
         "sending" : "Sending",
         "sendErr" : "Failed to send message"
+    },
+    "Footer" :{
+        "aPropos": "About us",
+        "gcu": "Terms & Conditions",
+        "copyRight": "All rights reserved"
     }
 }

@@ -7,7 +7,7 @@ import { GLOBAL_STYLES } from '../style/global';
 import ButtonText from './ButtonText';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 
-const Footer = ({ backColor }) => {
+const Footer = ({ backColor, ...props}) => {
     const navigation = useNavigation()
     const windowWidth = useScreenWidthDimention()
 
@@ -21,8 +21,8 @@ const Footer = ({ backColor }) => {
                     <View style={styles.links}>
                         <View>
                             <ButtonText onPress={() => navigation.navigate("Contact")} styleText={styles.text} text="Contact"></ButtonText>
-                            <ButtonText onPress={() => navigation.navigate("APropos")} styleText={styles.text} text="À propos"></ButtonText>
-                            <ButtonText onPress={() => console.log("CGU & Mentions légales")} styleText={styles.text} text="CGU & Mentions légales"></ButtonText>
+                            <ButtonText onPress={() => navigation.navigate("APropos")} styleText={styles.text} text={props.language.Footer.aPropos}></ButtonText>
+                            <ButtonText onPress={() => console.log("CGU & Mentions légales")} styleText={styles.text} text={props.language.Footer.gcu}></ButtonText>
                         </View>
                         <View>
                             <ButtonText onPress={() => console.log("Twitter")} styleText={styles.text} text="Twitter"></ButtonText>
@@ -32,7 +32,7 @@ const Footer = ({ backColor }) => {
                     </View>
                 </View>
                 <View style={styles.copyRight}>
-                    <Text style={[styles.text, { marginVertical: 25, textAlign: "center" }]}>&copy; Isidor's Quest - 2023 -- Tous droits réservés.</Text>
+                    <Text style={[styles.text, { marginVertical: 25, textAlign: "center" }]}>&copy; Isidor's Quest - 2023 -- {props.language.Footer.copyRight}.</Text>
                 </View>
             </View>
         </View>

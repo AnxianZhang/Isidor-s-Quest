@@ -63,7 +63,7 @@ const APropos = ({ language }) => {
                     </View>
                 </View>
             </View>
-            <Footer backColor={"#7094CB"}></Footer>
+            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     );
 };
