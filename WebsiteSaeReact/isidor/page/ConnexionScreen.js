@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions } from 'react-native';
@@ -114,9 +114,7 @@ const ConnexionScreen = ({ language }) => {
                     </View>
                 </View>
             </View>
-            <View>
-                <Footer backColor={"#443955"}></Footer>
-            </View>
+            <Footer backColor={"#443955"}></Footer>
         </ScrollView>
     )
 }
@@ -124,18 +122,16 @@ const styles = StyleSheet.create({
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
-        height: windowHeight * 0.85,
+        height: 750,
     },
     FormulaireBox: {
         height: windowHeight * 0.7,
-        // width : windowWidth * 0.6, // <=========================
         borderRadius: 50,
         backgroundColor: "#443955",
         flex: .75,
         alignItems: "center"
     },
     InputStyle: {
-        // alignItems : "center",
         paddingTop: 40
     },
     ButtonContainer: {
@@ -146,8 +142,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: "#FFFFFF",
         fontFamily: "Light",
-        // height: "100%",
-        // textAlign : "center",
         margin: "auto",
     },
     ButtonConnectContainer: {
@@ -165,20 +159,6 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         paddingBottom: 30,
     },
-    // NewAccountButtonConnectContainer: {
-    //     width: 310,
-    //     height: 42,
-    //     backgroundColor: "#5BD94C",
-    //     borderRadius: 20
-    // },
-    // NewAccountButtonText: {
-    //     fontSize: 25,
-    //     color: "#FFFFFF",
-    //     fontFamily: "regular",
-    //     // textAlign : "center"
-    //     margin: "auto",
-
-    // }
 });
 
 export default ConnexionScreen;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import Header from '../component/Header';
 import { Dimensions} from 'react-native';
 import { useState, useEffect, useRef } from 'react';
@@ -80,7 +80,7 @@ const ContactUsScreen = ({language}) => {
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
 
     return (
-        <View style={GLOBAL_STYLES.backcolor}>
+        <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
             <View style={styles.FormContainer}>
                 <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
@@ -126,7 +126,7 @@ const ContactUsScreen = ({language}) => {
             <View>
                 <Footer backColor="#443955"></Footer>
             </View>
-        </View>
+        </ScrollView>
     )
     
 }
@@ -136,18 +136,16 @@ const styles = StyleSheet.create({
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
-        height: windowHeight * 0.85,
+        height: 750,
     },
     FormulaireBox: {
-        height: windowHeight * 0.7,
-        // width : windowWidth * 0.6, // <=========================
+        height: 600,
         borderRadius: 50,
         backgroundColor: "#443955",
         flex: .75,
         alignItems: "center"
     },
     InputStyle: {
-        // alignItems : "center",
         paddingTop: 40
     },
     ButtonContainer: {
@@ -158,8 +156,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: "#FFFFFF",
         fontFamily: "Light",
-        // height: "100%",
-        // textAlign : "center",
         margin: "auto",
     },
     ButtonEnvoyerContainer: {

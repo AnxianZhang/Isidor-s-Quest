@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-web';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Header from '../component/Header';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { getLanguage } from '../function/languageSelect';
@@ -16,10 +15,10 @@ const APropposNav = ({ targetRef, language }) => {
     return (
         <View style={navStyles.nav}>
             <Text style={[navStyles.border, navStyles.title]}>{language.propos.nav}</Text>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(2)}>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3.25)}>
                 <Text style={navStyles.touchableColor}>{language.propos.contextTitle}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(3)}>
+            <TouchableOpacity style={navStyles.border} onPress={() => scrollToAnchor(5.25)}>
                 <Text style={navStyles.touchableColor}>{language.propos.consisteTitle}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[navStyles.border, { borderBottomColor: "#7094CB" }]} onPress={() => scrollToAnchor(10)}>
@@ -38,7 +37,7 @@ const APropos = ({ language }) => {
         setSelectLanguage(getLanguage)
     })
 
-    const flexDirectionStyle = screenWidth <= 1024 ? "column" : "row"
+    const flexDirectionStyle = screenWidth <= 1400 ? "column" : "row"
     const marginStyle = screenWidth <= 1024 ? 0 : 50
 
     return (
@@ -49,24 +48,22 @@ const APropos = ({ language }) => {
                     <APropposNav targetRef={targetRef} language={selectLanguage}></APropposNav>
                     <View style={pageStyles.allParagraph}>
                         <Text style={[pageStyles.title, pageStyles.colorText]}>{selectLanguage.propos.title}</Text>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.contextTitle}</Text>
                             <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.contextPara}</Text>
                         </View>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.consisteTitle}</Text>
                             <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.consistePara}</Text>
                         </View>
-                        <View style={pageStyles.paragraph}>
+                        <View>
                             <Text style={[pageStyles.paragraphTitle, pageStyles.colorText]}>{selectLanguage.propos.getDataTitle}</Text>
                             <Text style={[pageStyles.colorText, pageStyles.paragraphText]}>{selectLanguage.propos.getDataPara}</Text>
                         </View>
                     </View>
                 </View>
             </View>
-            <View style={{marginTop: 100}}>
-                <Footer backColor={"#7094CB"}></Footer>
-            </View>
+            <Footer backColor={"#7094CB"}></Footer>
         </ScrollView>
     );
 };
@@ -74,7 +71,6 @@ const APropos = ({ language }) => {
 const pageStyles = StyleSheet.create({
     colorText: {
         color: "#DCDCDC",
-        // textAlign: "justify"
     },
     header: {
         flexDirection: 'row',
@@ -96,7 +92,6 @@ const pageStyles = StyleSheet.create({
 
     title: {
         fontSize: 60,
-        // marginBottom: 10,
         paddingBottom: 10,
         borderBottomWidth: 2.5,
         borderColor: "#7094CB",
@@ -104,17 +99,11 @@ const pageStyles = StyleSheet.create({
 
     allParagraph: {
         flex: 1,
-        // flexDirection: "row",
     },
 
     paragraphTitle: {
         fontSize: 40,
         marginTop: 50,
-    },
-
-    paragraph: {
-        //marginBottom: 50,
-        // backgroundColor: "red",
     },
 
     paragraphText: {

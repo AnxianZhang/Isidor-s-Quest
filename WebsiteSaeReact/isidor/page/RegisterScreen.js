@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 import Header from '../component/Header';
 import { useState, useEffect } from 'react';
 import Field from '../component/Field';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Seperator from '../component/Seperator';
-import { ScrollView } from 'react-native-web';
 import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
@@ -132,11 +131,10 @@ const styles = StyleSheet.create({
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
-        height: windowHeight * 0.90
+        height: 900,
     },
     FormulaireBox: {
-        height: windowHeight * 0.85,
-        // width: windowWidth * 0.5,
+        height: 700,
         borderRadius: 50,
         backgroundColor: "#443955"
 
@@ -154,24 +152,12 @@ const styles = StyleSheet.create({
         color: "#EE8A45",
         fontFamily: "Light Italic",
         paddingBottom: 5,
+        textAlign: "center"
     },
     ButtonContainer: {
         alignItems: "center",
         paddingTop: 20
     },
-    // NewUserButtonConnectContainer: {
-    //     width: 310,
-    //     height: 42,
-    //     backgroundColor: "#5BD94C",
-    //     borderRadius: 20
-    // },
-    // NewUserButtonText: {
-    //     fontSize: 25,
-    //     color: "#FFFFFF",
-    //     fontFamily: "regular",
-    //     // textAlign: "center"
-    //     margin: "auto",
-    // }
 });
 
 export default RegisterScreen;
