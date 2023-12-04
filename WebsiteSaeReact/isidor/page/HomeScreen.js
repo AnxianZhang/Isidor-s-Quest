@@ -9,8 +9,11 @@ import ButtonImage from '../component/ButtonImage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
-import BackgroundGame from "../assets/Background1.png"
-import BackgrounGameSecond from "../assets/Background3.png"
+// import BackgroundGame from "../assets/Background1.png"
+import BackgroundGame from "../assets/Background.png"
+// import BackgrounGameSecond from "../assets/Background3.png"
+import Archer from "../assets/Archer.png"
+import Guerrier from "../assets/Guerrier.png"
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
@@ -42,8 +45,10 @@ const HomeScreen = ({ language }) => {
     const windowWidthByHook = useScreenWidthDimention()
     const gameTitleTextFontSizeStyle = windowWidthByHook > 1350 ? 70 : 50;
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
-    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 600 : 670
+    const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "16%" : "10%" : "5%" : 0
+    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 550 : 600
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
+    const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 150 : 100 : 80
 
     return (
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} ref={firstItemRef}>
@@ -75,10 +80,33 @@ const HomeScreen = ({ language }) => {
                             <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.gameDescPartOne}{"\n\n"}{selectLanguage.Home.gameDescPartTwo}</Text>
                         </View>
                     </View>
+
+                    <View style={StyleSheet.compose(styles.ThirdPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
+                    {/* empty box */}
+                    <View style={{ height: emptyBoxHeightStyle }}></View>
+                    <View style={styles.GameDescriptionContainer}>
+                            <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
+                            
+                            <View style={styles.flexrow}>
+                                <Image source={Guerrier}
+                                style = {{ width: playerImgSize, height: playerImgSize }}
+                                ></Image>
+                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.typeOneGuerrier}{selectLanguage.Home.typeOneDesc}</Text>
+                            </View>
+
+                            <View style={styles.flexrow}>
+                                <Image source={Archer}
+                                style = {{ width: playerImgSize, height: playerImgSize }}
+                                ></Image>
+                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.typeTwoArcher}{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
+                            </View>
+                        </View>
+                    </View>
+
                 </ScrollView>
             </BackgroundPicture>
-            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
             {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
+            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     )
 }
@@ -92,7 +120,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        minHeight: 2090,
+        minHeight: 4800,
     },
     gameTitle: {
         flexDirection: 'column',
@@ -156,6 +184,14 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         color: "white",
     },
+    ThirdPartContainer: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column"
+    },
+    flexrow : {
+        flexDirection: "row"
+    }
 });
 
 export default HomeScreen;

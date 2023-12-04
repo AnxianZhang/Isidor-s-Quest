@@ -3,7 +3,15 @@
         "buttonPlay": "Play",
         "gameTitle": "Isidor's Quest: The Fantasy Platformer",
         "gameDescPartOne": "Dear Gambler, in a distant realm, there reigns a powerful god respected by all, named Disanskrit, the sacred lord. He created mazes as well as puzzles across his regions.",
-        "gameDescPartTwo": "Many adventurers have been inadvertently sucked into his kingdom, but none have ever returned. Locked in this world, you, Isidor, must begin exploring the regions in order to regain his freedom and obtain answers..."
+        "gameDescPartTwo": "Many adventurers have been inadvertently sucked into his kingdom, but none have ever returned. Locked in this world, you, Isidor, must begin exploring the regions in order to regain his freedom and obtain answers...",
+        "playerTitle": "Embark on one of the 2 classes to discover",
+        "typeOneGuerrier": "The Warrior",
+        "typeOneDesc": ": master of close combat. All of its statistics are high, except for its speed which is lower than other classes.",
+        "typeTwoArcher": "The Archer",
+        "typeTwoDescPartOne": ": excels in long-range attacks, with speed and agility allowing for quick and precise arrow shots.",
+        "typeTwoDescPartTwo": "However, defense and health points are less robust than other characters.",
+        "dispoTitle": "Isidor’s Quest is available now",
+        "dispoDesc": "The Isidor’s Quest experience is available on all browsers. Discover our application without further delay. Simply create an account, and you can start your adventure."
     },
     "Header": {
         "about": "About Us",

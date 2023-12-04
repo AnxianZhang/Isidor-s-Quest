@@ -3,7 +3,15 @@
         "buttonPlay" : "Jouer",
         "gameTitle" : "Isidor’s Quest : le jeu fantastique de plateforme",
         "gameDescPartOne" : "Cher joueur,  dans un lointain royaume, règne un puissant dieu respecté de tous, nommé Disanskrit, le seigneur sacré. Il a créé des labyrinthes ainsi que des énigmes à travers ses régions.",
-        "gameDescPartTwo" : "De nombreux aventuriers ont été malencontreusement aspirés dans son royaume mais aucun n'en est jamais revenu. Enfermé à votre tour dans ce monde, vous, Isidor, doit entreprendre l'exploration des régions pour espérer retrouver sa liberté et obtenir des réponses..."
+        "gameDescPartTwo" : "De nombreux aventuriers ont été malencontreusement aspirés dans son royaume mais aucun n'en est jamais revenu. Enfermé à votre tour dans ce monde, vous, Isidor, doit entreprendre l'exploration des régions pour espérer retrouver sa liberté et obtenir des réponses...",
+        "playerTitle" : "Incarne l’une des 2 classes à découvrir",
+        "typeOneGuerrier" : "Le guerrier",
+        "typeOneDesc" : ": maître du combat au corps à corps. Toutes ses statistiques sont élevées, mise à part sa vitesse qui est inférieure aux autres classes.",
+        "typeTwoArcher" : "L'archer'",
+        "typeTwoDescPartOne" : ": excelle dans les attaques à distance, sa vitesse et son agilité lui permettent de décocher des flèches rapidement et avec précision.",
+        "typeTwoDescPartTwo" : "Cependant, sa défense et ses points de vie sont moins robustes que les autres personnages.",
+        "dispoTitle" : "Isidor’ Quest est disponible dès maintenant",
+        "dispoDesc" : "L'expérience Isidor’s Quest est disponible sur tous les navigateurs. Découvre notre application sans plus attendre. Il vous suffit simplement de créer un compte et vous pourrez commencer votre aventure."
     },
     "Header" : {
         "about" : "A propos",
