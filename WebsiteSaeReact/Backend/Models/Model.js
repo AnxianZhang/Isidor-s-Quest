@@ -5,7 +5,8 @@ const userSchema = new mongoose.Schema({
    nomFamille : String,
    email : String,
    pseudo : String,
-   password : String
+   password : String,
+   isPay : Boolean
 });
 
 const codeSchema = new mongoose.Schema({
