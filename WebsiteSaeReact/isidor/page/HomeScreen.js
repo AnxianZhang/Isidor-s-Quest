@@ -14,6 +14,7 @@ import BackgroundGame from "../assets/Background.png"
 // import BackgrounGameSecond from "../assets/Background3.png"
 import Archer from "../assets/Archer.png"
 import Guerrier from "../assets/Guerrier.png"
+import PC from "../assets/pc.png"
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
@@ -45,15 +46,15 @@ const HomeScreen = ({ language }) => {
     const windowWidthByHook = useScreenWidthDimention()
     const gameTitleTextFontSizeStyle = windowWidthByHook > 1350 ? 70 : 50;
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
-    const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "16%" : "10%" : "5%" : 0
-    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 550 : 600
+    const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "12%" : "8%" : "5%" : 30
+    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 200 : 350
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
-    const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 150 : 100 : 80
-
+    const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 130 : 110 : 100
+    const dispoDescripFlexDirect = windowWidthByHook <= 650 ? "column-reverse" : "row"
     return (
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} ref={firstItemRef}>
-            <BackgroundPicture source={BackgroundGame}  style={styles.image}>
-                <ScrollView>
+            <ScrollView>
+                <BackgroundPicture source={BackgroundGame}  style={styles.image}>
                     <Header setIsConnect={setIsConnect} setLanguage={setSelectLanguage} language={selectLanguage} />
                     <View style={styles.gameTitle}>
                         <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
@@ -82,30 +83,45 @@ const HomeScreen = ({ language }) => {
                     </View>
 
                     <View style={StyleSheet.compose(styles.ThirdPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
-                    {/* empty box */}
-                    <View style={{ height: emptyBoxHeightStyle }}></View>
-                    <View style={styles.GameDescriptionContainer}>
+                        {/* <View style={{ height: emptyBoxHeightStyle }}></View> empty box */}
+                        <View style={styles.PlayerDescriptionContainer}>
                             <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
                             
                             <View style={styles.flexrow}>
-                                <Image source={Guerrier}
-                                style = {{ width: playerImgSize, height: playerImgSize }}
+                                <Image 
+                                    source={Guerrier}
+                                    style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.typeOneGuerrier}{selectLanguage.Home.typeOneDesc}</Text>
+                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><span style={{color: "#C3503C"}}>{selectLanguage.Home.typeOneGuerrier}</span>{selectLanguage.Home.typeOneDesc}</Text>
                             </View>
 
                             <View style={styles.flexrow}>
-                                <Image source={Archer}
-                                style = {{ width: playerImgSize, height: playerImgSize }}
+                                <Image 
+                                    source={Archer}
+                                    style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.typeTwoArcher}{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
+                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><span style={{color: "#5BD94C"}}>{selectLanguage.Home.typeTwoArcher}</span>{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
                             </View>
                         </View>
                     </View>
 
-                </ScrollView>
-            </BackgroundPicture>
-            {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
+                    <View style={StyleSheet.compose(styles.FourthPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
+                        {/* <View style={{ height: emptyBoxHeightStyle }}></View> empty box */}
+                        <View style={StyleSheet.compose(styles.DispoDescriptionContainer, { flexDirection: dispoDescripFlexDirect })}>
+                            <View style={{flex: 0.4}}>
+                                <Image source={PC}
+                                style = {{ width: playerImgSize*2.5, height: playerImgSize*2.5 }}
+                                ></Image>
+                            </View>
+
+                            <View style={StyleSheet.compose(styles.flexcom, { flex: 0.6})}>
+                                <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.dispoTitle}</Text>
+                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.dispoDesc}</Text>
+                            </View>
+                        </View>
+                    </View>
+                </BackgroundPicture> 
+            </ScrollView>
             <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
     )
@@ -116,7 +132,7 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
         flexGrow: 1,
-        backgroundColor: "#7094CB"
+        backgroundColor: "#7094CB",
     },
     image: {
         width: '100%',
@@ -186,12 +202,34 @@ const styles = StyleSheet.create({
     },
     ThirdPartContainer: {
         flex: 1,
-        display: "flex",
-        flexDirection: "column"
     },
     flexrow : {
-        flexDirection: "row"
-    }
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    flexcom : {
+        flexDirection: "column",
+        alignItems: "center"
+    },
+    PlayerDescriptionContainer: {
+        alignItems: "center",
+        // justifyContent: "center",
+        backgroundColor: "#443955",
+        paddingTop: 20,
+        paddingBottom: 60,
+    },
+    playerDescription: {
+        fontFamily: "Light",
+        color: "black",
+    },
+    FourthPartContainer: {
+        flex: 1,
+    },
+    DispoDescriptionContainer: {
+        // flexDirection: "row-reverse",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 });
 
 export default HomeScreen;
