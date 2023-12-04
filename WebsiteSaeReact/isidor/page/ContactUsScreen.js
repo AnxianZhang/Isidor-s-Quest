@@ -84,6 +84,9 @@ const ContactUsScreen = ({language}) => {
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
             <View style={styles.FormContainer}>
                 <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
+                    <View style={GLOBAL_STYLES.form.title}>
+                        <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Contact.title}</Text>
+                    </View>
                     <View style={styles.InputStyle}>
                         <TextInput
                             style={GLOBAL_STYLES.form.fields}

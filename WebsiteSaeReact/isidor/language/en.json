@@ -60,7 +60,8 @@
         "sendOK" : "Message sent successfully!",
         "send" : "Send",
         "sending" : "Sending",
-        "sendErr" : "Failed to send message"
+        "sendErr" : "Failed to send message",
+        "title" : "Contact Form"
     },
     "Footer" :{
         "aPropos": "About us",
