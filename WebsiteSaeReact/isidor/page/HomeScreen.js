@@ -6,6 +6,7 @@ import {Dimensions} from 'react-native';
 import Play from "../assets/Play.png";
 import Previous from "../assets/previous.png";
 import ButtonImage from '../component/ButtonImage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { ScrollView } from 'react-native-web';
@@ -18,7 +19,7 @@ const HomeScreen = ({language})=>{
     const [selectLanguage, setSelectLanguage] = useState(language); 
     const isFocused = useIsFocused();
     const navigation = useNavigation();
-    const [isConnect, setIsConnect] = useState("false");
+    const [isConnect, setIsConnect] = useState(false);
     const firstItemRef = useRef(null);
     useEffect(()=>{
         getData()
@@ -28,7 +29,6 @@ const HomeScreen = ({language})=>{
         setSelectLanguage(getLanguage);
     })
 
-<<<<<<< Updated upstream
     const Payer = async ()=>{
         try {
             const response = await fetch('http://localhost:3005/pay', {
@@ -54,17 +54,6 @@ const HomeScreen = ({language})=>{
             setIsConnect(responseJSON.isConnect);
         }
         console.log("connexion : " + isConnect);
-=======
-    const getData = async () => {
-        const response = await fetch('http://localhost:3005/isConnect', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
-        const textResponse = await response.text();
-        setIsConnect(textResponse);
->>>>>>> Stashed changes
     }
     return(
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
@@ -102,44 +91,7 @@ const HomeScreen = ({language})=>{
         <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}>
 
 
-<<<<<<< Updated upstream
         </BackgroundPicture>
-=======
-    return (
-        <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} ref={firstItemRef}>
-            <BackgroundPicture source={BackgroundGame}  style={styles.image}>
-                <ScrollView>
-                    <Header setIsConnect={setIsConnect} setLanguage={setSelectLanguage} language={selectLanguage} />
-                    <View style={styles.gameTitle}>
-                        <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
-                    </View>
-                    <View style={styles.containButtonPlay}>
-                        <TouchableOpacity onPress={() => { isConnect === "true" ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
-                            <View style={styles.buttonContent}>
-                                <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
-                            </View>
-                        </TouchableOpacity>
-                        {/* <TouchableOpacity onPress={() => navigation.navigate("PaymentCard")}>
-                            <View style={styles.buttonContent}>
-                                <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>test</Text>
-                            </View>
-                        </TouchableOpacity> */}
-                        <ButtonImage onPress={() => firstItemRef.current.scrollTo({y: 1300, animated: true})} source={{ uri: Previous }} style={styles.previousLogo} />
-                    </View>
-                    <View style={StyleSheet.compose(styles.SecondPartContainer, { paddingHorizontal: SecondPartContainerPaddingHorizontalStyle, })}>
-                        <View style={{ height: emptyBoxHeightStyle }}></View> {/* empty box */}
-                        <View style={styles.GameDescriptionContainer}>
-                            <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.gameTitle}</Text>
-                            <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.gameDescPartOne}{"\n\n"}{selectLanguage.Home.gameDescPartTwo}</Text>
-                        </View>
-                    </View>
-                </ScrollView>
-            </BackgroundPicture>
-            <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
-            {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
->>>>>>> Stashed changes
         </ScrollView>
     )
 }

@@ -7,6 +7,7 @@ import ButtonImage from './ButtonImage';
 import { useNavigation } from '@react-navigation/native';
 import Play from "../assets/Play.png";
 import { useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
 import List from './List';
 import { getLanguage } from '../function/languageSelect';
@@ -15,7 +16,7 @@ const Header = (props) => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [open, setOpen] = useState(false);
-    const [isConnect, setIsConnect] = useState("false");
+    const [isConnect, setIsConnect] = useState(false);
 
     useEffect(() => {
         getData()
@@ -26,55 +27,17 @@ const Header = (props) => {
     })
 
     const getData = async () => {
-        const response = await fetch('http://localhost:3005/isConnect', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
-        const textResponse = await response.text();
-        setIsConnect(textResponse);
+        const response = await AsyncStorage.getItem("user");
+        const responseJSON = JSON.parse(response);
+        if (responseJSON !== null) {
+            setIsConnect(responseJSON.isConnect);
+        }
     }
 
-    const NavigationGestion = async () => {
-        if (isConnect == "false") {
-            navigation.navigate("Connexion");
-        }
-        if (isConnect == "true") {
-            try {
-                const response = await fetch('http://localhost:3005/isPay', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                });
-                const textResponse = await response.text();
-                console.log(textResponse);
-                if(textResponse === "false"){
-                    navigation.navigate("PaymentCard");
-                }
-                else{
-                    navigation.navigate("Game");
-                }
-            }
-            catch (error) {
-                console.error('Erreur lors de l\'envoi des données au backend', error);
-            }
-        }
-    }
     const disconnection = async () => {
-        try {
-            await fetch('http://localhost:3005/disconnection', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-            setIsConnect("false");
-        }
-        catch (error) {
-            console.error('Erreur lors de l\'envoi des données au backend', error);
-        }
+        setIsConnect(false);
+        props.setIsConnect(false);
+        await AsyncStorage.setItem("user", JSON.stringify({ pseudo: null, isConnect: false }));
     }
     return (
         <View style={props.style ? props.style : styles.header}>
@@ -92,10 +55,10 @@ const Header = (props) => {
                     }
                 </View>
                 <View style={styles.containConnect}>
-                    <ButtonText onPress={() => { isConnect === "true" ? disconnection() : navigation.navigate("Connexion") }} text={isConnect === "true" ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} />
+                    <ButtonText onPress={() => { isConnect ? disconnection() : navigation.navigate("Connexion") }} text={isConnect ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} />
                 </View>
                 <View>
-                    <TouchableOpacity onPress={() => NavigationGestion()}>
+                    <TouchableOpacity onPress={() => { isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
                         <View style={styles.buttonContent}>
                             <Image source={{ uri: Play }} style={styles.playLogo} />
                             <Text style={styles.headerText}>{props.language.Home.buttonPlay}</Text>

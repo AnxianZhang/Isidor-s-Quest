@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { User } = require("../Models/Model")
-var store = require('store')
 
 const Inscription  = async(req, res) =>{
     try {
@@ -10,11 +9,9 @@ const Inscription  = async(req, res) =>{
           prenom : data.prenom,
           nomFamille : data.nomFamille,
           email : data.email,
-          pseudo : data.pseudo,
-          isPay : false
+          pseudo : data.pseudo
         });
         newUser.password = newUser.generateHash(data.password);
-        store.set('user', { pseudo:data.pseudo });
         await newUser.save();
         return res.status(200).send('Données enregistrées avec succès');
       } catch (error) {
@@ -34,7 +31,6 @@ const Connexion  = async(req, res) =>{
         if(!findUserPseudo.validPassword(data.password)){
             return res.status(402).send("Nom d'utilisateur/Mot de passe incorrect");
         }
-        store.set('user', { pseudo:data.pseudo });
         return res.status(200).send("connexion reussie");
       } catch (error) {
         console.error('erreur durant la connexion', error);
@@ -42,23 +38,7 @@ const Connexion  = async(req, res) =>{
       }
 }
 
-const isConnect = async(req,res) => {
-   if(store.get('user') == null || store.get("user") != null && store.get('user').pseudo == null){
-    return res.status(200).send(false);
-  }
-  else{
-    return res.status(200).send(true);
-  }
-}
-
-const disconnection = async(req,res) => {
-    store.set("user", {pseudo : null});
-    return res.status(200).send(false);
-}
-
 module.exports = {
     Inscription,
-    Connexion,
-    isConnect,
-    disconnection
+    Connexion
 };

@@ -4,6 +4,7 @@ import { Dimensions } from 'react-native';
 import Header from '../component/Header';
 import { useState, useEffect } from 'react';
 import Field from '../component/Field';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Seperator from '../component/Seperator';
 import { ScrollView } from 'react-native-web';
 import { useNavigation } from '@react-navigation/native';
