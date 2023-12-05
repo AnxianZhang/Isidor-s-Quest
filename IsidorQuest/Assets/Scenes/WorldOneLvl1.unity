@@ -328,142 +328,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 110507710128138389, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_Name
-      value: LaunchProjectileRight
-      objectReference: {fileID: 0}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: cooldown
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: climbSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: launchLeft
-      value: 
-      objectReference: {fileID: 466105406}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: projectile
-      value: 
-      objectReference: {fileID: 1619751857681051284, guid: 85933b64524725a45a40ebd3604a396f, type: 3}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 340312327}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: launchRight
-      value: 
-      objectReference: {fileID: 1471565605}
-    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 615113258400446640, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 615113258400446640, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 615113258400446640, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: climbSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 615113258400446640, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 340312327}
-    - target: {fileID: 615113258400446640, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 932747273788877444, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 932747273788877444, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 3630000530060547987, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 3630000530060547987, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3630000530060547987, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: climbSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3630000530060547987, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 340312327}
-    - target: {fileID: 3630000530060547987, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: life
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: degat
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: lifeMax
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: cooldown
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: climbSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 340312327}
-    - target: {fileID: 4163025510220215156, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5021729005009134101, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5021729005009134101, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5021729005009134101, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.25
-      objectReference: {fileID: 0}
     - target: {fileID: 5021729005009134101, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.63765
@@ -504,73 +368,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5652816849117957608, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5652816849117957608, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5832411376378212233, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: life
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: degat
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: lifeMax
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: cooldown
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: climbSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 340312327}
-    - target: {fileID: 5916280259440151372, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_Name
       value: Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9042638537653934869, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-      propertyPath: m_FlipX
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -782,20 +582,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb98af57c910d684cb668fc7371d88ff, type: 3}
---- !u!4 &340312327 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7910409576319320132, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-  m_PrefabInstance: {fileID: 299850155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!223 &376934981 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3975292491153447436, guid: cb98af57c910d684cb668fc7371d88ff, type: 3}
   m_PrefabInstance: {fileID: 323856166}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &466105406 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 932747273788877444, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-  m_PrefabInstance: {fileID: 299850155}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &514143338 stripped
 Transform:
@@ -862,11 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47e133345c5cae42aca7923e210a999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1471565605 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5832411376378212233, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
-  m_PrefabInstance: {fileID: 299850155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1845790058 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3297689585366022020, guid: 9642c066c35111d45b1fc44f2a7b1bf8, type: 3}
@@ -979,14 +764,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
-    - target: {fileID: 2678461147120105529, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -16.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 2678461147120105529, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.42
-      objectReference: {fileID: 0}
     - target: {fileID: 5347370004949906963, guid: 3f82b615835616841ae98d2206c298b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1084,26 +861,6 @@ PrefabInstance:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 1196350785}
-    - target: {fileID: 3555281460400516396, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
-      propertyPath: jumpForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555281460400516396, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
-      propertyPath: moveSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555281460400516396, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
-      propertyPath: climbSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555281460400516396, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
-      propertyPath: groundCheck
-      value: 
-      objectReference: {fileID: 514143338}
-    - target: {fileID: 3555281460400516396, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5735346321844106836, guid: d1c70495d52060c4ba70782a912877ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6376505
