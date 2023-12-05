@@ -47,7 +47,9 @@ const HomeScreen = ({ language }) => {
     const gameTitleTextFontSizeStyle = windowWidthByHook > 1350 ? 70 : 50;
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
     const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "12%" : "8%" : "5%" : 30
-    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 200 : 350
+    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 700 : 800
+    const emptyBoxThirdHeightStyle = windowWidthByHook <= 650 ? 600 : 700
+    const emptyBoxFourthHeightStyle = windowWidthByHook <= 650 ? 350 : 600
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
     const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 130 : 110 : 100
     const dispoDescripFlexDirect = windowWidthByHook <= 650 ? "column-reverse" : "row"
@@ -74,18 +76,19 @@ const HomeScreen = ({ language }) => {
                         </TouchableOpacity> */}
                         <ButtonImage onPress={() => firstItemRef.current.scrollTo({y: 1300, animated: true})} source={{ uri: Previous }} style={styles.previousLogo} />
                     </View>
+                    
+                    <View style={{ height: emptyBoxHeightStyle }}></View> {/* empty box */}
                     <View style={StyleSheet.compose(styles.SecondPartContainer, { paddingHorizontal: SecondPartContainerPaddingHorizontalStyle, })}>
-                        <View style={{ height: emptyBoxHeightStyle }}></View> {/* empty box */}
                         <View style={styles.GameDescriptionContainer}>
                             <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.gameTitle}</Text>
                             <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.gameDescPartOne}{"\n\n"}{selectLanguage.Home.gameDescPartTwo}</Text>
                         </View>
                     </View>
 
+                    <View style={{ height: emptyBoxThirdHeightStyle }}></View> {/* empty box */}
                     <View style={StyleSheet.compose(styles.ThirdPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
-                        {/* <View style={{ height: emptyBoxHeightStyle }}></View> empty box */}
                         <View style={styles.PlayerDescriptionContainer}>
-                            <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
+                            <Text style={StyleSheet.compose(styles.playerDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
                             
                             <View style={styles.flexrow}>
                                 <Image 
@@ -105,8 +108,8 @@ const HomeScreen = ({ language }) => {
                         </View>
                     </View>
 
+                    <View style={{ height: emptyBoxFourthHeightStyle }}></View> {/* empty box */}
                     <View style={StyleSheet.compose(styles.FourthPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
-                        {/* <View style={{ height: emptyBoxHeightStyle }}></View> empty box */}
                         <View style={StyleSheet.compose(styles.DispoDescriptionContainer, { flexDirection: dispoDescripFlexDirect })}>
                             <View style={{flex: 0.4}}>
                                 <Image source={PC}
@@ -121,8 +124,8 @@ const HomeScreen = ({ language }) => {
                         </View>
                     </View>
                 </BackgroundPicture> 
-            </ScrollView>
             <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
+            </ScrollView>
         </ScrollView>
     )
 }
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        minHeight: 4800,
+        minHeight: 4000,
     },
     gameTitle: {
         flexDirection: 'column',
@@ -212,11 +215,18 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     PlayerDescriptionContainer: {
+        // flex: 1,
         alignItems: "center",
         // justifyContent: "center",
         backgroundColor: "#443955",
         paddingTop: 20,
         paddingBottom: 60,
+    },
+    playerDescriptionTitleText: {
+        fontFamily: "Bold",
+        color: "#FFFFFF",
+        marginVertical: 10,
+        textAlign: "center"
     },
     playerDescription: {
         fontFamily: "Light",
@@ -226,6 +236,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     DispoDescriptionContainer: {
+        // flex: 1,
         // flexDirection: "row-reverse",
         alignItems: "center",
         justifyContent: "center",
