@@ -6,7 +6,6 @@ import Seperator from '../component/Seperator';
 import { Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
@@ -44,6 +43,29 @@ const VerificationScreen = ({ language }) => {
             email: route.params.data.email,
             pseudo: route.params.data.pseudo,
             password: route.params.data.password
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+       }
+       try {
+           const response = await fetch('http://localhost:3005/inscription', {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(data)
+           });
+           const result = await response.status;
+           if (result === 200) {
+               await AsyncStorage.setItem("user", JSON.stringify({ pseudo: route.params.data.pseudo, isConnect: true }));
+               navigation.navigate("Home");
+           }
+       }
+       catch (error) {
+           console.error('Erreur lors de l\'envoi des données au backend', error);
+       }
+=======
+>>>>>>> parent of 1a9da753 (Revert "Changement")
         }
         try {
             const response = await fetch('http://localhost:3005/inscription', {
@@ -55,13 +77,20 @@ const VerificationScreen = ({ language }) => {
             });
             const result = await response.status;
             if (result === 200) {
+<<<<<<< HEAD
                 await AsyncStorage.setItem("user", JSON.stringify({ pseudo: route.params.data.pseudo, isConnect: true }));
+=======
+>>>>>>> parent of 1a9da753 (Revert "Changement")
                 navigation.navigate("Home");
             }
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> parent of 1a9da753 (Revert "Changement")
     }
 
     const sendDataToDatabase = async () => {

@@ -8,7 +8,6 @@ import { Dimensions } from 'react-native';
 import Play from "../assets/Play.png";
 import Previous from "../assets/previous.png";
 import ButtonImage from '../component/ButtonImage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import BackgroundGame from "../assets/Background1.png"
@@ -22,7 +21,7 @@ const HomeScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const isFocused = useIsFocused();
     const navigation = useNavigation();
-    const [isConnect, setIsConnect] = useState(false);
+    const [isConnect, setIsConnect] = useState("false");
     const firstItemRef = useRef(null);
     useEffect(() => {
         getData()
@@ -32,13 +31,47 @@ const HomeScreen = ({ language }) => {
         setSelectLanguage(getLanguage);
     })
 
+<<<<<<< HEAD
     const getData = async () => {
+=======
+<<<<<<< Updated upstream
+    const Payer = async ()=>{
+        try {
+            const response = await fetch('http://localhost:3005/pay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.status;
+            const TextResponse = await response.text();
+            window.location = JSON.parse(TextResponse).forwardLink;
+        }
+        catch (error){
+
+        }
+    }
+
+
+    const getData = async ()=>{
+>>>>>>> parent of 1a9da753 (Revert "Changement")
         const response = await AsyncStorage.getItem("user");
         const responseJSON = JSON.parse(response);
         if (responseJSON !== null) {
             setIsConnect(responseJSON.isConnect);
         }
         console.log("connexion : " + isConnect);
+=======
+    const getData = async () => {
+        const response = await fetch('http://localhost:3005/isConnect', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        const textResponse = await response.text();
+        setIsConnect(textResponse);
+>>>>>>> Stashed changes
     }
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -47,6 +80,12 @@ const HomeScreen = ({ language }) => {
     const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 600 : 670
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+        </BackgroundPicture>
+=======
+>>>>>>> parent of 1a9da753 (Revert "Changement")
     return (
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} ref={firstItemRef}>
             <BackgroundPicture source={BackgroundGame}  style={styles.image}>
@@ -56,7 +95,11 @@ const HomeScreen = ({ language }) => {
                         <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
                     </View>
                     <View style={styles.containButtonPlay}>
+<<<<<<< HEAD
                         <TouchableOpacity onPress={() => { isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
+=======
+                        <TouchableOpacity onPress={() => { isConnect === "true" ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
+>>>>>>> parent of 1a9da753 (Revert "Changement")
                             <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
                                 <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
@@ -81,6 +124,10 @@ const HomeScreen = ({ language }) => {
             </BackgroundPicture>
             <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
             {/* <BackgroundPicture source={BackgrounGameSecond} resize="cover" style={styles.image}></BackgroundPicture> */}
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> parent of 1a9da753 (Revert "Changement")
         </ScrollView>
     )
 }

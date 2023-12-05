@@ -1,5 +1,10 @@
 const stripe = require('stripe')('sk_test_51OH9jAEHb0xYdWYmVl6vAlOlHOwMayIxzSDf7IjqPt6ssKtX3vMX0R5rVRNP7r6GyAvWEdtPSTBCc0cPoqaFb0g300refpnyhh');
+<<<<<<< HEAD
 
+=======
+const mongoose = require('mongoose');
+const { User } = require("../Models/Model")
+>>>>>>> parent of 1a9da753 (Revert "Changement")
 
 
 const PaymentByStripe = async (req, res) => {
@@ -19,7 +24,10 @@ const PaymentByStripe = async (req, res) => {
               enabled: true,
             },
           });
+<<<<<<< HEAD
           console.log(session);
+=======
+>>>>>>> parent of 1a9da753 (Revert "Changement")
           res.status(200).send({url : session.url});
     } catch (err) {
         res.send(err);
@@ -27,5 +35,10 @@ const PaymentByStripe = async (req, res) => {
 }
 
 module.exports = {
+<<<<<<< HEAD
     PaymentByStripe
+=======
+    PaymentByStripe,
+
+>>>>>>> parent of 1a9da753 (Revert "Changement")
 }

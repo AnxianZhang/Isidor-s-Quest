@@ -1,4 +1,4 @@
-
+const {successPayment} = require("./PaymentSuccessController");
 const paypal = require('paypal-rest-sdk');
 
 paypal.configure({
@@ -16,7 +16,7 @@ const Paypal = (req, res) => {
       },
       "redirect_urls": {
           "return_url": "http://localhost:3005/success",
-          "cancel_url": "http://localhost:19006/"
+          "cancel_url": "http://localhost:19006/Cancel"
       },
       "transactions": [{
           "item_list": {
@@ -49,10 +49,7 @@ const Paypal = (req, res) => {
         }
       });}
 
-const TransactionSuccess = (req, res) => {
-
-    //ajouter la gestion bd
-  
+const TransactionSuccess = async (req, res) => {
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
   
@@ -71,7 +68,8 @@ const TransactionSuccess = (req, res) => {
           console.log(error.response);
           throw error;
       } else {
-        res.redirect('http://localhost:19006/');
+        successPayment();
+        res.redirect('http://localhost:19006/Success');
       }
   });
   };    
