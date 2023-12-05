@@ -1,12 +1,13 @@
 import * as React from 'react';
+
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView} from 'react-native';
 import BackgroundPicture from '../component/Background';
 import Header from '../component/Header';
 import { Dimensions } from 'react-native';
+
 import Play from "../assets/Play.png";
 import Previous from "../assets/previous.png";
 import ButtonImage from '../component/ButtonImage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState, useRef } from 'react';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
 import BackgroundGame from "../assets/Background1.png"
@@ -20,7 +21,7 @@ const HomeScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const isFocused = useIsFocused();
     const navigation = useNavigation();
-    const [isConnect, setIsConnect] = useState(false);
+    const [isConnect, setIsConnect] = useState("false");
     const firstItemRef = useRef(null);
     useEffect(() => {
         getData()
@@ -30,13 +31,36 @@ const HomeScreen = ({ language }) => {
         setSelectLanguage(getLanguage);
     })
 
-    const getData = async () => {
-        const response = await AsyncStorage.getItem("user");
-        const responseJSON = JSON.parse(response);
-        if (responseJSON !== null) {
-            setIsConnect(responseJSON.isConnect);
+    const Payer = async ()=>{
+        try {
+            const response = await fetch('http://localhost:3005/pay', {
+                method: 'POST',
+                credentials : "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const result = await response.status;
+            const TextResponse = await response.text();
+            window.location = JSON.parse(TextResponse).forwardLink;
         }
-        console.log("connexion : " + isConnect);
+        catch (error){
+
+        }
+    }
+
+
+   
+    const getData = async () => {
+        const response = await fetch('http://localhost:3005/isConnect', {
+            method: 'POST',
+            credentials : "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        const textResponse = await response.text();
+        setIsConnect(textResponse);
     }
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -44,6 +68,7 @@ const HomeScreen = ({ language }) => {
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
     const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 600 : 670
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
+
 
     return (
         <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent} ref={firstItemRef}>
@@ -54,7 +79,7 @@ const HomeScreen = ({ language }) => {
                         <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
                     </View>
                     <View style={styles.containButtonPlay}>
-                        <TouchableOpacity onPress={() => { isConnect ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
+                        <TouchableOpacity onPress={() => { isConnect === "true" ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
                             <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
                                 <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>

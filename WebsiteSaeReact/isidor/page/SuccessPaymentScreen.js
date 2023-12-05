@@ -15,6 +15,7 @@ const SucessPaymentScreen = ({ language }) => {
     const isFocused = useIsFocused();
 
     useEffect(() => {
+        sendDataToDatabase();
         setTimeout(() => navigation.navigate("Home"), 5000)
     }, [isFocused])
 
@@ -23,24 +24,14 @@ const SucessPaymentScreen = ({ language }) => {
     })
 
     const sendDataToDatabase = async () => {
-        const data = {
-            name: nom,
-            email: email
-        }
         try {
-            const response = await fetch('http://localhost:3005/charge', {
+            await fetch('http://localhost:3005/successPayment', {
                 method: 'POST',
+                credentials : "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
             });
-            const status = await response.status;
-            const TextResponse = await response.text();
-            if (status === 200) {
-                window.location = (JSON.parse(TextResponse).url);
-                navigation.navigate("Home")
-            }
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);

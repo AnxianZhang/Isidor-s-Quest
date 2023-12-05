@@ -31,6 +31,7 @@ const CancelPaymentScreen = ({ language }) => {
         try {
             const response = await fetch('http://localhost:3005/charge', {
                 method: 'POST',
+                credentials : "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },

@@ -6,7 +6,6 @@ import { Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
@@ -43,6 +42,7 @@ const ConnexionScreen = ({ language }) => {
         try {
             const response = await fetch('http://localhost:3005/connexion', {
                 method: 'POST',
+                credentials : "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -68,7 +68,6 @@ const ConnexionScreen = ({ language }) => {
             console.log(result);
             if (result === 200) {
                 console.log("naviguer");
-                await AsyncStorage.setItem("user", JSON.stringify({ pseudo: pseudo, isConnect: true }));
                 setErrorPassword("");
                 setErrorPseudo("");
                 navigation.navigate("Home");

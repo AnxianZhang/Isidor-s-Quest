@@ -6,7 +6,6 @@ import Seperator from '../component/Seperator';
 import { Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
@@ -23,7 +22,6 @@ const VerificationScreen = ({ language }) => {
     const [disable, setDisable] = useState(true);
     const navigation = useNavigation();
     const route = useRoute();
-
     let number = /^(0|[1-9][0-9]*)$/
     useEffect(() => {
         setSelectLanguage(getLanguage);
@@ -45,10 +43,12 @@ const VerificationScreen = ({ language }) => {
             email: route.params.data.email,
             pseudo: route.params.data.pseudo,
             password: route.params.data.password
-        }
+
+       }
         try {
             const response = await fetch('http://localhost:3005/inscription', {
                 method: 'POST',
+                credentials : "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -56,7 +56,6 @@ const VerificationScreen = ({ language }) => {
             });
             const result = await response.status;
             if (result === 200) {
-                await AsyncStorage.setItem("user", JSON.stringify({ pseudo: route.params.data.pseudo, isConnect: true }));
                 navigation.navigate("Home");
             }
         }
@@ -79,6 +78,7 @@ const VerificationScreen = ({ language }) => {
             try {
                 const response = await fetch('http://localhost:3005/VerifyCode', {
                     method: 'POST',
+                    credentials : "include",
                     headers: {
                         'Content-Type': 'application/json'
                     },

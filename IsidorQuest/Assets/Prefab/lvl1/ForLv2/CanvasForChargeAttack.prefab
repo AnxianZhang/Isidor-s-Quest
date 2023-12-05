@@ -374,6 +374,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524e8f7fdde4ed246a10f678f81b6319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackChargePlayer: {fileID: 0}
   ChargeBar: {fileID: 86615344833330738}
   chargeBarCanvas: {fileID: 7448610368824837549}

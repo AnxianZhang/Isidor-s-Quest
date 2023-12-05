@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 858132931010223839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.09, y: 16.18, z: 0.04914408}
+  m_LocalPosition: {x: 16.34, y: 15.59, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 1379211703751638887}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8799057, y: -0.993, z: 0.04914408}
+  m_LocalPosition: {x: 18.29, y: 16.34, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -282,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 1886715115725350659}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8799057, y: -0.993, z: 0.04914408}
+  m_LocalPosition: {x: 26.1, y: 16.34, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -413,7 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47e133345c5cae42aca7923e210a999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 5243690919416013051}
   life: 60
@@ -543,7 +542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 5243690919416013051}
   life: 60
@@ -552,8 +550,8 @@ MonoBehaviour:
   speed: 1
   waitTime: 0.5
   movePos:
-  - {fileID: 2968644042755229696}
   - {fileID: 4203795341782020121}
+  - {fileID: 2968644042755229696}
 --- !u!1 &3293944083643020070
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +633,7 @@ GameObject:
   - component: {fileID: 3157845551983236685}
   - component: {fileID: 7468379571756777099}
   m_Layer: 7
-  m_Name: Snake1
+  m_Name: Snake2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 4435815856539512437}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 63.01, y: 31.45, z: 0.04914408}
+  m_LocalPosition: {x: 81.22, y: 29.35, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -743,7 +741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47e133345c5cae42aca7923e210a999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 479068590057197183}
   life: 60
@@ -873,7 +870,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 479068590057197183}
   life: 60
@@ -909,7 +905,7 @@ Transform:
   m_GameObject: {fileID: 4657459065334606999}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 59.54, y: 30.59, z: 0.04914408}
+  m_LocalPosition: {x: 77.46, y: 28.53, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -965,9 +961,9 @@ GameObject:
   - component: {fileID: 2176733057160990552}
   - component: {fileID: 6277395384030195226}
   - component: {fileID: 497153678265661554}
-  m_Layer: 0
-  m_Name: Golem
-  m_TagString: Untagged
+  m_Layer: 7
+  m_Name: Golem1
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +977,7 @@ Transform:
   m_GameObject: {fileID: 4808383482377176510}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 21.7, y: 17.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1052,7 +1048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 677064424477737318}
   life: 200
@@ -1061,8 +1056,8 @@ MonoBehaviour:
   speed: 3
   waitTime: 0.5
   movePos:
-  - {fileID: 3121017599669590026}
   - {fileID: 7095242037998359878}
+  - {fileID: 3121017599669590026}
 --- !u!50 &7403837389209838048
 Rigidbody2D:
   serializedVersion: 4
@@ -1089,7 +1084,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8822407708398833577
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1203,17 +1198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6491f5bbfbb154b4e8e458edde797b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
-  dropCoin: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  life: 0
-  degat: 0
-  flashTime: 0
+  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+  spriteRenderer: {fileID: 677064424477737318}
+  life: 150
+  degat: 30
+  flashTime: 0.2
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 0
-  groundCheck: {fileID: 0}
-  speedGolem: 0
+    m_Bits: 1
+  groundCheck: {fileID: 7313513779862448176}
+  speedGolem: 5
 --- !u!1 &5270050041281467007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1233,7 @@ Transform:
   m_GameObject: {fileID: 5270050041281467007}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9080944, y: -0.993, z: 0.04914408}
+  m_LocalPosition: {x: 65.96, y: 30.59, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1270,7 +1264,7 @@ Transform:
   m_GameObject: {fileID: 5380352290997712056}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8799057, y: -0.993, z: 0.04914408}
+  m_LocalPosition: {x: 59.54, y: 30.59, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1301,7 +1295,7 @@ Transform:
   m_GameObject: {fileID: 5878895776199166000}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.1, y: 16.34, z: 0.04914408}
+  m_LocalPosition: {x: 28.68, y: 15.59, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1434,7 +1428,7 @@ Transform:
   m_GameObject: {fileID: 6122145050328781016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: -0.993, z: 0.04914408}
+  m_LocalPosition: {x: 63.01, y: 31.45, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1527,9 +1521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47e133345c5cae42aca7923e210a999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 5911633961616480461}
   life: 60
   degat: 10
   flashTime: 0.2
@@ -1657,7 +1650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 5911633961616480461}
   life: 60
@@ -1724,7 +1716,7 @@ Transform:
   m_GameObject: {fileID: 7754399059224880300}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 65.96, y: 30.59, z: 0.04914408}
+  m_LocalPosition: {x: 84.45, y: 28.43, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1851,7 +1843,7 @@ Transform:
   m_GameObject: {fileID: 8252467636405891898}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 66.9, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1877,7 +1869,7 @@ GameObject:
   - component: {fileID: 2644416375014464406}
   - component: {fileID: 5997135832246864269}
   m_Layer: 7
-  m_Name: Golem
+  m_Name: Golem2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1892,7 +1884,7 @@ Transform:
   m_GameObject: {fileID: 9132399236955736310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.7, y: 17.21, z: 0}
+  m_LocalPosition: {x: 22.89, y: 16.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1963,7 +1955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 4802227784053513251}
   life: 200
@@ -1972,8 +1963,8 @@ MonoBehaviour:
   speed: 3
   waitTime: 0.5
   movePos:
-  - {fileID: 901446192599979291}
   - {fileID: 5565743931214990590}
+  - {fileID: 901446192599979291}
 --- !u!50 &2629405396440982190
 Rigidbody2D:
   serializedVersion: 4
@@ -2114,7 +2105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6491f5bbfbb154b4e8e458edde797b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainPlayer: {fileID: 0}
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
   spriteRenderer: {fileID: 4802227784053513251}
   life: 150

@@ -4,7 +4,6 @@ import { Dimensions } from 'react-native';
 import Header from '../component/Header';
 import { useState, useEffect } from 'react';
 import Field from '../component/Field';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
@@ -58,6 +57,7 @@ const RegisterScreen = ({ language }) => {
             try {
                 const response = await fetch('http://localhost:3005/SendCode', {
                     method: 'POST',
+                    credentials : "include",
                     headers: {
                         'Content-Type': 'application/json'
                     },

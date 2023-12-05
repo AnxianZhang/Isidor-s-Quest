@@ -27,15 +27,15 @@ RectTransform:
   m_GameObject: {fileID: 180355846717314196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.166735, y: 15.088123, z: 1.1326}
+  m_LocalScale: {x: 37.854523, y: 8.424655, z: 1.1326}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4746460858386093288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 224.8, y: 158}
-  m_SizeDelta: {x: 2.5, y: 2}
+  m_AnchoredPosition: {x: -60.3, y: 4.6}
+  m_SizeDelta: {x: 3, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5174492978014299435
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47219afd594cf5345b2f5624b837b91a, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: da3bda900a127ff46af72418387a5b87, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -126,7 +126,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 8662567316996434190, guid: 681b6de9f8bdded4e82db96f40d7f0cd, type: 3}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 1534787135191843014}
   - component: {fileID: 7930510625643240786}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: ChargeBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,15 +207,15 @@ RectTransform:
   m_GameObject: {fileID: 4096471161118789169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 14.940977, y: 12.566196, z: 1.1326}
+  m_LocalScale: {x: 68.58577, y: 12.5662, z: 1.1326}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4746460858386093288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 224.9, y: 158}
-  m_SizeDelta: {x: 2, y: 1}
+  m_AnchoredPosition: {x: -60.32, y: 4.6}
+  m_SizeDelta: {x: 2.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7064693952635609166
 CanvasRenderer:
@@ -238,19 +238,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.008597332, g: 0.46053007, b: 0.6509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47219afd594cf5345b2f5624b837b91a, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: da3bda900a127ff46af72418387a5b87, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.984
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -267,6 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524e8f7fdde4ed246a10f678f81b6319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChargeBar: {fileID: 1534787135191843014}
+  chargeBarCanvas: {fileID: 3975292491153447436}
 --- !u!1 &4245474046024772781
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +281,7 @@ GameObject:
   - component: {fileID: 4730394454482073388}
   - component: {fileID: 7022658872002603226}
   m_Layer: 5
-  m_Name: Health
+  m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -294,15 +296,15 @@ RectTransform:
   m_GameObject: {fileID: 4245474046024772781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 14.940977, y: 12.566196, z: 1.1326}
+  m_LocalScale: {x: 68.58577, y: 12.566196, z: 1.1326}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4746460858386093288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 224.9, y: 158}
-  m_SizeDelta: {x: 2, y: 1}
+  m_AnchoredPosition: {x: -60.32, y: 4.6}
+  m_SizeDelta: {x: 2.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4730394454482073388
 CanvasRenderer:
@@ -325,14 +327,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.007843138, g: 0.45882353, b: 0.6509804, a: 0.078431375}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47219afd594cf5345b2f5624b837b91a, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: da3bda900a127ff46af72418387a5b87, type: 3}
   m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1

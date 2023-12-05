@@ -1,6 +1,6 @@
 const stripe = require('stripe')('sk_test_51OH9jAEHb0xYdWYmVl6vAlOlHOwMayIxzSDf7IjqPt6ssKtX3vMX0R5rVRNP7r6GyAvWEdtPSTBCc0cPoqaFb0g300refpnyhh');
-
-
+const mongoose = require('mongoose');
+const { User } = require("../Models/Model")
 
 const PaymentByStripe = async (req, res) => {
     try {
@@ -19,7 +19,6 @@ const PaymentByStripe = async (req, res) => {
               enabled: true,
             },
           });
-          console.log(session);
           res.status(200).send({url : session.url});
     } catch (err) {
         res.send(err);
@@ -27,5 +26,5 @@ const PaymentByStripe = async (req, res) => {
 }
 
 module.exports = {
-    PaymentByStripe
+    PaymentByStripe,
 }

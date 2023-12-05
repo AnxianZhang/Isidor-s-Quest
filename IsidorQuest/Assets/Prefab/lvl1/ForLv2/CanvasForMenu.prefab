@@ -458,12 +458,12 @@ GameObject:
   - component: {fileID: 7921354875032722348}
   - component: {fileID: 506479488246852707}
   m_Layer: 5
-  m_Name: PlayerDeathMenu
+  m_Name: DeathMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4719084905375990753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1882,15 +1882,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1565459494978304381, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1565459494978304381, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1565459494978304381, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2711790795115705073, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1926,11 +1926,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5311264759269131356, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5311264759269131356, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9105638825612179184, guid: 31a134c551026334bbd9c3f78580a71f, type: 3}
       propertyPath: m_Pivot.x

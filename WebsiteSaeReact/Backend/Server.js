@@ -1,17 +1,36 @@
 const express = require('express');
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const app = express();
+app.use(
+  session({
+    secret: "isidor",
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+      secure: false,
+      sameSite: true,
+    },
+  })
+);
+app.use(cookieParser());
 const cors = require('cors');
-const {Inscription, Connexion} = require("./Controller/userController");
+const {Inscription, Connexion, isConnect, disconnection} = require("./Controller/userController");
 const {SendCode, VerifyCode} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
+const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
+
 
 app.use(cors({
-    allowedHeaders: ['Content-Type']
+  origin: 'http://localhost:19006',
+  credentials: true,
+  allowedHeaders: ['Content-Type'],
 }));
   
 app.use(express.json());
+
 app.post("/inscription", Inscription);
 app.post("/connexion", Connexion)
 app.post("/SendCode", SendCode);
@@ -20,8 +39,11 @@ app.post('/pay', Paypal);
 app.get('/success', TransactionSuccess);
 app.get('/cancel', (req, res) => res.status(400).send('Cancelled'));
 app.post("/charge", PaymentByStripe);
-
 app.post("/contact", mailSend);
+app.post("/successPayment", successPayment)
+app.post("/isPay", userPay);
+app.post("/isConnect", isConnect);
+app.post("/disconnection", disconnection);
 
 const port = 3005
 
