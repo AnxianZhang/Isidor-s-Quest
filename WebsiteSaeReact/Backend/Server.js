@@ -4,6 +4,11 @@ const cors = require('cors');
 const {Inscription, Connexion} = require("./Controller/userController");
 const {SendCode, VerifyCode} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
+<<<<<<< HEAD
+=======
+const {PaymentByStripe} = require("./Controller/PaymentCardController");
+const {mailSend} = require("./Controller/contactController")
+>>>>>>> main
 
 app.use(cors({
     allowedHeaders: ['Content-Type']
@@ -17,11 +22,28 @@ app.post("/VerifyCode", VerifyCode);
 app.post('/pay', Paypal);  
 app.get('/success', TransactionSuccess);
 app.get('/cancel', (req, res) => res.status(400).send('Cancelled'));
+<<<<<<< HEAD
 
 
 const port = 3005
 
+=======
+app.post("/charge", PaymentByStripe);
+
+app.post("/contact", mailSend);
+
+const port = 3005
+
+const contactPort = 5000
+
+>>>>>>> main
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+<<<<<<< HEAD
+=======
+app.listen(contactPort, () => {
+  console.log(`Server is running on port ${contactPort}`);
+});
+>>>>>>> main

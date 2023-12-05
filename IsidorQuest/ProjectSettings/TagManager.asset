@@ -4,12 +4,18 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - echelle
   - ground
   - water
   - enemy
   - snake
   - Enemy
+=======
+  - Enemy
+  - echelle
+  - water
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
@@ -17,10 +23,17 @@ TagManager:
   - Player
   - Water
   - UI
+<<<<<<< HEAD
   - Enemy
   - 
   - 
   - 
+=======
+  - Player
+  - Enemy
+  - Item
+  - Ladder
+>>>>>>> main
   - 
   - 
   - 
@@ -46,4 +59,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ladder
+    uniqueID: 412815345
+    locked: 0
+  - name: Enemy
+    uniqueID: 1533183083
+    locked: 0
+  - name: Player
+    uniqueID: 2221852427
+    locked: 0
+  - name: UI
+    uniqueID: 2071464981
     locked: 0
