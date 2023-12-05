@@ -42,8 +42,6 @@
         "errorCodeCaseOne" : "Code doesn't match",
         "errorExpireDate" : "Your code has expired",
         "errorCode" : "Incorrect code"
-<<<<<<< HEAD
-=======
     },
     "propos": {
         "nav": "Table of contents :",
@@ -69,6 +67,5 @@
         "aPropos": "About us",
         "gcu": "Terms & Conditions",
         "copyRight": "All rights reserved"
->>>>>>> main
     }
 }

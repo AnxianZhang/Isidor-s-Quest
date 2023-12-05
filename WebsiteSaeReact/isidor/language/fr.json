@@ -42,8 +42,6 @@
         "errorCodeCaseOne" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
         "errorCode" : "Code incorrect"
-<<<<<<< HEAD
-=======
     },
     "propos": {
         "nav": "Table des contenus :",
@@ -69,6 +67,5 @@
         "aPropos": "À propos",
         "gcu": "CGU & Mentions légales",
         "copyRight": "Tous droits réservés"
->>>>>>> main
     }
 }
