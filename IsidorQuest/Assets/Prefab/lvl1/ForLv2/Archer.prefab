@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -1835061210, guid: 686da664108cb75489eba609acb189aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   projectile: {fileID: 917121893700933795, guid: 5e7801c36b6d5ee488886dff10898baa, type: 3}
   launchRight: {fileID: 121045319323939331}
   launchLeft: {fileID: 2234743243151382570}
-  cooldown: 1
+  cooldown: 0.5
 --- !u!95 &7092426826607958213
 Animator:
   serializedVersion: 5
