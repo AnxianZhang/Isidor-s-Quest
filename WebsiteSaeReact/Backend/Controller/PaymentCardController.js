@@ -19,12 +19,20 @@ const PaymentByStripe = async (req, res) => {
               enabled: true,
             },
           });
+          req.session.checkoutid = session.id;
           res.status(200).send({url : session.url});
     } catch (err) {
         res.send(err);
     }
 }
 
+const RetrieveInvoiceURL = async (checkoutid) => {
+  const session = await stripe.checkout.sessions.retrieve(checkoutid);
+  const invoice = await stripe.invoices.retrieve(session.invoice);
+  return invoice.hosted_invoice_url ;
+}
+
 module.exports = {
     PaymentByStripe,
+    RetrieveInvoiceURL
 }

@@ -15,7 +15,6 @@ const Inscription  = async(req, res) =>{
         });
         newUser.password = newUser.generateHash(data.password);
         req.session.pseudo = data.pseudo;
-        console.log(req.session);
         await newUser.save();
         return res.status(200).send('Données enregistrées avec succès');
       } catch (error) {
@@ -36,7 +35,6 @@ const Connexion  = async(req, res) =>{
             return res.status(402).send("Nom d'utilisateur/Mot de passe incorrect");
         }
         req.session.pseudo = data.pseudo;
-        console.log(req.session);
         return res.status(200).send("connexion reussie");
       } catch (error) {
         console.error('erreur durant la connexion', error);
