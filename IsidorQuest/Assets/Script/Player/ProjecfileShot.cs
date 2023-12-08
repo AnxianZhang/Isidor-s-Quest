@@ -49,7 +49,7 @@ public class ProjecfileShot : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            mainPlayer.AttackEnemy(GameObject.Find(col.gameObject.name));
+            ((Archer) mainPlayer).AttackEnemy(GameObject.Find(col.gameObject.name));
             Destroy(gameObject);
         }
         else{

@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 public class PlayerDeathScreen : MonoBehaviour
 {
     //[SerializeField] private Canvas playerDeathScreen;
-    private PlayerMovement player;
+    private Player player;
     private GameObject deathMenu;
     private bool isDisplayBoxCalled;
 
     private void Start()
     {
-        this.player = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.deathMenu = gameObject.transform.GetChild(2).gameObject;
     }
 
@@ -22,7 +22,7 @@ public class PlayerDeathScreen : MonoBehaviour
 
     private void DisplayBox()
     {
-        if (player.getIsDeath() && !this.isDisplayBoxCalled)
+        if (player.isDeath && !this.isDisplayBoxCalled)
         {
             Time.timeScale = .0f;
             this.deathMenu.SetActive(true);
@@ -32,6 +32,7 @@ public class PlayerDeathScreen : MonoBehaviour
 
     public void retryButton()
     {
+        // revice player
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

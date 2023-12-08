@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    private PlayerMovement mainPlayer;
+    private Player mainPlayer;
     public GameObject dropCoin;
     public SpriteRenderer spriteRenderer;
     [SerializeField] private int life;
@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     public void Start()
     {
-        this.mainPlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
+        this.mainPlayer = GameObject.FindWithTag("Player").GetComponent<Player>(); // get the specific, class witch extends Plqyer
         rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
     public void Update()
     {
 
-        animationAttackEnemy();
+        //animationAttackEnemy();
         if (isAttack == true)
         {
             if (Time.time > lastAttackedAt + cooldown)
@@ -56,10 +56,10 @@ public abstract class Enemy : MonoBehaviour
             Death();
         }
     }
-
+/*
     private void animationAttackEnemy(){
         animator.SetBool("isHit", isHit);
-    }
+    }*/
     private void FlashColor(float time)
     {
         spriteRenderer.color = Color.red;

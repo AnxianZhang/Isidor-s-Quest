@@ -21,11 +21,11 @@ public abstract class PlayerMovement : MonoBehaviour
     private bool isOnGround;
     private bool isLadder;
     private bool climbing;
-    public bool isClimbing;
-    public bool isUnmoveble;
+    private bool isClimbing;
+    private bool isUnmoveble;
 
 
-    private Rigidbody2D rigidBody;
+    protected Rigidbody2D rigidBody { get; set; }
     private CapsuleCollider2D playerCollider;
 
     protected Animator animator;
@@ -143,21 +143,21 @@ public abstract class PlayerMovement : MonoBehaviour
         climbing=animator.GetBool("isLander");
     }
 
-    public abstract void Attack(int damage, Vector3 enemyPosition);
+    //public abstract void Attack(int damage, Vector3 enemyPosition);
 
-    public abstract float getCooldown();
+    //public abstract float getCooldown();
         
-    public abstract float getCooldownNow();
+    //public abstract float getCooldownNow();
         
-    public abstract bool getIsDeath();
+    //public abstract bool getIsDeath();
 
-    public abstract int getLife();
+    //public abstract int getLife();
 
-    public abstract int getLifeMax();
-
+    //public abstract int getLifeMax();
+/*
     public virtual void AttackEnemy(GameObject enemy){
 
-    }
+    }*/
 
     //void OnCollisionEnter2D(Collision2D col)
     //{

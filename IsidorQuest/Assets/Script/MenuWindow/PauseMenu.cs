@@ -6,18 +6,20 @@ public class PauseMenu : MonoBehaviour
     private static bool isPaused = false;
 
     private GameObject pauseMenu;
+    private Player pM;
 
     [SerializeField] private GameObject settingsMenu;
 
     private void Start()
     {
-        this.pauseMenu = gameObject.transform.GetChild(0).gameObject;
+        this.pauseMenu = gameObject.transform.GetChild(1).gameObject;
+        this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy && !this.pM.isDeath)
         {
             if (isPaused) resume();
             else pause();
