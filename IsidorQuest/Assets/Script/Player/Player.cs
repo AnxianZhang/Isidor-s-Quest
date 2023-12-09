@@ -33,9 +33,16 @@ public abstract class Player : PlayerMovement
         }
     }
 
+    public void revive()
+    {
+        this.currentLife = this.maxLife;
+        this.isDeath = false;
+        gameObject.SetActive(true);
+    }
+
     private void Death()
     {
-        this.currentLife = this.currentLife - this.currentLife;
+        this.currentLife -= this.currentLife;
         this.isDeath = true;
         gameObject.SetActive(false);
         //Destroy(gameObject);
@@ -43,8 +50,8 @@ public abstract class Player : PlayerMovement
 
     public float getCooldownNow()
     {
-        if (Time.time <= lastAttackedAt + cooldown && lastAttackedAt != 0f)
-            return (lastAttackedAt + cooldown) - Time.time;
+        if (Time.time <= this.lastAttackedAt + this.cooldown && this.lastAttackedAt != 0f)
+            return (this.lastAttackedAt + this.cooldown) - Time.time;
         else
         {
             return 0f;
@@ -68,7 +75,7 @@ public abstract class Player : PlayerMovement
 
     public void Attack(int degat, Vector3 enemyPosition)
     {
-        this.currentLife = this.currentLife - degat;
+        this.currentLife -= degat;
         float res = enemyPosition.x - transform.position.x;
         if (base.rigidBody.velocity.y <= 0f)
         {
@@ -85,7 +92,7 @@ public abstract class Player : PlayerMovement
 
     public void isInWater(Collision2D col)
     {
-        if (col.gameObject.tag == "water")
+        if (col.gameObject.tag.Equals("water"))
         {
             this.isWater = true;
         }

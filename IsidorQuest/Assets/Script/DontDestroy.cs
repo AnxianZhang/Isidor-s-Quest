@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DontDestroy : MonoBehaviour
 {
     private string objID;
-    private DontDestroy [] toNotDestroy;
+    private DontDestroy[] toNotDestroy;
     private void Awake()
     {
         this.objID = name + transform.position.ToString() + transform.eulerAngles.ToString();
@@ -18,5 +19,10 @@ public class DontDestroy : MonoBehaviour
             if (this.toNotDestroy[i] != this && this.toNotDestroy[i].objID == objID)
                 Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void removeDontDestroy()
+    {
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
     }
 }

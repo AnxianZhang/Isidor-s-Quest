@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeathScreen : MonoBehaviour
 {
-    //[SerializeField] private Canvas playerDeathScreen;
     private Player player;
     private GameObject deathMenu;
     private bool isDisplayBoxCalled;
@@ -14,7 +13,6 @@ public class PlayerDeathScreen : MonoBehaviour
         this.deathMenu = gameObject.transform.GetChild(2).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         DisplayBox();
@@ -25,14 +23,22 @@ public class PlayerDeathScreen : MonoBehaviour
         if (player.isDeath && !this.isDisplayBoxCalled)
         {
             Time.timeScale = .0f;
+            Debug.Log("hi");
             this.deathMenu.SetActive(true);
             this.isDisplayBoxCalled = true;
         }
     }
 
+    private void executeRemoveDontDestroyObjects()
+    {
+        if (CurrentSceenManager.instance.isActiveAndEnabled) CurrentSceenManager.instance.removeDontDestoyObjects();
+    }
+
     public void retryButton()
     {
-        // revice player
+        executeRemoveDontDestroyObjects();
+        this.isDisplayBoxCalled = false;
+        this.player.revive();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
