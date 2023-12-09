@@ -35,24 +35,33 @@ const HomeScreen = ({ language }) => {
         setSelectLanguage(getLanguage);
     })
 
-    const Payer = async ()=>{
-        try {
-            const response = await fetch('http://localhost:3005/pay', {
-                method: 'POST',
-                credentials : "include",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const result = await response.status;
-            const TextResponse = await response.text();
-            window.location = JSON.parse(TextResponse).forwardLink;
+    const NavigationGestion = async () => {
+        if (isConnect == "false") {
+            navigation.navigate("Connexion");
         }
-        catch (error){
-
+        if (isConnect == "true") {
+            try {
+                const response = await fetch('http://localhost:3005/isPay', {
+                    method: 'POST',
+                    credentials : "include",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                const textResponse = await response.text();
+                console.log(textResponse);
+                if(textResponse === "false"){
+                    navigation.navigate("PaymentCard");
+                }
+                else{
+                    navigation.navigate("Game");
+                }
+            }
+            catch (error) {
+                console.error('Erreur lors de l\'envoi des données au backend', error);
+            }
         }
     }
-
 
    
     const getData = async () => {
@@ -86,18 +95,12 @@ const HomeScreen = ({ language }) => {
                         <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
                     </View>
                     <View style={styles.containButtonPlay}>
-                        <TouchableOpacity onPress={() => { isConnect === "true" ? navigation.navigate("Game") : navigation.navigate("Connexion") }}>
+                        <TouchableOpacity onPress={() => NavigationGestion()}>
                             <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
                                 <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
                             </View>
                         </TouchableOpacity>
-                        {/* <TouchableOpacity onPress={() => navigation.navigate("PaymentCard")}>
-                            <View style={styles.buttonContent}>
-                                <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>test</Text>
-                            </View>
-                        </TouchableOpacity> */}
                         <ButtonImage onPress={() => firstItemRef.current.scrollTo({y: 1300, animated: true})} source={{ uri: Previous }} style={styles.previousLogo} />
                     </View>
                     

@@ -7,7 +7,7 @@ import UnityCompile from './page/UnityCompilerScreen';
 import APropos from './page/APropos';
 import { useState } from 'react';
 import fr from "./language/fr.json"
-import PaymentCardScreen from './page/PaymentCardScreen';
+import PaymentCardScreen from './page/PaymentScreen';
 import VerificationScreen from './page/VerificationUserCodeScreen';
 import SucessPaymentScreen from './page/SuccessPaymentScreen';
 import CancelPaymentScreen from './page/CancelPaymentScreen';

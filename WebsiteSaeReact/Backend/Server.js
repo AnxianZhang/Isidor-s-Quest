@@ -9,13 +9,13 @@ app.use(
     resave: false,
     cookie: {
       secure: false,
-      sameSite: true,
+      sameSite: false,
     },
   })
 );
 app.use(cookieParser());
 const cors = require('cors');
-const {Inscription, Connexion, isConnect, disconnection} = require("./Controller/userController");
+const {Inscription, Connexion, isConnect, disconnection, VerifySuccessPayment} = require("./Controller/userController");
 const {SendCode, VerifyCode} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe} = require("./Controller/PaymentCardController");
@@ -44,7 +44,7 @@ app.post("/successPayment", successPayment)
 app.post("/isPay", userPay);
 app.post("/isConnect", isConnect);
 app.post("/disconnection", disconnection);
-
+app.get("/verifyPayment", VerifySuccessPayment);
 const port = 3005
 
 const contactPort = 5000

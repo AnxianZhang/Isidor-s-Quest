@@ -20,6 +20,7 @@ const PaymentByStripe = async (req, res) => {
             },
           });
           req.session.checkoutid = session.id;
+          req.session.succesPayment = true;
           res.status(200).send({url : session.url});
     } catch (err) {
         res.send(err);

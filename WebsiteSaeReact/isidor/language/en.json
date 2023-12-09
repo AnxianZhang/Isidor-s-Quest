@@ -71,6 +71,14 @@
         "sendErr" : "Failed to send message",
         "title" : "Contact Form"
     },
+    "Payment" : {
+        "PayWithPaypal": "Pay by paypal",
+        "PayWithCB": "Pay by credit card",
+        "ErrorPay": "Payment refused",
+        "SuccessCBPayment": "Successful credit card payment", 
+        "SuccessPaypalPayment": "Successful Paypal payment", 
+        "factureLinkChargement": "Download the invoice"
+    },
     "Footer" :{
         "aPropos": "About us",
         "gcu": "Terms & Conditions",

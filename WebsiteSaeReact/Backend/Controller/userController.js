@@ -56,9 +56,19 @@ const disconnection = async(req,res) => {
     return res.status(200).send(false);
 }
 
+const VerifySuccessPayment = async(req, res) => {
+  if(req.session.succesPayment == true){
+    req.session.succesPayment = false;
+    return res.status(200).send(true);
+  }
+  else{
+    return res.status(200).send(false);
+  }
+}
 module.exports = {
     Inscription,
     Connexion,
     isConnect,
-    disconnection
+    disconnection,
+    VerifySuccessPayment
 };

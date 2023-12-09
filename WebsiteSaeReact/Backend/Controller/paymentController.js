@@ -1,4 +1,3 @@
-const {successPayment} = require("./PaymentSuccessController");
 const paypal = require('paypal-rest-sdk');
 
 paypal.configure({
@@ -8,7 +7,7 @@ paypal.configure({
   });
   
 const Paypal = (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    //res.header("Access-Control-Allow-Origin", "*");
     const create_payment_json = {
       "intent": "sale",
       "payer": {
@@ -68,7 +67,7 @@ const TransactionSuccess = async (req, res) => {
           console.log(error.response);
           throw error;
       } else {
-        successPayment();
+        req.session.succesPayment = true;
         res.redirect('http://localhost:19006/Success');
       }
   });

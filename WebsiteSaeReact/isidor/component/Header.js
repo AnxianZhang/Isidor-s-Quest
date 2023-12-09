@@ -76,6 +76,7 @@ const Header = (props) => {
                 },
             });
             setIsConnect("false");
+            navigation.navigate("Home");
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);

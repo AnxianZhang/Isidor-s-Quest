@@ -71,6 +71,14 @@
         "sendErr" : "Échec de l'envoi du message",
         "title" : "Formulaire de Contact"
     },
+    "Payment" : {
+        "PayWithPaypal" : "Payer par paypal",
+        "PayWithCB" : "Payer par carte bancaire",
+        "ErrorPay" : "Paiement réfusé",
+        "SuccessCBPayment" : "Paiement par carte bancaire reussie",
+        "SuccessPaypalPayment" : "Paiement Paypal reussi",
+        "factureLinkChargement" : "Télécharger la facture"
+    },
     "Footer" :{
         "aPropos": "À propos",
         "gcu": "CGU & Mentions légales",

@@ -4,7 +4,7 @@ import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions } from 'react-native';
 import { useState, useEffect } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
@@ -15,9 +15,6 @@ const PaymentCardScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const [nom, setNom] = useState("");
     const [email, setEmail] = useState("");
-    const [disable, setDisable] = useState(true);
-    const navigation = useNavigation();
-
     useEffect(() => {
         setSelectLanguage(getLanguage);
     })
@@ -39,6 +36,7 @@ const PaymentCardScreen = ({ language }) => {
             const status = await response.status;
             const TextResponse = await response.text();
             if (status === 200) {
+                await AsyncStorage.setItem("navigationOk", JSON.stringify({ navigationOK : true }));
                 window.location = (JSON.parse(TextResponse).url);
             }
         }
@@ -58,6 +56,7 @@ const PaymentCardScreen = ({ language }) => {
             });
             const result = await response.status;
             const TextResponse = await response.text();
+            //await AsyncStorage.setItem("navigationOk", JSON.stringify({ navigationOK : true }));
             window.location = JSON.parse(TextResponse).forwardLink;
         }
         catch (error) {
@@ -71,14 +70,14 @@ const PaymentCardScreen = ({ language }) => {
                 <View style={styles.ButtonContainer}>
                     <TouchableOpacity onPress={() => Payer()}>
                         <View style={[GLOBAL_STYLES.form.buttonContainer, { backgroundColor: "#EE8A45" }]}>
-                            <Text style={GLOBAL_STYLES.form.buttonText}>Payer par paypal</Text>
+                            <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Payment.PayWithPaypal}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.ButtonContainer}>
                     <TouchableOpacity onPress={() => sendDataToDatabase()}>
                         <View style={[GLOBAL_STYLES.form.buttonContainer, { backgroundColor: "#EE8A45" }]}>
-                            <Text style={GLOBAL_STYLES.form.buttonText}>Payer par carte bancaire</Text>
+                            <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Payment.PayWithCB}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

@@ -13,7 +13,7 @@ const SucessPaymentScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const navigation = useNavigation();
     const isFocused = useIsFocused();
-
+    const [factureLink, setFactureLink] = useState("");
     useEffect(() => {
         sendDataToDatabase();
     }, [isFocused])
@@ -23,6 +23,9 @@ const SucessPaymentScreen = ({ language }) => {
     })
 
     const sendDataToDatabase = async () => {
+        let executeFunction;
+        getData().then(async function(result) {
+        if(result == "true"){
         try {
             const res = await fetch('http://localhost:3005/successPayment', {
                 method: 'POST',
@@ -34,14 +37,37 @@ const SucessPaymentScreen = ({ language }) => {
             const status = await res.status;
             if (status == 200){
                 const text = await res.text();
-                window.open(text, '_blank');
+                setFactureLink(text);
             }
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
-        
-        
+        }
+        else{
+            navigation.navigate("Home");
+        }
+    });
+    }
+
+    const getData = async()=>{
+        try {
+            const res = await fetch('http://localhost:3005/verifyPayment', {
+                method: 'GET',
+                credentials : "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            const status = await res.status;
+            if (status == 200){
+                const text = await res.text();
+                return text;
+            }
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des données au backend', error);
+        }
     }
 
 
@@ -49,7 +75,20 @@ const SucessPaymentScreen = ({ language }) => {
         <View style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
             <View style={styles.container}>
-                <Text style={GLOBAL_STYLES.form.text}>Paiement reussi</Text>
+                {factureLink != "" ?
+                    <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Payment.SuccessCBPayment}</Text>
+                : 
+                    <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Payment.SuccessPaypalPayment}</Text>
+                }
+                {factureLink != "" &&
+                <View style={styles.buttonContain}> 
+                <TouchableOpacity onPress={() => { window.open(factureLink, '_blank'); }}>
+                    <View style={styles.buttonContent}>
+                        <Text style={styles.headerText}>{selectLanguage.Payment.factureLinkChargement}</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
+                }
             </View>
         </View>
     )
@@ -60,6 +99,24 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         height: windowHeight * 0.85,
     },
+    buttonContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: "#EE8A45",
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingRight: 50,
+        paddingLeft: 50,
+        borderRadius: 10
+    },
+    headerText: {
+        fontSize: 24,
+        fontFamily: "regular",
+        color: "white",
+    },
+    buttonContain : {
+        paddingTop : 10,
+    }
 });
 
 export default SucessPaymentScreen;
