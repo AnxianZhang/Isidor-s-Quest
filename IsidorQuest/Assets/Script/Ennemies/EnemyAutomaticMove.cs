@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
-public class EnemySnakeMoveAutomatic : Enemy
+public class EnemyAutomaticMove : MonoBehaviour
 {
-    public float speed;
+    //public float speed;
     public float waitTime;
     public Transform[] movePos;
 
@@ -15,17 +12,20 @@ public class EnemySnakeMoveAutomatic : Enemy
     private System.Random random;
     private float randomTimer = 0f;
     // Start is called before the first frame update
-    public new void Start()
+    private Enemy enemy;
+
+    public void Start()
     {
-        base.Start();
-        wait = waitTime;
-        random = new System.Random();
+        //base.Start();
+        this.wait = waitTime;
+        this.random = new System.Random();
+        this.enemy = gameObject.GetComponent<Enemy>();
     }
 
     // Update is called once per frame
-    public new void Update()
+    public void Update()
     {
-        base.Update();
+        //base.Update();
         //Debug.Log(Vector2.Distance(movePos[0].position, movePos[1].position));// >3 -> ai
         float resMove0Y = movePos[0].position.y - transform.position.y;
         float resMove1Y = movePos[1].position.y - transform.position.y;
@@ -62,16 +62,16 @@ public class EnemySnakeMoveAutomatic : Enemy
                 if (movingRight)
                 {
                     transform.position =
-                        Vector2.MoveTowards(transform.position, movePos[0].position, speed * Time.deltaTime);
+                        Vector2.MoveTowards(transform.position, movePos[0].position, this.enemy.getRunning() * Time.deltaTime);
                     //transform.eulerAngles = new Vector3(0, 0, 0);
-                    spriteRenderer.flipX = false;
+                    this.enemy.spriteRenderer.flipX = false;
                 }
                 if (!movingRight)
                 {
                     transform.position =
-                            Vector2.MoveTowards(transform.position, movePos[1].position, speed * Time.deltaTime);
+                            Vector2.MoveTowards(transform.position, movePos[1].position, this.enemy.getRunning() * Time.deltaTime);
                     //transform.eulerAngles = new Vector3(0, -180, 0);
-                    spriteRenderer.flipX = true;
+                    this.enemy.spriteRenderer.flipX = true;
                 }
                 if (Vector2.Distance(transform.position, movePos[0].position) <= 0.1f || Vector2.Distance(transform.position, movePos[1].position) <= 0.1f)
                 {
@@ -89,7 +89,7 @@ public class EnemySnakeMoveAutomatic : Enemy
             //sans ai
             // Debug.Log(Vector2.Distance(transform.position, movePos[i].position) < 0.1f);
             transform.position =
-                Vector2.MoveTowards(transform.position, movePos[i].position, speed * Time.deltaTime);
+                Vector2.MoveTowards(transform.position, movePos[i].position, this.enemy.getRunning() * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, movePos[i].position) < 0.1f)
             {
@@ -102,13 +102,13 @@ public class EnemySnakeMoveAutomatic : Enemy
                     if (movingRight)
                     {
                         /* transform.eulerAngles = new Vector3(0, -180, 0);*/
-                        spriteRenderer.flipX = true;
+                        this.enemy.spriteRenderer.flipX = true;
                         movingRight = false;
                     }
                     else
                     {
                         /*transform.eulerAngles = new Vector3(0, 0, 0);*/
-                        spriteRenderer.flipX = false;
+                        this.enemy.spriteRenderer.flipX = false;
                         movingRight = true;
                     }
 
