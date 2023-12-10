@@ -18,7 +18,7 @@ const cors = require('cors');
 const {Inscription, Connexion, isConnect, disconnection, VerifySuccessPayment} = require("./Controller/userController");
 const {SendCode, VerifyCode} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
-const {PaymentByStripe} = require("./Controller/PaymentCardController");
+const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
 
@@ -45,6 +45,8 @@ app.post("/isPay", userPay);
 app.post("/isConnect", isConnect);
 app.post("/disconnection", disconnection);
 app.get("/verifyPayment", VerifySuccessPayment);
+app.get("/transactionCardSuccess", transactionCardSuccess);
+
 const port = 3005
 
 const contactPort = 5000

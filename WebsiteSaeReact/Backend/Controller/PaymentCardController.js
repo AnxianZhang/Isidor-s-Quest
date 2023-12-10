@@ -13,20 +13,23 @@ const PaymentByStripe = async (req, res) => {
               },
             ],
             mode: 'payment',
-            success_url: `http://localhost:19006/Success`,
+            success_url: `http://localhost:3005/transactionCardSuccess`,
             cancel_url: `http://localhost:19006/Cancel`,
             invoice_creation : {
               enabled: true,
             },
           });
           req.session.checkoutid = session.id;
-          req.session.succesPayment = true;
           res.status(200).send({url : session.url});
     } catch (err) {
         res.send(err);
     }
 }
 
+const transactionCardSuccess = (req,res) =>{
+  req.session.succesPayment = true;
+  res.redirect('http://localhost:19006/Success');
+}
 const RetrieveInvoiceURL = async (checkoutid) => {
   const session = await stripe.checkout.sessions.retrieve(checkoutid);
   const invoice = await stripe.invoices.retrieve(session.invoice);
@@ -35,5 +38,6 @@ const RetrieveInvoiceURL = async (checkoutid) => {
 
 module.exports = {
     PaymentByStripe,
+    transactionCardSuccess,
     RetrieveInvoiceURL
 }
