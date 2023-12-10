@@ -180,11 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
---- !u!20 &145076084 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 8662567316996434190, guid: 681b6de9f8bdded4e82db96f40d7f0cd, type: 3}
-  m_PrefabInstance: {fileID: 5419864991358498295}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &299850155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +231,10 @@ PrefabInstance:
     - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_Name
       value: Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -768,6 +767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8869024163268410946, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 365615188}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1108,22 +1111,6 @@ PrefabInstance:
     - target: {fileID: 4093536685638860982, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
       propertyPath: m_Name
       value: CanvasForMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771215001554462531, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 145076084}
-    - target: {fileID: 4771215001554462531, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771215001554462531, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4771215001554462531, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2071464981
       objectReference: {fileID: 0}
     - target: {fileID: 7977946490913362705, guid: 84e2cbd106382d14d912850b1ae08288, type: 3}
       propertyPath: m_Pivot.x
