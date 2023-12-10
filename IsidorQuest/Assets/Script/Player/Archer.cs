@@ -11,7 +11,6 @@ public class Archer : Player
     public new void Start()
     {
         base.Start();
-        
         base.maxLife = 60;
         base.currentLife = base.maxLife;
         base.damageDeal = 10;
@@ -25,6 +24,7 @@ public class Archer : Player
 
     protected override void doPlayerAttaque()
     {
+        gm.ProjectileSoundPlay();
         if (spriteRenderer.flipX == true)
         {
             Instantiate(this.projectile, new Vector3(this.launchLeft.position.x, this.launchLeft.position.y, 1.0f), transform.rotation);

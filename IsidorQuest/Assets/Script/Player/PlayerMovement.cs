@@ -33,6 +33,7 @@ public abstract class PlayerMovement : MonoBehaviour
 
     private float hMovement;
     private float vMovement;
+    protected GameSound gm;
     private float originalGravityScale;
 
     public void Start()
@@ -42,6 +43,7 @@ public abstract class PlayerMovement : MonoBehaviour
         this.animator = gameObject.GetComponent<Animator>();
         this.playerCollider = GetComponent<CapsuleCollider2D>();
         this.originalGravityScale = this.rigidBody.gravityScale;
+        this.gm = GameObject.FindWithTag("SoundManager").GetComponent<GameSound>();
     }
 
     public void Update()
@@ -81,10 +83,13 @@ public abstract class PlayerMovement : MonoBehaviour
         {
             if (this.isJumping && this.isOnGround)
             {
+                gm.playerJumpSound();
                 this.rigidBody.AddForce(new Vector2(0f, this.jumpForce));
                 this.isJumping = false;
             }
-
+            if(!gm.isPlayerWalkSoundIsPlaying() && this.rigidBody.velocity.x != 0 && this.isOnGround){
+                gm.PlayerWalkSound();
+            }
             this.rigidBody.velocity = new Vector2(this.hMovement, this.rigidBody.velocity.y); // move a player in a new position
         }
         else
