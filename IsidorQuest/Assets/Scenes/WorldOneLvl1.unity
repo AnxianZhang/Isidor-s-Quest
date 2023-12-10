@@ -237,6 +237,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 6402746300736297181, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9042638537653934869, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -652,7 +656,7 @@ PrefabInstance:
     - target: {fileID: 8869024163268410946, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 145076084}
+      objectReference: {fileID: 0}
     - target: {fileID: 8869024163268410946, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
       propertyPath: m_PixelPerfect
       value: 0
