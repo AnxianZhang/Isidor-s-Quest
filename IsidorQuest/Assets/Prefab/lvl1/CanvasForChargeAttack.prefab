@@ -126,7 +126,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 8662567316996434190, guid: 681b6de9f8bdded4e82db96f40d7f0cd, type: 3}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -136,8 +136,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2073114869
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &6492801373193014925
 MonoBehaviour:
@@ -353,6 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808749885540221131}
+  - component: {fileID: 7788183815848386361}
   m_Layer: 0
   m_Name: CanvasForChargeAttack
   m_TagString: Untagged
@@ -376,3 +377,15 @@ Transform:
   - {fileID: 4746460858386093288}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7788183815848386361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416564823768470645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668c84a64f023be4e9532ecc8eeef311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

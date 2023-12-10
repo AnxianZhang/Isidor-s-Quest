@@ -5,20 +5,19 @@ using UnityEngine;
 
 public class HealthBarEnnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] private Enemy enemy;
     [SerializeField] private Image healthBar;
     [SerializeField] private Canvas healthBarCanvas;
 
     private float posXInitial;
     private float posYInitial;
+
     void Start()
     {
-        posXInitial= enemy.transform.position.x;
-        posYInitial= enemy.transform.position.y;
+        posXInitial = enemy.transform.position.x;
+        posYInitial = enemy.transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         healthBar.fillAmount = CalculatePlayerLife();
@@ -33,8 +32,10 @@ public class HealthBarEnnemy : MonoBehaviour
         healthBarCanvas.transform.position = new Vector3(newposXCanvas, newposyCanvas, 0f);
     }
 
-    private void inactive(){
-        if(enemy.getLife() <= 0){
+    private void inactive()
+    {
+        if (enemy.getLife() <= 0)
+        {
             healthBarCanvas.enabled = false;
         }
     }
@@ -43,13 +44,13 @@ public class HealthBarEnnemy : MonoBehaviour
     {
         int life = enemy.getLife();
         if (life != 0)
-            {
-                float lifeActual = life;
-                float percentLife = enemy.getLifeMax() * 0.01f;
-                float lifeEnnemy = lifeActual / percentLife;
-                float lifeFinal = lifeEnnemy * 0.01f;
-                return lifeFinal;
-            }
+        {
+            float lifeActual = life;
+            float percentLife = enemy.getLifeMax() * 0.01f;
+            float lifeEnnemy = lifeActual / percentLife;
+            float lifeFinal = lifeEnnemy * 0.01f;
+            return lifeFinal;
+        }
         return 0.0f;
     }
 }

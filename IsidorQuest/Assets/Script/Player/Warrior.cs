@@ -5,138 +5,69 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Warrior : PlayerMovement
+public class Warrior : Player
 {
-    private int blinks = 2;
-    private float time = 0.02f;
-    private Rigidbody2D rb;
-    private int life = 100;
-    private int lifeMax = 100;
-    private int degat = 20;
-    private bool isWater = false;
-    private bool isDeath = false;
-    private float cooldown = 2f;
-    private float lastAttackedAt = 0f;
-    // Start is called before the first frame update
-    private GameObject[] enemys;
-    private bool isHit = false;
+    private const float ATTACK_RANGE_RADIUS = 3f;
+    private const float DIAG_RANGE_RADIUS = .5f;
+
+    [SerializeField] private Transform attaqueRange;
+    [SerializeField] private LayerMask scallingLayer;
+
+    private bool isEnnemyInRange;
+    private Collider2D ennemyCollider;
 
     public new void Start()
     {
         base.Start();
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        base.maxLife = 100;
+        base.currentLife = base.maxLife;
+        base.damageDeal = 20;
+        base.cooldown = 2f;
+
+        this.ennemyCollider = null;
     }
 
-    // Update is called once per frame
     public new void Update()
     {
-        base.Update();
-        AttackAnimation();
-        if (isWater)
-        {
-            Death();
-        }
-        if (life <= 0)
-        {
-            Death();
-        }
-        if (Input.GetKeyDown(KeyCode.S) && Time.time > lastAttackedAt + cooldown || Input.GetKeyDown(KeyCode.S) && lastAttackedAt == 0f)
-        {
-            AttackEnemy();
-        }
-        else{
-            isHit = false;
-        }
-
+        base.playerActions();
     }
 
-    private void AttackAnimation(){
-        this.animator.SetBool("isHit", isHit);
-    }
-    public void AttackEnemy()
+    protected override void doPlayerAttaque()
     {
-        for(int i = 0; i < enemys.Length; i++){
-            float res = enemys[i].transform.position.y - transform.position.y;
-            float resSprite = enemys[i].transform.position.x - transform.position.x;
-            bool tourner = resSprite < 0 && spriteRenderer.flipX ||  resSprite >= 0 && !spriteRenderer.flipX ? true : false; 
-            if(Vector2.Distance(enemys[i].transform.position, transform.position) < 2.0f && res < 0.25f && res > -0.25f && tourner){
-                enemys[i].GetComponent<Enemy>().Attack(degat, transform.position);
-                lastAttackedAt = Time.time;
-                isHit = true;
+        if (this.ennemyCollider != null)
+        {
+            GameObject ennemy = this.ennemyCollider.gameObject;
+
+            float res = ennemy.transform.position.y - transform.position.y;
+            float resSprite = ennemy.transform.position.x - transform.position.x;
+            bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
+            if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
+            {
+                ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
+                base.lastAttackedAt = Time.time;
+                base.isHit = true;
             }
         }
     }
 
-    private void Death()
+    private new void FixedUpdate()
     {
-        life = life - life;
-        isDeath = true;
-        gameObject.SetActive(false);
-        //Destroy(gameObject);
-    }
+        base.FixedUpdate();
 
-    public override bool getIsDeath()
-    {
-        return isDeath;
-    }
-    public override int getLife()
-    {
-        return life;
-    }
+        // detect when an ennemy enter in the attack range of the warior
+        this.ennemyCollider = Physics2D.OverlapCircle(this.attaqueRange.position, ATTACK_RANGE_RADIUS, this.scallingLayer);
 
-    public override int getLifeMax()
-    {
-        return lifeMax;
-    }
-
-    public override float getCooldown(){
-        return cooldown;
-    }
-
-    public override float getCooldownNow(){
-        if(Time.time <= lastAttackedAt + cooldown && lastAttackedAt != 0f)
-            return (lastAttackedAt + cooldown) - Time.time;
-        else{
-            return 0f;
-        }
-    }
-
-    void BlinkPlayer(int numBlinks, float seconds)
-    {
-        StartCoroutine(DoBlinks(numBlinks, seconds));
-    }
-
-    IEnumerator DoBlinks(int numBlinks, float seconds)
-    {
-        for (int i = 0; i < numBlinks * 2; i++)
-        {
-            spriteRenderer.enabled = !spriteRenderer.enabled;
-            yield return new WaitForSeconds(seconds);
-        }
-        spriteRenderer.enabled = true;
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "water")
-        {
-            isWater = true;
-        }
+        base.isInWater(col);
     }
 
-    public override void Attack(int degat, Vector3 enemyPosition)
+    private new void OnDrawGizmos()
     {
-        life = life - degat;
-        float res = enemyPosition.x - transform.position.x;
-        if(this.rb.velocity.y <= 0f){
-            Vector2 direction = (enemyPosition - transform.position) * -1;
-            rb.AddForce(new Vector3(direction.x * 1000f, 100f, 0f));
-        }
-        if(res >= -0.5f && res < 0.5f){
-            Vector2 direction = (enemyPosition - transform.position) * -1;
-            rb.AddForce(new Vector3(direction.x * 1000f, 200f, 0f));
-        }
-        BlinkPlayer(blinks, time);
+        base.OnDrawGizmos();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.attaqueRange.position, ATTACK_RANGE_RADIUS);
     }
 }

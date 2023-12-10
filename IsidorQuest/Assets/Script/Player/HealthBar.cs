@@ -6,14 +6,13 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private PlayerMovement lifePlayer;
     [SerializeField] private Image healthBar;
-
+    
+    private Player lifePlayer;
 
     void Start()
     {
-        this.lifePlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
+        this.lifePlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
         //transform.position = camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0,1,0));        
     }
 
@@ -21,22 +20,20 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         //transform.position = camera.main.ViewportToWorldPoint(new Vector3(0,1,0));
-        healthBar.fillAmount = CalculatePlayerLife();
+        this.healthBar.fillAmount = CalculatePlayerLife();
     }
 
     private float CalculatePlayerLife()
     {
-        int life = lifePlayer.getLife();
+        int life = this.lifePlayer.currentLife;
         if (life != 0)
-            {
-                float lifeActual = life;
-                float percentLife = lifePlayer.getLifeMax() * 0.01f;
-                float lifeMainPlayer = lifeActual / percentLife;
-                float lifeFinal = lifeMainPlayer * 0.01f;
-                return lifeFinal;
-            }
+        {
+            float lifeActual = life;
+            float percentLife = this.lifePlayer.maxLife * 0.01f;
+            float lifeMainPlayer = lifeActual / percentLife;
+            float lifeFinal = lifeMainPlayer * 0.01f;
+            return lifeFinal;
+        }
         return 0.0f;
     }
-
-    
 }

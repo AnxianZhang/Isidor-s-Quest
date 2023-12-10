@@ -4,38 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChargeBarAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-private PlayerMovement AttackChargePlayer;
-[SerializeField] private Image ChargeBar;
+    private Player AttackChargePlayer;
 
-[SerializeField] private Canvas chargeBarCanvas;
-private float posXInitial;
+    [SerializeField] private Image ChargeBar;
+    [SerializeField] private Canvas chargeBarCanvas;
 
-private float posYInitial;
-void Start()
-{
-    this.AttackChargePlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
-    posXInitial= AttackChargePlayer.transform.position.x;
-    posYInitial= AttackChargePlayer.transform.position.y;
-}
+    private float posXInitial;
+    private float posYInitial;
 
-// Update is called once per frame
-void Update()
-{
-    ChargeBar.fillAmount = CalculatePlayerLife();
-    inactive();
-    HealthBarPosition();
-}
-    private void HealthBarPosition()
+    void Start()
     {
-        float newposXCanvas = AttackChargePlayer.transform.position.x - posXInitial;
-        float newposyCanvas = AttackChargePlayer.transform.position.y - posYInitial;
-        chargeBarCanvas.transform.position = new Vector3(newposXCanvas, newposyCanvas, 0f);
+        this.AttackChargePlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.posXInitial = this.AttackChargePlayer.transform.position.x;
+        this.posYInitial = this.AttackChargePlayer.transform.position.y;
     }
 
-    private void inactive(){
-        if(AttackChargePlayer.getIsDeath()){
-            chargeBarCanvas.enabled = false;
+    void Update()
+    {
+        ChargeBar.fillAmount = CalculatePlayerLife();
+        inactive();
+        HealthBarPosition();
+    }
+
+    private void HealthBarPosition()
+    {
+        float newposXCanvas = this.AttackChargePlayer.transform.position.x - this.posXInitial;
+        float newposyCanvas = this.AttackChargePlayer.transform.position.y - this.posYInitial;
+        this.chargeBarCanvas.transform.position = new Vector3(newposXCanvas, newposyCanvas, 0f);
+    }
+
+    private void inactive()
+    {
+        if (this.AttackChargePlayer.isDeath)
+        {
+            this.chargeBarCanvas.enabled = false;
         }
     }
 
@@ -43,13 +45,13 @@ void Update()
     {
         float charge = AttackChargePlayer.getCooldownNow();
         if (charge != 0)
-            {
-                float chargeActual = AttackChargePlayer.getCooldown() - charge;
-                float percentCharge = AttackChargePlayer.getCooldown() * 0.01f;
-                float chargePlayer = chargeActual / percentCharge;
-                float chargeFinal = chargePlayer * 0.01f;
-                return chargeFinal;
-            }
+        {
+            float chargeActual = this.AttackChargePlayer.cooldown - charge;
+            float percentCharge = this.AttackChargePlayer.cooldown * 0.01f;
+            float chargePlayer = chargeActual / percentCharge;
+            float chargeFinal = chargePlayer * 0.01f;
+            return chargeFinal;
+        }
         return 1f;
     }
 }
