@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - echelle
   - water
-  - SoundManager
   layers:
   - Default
   - TransparentFX

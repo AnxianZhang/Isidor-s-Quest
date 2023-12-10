@@ -14,6 +14,7 @@ public abstract class Player : PlayerMovement
 
     public bool isDeath { get; protected set; }
     protected float lastAttackedAt;
+
     protected bool isWater;
     protected bool isHit;
 
@@ -45,7 +46,6 @@ public abstract class Player : PlayerMovement
 
     private void Death()
     {
-        gm.playerDeathSound();
         this.currentLife = 0;
         this.isDeath = true;
         gameObject.SetActive(false);
@@ -80,9 +80,6 @@ public abstract class Player : PlayerMovement
     {
         this.currentLife -= degat;
         float res = enemyPosition.x - transform.position.x;
-        if(!gm.playerDamageIsPlaying()){
-            gm.playerDamageSound();
-        }
         if (base.rigidBody.velocity.y <= 0f)
         {
             Vector2 direction = (enemyPosition - transform.position) * -1;
