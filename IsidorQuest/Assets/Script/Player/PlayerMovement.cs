@@ -69,7 +69,7 @@ public abstract class PlayerMovement : MonoBehaviour
     /*
      * Call every 0.02s, usually used for physics calculations
      */
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         // create a circle on the groundCheck position, with a radius
         this.isOnGround = Physics2D.OverlapCircle(this.groundCheck.position, GROUND_CHECK_RADIUS, ignoreLayer);
@@ -109,7 +109,7 @@ public abstract class PlayerMovement : MonoBehaviour
         this.isClimbing = isClimbing;
     }
 
-    private void OnDrawGizmos()
+    protected void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(this.groundCheck.position, GROUND_CHECK_RADIUS);
