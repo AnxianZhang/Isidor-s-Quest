@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private Player lifePlayer;
     [SerializeField] private Image healthBar;
-
+    
+    private Player lifePlayer;
 
     void Start()
     {

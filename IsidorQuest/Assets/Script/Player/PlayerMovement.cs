@@ -35,16 +35,16 @@ public abstract class PlayerMovement : MonoBehaviour
     private float vMovement;
     private float originalGravityScale;
 
-     public void Start()
+    public void Start()
     {
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
         this.animator = gameObject.GetComponent<Animator>();
-        this.playerCollider= GetComponent<CapsuleCollider2D>();
-        this.originalGravityScale= this.rigidBody.gravityScale;
+        this.playerCollider = GetComponent<CapsuleCollider2D>();
+        this.originalGravityScale = this.rigidBody.gravityScale;
     }
 
-     public void Update()
+    public void Update()
     {
         this.hMovement = Input.GetAxis("Horizontal") * moveSpeed;
 
@@ -53,7 +53,7 @@ public abstract class PlayerMovement : MonoBehaviour
             this.vMovement = Input.GetAxis("Vertical") * moveSpeed;
 
         //Inputs are always ine uptade function
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isOnGround && !PauseMenu.getIsPaused())
         {
             this.isJumping = true;
         }
@@ -66,9 +66,6 @@ public abstract class PlayerMovement : MonoBehaviour
         CheckStatus();
     }
 
-    /*
-     * Call every 0.02s, usually used for physics calculations
-     */
     protected void FixedUpdate()
     {
         // create a circle on the groundCheck position, with a radius
@@ -90,7 +87,8 @@ public abstract class PlayerMovement : MonoBehaviour
 
             this.rigidBody.velocity = new Vector2(this.hMovement, this.rigidBody.velocity.y); // move a player in a new position
         }
-        else{
+        else
+        {
             this.isJumping = false;
             this.rigidBody.velocity = new Vector2(this.hMovement, this.vMovement);
         }
@@ -115,64 +113,38 @@ public abstract class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireSphere(this.groundCheck.position, GROUND_CHECK_RADIUS);
     }
 
-    private void CheckLadder(){
-        isLadder=Physics2D.IsTouchingLayers(playerCollider, LayerMask.GetMask("Ladder"));
+    private void CheckLadder()
+    {
+        isLadder = Physics2D.IsTouchingLayers(playerCollider, LayerMask.GetMask("Ladder"));
     }
 
-    void Climb(){
-        if(isLadder){
-            float moveY=Input.GetAxis("Vertical");
-            if(moveY>0.5f||moveY<-0.5f){
-                animator.SetBool("isLander",true);
+    void Climb()
+    {
+        if (isLadder)
+        {
+            float moveY = Input.GetAxis("Vertical");
+            if (moveY > 0.5f || moveY < -0.5f)
+            {
+                animator.SetBool("isLander", true);
                 rigidBody.gravityScale = originalGravityScale;
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x,moveY*climbSpeed);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, moveY * climbSpeed);
             }
-            else{
-                animator.SetBool("isLander",false);
-                rigidBody.gravityScale=0.0f;
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x,0.0f);
+            else
+            {
+                animator.SetBool("isLander", false);
+                rigidBody.gravityScale = 0.0f;
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0.0f);
             }
         }
-        else{
-            animator.SetBool("isLander",false);
+        else
+        {
+            animator.SetBool("isLander", false);
             rigidBody.gravityScale = originalGravityScale;
         }
     }
 
-    void CheckStatus(){
-        climbing=animator.GetBool("isLander");
+    void CheckStatus()
+    {
+        climbing = animator.GetBool("isLander");
     }
-
-    //public abstract void Attack(int damage, Vector3 enemyPosition);
-
-    //public abstract float getCooldown();
-        
-    //public abstract float getCooldownNow();
-        
-    //public abstract bool getIsDeath();
-
-    //public abstract int getLife();
-
-    //public abstract int getLifeMax();
-/*
-    public virtual void AttackEnemy(GameObject enemy){
-
-    }*/
-
-    //void OnCollisionEnter2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "Enemy")
-    //    {
-    //        isAttackSnake = true;
-    //    }
-
-    //}
-
-    //void OnCollisionExit2D(Collision2D col)
-    //{
-    //    if (col.gameObject.tag == "Enemy")
-    //    {
-    //        isAttackSnake = false;
-    //    }
-    //}
 }

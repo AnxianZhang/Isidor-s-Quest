@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChargeBarAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Player AttackChargePlayer;
 
     [SerializeField] private Image ChargeBar;
@@ -26,6 +25,7 @@ public class ChargeBarAttack : MonoBehaviour
         inactive();
         HealthBarPosition();
     }
+
     private void HealthBarPosition()
     {
         float newposXCanvas = this.AttackChargePlayer.transform.position.x - this.posXInitial;

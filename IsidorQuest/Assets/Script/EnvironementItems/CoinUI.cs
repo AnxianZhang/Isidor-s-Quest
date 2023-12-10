@@ -9,15 +9,19 @@ public class CoinUI : MonoBehaviour
     public Text coinQuantity;
 
     public static int CurrentCoinQuantity;
-    // Start is called before the first frame update
+
     void Start()
     {
-        CurrentCoinQuantity=startCoinQuantity;
+        CurrentCoinQuantity = startCoinQuantity;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        coinQuantity.text=CurrentCoinQuantity.ToString();
+        coinQuantity.text = CurrentCoinQuantity.ToString();
+    }
+
+    public static void removeCoins(int amount)
+    {
+        CurrentCoinQuantity -= amount;
     }
 }

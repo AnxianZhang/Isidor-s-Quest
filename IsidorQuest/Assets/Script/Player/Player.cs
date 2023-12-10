@@ -23,11 +23,13 @@ public abstract class Player : PlayerMovement
     protected void playerActions()
     {
         base.Update();
-        if (this.isWater || this.currentLife <= 0)
+        if ((this.isWater || this.currentLife <= 0))
         {
             Death();
         }
-        if (Input.GetKeyDown(KeyCode.S) && Time.time > this.lastAttackedAt + this.cooldown || Input.GetKeyDown(KeyCode.S) && lastAttackedAt == 0f)
+        if ((Input.GetKeyDown(KeyCode.S) && Time.time > this.lastAttackedAt + this.cooldown
+            || Input.GetKeyDown(KeyCode.S) && lastAttackedAt == 0f)
+            && !PauseMenu.getIsPaused())
         {
             doPlayerAttaque();
         }
@@ -37,15 +39,16 @@ public abstract class Player : PlayerMovement
     {
         this.currentLife = this.maxLife;
         this.isDeath = false;
+        this.isWater = false;
         gameObject.SetActive(true);
+        BlinkPlayer();
     }
 
     private void Death()
     {
-        this.currentLife -= this.currentLife;
+        this.currentLife = 0;
         this.isDeath = true;
         gameObject.SetActive(false);
-        //Destroy(gameObject);
     }
 
     public float getCooldownNow()
@@ -58,9 +61,9 @@ public abstract class Player : PlayerMovement
         }
     }
 
-    private void BlinkPlayer(int numBlinks, float seconds)
+    private void BlinkPlayer()
     {
-        StartCoroutine(DoBlinks(numBlinks, seconds));
+        StartCoroutine(DoBlinks(this.blinks, this.time));
     }
 
     private IEnumerator DoBlinks(int numBlinks, float seconds)
@@ -87,7 +90,7 @@ public abstract class Player : PlayerMovement
             Vector2 direction = (enemyPosition - transform.position) * -1;
             base.rigidBody.AddForce(new Vector3(direction.x * 1000f, 200f, 0f));
         }
-        BlinkPlayer(blinks, time);
+        BlinkPlayer();
     }
 
     public void isInWater(Collision2D col)

@@ -16,7 +16,6 @@ public class PauseMenu : MonoBehaviour
         this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy && !this.pM.isDeath)
@@ -47,10 +46,11 @@ public class PauseMenu : MonoBehaviour
     public void mainMenu()
     {
         resume();
+        CurrentSceenManager.instance.removeDontDestoyObjects();
         SceneManager.LoadScene("HomeMenu");
     }
 
-    public bool getIsPaused()
+    public static bool getIsPaused()
     {
         return isPaused;
     }

@@ -4,22 +4,12 @@ using UnityEngine;
 
 public class CoinItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        // Debug.Log(other.GetType().ToString());
-        if(other.tag == "Player" && other.GetType().ToString()=="UnityEngine.CapsuleCollider2D"){
-            CoinUI.CurrentCoinQuantity=CoinUI.CurrentCoinQuantity+1;
+        if (other.tag == "Player" && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+        {
+            CoinUI.CurrentCoinQuantity++;
+            CurrentSceenManager.instance.incrementGoldRecoltedInCurrentSceen();
             Destroy(gameObject);
         }
     }

@@ -8,9 +8,10 @@ public class ProjecfileShot : MonoBehaviour
     private PlayerMovement mainPlayer;
     private Animator animationAttack;
     [SerializeField] private float Speed;
+
     void Start()
     {
-        this.mainPlayer = GameObject.Find("Player") ? GameObject.FindWithTag("Player").GetComponent<Warrior>() : GameObject.FindWithTag("Player").GetComponent<Archer>();
+        this.mainPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.animationAttack = gameObject.GetComponent<Animator>();
     }
@@ -22,41 +23,46 @@ public class ProjecfileShot : MonoBehaviour
         moveProjectile();
     }
 
-    private void moveProjectile(){
-        if(transform.position.z == 1.0f){
-            transform.position += -transform.right  * Time.deltaTime * Speed;
+    private void moveProjectile()
+    {
+        if (transform.position.z == 1.0f)
+        {
+            transform.position += -transform.right * Time.deltaTime * Speed;
         }
-        else{
-            transform.position += transform.right  * Time.deltaTime * Speed;
+        else
+        {
+            transform.position += transform.right * Time.deltaTime * Speed;
         }
     }
 
-    private void animationProjectile(){
+    private void animationProjectile()
+    {
         flip();
         this.animationAttack.SetBool("isDisplace", true);
     }
 
-    private void flip(){
-        if(transform.position.z == 1.0f){
-             this.spriteRenderer.flipX = true;
+    private void flip()
+    {
+        if (transform.position.z == 1.0f)
+        {
+            this.spriteRenderer.flipX = true;
         }
-        else{
-             this.spriteRenderer.flipX = false;
+        else
+        {
+            this.spriteRenderer.flipX = false;
         }
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            ((Archer) mainPlayer).AttackEnemy(GameObject.Find(col.gameObject.name));
+            ((Archer)mainPlayer).AttackEnemy(GameObject.Find(col.gameObject.name));
             Destroy(gameObject);
         }
-        else{
-           Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
         }
     }
-
-
-     
 }

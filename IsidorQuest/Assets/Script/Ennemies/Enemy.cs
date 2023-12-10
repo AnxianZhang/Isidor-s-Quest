@@ -52,7 +52,6 @@ public abstract class Enemy : MonoBehaviour
         this.ennemyCollider = GetComponent<CircleCollider2D>();
     }
 
-    // Update is called once per frame
     public void Update()
     {
         if (isAttack == true)

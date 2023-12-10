@@ -6,6 +6,7 @@ public class CurrentSceenManager : MonoBehaviour
 {
 
     public static CurrentSceenManager instance;
+    private int goldRecoltedInSceen;
 
     [SerializeField] private bool isPlayerPresentByDefault;
     private DontDestroy[] objectToDestroy;
@@ -32,4 +33,14 @@ public class CurrentSceenManager : MonoBehaviour
     }
 
     public bool getIsPlayerPresentByDefault() { return isPlayerPresentByDefault; }
+
+    public void incrementGoldRecoltedInCurrentSceen()
+    {
+        goldRecoltedInSceen++;
+    }
+
+    public int getGoldRecoltedInSceen()
+    {
+        return goldRecoltedInSceen;
+    }
 }

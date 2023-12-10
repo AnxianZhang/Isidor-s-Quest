@@ -2,40 +2,40 @@ using UnityEngine;
 
 public class EnemyAutomaticMove : MonoBehaviour
 {
-    //public float speed;
     public float waitTime;
     public Transform[] movePos;
 
-    private int i = 0;
-    private bool movingRight = true;
-    private float wait;
-    private System.Random random;
-    private float randomTimer = 0f;
-    // Start is called before the first frame update
     private Enemy enemy;
+
+    private System.Random random;
+
+    private int i = 0;
+    private float wait;
+    private float randomTimer = 0f;
+
+    private bool movingRight = true;
 
     public void Start()
     {
-        //base.Start();
         this.wait = waitTime;
         this.random = new System.Random();
         this.enemy = gameObject.GetComponent<Enemy>();
     }
 
-    // Update is called once per frame
     public void Update()
     {
-        //base.Update();
         //Debug.Log(Vector2.Distance(movePos[0].position, movePos[1].position));// >3 -> ai
         float resMove0Y = movePos[0].position.y - transform.position.y;
         float resMove1Y = movePos[1].position.y - transform.position.y;
         float resMove0X = movePos[0].position.x - transform.position.x;
         float resMove1X = movePos[1].position.x - transform.position.x;
-        if(resMove0Y < -0.2f || resMove0Y >0.3f || resMove0X < -0.1f){
-            movePos[0].position = new Vector3(transform.position.x+2f,transform.position.y,transform.position.y);
+        if (resMove0Y < -0.2f || resMove0Y > 0.3f || resMove0X < -0.1f)
+        {
+            movePos[0].position = new Vector3(transform.position.x + 2f, transform.position.y, transform.position.y);
         }
-        if(resMove1Y < -0.2f || resMove1Y >0.3f || resMove1X > 0.1f){
-            movePos[1].position = new Vector3(transform.position.x-2f,transform.position.y,transform.position.y);
+        if (resMove1Y < -0.2f || resMove1Y > 0.3f || resMove1X > 0.1f)
+        {
+            movePos[1].position = new Vector3(transform.position.x - 2f, transform.position.y, transform.position.y);
         }
         if (Vector2.Distance(movePos[0].position, movePos[1].position) > 3)
         {
@@ -128,4 +128,3 @@ public class EnemyAutomaticMove : MonoBehaviour
 
     }
 }
-

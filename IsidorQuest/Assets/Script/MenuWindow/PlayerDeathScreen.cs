@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerDeathScreen : MonoBehaviour
 {
@@ -22,8 +23,6 @@ public class PlayerDeathScreen : MonoBehaviour
     {
         if (player.isDeath && !this.isDisplayBoxCalled)
         {
-            Time.timeScale = .0f;
-            Debug.Log("hi");
             this.deathMenu.SetActive(true);
             this.isDisplayBoxCalled = true;
         }
@@ -31,21 +30,26 @@ public class PlayerDeathScreen : MonoBehaviour
 
     private void executeRemoveDontDestroyObjects()
     {
-        if (CurrentSceenManager.instance.isActiveAndEnabled) CurrentSceenManager.instance.removeDontDestoyObjects();
+        if (CurrentSceenManager.instance.getIsPlayerPresentByDefault())
+        {
+            CurrentSceenManager.instance.removeDontDestoyObjects();
+        }
     }
 
     public void retryButton()
     {
         executeRemoveDontDestroyObjects();
-        this.isDisplayBoxCalled = false;
-        this.player.revive();
-        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        this.player.revive();
+        this.isDisplayBoxCalled = false;
+        this.deathMenu.SetActive(false);
+        CoinUI.removeCoins(CurrentSceenManager.instance.getGoldRecoltedInSceen());
     }
 
     public void mainMenuButton()
     {
         Time.timeScale = 1f;
+        CurrentSceenManager.instance.removeDontDestoyObjects();
         SceneManager.LoadScene("HomeMenu");
     }
 }
