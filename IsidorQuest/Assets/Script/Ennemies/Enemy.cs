@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
     private int lifeMax;
     private float cooldown = 2f;
     private float lastAttackedAt = 0f;
-
+    protected GameSound gm;
     private bool isAttack;
     private bool isDeath;
     private bool isHit;
@@ -50,6 +50,8 @@ public abstract class Enemy : MonoBehaviour
         this.lifeMax = life;
         this.enemyMove = gameObject.GetComponent<EnemyAutomaticMove>();
         this.ennemyCollider = GetComponent<CircleCollider2D>();
+        this.gm = GameObject.FindWithTag("SoundManager").GetComponent<GameSound>();
+
     }
 
     public void Update()
