@@ -43,9 +43,6 @@ public class Warrior : Player
             bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
             if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
             {
-                if(!gm.isHitSoundPlaying()){
-                    gm.hitSoundPlay();
-                }
                 ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
                 base.lastAttackedAt = Time.time;
                 base.isHit = true;
