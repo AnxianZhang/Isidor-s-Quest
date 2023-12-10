@@ -7,6 +7,7 @@ public class CurrentSceenManager : MonoBehaviour
 
     public static CurrentSceenManager instance;
     private int goldRecoltedInSceen;
+    private int playerLifeWhenEnteringTheSceen;
 
     [SerializeField] private bool isPlayerPresentByDefault;
     private DontDestroy[] objectToDestroy;
@@ -24,12 +25,18 @@ public class CurrentSceenManager : MonoBehaviour
     private void Start()
     {
         this.objectToDestroy = Object.FindObjectsOfType<DontDestroy>();
+        this.playerLifeWhenEnteringTheSceen = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().currentLife;
     }
 
     public void removeDontDestoyObjects()
     {
         foreach (DontDestroy dd in this.objectToDestroy)
             dd.removeDontDestroy();
+    }
+
+    public int getPlayerLifeWhenEnteringTheSceen()
+    {
+        return playerLifeWhenEnteringTheSceen;
     }
 
     public bool getIsPlayerPresentByDefault() { return isPlayerPresentByDefault; }

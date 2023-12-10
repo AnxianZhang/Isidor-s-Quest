@@ -21,6 +21,11 @@ public class DontDestroy : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public static void reAddToDontDestroy(GameObject o)
+    {
+        DontDestroyOnLoad(o);
+    }
+
     public void removeDontDestroy()
     {
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());

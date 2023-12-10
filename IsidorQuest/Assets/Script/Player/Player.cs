@@ -34,9 +34,9 @@ public abstract class Player : PlayerMovement
         }
     }
 
-    public void revive()
+    public void revive(bool isPresentByDefault, int lifeWhenEnteringSceen)
     {
-        this.currentLife = this.maxLife;
+        this.currentLife = isPresentByDefault ? this.maxLife : lifeWhenEnteringSceen;
         this.isDeath = false;
         this.isWater = false;
         gameObject.SetActive(true);

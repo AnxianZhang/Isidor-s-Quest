@@ -28,22 +28,27 @@ public class PlayerDeathScreen : MonoBehaviour
         }
     }
 
-    private void executeRemoveDontDestroyObjects()
+    private void executeRemoveObjects()
     {
         if (CurrentSceenManager.instance.getIsPlayerPresentByDefault())
         {
             CurrentSceenManager.instance.removeDontDestoyObjects();
         }
+
+        CoinUI.removeCoins(CurrentSceenManager.instance.getGoldRecoltedInSceen());
     }
 
     public void retryButton()
     {
-        executeRemoveDontDestroyObjects();
+        executeRemoveObjects();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        this.player.revive();
+
+        this.player.revive(
+            CurrentSceenManager.instance.getIsPlayerPresentByDefault(), 
+            CurrentSceenManager.instance.getPlayerLifeWhenEnteringTheSceen()
+        );
         this.isDisplayBoxCalled = false;
         this.deathMenu.SetActive(false);
-        CoinUI.removeCoins(CurrentSceenManager.instance.getGoldRecoltedInSceen());
     }
 
     public void mainMenuButton()

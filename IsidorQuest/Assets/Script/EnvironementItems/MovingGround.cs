@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MovingGround : MonoBehaviour
 {
-    public float speed;
-    public float waitTime;
-    public Transform[] movePos;
+    [SerializeField] private float speed;
+    [SerializeField] private float waitTime;
+    [SerializeField] private Transform[] movePos;
 
     private int i;
     private Transform playerParent;
@@ -14,33 +14,40 @@ public class MovingGround : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        i=1;
-        playerParent=GameObject.FindGameObjectWithTag("Player").transform.parent;
+        this.i = 1;
+        this.playerParent = GameObject.FindGameObjectWithTag("Player").transform.parent;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, movePos[i].position, speed*Time.deltaTime);
-        if(Vector2.Distance(transform.position,movePos[i].position)<0.1f){
-            if(waitTime<0.0f){
-                if(i==0){
-                    i=1;
+        transform.position = Vector2.MoveTowards(transform.position, this.movePos[i].position, this.speed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, this.movePos[i].position) < 0.1f)
+        {
+            if (this.waitTime < 0.0f)
+            {
+                if (this.i == 0)
+                {
+                    this.i = 1;
                 }
-                else{
-                    i=0;
+                else
+                {
+                    this.i = 0;
                 }
 
-                waitTime=0.5f;
+                this.waitTime = 0.5f;
             }
-            else{
-                waitTime-=Time.deltaTime;
+            else
+            {
+                this.waitTime -= Time.deltaTime;
             }
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.tag == "Player"){
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
             other.gameObject.transform.parent = gameObject.transform;
         }
     }
@@ -48,7 +55,8 @@ public class MovingGround : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.transform.parent = playerParent;
+            other.gameObject.transform.parent = this.playerParent;
+            DontDestroy.reAddToDontDestroy(other.gameObject);
         }
     }
 }
