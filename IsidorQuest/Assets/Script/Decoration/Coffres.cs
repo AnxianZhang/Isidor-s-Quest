@@ -6,9 +6,11 @@ public class Coffres : MonoBehaviour
 {
     private Animator animator;
     private bool coffreOuvert = false;
+    private GameSound gm;  
     // Start is called before the first frame update
     void Start()
     {
+      this.gm = GameObject.FindWithTag("SoundManager").GetComponent<GameSound>();
       this.animator = gameObject.GetComponent<Animator>();   
     }
 
@@ -26,6 +28,9 @@ public class Coffres : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            if(!coffreOuvert){
+                gm.chestSoundPlay();
+            }
             coffreOuvert = true;
         }
     }
