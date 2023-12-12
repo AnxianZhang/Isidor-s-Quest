@@ -12,6 +12,7 @@ import VerificationScreen from './page/VerificationUserCodeScreen';
 import SucessPaymentScreen from './page/SuccessPaymentScreen';
 import CancelPaymentScreen from './page/CancelPaymentScreen';
 import ContactUsScreen from './page/ContactUsScreen';
+import ForgotPass from './page/ForgotPass';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage, setSelectLanguage] = useState(fr);
@@ -22,6 +23,7 @@ export default function App() {
   return (
     <NavigationContainer linking={linking}>
       <Stack.Navigator>
+        <Stack.Screen name="ForgotPass" options={{ headerShown: false }}>{() => (<ForgotPass language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Home" options={{ headerShown: false }}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="APropos" options={{ headerShown: false }}>{() => (<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{ headerShown: false }}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
