@@ -20,6 +20,10 @@ public class CoinUI : MonoBehaviour
         coinQuantity.text = CurrentCoinQuantity.ToString();
     }
 
+    public int getCoins(){
+        return CurrentCoinQuantity;
+    }
+
     public static void removeCoins(int amount)
     {
         CurrentCoinQuantity -= amount;
