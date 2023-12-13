@@ -14,6 +14,16 @@ const codeSchema = new mongoose.Schema({
     code : Number,
     ExpirationDate : Date,
  });
+
+ const gameSchema = new mongoose.Schema({
+    //pseudo : String,
+    levelName : String,
+    chooseCharacter : String,
+    coins : Number,
+    health : Number,
+    reussie : Boolean,
+    successPercentLevel : Number
+ });
  
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -25,8 +35,10 @@ userSchema.methods.validPassword = function(password) {
 
 const User = mongoose.model('User', userSchema, "User");
 const Code = mongoose.model('Code', codeSchema, "Code");
+const Game = mongoose.model('Game', gameSchema, "Game");
 
 module.exports =  {
     User,
-    Code
+    Code,
+    Game
 }

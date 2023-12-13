@@ -5,11 +5,12 @@ const app = express();
 app.use(
   session({
     secret: "isidor",
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
     cookie: {
       secure: false,
       sameSite: false,
+      domain : "localhost"
     },
   })
 );
@@ -21,6 +22,7 @@ const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
+const { saveGameData } = require('./Controller/gameController');
 
 
 app.use(cors({
@@ -46,7 +48,7 @@ app.post("/isConnect", isConnect);
 app.post("/disconnection", disconnection);
 app.get("/verifyPayment", VerifySuccessPayment);
 app.get("/transactionCardSuccess", transactionCardSuccess);
-
+app.post("/PostSaveGame", saveGameData);
 const port = 3005
 
 const contactPort = 5000
