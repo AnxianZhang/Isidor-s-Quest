@@ -98,7 +98,7 @@ const ConnexionScreen = ({ language }) => {
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => console.log("ok")}>
+                    <TouchableOpacity onPress={() => navigation.navigate("ForgotPass")}>
                         <View style={styles.forgetPassword}>
                             <Text style={styles.forgetPasswordText}>{selectLanguage.connexion.forgotPassword}</Text>
                         </View>

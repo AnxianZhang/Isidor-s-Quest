@@ -13,6 +13,8 @@ import SucessPaymentScreen from './page/SuccessPaymentScreen';
 import CancelPaymentScreen from './page/CancelPaymentScreen';
 import ContactUsScreen from './page/ContactUsScreen';
 import ForgotPass from './page/ForgotPass';
+import ChangePwd from './page/ChangePwd';
+import ChangePwdSuccess from './page/ChangePwdSuccess';
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [selectLanguage, setSelectLanguage] = useState(fr);
@@ -23,10 +25,12 @@ export default function App() {
   return (
     <NavigationContainer linking={linking}>
       <Stack.Navigator>
-        <Stack.Screen name="ForgotPass" options={{ headerShown: false }}>{() => (<ForgotPass language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="ChangePwd" options={{ headerShown: false }}>{() => (<ChangePwd language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="ChangePwdSuccess" options={{ headerShown: false }}>{() => (<ChangePwdSuccess language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Home" options={{ headerShown: false }}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="APropos" options={{ headerShown: false }}>{() => (<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{ headerShown: false }}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="ForgotPass" options={{ headerShown: false }}>{() => (<ForgotPass language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Register" options={{ headerShown: false }}>{() => (<RegisterScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Game" component={UnityCompile} />
         <Stack.Screen name="VerifyCode" options={{ headerShown: false }}>{() => (<VerificationScreen language={selectLanguage} />)}</Stack.Screen>

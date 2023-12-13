@@ -109,7 +109,10 @@ const VerificationScreen = ({ language }) => {
                 if (result === 200) {
                     setErrorCode("");
                     setErrorConfirmCode("");
-                    RegisterUser();
+                    if (route.params.data.isForgotPass)
+                        navigation.navigate("ChangePwd", {data: data})
+                    else 
+                        RegisterUser();
                 }
             }
             catch (error) {
@@ -137,7 +140,7 @@ const VerificationScreen = ({ language }) => {
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
                             <View style={[GLOBAL_STYLES.form.buttonContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" }]}>
-                                <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Code.register}</Text>
+                                <Text style={GLOBAL_STYLES.form.buttonText}>{route.params.data.isForgotPass ? selectLanguage.Code.verifCodeChange : selectLanguage.Code.register}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

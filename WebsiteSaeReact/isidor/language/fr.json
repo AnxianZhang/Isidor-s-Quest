@@ -49,7 +49,8 @@
         "register" : "S'inscrire",
         "errorCodeCaseOne" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
-        "errorCode" : "Code incorrect"
+        "errorCode" : "Code incorrect",
+        "verifCodeChange" : "Verifier"
     },
     "propos": {
         "nav": "Table des contenus :",

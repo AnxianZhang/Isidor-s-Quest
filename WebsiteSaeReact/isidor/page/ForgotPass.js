@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getLanguage } from '../function/languageSelect';
 import Header from '../component/Header';
 import Field from '../component/Field';
+import { useNavigation } from '@react-navigation/native';
 
 const ForgotPass = ({ language }) => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    const navigation = useNavigation()
     const [selectLanguage, setSelectLanguage] = useState(language)
     const [email, setEmail] = useState("")
     const [errorEmail, setErrorEmail] = useState("")
@@ -18,35 +22,61 @@ const ForgotPass = ({ language }) => {
         setSelectLanguage(getLanguage)
     })
 
+    useEffect(()=>{
+        setDisable(!(email && reg.test(email)))
+    }, [email])
+
     const handleSubmit = async () => {
-        console.log("back-end")
+        const data = {
+            email: email,
+            isForgotPass: true,
+        }
+
+        let response = await fetch('http://localhost:3005/sendCodeForRetrivePass', {
+            method: 'POST',
+            credentials: 'include', // authentification datas, like cookies
+            headers:{
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(data),
+        }).then(res => res.status)
+
+        if (response === 200){
+            setErrorEmail('')
+            navigation.navigate('VerifyCode', {data: data})
+        }
+        else{
+            setEmail('')
+            setErrorEmail("Ce mail n'a pas de compte Isidor associé !")
+        }
     }
 
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
 
     return (
-        <View style={GLOBAL_STYLES.backcolor}>
+        <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
-            <View style={GLOBAL_STYLES.toCenter}>
-                <View style={{ height: 700 }}>
-                    <View style={[styles.container, {width: formulaireBoxWidthStyle}]}>
+            <View>
+                <View style={{ height: 522 }}>
+                    <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 300}]}>
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>Saisissez votre mail: </Text>
                         <View style={styles.InputStyle}>
                             <Field
                                 TextInputStyle={GLOBAL_STYLES.form.fields}
                                 placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"}
-                                placeholder={errorEmail.length ? errorEmail : "Email"}
+                                placeholder="Email"
                                 onChangeText={setEmail}
                                 value={email}
                                 secureTextEntry={false}
                             />
+                            {errorEmail ? <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{errorEmail}</Text> : <Text style={{fontSize: 20, marginVertical: 20}}> </Text>}
                             <View style={styles.ButtonContainer}>
                                 <TouchableOpacity
                                     onPress={handleSubmit}
                                     disabled={disable}
                                     style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
                                 >
-                                    <Text style={styles.EnvoyerButtonText}>Retrieve password</Text>
+                                    <Text style={styles.EnvoyerButtonText}>Récupérer le code de vérification</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -54,32 +84,26 @@ const ForgotPass = ({ language }) => {
                 </View>
             </View>
             <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        borderRadius: 50,
-        backgroundColor: "#443955",
-        height: 300,
-        marginVertical: 100,
-        marginHorizontal: "auto",
-        alignItems: 'center',
-    },
+    // container: {
+    //     borderRadius: 50,
+    //     backgroundColor: "#443955",
+    //     marginVertical: 100,
+    //     marginHorizontal: "auto",
+    //     alignItems: 'center',
+    // },
 
     InputStyle: {
-        paddingTop: 40
+        paddingTop: 30
     },
 
     ButtonContainer: {
         alignItems: "center",
-        paddingTop: 40,
-    },
-
-    ButtonContainer: {
-        alignItems: "center",
-        paddingTop: 40,
+        // marginTop: 10,
     },
 
     EnvoyerButtonText: {

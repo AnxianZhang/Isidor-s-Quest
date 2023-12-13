@@ -49,7 +49,8 @@
         "register": "Register",
         "errorCodeCaseOne" : "Code doesn't match",
         "errorExpireDate" : "Your code has expired",
-        "errorCode" : "Incorrect code"
+        "errorCode" : "Incorrect code",
+        "verifCodeChange" : "Verify"
     },
     "propos": {
         "nav": "Table of contents :",
