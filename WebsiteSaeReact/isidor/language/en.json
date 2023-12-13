@@ -28,6 +28,21 @@
         "password": "Password",
         "errorConnection" : "Incorrect username/password"
     },
+    "forgotPass": {
+        "noAccount": "This email does not have an associated Isidor account!",
+        "title": "Enter your email:",
+        "getCodeButton": "Get the verification code"
+    },
+    "changePwd": {
+        "goToConnection": "Please go to the login page",
+        "notCorresponding": "Passwords do not match",
+        "timeOut": "Timeout, exceeded time limit",
+        "title": "Password Change",
+        "newPass": "New Password",
+        "confirmNewPass": "Confirm New Password",
+        "change": "Change",
+        "success": "Password successfully modified!"
+    },
     "Register": {
         "register": "Register",
         "name": "Name",

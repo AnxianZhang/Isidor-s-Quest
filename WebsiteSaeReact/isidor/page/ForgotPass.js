@@ -47,7 +47,7 @@ const ForgotPass = ({ language }) => {
         }
         else{
             setEmail('')
-            setErrorEmail("Ce mail n'a pas de compte Isidor associé !")
+            setErrorEmail(selectLanguage.forgotPass.noAccount)
         }
     }
 
@@ -59,7 +59,7 @@ const ForgotPass = ({ language }) => {
             <View>
                 <View style={{ height: 522 }}>
                     <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 300}]}>
-                        <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>Saisissez votre mail: </Text>
+                        <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>
                             <Field
                                 TextInputStyle={GLOBAL_STYLES.form.fields}
@@ -76,7 +76,7 @@ const ForgotPass = ({ language }) => {
                                     disabled={disable}
                                     style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
                                 >
-                                    <Text style={styles.EnvoyerButtonText}>Récupérer le code de vérification</Text>
+                                    <Text style={styles.EnvoyerButtonText}>{selectLanguage.forgotPass.getCodeButton}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -89,14 +89,6 @@ const ForgotPass = ({ language }) => {
 };
 
 const styles = StyleSheet.create({
-    // container: {
-    //     borderRadius: 50,
-    //     backgroundColor: "#443955",
-    //     marginVertical: 100,
-    //     marginHorizontal: "auto",
-    //     alignItems: 'center',
-    // },
-
     InputStyle: {
         paddingTop: 30
     },

@@ -38,7 +38,7 @@ const ChangePwd = ({ language }) => {
                 confirmPass: confirmPass,
             }
         } catch (e) {
-            setPassError('Veuillez passser par la page de connexion')
+            setPassError(selectLanguage.changePwd.goToConnection)
             setPass('')
             setConfirmPass('')
             return
@@ -54,12 +54,12 @@ const ChangePwd = ({ language }) => {
         }).then(res => res.status)
 
         if (result === 401) {
-            setPassError('Les deux mots de pass ne correspondent pas')
+            setPassError(selectLanguage.changePwd.notCorresponding)
             setPass('')
             setConfirmPass('')
         }
         else if (result === 402) {
-            setPassError('Time out, vous avez mis trop de temp')
+            setPassError(selectLanguage.changePwd.timeOut)
             setPass('')
             setConfirmPass('')
         }
@@ -78,12 +78,12 @@ const ChangePwd = ({ language }) => {
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View style={[GLOBAL_STYLES.toCenter, { height: 522 }]}>
                 <View style={[GLOBAL_STYLES.container, { width: formulaireBoxWidthStyle, flex: 1, marginVertical: 75 }]}>
-                    <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title, { fontSize: windowWidthByHook < 750 ? 30 : 40 }]}>Modification du mot de pass</Text>
+                    <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title, { fontSize: windowWidthByHook < 750 ? 30 : 40 }]}>{selectLanguage.changePwd.title}</Text>
                     <View style={{ paddingTop: 30 }}>
                         <Field
                             TextInputStyle={GLOBAL_STYLES.form.fields}
                             placeholderTextColor={passError.length ? "#E55839" : "#000000"}
-                            placeholder="Nouveau mot de passe"
+                            placeholder={selectLanguage.changePwd.newPass}
                             onChangeText={setPass}
                             value={pass}
                             secureTextEntry={true}
@@ -92,7 +92,7 @@ const ChangePwd = ({ language }) => {
                             TextInputStyle={GLOBAL_STYLES.form.fields}
                             fieldsViewStyle={styles.maringTop}
                             placeholderTextColor={passError.length ? "#E55839" : "#000000"}
-                            placeholder="Confirmez le nouveau mot de passe"
+                            placeholder={selectLanguage.changePwd.confirmNewPass}
                             onChangeText={setConfirmPass}
                             value={confirmPass}
                             secureTextEntry={true}
@@ -104,7 +104,7 @@ const ChangePwd = ({ language }) => {
                                 disabled={disable}
                                 style={[StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" }), styles.marginTop]}
                             >
-                                <Text style={styles.EnvoyerButtonText}>Modifier</Text>
+                                <Text style={styles.EnvoyerButtonText}>{selectLanguage.changePwd.change}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -16,7 +16,7 @@ const ChangePwdSuccess = ({language}) => {
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View style={[GLOBAL_STYLES.toCenter, { height: 522 }]}>
-                <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>Mot de passe modifier avec succes !</Text>
+                <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.changePwd.success}</Text>
             </View>
             <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
         </ScrollView>
