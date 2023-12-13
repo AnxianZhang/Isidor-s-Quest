@@ -15,8 +15,8 @@ app.use(
 );
 app.use(cookieParser());
 const cors = require('cors');
-const {Inscription, Connexion, isConnect, disconnection, VerifySuccessPayment} = require("./Controller/userController");
-const {SendCode, VerifyCode} = require("./Controller/codeController");
+const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment} = require("./Controller/userController");
+const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
@@ -33,6 +33,8 @@ app.use(express.json());
 
 app.post("/inscription", Inscription);
 app.post("/connexion", Connexion)
+app.post("/sendCodeForRetrivePass", sendCodeForRetrivePass);
+app.post("/changePwd", changePwd);
 app.post("/SendCode", SendCode);
 app.post("/VerifyCode", VerifyCode);
 app.post('/pay', Paypal);  

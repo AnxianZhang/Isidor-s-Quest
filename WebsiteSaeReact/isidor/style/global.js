@@ -5,6 +5,10 @@ export const GLOBAL_STYLES = StyleSheet.create({
         flex: 1,
         backgroundColor: "#7094CB"
     },
+    toCenter:{
+        justifyContent: "center",
+        alignItems: "center",
+    },
     header: {
         flexDirection: 'row',
         alignItems: "center",
@@ -16,6 +20,13 @@ export const GLOBAL_STYLES = StyleSheet.create({
         width: 72,
         height: 64
     },
+    container: {
+        borderRadius: 50,
+        backgroundColor: "#443955",
+        marginVertical: 100,
+        marginHorizontal: "auto",
+        alignItems: 'center',
+    },
     form: {
         title: {
             alignItems: "center",
@@ -25,6 +36,7 @@ export const GLOBAL_STYLES = StyleSheet.create({
             color: "white",
             fontSize: 40,
             fontFamily: "ExtraBold",
+            textAlign: "center",
         },
         fields: {
             backgroundColor: "white",

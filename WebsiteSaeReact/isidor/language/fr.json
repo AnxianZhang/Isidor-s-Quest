@@ -28,6 +28,21 @@
         "password" : "Mot de passe",
         "errorConnection" : "Nom d'utilisateur/Mot de passe incorrect"
     },
+    "forgotPass" : {
+        "noAccount" : "Ce mail n'a pas de compte Isidor associé !",
+        "title" : "Saisissez votre mail:",
+        "getCodeButton" : "Obtenir le code de vérification"
+    },
+    "changePwd" :{
+        "goToConnection": "Veuillez passer par la page de connexion",
+        "notCorresponding": "Les deux mots de passe ne correspondent pas",
+        "timeOut": "Temps écoulé, délai dépassé",
+        "title": "Modification du mot de passe",
+        "newPass": "Nouveau mot de passe",
+        "confirmNewPass": "Confirmez le nouveau mot de passe",
+        "change": "Modifier",
+        "success": "Mot de passe modifié avec succès !"
+    },
     "Register" : {
         "register" : "S'inscrire",
         "name" : "Prénom",
@@ -49,7 +64,8 @@
         "register" : "S'inscrire",
         "errorCodeCaseOne" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
-        "errorCode" : "Code incorrect"
+        "errorCode" : "Code incorrect",
+        "verifCodeChange" : "Verifier"
     },
     "propos": {
         "nav": "Table des contenus :",
