@@ -24,5 +24,8 @@ public class CoinItem : MonoBehaviour
             CurrentSceenManager.instance.incrementGoldRecoltedInCurrentSceen();
             Destroy(gameObject);
         }
+        if (other.tag == "water"){
+            Destroy(gameObject);
+        }
     }
 }
