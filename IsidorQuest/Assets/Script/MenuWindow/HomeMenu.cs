@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class HomeMenu : MonoBehaviour
 {
-    private const string LVL_TO_LOAD = "WorldOneLvl1";
+    private const string LVL_TO_LOAD = "SelectCharacter";
 
     [SerializeField] private GameObject settingsWindow;
 
