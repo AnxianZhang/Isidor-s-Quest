@@ -8,6 +8,8 @@ TagManager:
   - echelle
   - water
   - SoundManager
+  - Menus
+  - Msg
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Enemy
   - Item
   - Ladder
-  - 
-  - 
+  - Market
+  - PNJ
   - 
   - 
   - 

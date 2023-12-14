@@ -18,7 +18,12 @@ public class NextLvlSceen : MonoBehaviour
     }
     public void nextLvlButton()
     {
-        StartCoroutine(laodNextSceen());
+        if (SceneManager.sceneCountInBuildSettings != SceneManager.GetActiveScene().buildIndex + 1)
+            StartCoroutine(laodNextSceen());
+        else
+        {
+            // show a message ==> no more lvl available for now
+        }
     }
 
     public void village()
