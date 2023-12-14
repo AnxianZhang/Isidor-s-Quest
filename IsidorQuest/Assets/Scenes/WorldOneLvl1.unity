@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: dropCoin
       value: 
       objectReference: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+    - target: {fileID: 371118582145903969, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
+      propertyPath: healthPotion
+      value: 
+      objectReference: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
     - target: {fileID: 4317773352011641922, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
       propertyPath: m_Name
       value: Decoration
@@ -183,10 +187,18 @@ PrefabInstance:
       propertyPath: dropCoin
       value: 
       objectReference: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+    - target: {fileID: 6591194022726056963, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
+      propertyPath: healthPotion
+      value: 
+      objectReference: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
     - target: {fileID: 8696490650159342064, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
       propertyPath: dropCoin
       value: 
       objectReference: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+    - target: {fileID: 8696490650159342064, guid: 01ff70ce9a55ffb4bb1af132ab378fcc, type: 3}
+      propertyPath: healthPotion
+      value: 
+      objectReference: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
