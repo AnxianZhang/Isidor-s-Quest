@@ -103,4 +103,11 @@ public abstract class Player : PlayerMovement
             this.isWater = true;
         }
     }
+
+    public void addHealth(int hp){
+        currentLife += hp;
+        if(currentLife > maxLife){
+            currentLife = maxLife;
+        }
+    }
 }

@@ -10,6 +10,8 @@ public class Coffres : MonoBehaviour
     public GameObject dropCoin;
     private bool coffreOuvert = false;
     private GameSound gm;  
+
+    public GameObject healthPotion;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,15 +37,22 @@ public class Coffres : MonoBehaviour
                 gm.chestSoundPlay();
                 var rnd = new System.Random();
 
-                var nbPieces = rnd.Next(3,5);
+                int nbPieces = rnd.Next(3,5);
+                float hMovement = 0f;
+                float vMovement = 0f;
 
                 while(nbPieces != 0){
                     GameObject piece = Instantiate(dropCoin,transform.position,Quaternion.identity);
-                    var hMovement = (float)rnd.NextDouble()+0.5f;
-                    var vMovement = (float)rnd.NextDouble()*2+3;
+                    hMovement = (float)rnd.NextDouble()+0.5f;
+                    vMovement = (float)rnd.NextDouble()*2+3;
                     piece.GetComponent<Rigidbody2D>().velocity = new Vector2(hMovement, vMovement);
                     nbPieces--;
                 }
+
+                GameObject potion = Instantiate(healthPotion,transform.position,Quaternion.identity);
+                hMovement = (float)rnd.NextDouble()+0.5f;
+                vMovement = (float)rnd.NextDouble()*2+3;
+                potion.GetComponent<Rigidbody2D>().velocity = new Vector2(hMovement, vMovement);
 
                 //Ajout potentiel de nouveaux objets dans le coffre tel que des potions
             }
