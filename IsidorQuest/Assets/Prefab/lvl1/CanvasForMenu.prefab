@@ -1719,7 +1719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryMenu: {fileID: 8474658761846309875}
-  slotsSprite: []
 --- !u!1 &4451360584347557821
 GameObject:
   m_ObjectHideFlags: 0

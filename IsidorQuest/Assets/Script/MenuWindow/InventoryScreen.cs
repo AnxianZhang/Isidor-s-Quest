@@ -14,16 +14,12 @@ public class InventoryScreen : MonoBehaviour
     [SerializeField] private GameObject inventoryMenu;
     private Player pM;
     private Inventory inventory;
-    private GameObject[] slotsSprite;
 
     // Start is called before the first frame update
     void Start()
     {
         this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
-        openInventory();
-        this.slotsSprite = GameObject.FindGameObjectsWithTag("SlotSprite");
-        closeInventory();
     }
 
     // Update is called once per frame
@@ -40,7 +36,7 @@ public class InventoryScreen : MonoBehaviour
 
     private void updateInventory()
     {
-        
+        GameObject[] slotsSprite = GameObject.FindGameObjectsWithTag("SlotSprite");
         GameObject[] inv =  inventory.GetInv();
         int index = 0;
         foreach (GameObject items in inv) {
