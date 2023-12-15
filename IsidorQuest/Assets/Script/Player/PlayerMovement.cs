@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System;
 
 public abstract class PlayerMovement : MonoBehaviour
 {
@@ -146,6 +147,16 @@ public abstract class PlayerMovement : MonoBehaviour
             animator.SetBool("isLander", false);
             rigidBody.gravityScale = originalGravityScale;
         }
+    }
+
+    public void upgradeMoveSpeed()
+    {
+        this.moveSpeed = (float)(this.moveSpeed * 1.01);
+    }
+
+    public float getMoveSpeed()
+    {
+        return this.moveSpeed;
     }
 
     void CheckStatus()

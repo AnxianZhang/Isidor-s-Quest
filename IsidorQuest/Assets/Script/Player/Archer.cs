@@ -12,6 +12,7 @@ public class Archer : Player
     {
         base.Start();
         base.maxLife = 60;
+        this.defence = 0;
         base.currentLife = base.maxLife;
         base.damageDeal = 10;
         base.cooldown = 1f;

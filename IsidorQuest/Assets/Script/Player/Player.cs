@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public abstract class Player : PlayerMovement
@@ -7,10 +7,11 @@ public abstract class Player : PlayerMovement
     protected int blinks = 2;
     protected float time = 0.02f;
     protected Rigidbody2D rB;
-    protected int damageDeal { get; set; }
+    public int damageDeal { get; protected set; }
     public int maxLife { get; protected set; }
     public int currentLife { get; protected set; }
     public float cooldown { get; protected set; }
+    public float defence { get; protected set; }
 
     public bool isDeath { get; protected set; }
     protected float lastAttackedAt;
@@ -18,6 +19,22 @@ public abstract class Player : PlayerMovement
     protected bool isHit;
 
     protected abstract void doPlayerAttaque();
+
+    public void upgradeDamageDeal()
+    {
+        this.damageDeal = (int)Math.Round(this.damageDeal * 1.10f);
+    }
+
+    public void upgradeLife()
+    {
+        this.maxLife = (int)Math.Round(this.maxLife * 1.10f);
+        this.currentLife = (int)Math.Round(this.currentLife * 1.10f);
+    }
+
+    public void upgradeDefence()
+    {
+        this.defence += .02f;
+    }
 
     protected void playerActions()
     {
@@ -80,7 +97,8 @@ public abstract class Player : PlayerMovement
     {
         this.currentLife -= degat;
         float res = enemyPosition.x - transform.position.x;
-        if(!gm.playerDamageIsPlaying()){
+        if (!gm.playerDamageIsPlaying())
+        {
             gm.playerDamageSound();
         }
         if (base.rigidBody.velocity.y <= 0f)
@@ -104,9 +122,11 @@ public abstract class Player : PlayerMovement
         }
     }
 
-    public void addHealth(int hp){
+    public void addHealth(int hp)
+    {
         currentLife += hp;
-        if(currentLife > maxLife){
+        if (currentLife > maxLife)
+        {
             currentLife = maxLife;
         }
     }

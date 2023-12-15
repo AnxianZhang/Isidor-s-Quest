@@ -20,7 +20,7 @@ public class CoinUI : MonoBehaviour
         coinQuantity.text = CurrentCoinQuantity.ToString();
     }
 
-    public int getCoins(){
+    public static int getCoins(){
         return CurrentCoinQuantity;
     }
 

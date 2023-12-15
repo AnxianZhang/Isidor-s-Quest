@@ -20,6 +20,7 @@ public class Warrior : Player
     {
         base.Start();
         base.maxLife = 100;
+        base.defence = .10f;
         base.currentLife = base.maxLife;
         base.damageDeal = 20;
         base.cooldown = 2f;

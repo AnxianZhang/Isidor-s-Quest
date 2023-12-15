@@ -212,6 +212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331321973000991720, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
+      propertyPath: moveSpeed
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5021729005009134101, guid: 9c6afda2d8b991945bc7361a4d00bdab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.63765
@@ -313,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 365615188}
+    - target: {fileID: 3975292491153447436, guid: cb98af57c910d684cb668fc7371d88ff, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4416564823768470645, guid: cb98af57c910d684cb668fc7371d88ff, type: 3}
       propertyPath: m_Name
       value: CanvasForChargeAttack
@@ -936,6 +944,10 @@ PrefabInstance:
     - target: {fileID: 2358218711219710253, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028376811957488080, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
+      propertyPath: startCoinQuantity
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8348555071111704162, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
       propertyPath: m_Name

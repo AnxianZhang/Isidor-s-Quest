@@ -10,6 +10,13 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject settingsMenu;
 
+    private static bool isInSkillTreeMenu;
+
+    public static void setIsInSkillTreeMenu(bool stat)
+    {
+        isInSkillTreeMenu = stat;
+    }
+
     private void Start()
     {
         this.pauseMenu = gameObject.transform.GetChild(1).gameObject;
@@ -18,7 +25,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy && !this.pM.isDeath)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy && !this.pM.isDeath && !isInSkillTreeMenu)
         {
             if (isPaused) resume();
             else pause();
