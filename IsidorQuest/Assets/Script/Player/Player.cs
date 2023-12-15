@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Player : PlayerMovement
@@ -16,8 +17,18 @@ public abstract class Player : PlayerMovement
     protected float lastAttackedAt;
     protected bool isWater;
     protected bool isHit;
+    private Inventory inventory;
 
     protected abstract void doPlayerAttaque();
+
+    public new void Start(){
+        base.Start();
+        this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+    }
+
+    public bool pickUp(GameObject item){
+        return inventory.AddItem(item);
+    }
 
     protected void playerActions()
     {

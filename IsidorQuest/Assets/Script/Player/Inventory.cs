@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Inventory : MonoBehaviour
+{
+
+    
+    private int inventorySize = 4;
+    public GameObject[] inventory;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        inventory = new GameObject[inventorySize];
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+//Add the item in the inventory, if the inventory is full return false
+    public bool AddItem(GameObject item){
+        int index = 0;
+        foreach (GameObject slot in inventory) {
+            if(slot == null){
+                break;
+            }
+            index++;
+        }
+        if(index == inventorySize) return false;
+        inventory[index] = item;
+        return true;
+    }
+}

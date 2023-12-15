@@ -23,8 +23,7 @@ public class PotionItem : MonoBehaviour
     {
         if (other.tag == "Player" && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
         {
-            mainPlayer.addHealth(this.heal);
-            Destroy(gameObject);
+            if (mainPlayer.pickUp(gameObject)) gameObject.SetActive(false);
         }
         if (other.tag == "water"){
             Destroy(gameObject);
