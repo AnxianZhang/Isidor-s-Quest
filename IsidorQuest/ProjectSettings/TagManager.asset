@@ -10,6 +10,7 @@ TagManager:
   - SoundManager
   - Menus
   - Msg
+  - HealthPotion
   layers:
   - Default
   - TransparentFX
