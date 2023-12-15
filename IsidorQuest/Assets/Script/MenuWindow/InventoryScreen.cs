@@ -1,6 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEditor;
+using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryScreen : MonoBehaviour
 {
@@ -8,19 +13,45 @@ public class InventoryScreen : MonoBehaviour
     private bool isOpen;
     [SerializeField] private GameObject inventoryMenu;
     private Player pM;
+    private Inventory inventory;
+    private GameObject[] slotsSprite;
+
     // Start is called before the first frame update
     void Start()
     {
         this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+        openInventory();
+        this.slotsSprite = GameObject.FindGameObjectsWithTag("SlotSprite");
+        closeInventory();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.I)) && !this.pM.isDeath)
+        if (Input.GetKeyDown(KeyCode.I) && !this.pM.isDeath)
         {
             if (isOpen) closeInventory();
             else openInventory();
+        }
+
+        if(isOpen){updateInventory();}
+    }
+
+    private void updateInventory()
+    {
+        
+        GameObject[] inv =  inventory.GetInv();
+        int index = 0;
+        foreach (GameObject items in inv) {
+            Image sprite = slotsSprite[index].GetComponent<Image>();
+            if(items != null){
+                sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
+            }
+            else{
+                sprite.sprite = null;
+            }
+            index++;
         }
     }
 

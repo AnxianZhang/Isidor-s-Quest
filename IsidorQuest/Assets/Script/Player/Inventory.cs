@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 
     
     private int inventorySize = 4;
-    public GameObject[] inventory;
+    private GameObject[] inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +34,9 @@ public class Inventory : MonoBehaviour
         if(index == inventorySize) return false;
         inventory[index] = item;
         return true;
+    }
+
+    public GameObject[] GetInv(){
+        return inventory;
     }
 }
