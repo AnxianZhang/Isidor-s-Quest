@@ -5,30 +5,35 @@ public class InventoryScreen : MonoBehaviour
 {
 
     private bool isOpen;
-    private bool isUpdateInventoryExecuted;
     [SerializeField] private GameObject inventoryMenu;
     private Player pM;
     private Inventory inventory;
+    public bool[] updated;
 
     // Start is called before the first frame update
     void Start()
     {
         this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+
+        this.updated = new bool[inventory.GetLenInv()];
+        for (int i = 0; i< updated.Length; i++){
+            updated[i] = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.I) && !this.pM.isDeath)
         {
             if (isOpen) closeInventory();
             else openInventory();
         }
 
-        if (isOpen && !this.isUpdateInventoryExecuted) { 
+        if (isOpen) { 
             updateInventory();
-            this.isUpdateInventoryExecuted = true;
         }
     }
 
@@ -41,14 +46,19 @@ public class InventoryScreen : MonoBehaviour
             Image sprite = slotsSprite[index].GetComponent<Image>();
             Button button = slotsSprite[index].GetComponent<Button>();
             if(items != null){
-                Debug.Log("wowo");
-                sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
-                button.onClick.AddListener(() => useItem(button.transform.parent.GetSiblingIndex()-1));
-                button.interactable = true;
+                if(!updated[index]){
+                    sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
+                    button.onClick.AddListener(() => {useItem(button.transform.parent.GetSiblingIndex()-1);});
+                    button.interactable = true;
+                    if(items != null){
+                        updated[index] = true;
+                    }
+                } 
             }
             else{
                 sprite.sprite = null;
                 button.interactable = false;
+                updated[index] = false;
             }
             index++;
         }
@@ -64,7 +74,6 @@ public class InventoryScreen : MonoBehaviour
         inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         isOpen = false;
-        this.isUpdateInventoryExecuted = false;
     }
 
     private void useItem(int index){

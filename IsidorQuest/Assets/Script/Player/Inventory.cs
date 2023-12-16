@@ -42,8 +42,12 @@ public class Inventory : MonoBehaviour
         return inventory;
     }
 
-    internal void UseItem(int index)
+    public void UseItem(int index)
     {
         inventory[index].GetComponent<InventoryItem>().onUse();
+    }
+
+    public int GetLenInv(){
+        return inventorySize;
     }
 }
