@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEditor;
-using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,18 +35,22 @@ public class InventoryScreen : MonoBehaviour
         int index = 0;
         foreach (GameObject items in inv) {
             Image sprite = slotsSprite[index].GetComponent<Image>();
+            Button button = slotsSprite[index].GetComponent<Button>();
             if(items != null){
                 sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
+                button.onClick.AddListener(() => useItem(button.transform.parent.GetSiblingIndex()-1));
+                button.interactable = true;
             }
             else{
                 sprite.sprite = null;
+                button.interactable = false;
             }
             index++;
         }
     }
 
     private void openInventory(){
-        inventoryMenu.SetActive(true);
+        inventoryMenu.SetActive(true); 
         Time.timeScale = .0f;
         isOpen = true;
     }
@@ -61,5 +59,9 @@ public class InventoryScreen : MonoBehaviour
         inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         isOpen = false;
+    }
+
+    private void useItem(int index){
+        inventory.UseItem(index);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -33,10 +34,16 @@ public class Inventory : MonoBehaviour
         }
         if(index == inventorySize) return false;
         inventory[index] = item;
+        item.transform.SetParent(gameObject.transform);
         return true;
     }
 
     public GameObject[] GetInv(){
         return inventory;
+    }
+
+    internal void UseItem(int index)
+    {
+        inventory[index].GetComponent<InventoryItem>().onUse();
     }
 }
