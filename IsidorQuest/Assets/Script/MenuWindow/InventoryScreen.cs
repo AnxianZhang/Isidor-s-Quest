@@ -50,9 +50,7 @@ public class InventoryScreen : MonoBehaviour
                     sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
                     button.onClick.AddListener(() => {useItem(button.transform.parent.GetSiblingIndex()-1);});
                     button.interactable = true;
-                    if(items != null){
-                        updated[index] = true;
-                    }
+                    updated[index] = true;
                 } 
             }
             else{
