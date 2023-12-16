@@ -20,7 +20,6 @@ public class PotionItem : InventoryItem
     }
 
     public override void onUse(){
-        Debug.Log("hello");
         mainPlayer.addHealth(heal);
         Destroy(gameObject);
     }
