@@ -5,6 +5,7 @@ public class InventoryScreen : MonoBehaviour
 {
 
     private bool isOpen;
+    private bool isUpdateInventoryExecuted;
     [SerializeField] private GameObject inventoryMenu;
     private Player pM;
     private Inventory inventory;
@@ -25,7 +26,10 @@ public class InventoryScreen : MonoBehaviour
             else openInventory();
         }
 
-        if(isOpen){updateInventory();}
+        if (isOpen && !this.isUpdateInventoryExecuted) { 
+            updateInventory();
+            this.isUpdateInventoryExecuted = true;
+        }
     }
 
     private void updateInventory()
@@ -37,6 +41,7 @@ public class InventoryScreen : MonoBehaviour
             Image sprite = slotsSprite[index].GetComponent<Image>();
             Button button = slotsSprite[index].GetComponent<Button>();
             if(items != null){
+                Debug.Log("wowo");
                 sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
                 button.onClick.AddListener(() => useItem(button.transform.parent.GetSiblingIndex()-1));
                 button.interactable = true;
@@ -59,6 +64,7 @@ public class InventoryScreen : MonoBehaviour
         inventoryMenu.SetActive(false);
         Time.timeScale = 1f;
         isOpen = false;
+        this.isUpdateInventoryExecuted = false;
     }
 
     private void useItem(int index){
