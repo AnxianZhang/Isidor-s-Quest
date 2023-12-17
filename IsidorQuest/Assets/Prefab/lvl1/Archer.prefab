@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15ee9699af64f774385a9acce1f11823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 7.5
   jumpForce: 300
   climbSpeed: 7
   ignoreLayer:

@@ -813,6 +813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72456d084df69724681e99c8990102a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+  healthPotion: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
 --- !u!61 &2572271709379994010
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1276,6 +1278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72456d084df69724681e99c8990102a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+  healthPotion: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
 --- !u!61 &658134118849739870
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2280,6 +2284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72456d084df69724681e99c8990102a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
+  healthPotion: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
 --- !u!61 &4018590013911202880
 BoxCollider2D:
   m_ObjectHideFlags: 0
