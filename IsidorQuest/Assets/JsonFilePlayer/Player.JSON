@@ -1,0 +1,19 @@
+{
+  "players":
+  [
+    {
+        "life": "100",
+        "Strength": "20",
+        "Defence": "0",
+        "Speed": "5",
+        "Jump": "300"
+    },
+    {
+        "life": "60",
+        "Strength": "10",
+        "Defence": "0",
+        "Speed": "10",
+        "Jump": "300"
+    }
+  ]
+}

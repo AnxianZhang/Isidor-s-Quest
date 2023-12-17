@@ -648,6 +648,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 710625086404180064, guid: b59965b14d80d7742b16ecd26eea944d, type: 3}
+      propertyPath: storeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
+    - target: {fileID: 710625086404180064, guid: b59965b14d80d7742b16ecd26eea944d, type: 3}
       propertyPath: isPlayerPresentByDefault
       value: 0
       objectReference: {fileID: 0}
