@@ -27,6 +27,9 @@ public class SkillTreeMenu : MonoBehaviour
     [SerializeField] private Text playerAttack;
     [SerializeField] private Text playerSpeed;
 
+    [Header("Player UI")]
+    [SerializeField] private GameObject charactereDesign;
+
     private GameObject upgradeSkillsMenu;
     private Player player;
     private Text interactText;
@@ -41,6 +44,8 @@ public class SkillTreeMenu : MonoBehaviour
         this.playerDefence.text = (this.player.defence * 100).ToString() + "%";
         this.playerAttack.text = this.player.damageDeal.ToString();
         this.playerSpeed.text = this.player.getMoveSpeed().ToString();
+
+        this.charactereDesign.GetComponent<Image>().sprite = this.player.GetComponent<SpriteRenderer>().sprite;
     }
 
     private int parseInt(string text)

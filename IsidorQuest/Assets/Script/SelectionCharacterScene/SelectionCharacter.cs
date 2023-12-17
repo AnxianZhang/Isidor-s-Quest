@@ -28,7 +28,7 @@ public class Players
     private int nbCharacter;
     private int actualCharacter;
     private Text UIText;
-    private Text JumpText;
+    //private Text JumpText;
     private Text SpeedText;
     private Text DefenceText;
     private Text LifeText;
@@ -40,7 +40,7 @@ public class Players
         storeData.CharacterName = this.characterSelection[actualCharacter].name;
         actualCharacter = 0;
         UIText = GameObject.Find("TextNameCharacterSelect").GetComponent<Text>();
-        this.JumpText = GameObject.Find("JumpText").GetComponent<Text>();
+        //this.JumpText = GameObject.Find("JumpText").GetComponent<Text>();
         this.SpeedText = GameObject.Find("SpeedText").GetComponent<Text>();
         this.DefenceText = GameObject.Find("DefenceText").GetComponent<Text>();
         this.LifeText = GameObject.Find("LifeText").GetComponent<Text>();
@@ -98,7 +98,7 @@ public class Players
     {   
         Players PlayersInJson = JsonUtility.FromJson<Players>(jsonFile.text);
         LifeText.text = PlayersInJson.players[actualCharacter].life;
-        JumpText.text = PlayersInJson.players[actualCharacter].Jump;
+        //JumpText.text = PlayersInJson.players[actualCharacter].Jump;
         StrengthText.text = PlayersInJson.players[actualCharacter].Strength;
         SpeedText.text = PlayersInJson.players[actualCharacter].Speed;
         DefenceText.text = PlayersInJson.players[actualCharacter].Defence;
