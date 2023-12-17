@@ -12,6 +12,7 @@ import List from './List';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
+import { changeLanguage } from '../function/languageSelect';
 
 const Header = (props) => {
     const navigation = useNavigation();
@@ -97,7 +98,9 @@ const Header = (props) => {
                 <View>
                     <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
                     {open &&
-                    <View style={styles.listContainer}><List /></View>
+                        <View style={styles.listContainer}>
+                            <List onSelect={(selectedItem) => { setOpen(false); changeLanguage(selectedItem); }}/>
+                        </View>
                     }
                 </View>
                 <View style={styles.containConnect}>
