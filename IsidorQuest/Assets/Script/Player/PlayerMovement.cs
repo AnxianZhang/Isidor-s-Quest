@@ -31,7 +31,6 @@ public abstract class PlayerMovement : MonoBehaviour
 
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
-
     private float hMovement;
     private float vMovement;
     protected GameSound gm;

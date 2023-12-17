@@ -36,12 +36,12 @@ public abstract class Enemy : MonoBehaviour
     private bool isAttack;
     private bool isDeath;
     private bool isHit;
-
+    public StoringData storeData;
     protected abstract void doEnnemyOnGroundAction();
 
     public void Start()
     {
-        this.mainPlayer = GameObject.FindWithTag("Player").GetComponent<Player>(); // get the specific, class witch extends Plqyer
+        this.mainPlayer =  GameObject.Find(storeData.CharacterName).GetComponent<Player>(); // get the specific, class witch extends Plqyer
         this.rb = gameObject.GetComponent<Rigidbody2D>();
         this.animator = gameObject.GetComponent<Animator>();
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();

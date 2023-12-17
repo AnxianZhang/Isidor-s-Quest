@@ -542,15 +542,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 1805800831621408459}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 3273548643702190431}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &5460777525239121161
 Rigidbody2D:
   serializedVersion: 4
@@ -635,12 +634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 1805800831621408459}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 83101209335581217}
@@ -869,15 +862,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7141891626004984617}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 6972884317823641555}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &7692804644516760702
 Rigidbody2D:
   serializedVersion: 4
@@ -962,12 +954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7141891626004984617}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 659456662676661081}
@@ -1260,15 +1246,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7062341373482703668}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 4837429664319603893}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &5295639818178136201
 Rigidbody2D:
   serializedVersion: 4
@@ -1353,12 +1338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7062341373482703668}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 8120469538370181795}
@@ -1524,15 +1503,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7262801123131891695}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 654235026756968130}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &3697424392337020139
 Rigidbody2D:
   serializedVersion: 4
@@ -1652,12 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7262801123131891695}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 3431481254942163026}
@@ -2042,15 +2014,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 0}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 4256112739875480890}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &6693775379131203592
 Rigidbody2D:
   serializedVersion: 4
@@ -2170,12 +2141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 2640673900570990869}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 7606591496467085200}
@@ -2306,15 +2271,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 8808268894040016102}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 4362128779609161721}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &6555130954207593428
 Rigidbody2D:
   serializedVersion: 4
@@ -2434,12 +2398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 8808268894040016102}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 660982168895462581}
@@ -2886,15 +2844,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7683380289252649358}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 2598836884531578535}
-  speedSnake: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &3380443589310231415
 Rigidbody2D:
   serializedVersion: 4
@@ -2979,12 +2936,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 7683380289252649358}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 4757424342614968542}

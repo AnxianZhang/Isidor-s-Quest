@@ -16,8 +16,10 @@ public class Warrior : Player
     private bool isEnnemyInRange;
     private Collider2D ennemyCollider;
 
+   
     public new void Start()
     {
+        
         base.Start();
         base.maxLife = 100;
         base.defence = .10f;

@@ -183,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 1379211703751638887}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.29, y: 16.34, z: 0.04914408}
+  m_LocalPosition: {x: 21.7, y: 16.34, z: 0.04914408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,15 +414,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 5243690919416013051}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 6683456023240804050}
-  speedSnake: 3
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &1981748305718488043
 Rigidbody2D:
   serializedVersion: 4
@@ -542,12 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 5243690919416013051}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 4203795341782020121}
@@ -742,15 +735,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 479068590057197183}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 9222665521677857853}
-  speedSnake: 3
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &5092562049484084869
 Rigidbody2D:
   serializedVersion: 4
@@ -870,12 +862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 479068590057197183}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 8032498045589343730}
@@ -1048,12 +1034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 677064424477737318}
-  life: 200
-  degat: 30
-  flashTime: 0.3
-  speed: 3
   waitTime: 0.5
   movePos:
   - {fileID: 7095242037998359878}
@@ -1199,15 +1179,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 677064424477737318}
-  life: 150
-  degat: 30
   flashTime: 0.2
+  degat: 30
+  life: 150
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 7313513779862448176}
-  speedGolem: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!1 &5270050041281467007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,15 +1501,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 5911633961616480461}
-  life: 60
-  degat: 10
   flashTime: 0.2
+  degat: 10
+  life: 60
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 3331980679765617617}
-  speedSnake: 3
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!50 &5751054883641076906
 Rigidbody2D:
   serializedVersion: 4
@@ -1650,12 +1628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 5911633961616480461}
-  life: 60
-  degat: 10
-  flashTime: 0.2
-  speed: 1
   waitTime: 0.5
   movePos:
   - {fileID: 4861053120156874919}
@@ -1955,12 +1927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4876223c8564f479f66249bf1fc16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 4802227784053513251}
-  life: 200
-  degat: 30
-  flashTime: 0.3
-  speed: 3
   waitTime: 0.5
   movePos:
   - {fileID: 5565743931214990590}
@@ -2106,15 +2072,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropCoin: {fileID: 150041499294998890, guid: 26ee3fcf1c1db6a4ab6fc1246642523c, type: 3}
-  spriteRenderer: {fileID: 4802227784053513251}
-  life: 150
-  degat: 30
   flashTime: 0.2
+  degat: 30
+  life: 150
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 1
   groundCheck: {fileID: 5607397048679058174}
-  speedGolem: 5
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!1 &9162701900681165141
 GameObject:
   m_ObjectHideFlags: 0

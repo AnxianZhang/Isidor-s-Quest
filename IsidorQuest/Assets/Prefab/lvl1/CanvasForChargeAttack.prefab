@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChargeBar: {fileID: 1534787135191843014}
   chargeBarCanvas: {fileID: 3975292491153447436}
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!1 &4245474046024772781
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,10 +8,10 @@ public class ProjecfileShot : MonoBehaviour
     private PlayerMovement mainPlayer;
     private Animator animationAttack;
     [SerializeField] private float Speed;
-
+    public StoringData storeData;
     void Start()
     {
-        this.mainPlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.mainPlayer = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.animationAttack = gameObject.GetComponent<Animator>();
     }

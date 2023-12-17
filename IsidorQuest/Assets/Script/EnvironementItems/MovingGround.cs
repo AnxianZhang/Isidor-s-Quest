@@ -10,12 +10,13 @@ public class MovingGround : MonoBehaviour
 
     private int i;
     private Transform playerParent;
+    public StoringData storeData;
 
     // Start is called before the first frame update
     void Start()
     {
         this.i = 1;
-        this.playerParent = GameObject.FindGameObjectWithTag("Player").transform.parent;
+        this.playerParent = GameObject.Find(storeData.CharacterName).transform.parent;
     }
 
     // Update is called once per frame
