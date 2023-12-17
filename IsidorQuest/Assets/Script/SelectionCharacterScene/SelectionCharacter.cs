@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SelectionCharacter : MonoBehaviour
 {
     [SerializeField] private GameObject[] characterSelection;
+    public StoringData storeData;
     private const string LVL_TO_LOAD = "WorldOneLvl1";
     private int nbCharacter;
     private int actualCharacter;
@@ -14,6 +15,7 @@ public class SelectionCharacter : MonoBehaviour
     void Start()
     {
         nbCharacter = characterSelection.Length;
+        storeData.CharacterName = this.characterSelection[actualCharacter].name;
         actualCharacter = 0;
         UIText = GameObject.Find("TextNameCharacterSelect").GetComponent<Text>();
     }
@@ -29,13 +31,15 @@ public class SelectionCharacter : MonoBehaviour
             this.characterSelection[actualCharacter].SetActive(false);
             actualCharacter += 1;
             this.characterSelection[actualCharacter].SetActive(true);
-            UIText.text = this.characterSelection[actualCharacter].name;           
+            UIText.text = this.characterSelection[actualCharacter].name;
+            storeData.CharacterName = this.characterSelection[actualCharacter].name;           
         }
         else{
             this.characterSelection[actualCharacter].SetActive(false);
             actualCharacter = 0;
             this.characterSelection[actualCharacter].SetActive(true); 
             UIText.text = this.characterSelection[actualCharacter].name;
+            storeData.CharacterName = this.characterSelection[actualCharacter].name;
         }        
     }
 
@@ -44,13 +48,15 @@ public class SelectionCharacter : MonoBehaviour
             this.characterSelection[actualCharacter].SetActive(false);
             actualCharacter = this.nbCharacter-1;
             this.characterSelection[actualCharacter].SetActive(true);
-            UIText.text = this.characterSelection[actualCharacter].name;           
+            UIText.text = this.characterSelection[actualCharacter].name;
+            storeData.CharacterName = this.characterSelection[actualCharacter].name;           
         }
         else{
             this.characterSelection[actualCharacter].SetActive(false);
             actualCharacter -= 1;
             this.characterSelection[actualCharacter].SetActive(true); 
             UIText.text = this.characterSelection[actualCharacter].name;
+            storeData.CharacterName = this.characterSelection[actualCharacter].name;
         }        
     }
 

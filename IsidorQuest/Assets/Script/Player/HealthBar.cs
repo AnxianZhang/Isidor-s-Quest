@@ -9,10 +9,10 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image healthBar;
     
     private Player lifePlayer;
-
+    public StoringData storeData;
     void Start()
     {
-        this.lifePlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.lifePlayer = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
         //transform.position = camera.GetComponent<Camera>().ViewportToWorldPoint(new Vector3(0,1,0));        
     }
 

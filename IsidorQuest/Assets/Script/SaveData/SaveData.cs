@@ -23,10 +23,11 @@ public class SaveData : MonoBehaviour
     private GameObject mainPlayer;
     private GameObject SpawnPoint;
     private CoinUI coin;
+    public StoringData storeData;
     // Start is called before the first frame update
     void Start()
     {
-        this.mainPlayer = GameObject.FindWithTag("Player");
+        this.mainPlayer = GameObject.Find(storeData.CharacterName);
         this.coin = GameObject.Find("Coin").GetComponent<CoinUI>();
         this.SpawnPoint = GameObject.Find("SpawnPoint");
         this.door = GameObject.Find("Door");

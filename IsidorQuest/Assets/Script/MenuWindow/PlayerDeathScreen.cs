@@ -7,10 +7,10 @@ public class PlayerDeathScreen : MonoBehaviour
     private Player player;
     private GameObject deathMenu;
     private bool isDisplayBoxCalled;
-
+    public StoringData storeData;
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
         this.deathMenu = gameObject.transform.GetChild(2).gameObject;
     }
 

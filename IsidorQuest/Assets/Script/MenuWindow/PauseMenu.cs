@@ -9,11 +9,11 @@ public class PauseMenu : MonoBehaviour
     private Player pM;
 
     [SerializeField] private GameObject settingsMenu;
-
+    public StoringData storeData;
     private void Start()
     {
         this.pauseMenu = gameObject.transform.GetChild(1).gameObject;
-        this.pM = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        this.pM = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
     }
 
     void Update()

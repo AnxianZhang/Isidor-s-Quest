@@ -7,10 +7,10 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] public Vector3 posOffSet;
 
     private Vector3 velocity;
-
+    public StoringData storeData;
     void Start()
     {
-        this.player = GameObject.FindGameObjectWithTag("Player");
+        this.player = GameObject.Find(storeData.CharacterName);
     }
 
     void Update()

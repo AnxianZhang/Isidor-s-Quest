@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offSet: 0.5
   posOffSet: {x: 1, y: 2.5, z: -10}
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!114 &1841236621843749422
 MonoBehaviour:
   m_ObjectHideFlags: 0

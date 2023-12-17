@@ -11,10 +11,10 @@ public class ChargeBarAttack : MonoBehaviour
 
     private float posXInitial;
     private float posYInitial;
-
+    public StoringData storeData;
     void Start()
     {
-        this.AttackChargePlayer = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.AttackChargePlayer = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
         this.posXInitial = this.AttackChargePlayer.transform.position.x;
         this.posYInitial = this.AttackChargePlayer.transform.position.y;
     }

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 7
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!212 &4958647058269409490
 SpriteRenderer:
   m_ObjectHideFlags: 0

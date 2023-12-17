@@ -1211,6 +1211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 5044590127854357548}
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!114 &7282709710489328615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,6 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a7039b966c8034498b6efcb90b9578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!114 &3889682913665096201
 MonoBehaviour:
   m_ObjectHideFlags: 0

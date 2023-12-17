@@ -11,7 +11,7 @@ public class CurrentSceenManager : MonoBehaviour
 
     [SerializeField] private bool isPlayerPresentByDefault;
     private DontDestroy[] objectToDestroy;
-
+    public StoringData storeData;
     private void Awake()
     {
         if (instance != null)
@@ -25,7 +25,7 @@ public class CurrentSceenManager : MonoBehaviour
     private void Start()
     {
         this.objectToDestroy = Object.FindObjectsOfType<DontDestroy>();
-        this.playerLifeWhenEnteringTheSceen = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().currentLife;
+        this.playerLifeWhenEnteringTheSceen = GameObject.Find(storeData.CharacterName).GetComponent<Player>().currentLife;
     }
 
     public void removeDontDestoyObjects()
