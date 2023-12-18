@@ -34,16 +34,46 @@ public class SkillTreeMenu : MonoBehaviour
     private Player player;
     private Text interactText;
 
+    private void initPlayerStats()
+    {
+        this.playerMaxHP.text = this.player.maxLife.ToString();
+        this.playerDefence.text = (this.player.defence * 100).ToString() + "%";
+        this.playerAttack.text = this.player.damageDeal.ToString();
+        this.playerSpeed.text = this.player.getMoveSpeed().ToString();
+    }
+
+    private void SetSkillText(ref Text textComponent, int skillLevel)
+    {
+        textComponent.text = "lv." + skillLevel.ToString() + " / 10";
+    }
+
+    private void SetCostText(ref Text textComponent, int skillLevel)
+    {
+        textComponent.text = "Cost: " + skillLevel * 5;
+    }
+
+    private void initPlayerSkillsLvl()
+    {
+        Debug.Log(this.player.skills);
+        SetSkillText(ref this.HpLvl, this.player.skills.lifeLvl);
+        SetSkillText(ref this.defenceLvl, this.player.skills.defenceLvl);
+        SetSkillText(ref this.attackLvl, this.player.skills.damageDealLvl);
+        SetSkillText(ref this.speedLvl, this.player.skills.moveSpeedLvl);
+
+        SetCostText(ref this.upgradingHPCost, this.player.skills.lifeLvl);
+        SetCostText(ref this.upgradingDefenceCost, this.player.skills.defenceLvl);
+        SetCostText(ref this.upgradingAttackCost, this.player.skills.damageDealLvl);
+        SetCostText(ref this.upgradingSpeedCost, this.player.skills.moveSpeedLvl);
+    }
+
     void Start()
     {
         this.upgradeSkillsMenu = transform.GetChild(1).gameObject;
         this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
 
-        this.playerMaxHP.text = this.player.maxLife.ToString();
-        this.playerDefence.text = (this.player.defence * 100).ToString() + "%";
-        this.playerAttack.text = this.player.damageDeal.ToString();
-        this.playerSpeed.text = this.player.getMoveSpeed().ToString();
+        this.initPlayerStats();
+        this.initPlayerSkillsLvl();
 
         this.charactereDesign.GetComponent<Image>().sprite = this.player.GetComponent<SpriteRenderer>().sprite;
     }

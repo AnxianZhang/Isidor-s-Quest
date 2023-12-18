@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Script.Player;
 using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Player : PlayerMovement
@@ -13,6 +14,8 @@ public abstract class Player : PlayerMovement
     public float cooldown { get; protected set; }
     public float defence { get; protected set; }
 
+    public SkillsLvl skills { get; protected set; }
+
     public bool isDeath { get; protected set; }
     protected float lastAttackedAt;
     protected bool isWater;
@@ -20,20 +23,35 @@ public abstract class Player : PlayerMovement
 
     protected abstract void doPlayerAttaque();
 
+    protected new void Start()
+    {
+        base.Start();
+        this.skills = new SkillsLvl();
+    }
+
+    public void upgradeMoveSpeed()
+    {
+        base.setMoveSpeed((float)(base.getMoveSpeed() * 1.01));
+        ++this.skills.moveSpeedLvl;
+    }
+
     public void upgradeDamageDeal()
     {
         this.damageDeal = (int)Math.Round(this.damageDeal * 1.10f);
+        ++this.skills.damageDealLvl;
     }
 
     public void upgradeLife()
     {
         this.maxLife = (int)Math.Round(this.maxLife * 1.10f);
         this.currentLife = (int)Math.Round(this.currentLife * 1.10f);
+        ++this.skills.lifeLvl;
     }
 
     public void upgradeDefence()
     {
         this.defence += .02f;
+        ++this.skills.defenceLvl;
     }
 
     protected void playerActions()

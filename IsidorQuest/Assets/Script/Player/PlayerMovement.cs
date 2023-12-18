@@ -148,14 +148,14 @@ public abstract class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void upgradeMoveSpeed()
-    {
-        this.moveSpeed = (float)(this.moveSpeed * 1.01);
-    }
-
     public float getMoveSpeed()
     {
         return this.moveSpeed;
+    }
+
+    protected void setMoveSpeed(float value)
+    {
+        this.moveSpeed = value;
     }
 
     void CheckStatus()

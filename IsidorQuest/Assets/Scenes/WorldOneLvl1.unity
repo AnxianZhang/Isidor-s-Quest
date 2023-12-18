@@ -930,6 +930,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4028376811957488080, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
+      propertyPath: startCoinQuantity
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 8348555071111704162, guid: 50e14e4b6849c4c45882a4a173147703, type: 3}
       propertyPath: m_Name
       value: CanvasUI
