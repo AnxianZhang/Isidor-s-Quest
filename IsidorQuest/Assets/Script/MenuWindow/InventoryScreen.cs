@@ -8,7 +8,7 @@ public class InventoryScreen : MonoBehaviour
     [SerializeField] private GameObject inventoryMenu;
     private Player pM;
     private Inventory inventory;
-    public bool[] updated;
+    private bool[] updated;
 
     // Start is called before the first frame update
     void Start()
