@@ -1,6 +1,8 @@
 ﻿using Assets.Script.Player;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Player : PlayerMovement
@@ -20,6 +22,7 @@ public abstract class Player : PlayerMovement
     protected float lastAttackedAt;
     protected bool isWater;
     protected bool isHit;
+    private Inventory inventory;
 
     protected abstract void doPlayerAttaque();
 
@@ -27,6 +30,7 @@ public abstract class Player : PlayerMovement
     {
         base.Start();
         this.skills = new SkillsLvl();
+        this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
     public void upgradeMoveSpeed()
@@ -52,6 +56,10 @@ public abstract class Player : PlayerMovement
     {
         this.defence += .02f;
         ++this.skills.defenceLvl;
+    }
+
+    public bool pickUp(GameObject item){
+        return inventory.AddItem(item);
     }
 
     protected void playerActions()
