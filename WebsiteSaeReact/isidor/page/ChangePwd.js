@@ -72,7 +72,7 @@ const ChangePwd = ({ language }) => {
     }
 
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-
+    const textInputAndButtonWidthStyle = windowWidthByHook > 500? 400 : "100%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
@@ -81,7 +81,7 @@ const ChangePwd = ({ language }) => {
                     <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title, { fontSize: windowWidthByHook < 750 ? 30 : 40 }]}>{selectLanguage.changePwd.title}</Text>
                     <View style={{ paddingTop: 30 }}>
                         <Field
-                            TextInputStyle={GLOBAL_STYLES.form.fields}
+                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
                             placeholderTextColor={passError.length ? "#E55839" : "#000000"}
                             placeholder={selectLanguage.changePwd.newPass}
                             onChangeText={setPass}
@@ -89,7 +89,7 @@ const ChangePwd = ({ language }) => {
                             secureTextEntry={true}
                         />
                         <Field
-                            TextInputStyle={GLOBAL_STYLES.form.fields}
+                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
                             fieldsViewStyle={styles.maringTop}
                             placeholderTextColor={passError.length ? "#E55839" : "#000000"}
                             placeholder={selectLanguage.changePwd.confirmNewPass}
@@ -102,7 +102,7 @@ const ChangePwd = ({ language }) => {
                             <TouchableOpacity
                                 onPress={handleSubmit}
                                 disabled={disable}
-                                style={[StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" }), styles.marginTop]}
+                                style={[StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: textInputAndButtonWidthStyle }), styles.marginTop]}
                             >
                                 <Text style={styles.EnvoyerButtonText}>{selectLanguage.changePwd.change}</Text>
                             </TouchableOpacity>

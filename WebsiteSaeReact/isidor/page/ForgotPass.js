@@ -52,7 +52,8 @@ const ForgotPass = ({ language }) => {
     }
 
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-
+    const textInputAndButtonWidthStyle = windowWidthByHook > 500? 400 : "100%"
+    
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
@@ -62,7 +63,7 @@ const ForgotPass = ({ language }) => {
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>
                             <Field
-                                TextInputStyle={GLOBAL_STYLES.form.fields}
+                                TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
                                 placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"}
                                 placeholder="Email"
                                 onChangeText={setEmail}
@@ -74,7 +75,7 @@ const ForgotPass = ({ language }) => {
                                 <TouchableOpacity
                                     onPress={handleSubmit}
                                     disabled={disable}
-                                    style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
+                                    style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: textInputAndButtonWidthStyle })}
                                 >
                                     <Text style={styles.EnvoyerButtonText}>{selectLanguage.forgotPass.getCodeButton}</Text>
                                 </TouchableOpacity>

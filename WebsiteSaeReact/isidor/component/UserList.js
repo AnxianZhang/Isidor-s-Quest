@@ -13,7 +13,7 @@ const UserList = (props)=> {
         } else if (item === 'Profile') {
             // Handle logic for "Profile" when connected
             // For example, navigate to the user's profile screen
-            props.navigation.navigate('UserProfile');
+            props.navigation.navigate('UserData');
         }else if (item === 'Se connecter') {
             // Handle logic for "Profile" when connected
             // For example, navigate to the user's profile screen
