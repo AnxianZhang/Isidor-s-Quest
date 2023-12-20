@@ -35,7 +35,7 @@ public class DontDestroy : MonoBehaviour
 
     public void destroy()
     {
-        Debug.Log(gameObject.name.Equals("CoinUI") ? CoinUI.getCoins() : "");
+        //Debug.Log(gameObject.name.Equals("CoinUI") ? CoinUI.getCoins() : "");
         Destroy(gameObject);
     }
 }
