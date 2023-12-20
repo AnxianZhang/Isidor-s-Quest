@@ -112,7 +112,7 @@ const UserDataScreen = ({language}) => {
             <View style={styles.FormContainer}>
                 <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
                     <View style={GLOBAL_STYLES.form.title}>
-                        <Text style={GLOBAL_STYLES.form.text}>Informations personnelles</Text>
+                        <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.UserData.title}</Text>
                         <Text style={ {color: "white"}}>{email}</Text>
                     </View>
 
@@ -120,7 +120,7 @@ const UserDataScreen = ({language}) => {
                         <TextInput
                             style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
                             value={prenom}
-                            placeholder={"prenom"}
+                            placeholder={selectLanguage.UserData.name}
                             onChangeText={(text) => handleInputChange('prenom', text)}
                             editable={isEditing}
                         />
@@ -130,7 +130,7 @@ const UserDataScreen = ({language}) => {
                         <TextInput
                             style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
                             value={nomFamille}
-                            placeholder={"nomFamille"}
+                            placeholder={selectLanguage.UserData.familyName}
                             onChangeText={(text) => handleInputChange('nomFamille', text)}
                             editable={isEditing}
                         />
@@ -140,7 +140,7 @@ const UserDataScreen = ({language}) => {
                         <TextInput
                             style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
                             value={pseudo}
-                            placeholder={"pseudo"}
+                            placeholder={selectLanguage.UserData.pseudo}
                             onChangeText={(text) => handleInputChange('pseudo', text)}
                             editable={isEditing}
                         />
@@ -151,7 +151,7 @@ const UserDataScreen = ({language}) => {
                             onPress={handleEditing} 
                             style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: isEditing === true ? "#5BD94C" : "#E55839", width: buttonWidthStyle })}
                         >
-                            <Text style={styles.EnvoyerButtonText}>{ isEditing === true ? "valider" : "modifier" }</Text>
+                            <Text style={styles.EnvoyerButtonText}>{ isEditing === true ? selectLanguage.UserData.btnEnv : selectLanguage.UserData.btnEdit }</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

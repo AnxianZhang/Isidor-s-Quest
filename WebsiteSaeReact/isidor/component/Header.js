@@ -102,7 +102,7 @@ const Header = (props) => {
                     <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
                     {open &&
                         <View style={styles.listContainer}>
-                            <List onSelect={(selectedItem) => { setOpen(false); changeLanguage(selectedItem); }}/>
+                            <List onSelect={(selectedItem) => { setOpen(false); changeLanguage(selectedItem); }} setLanguage={props.setLanguage} language={props.language}/>
                         </View>
                     }
                 </View>
@@ -110,7 +110,7 @@ const Header = (props) => {
                     {/* <ButtonText onPress={() => { isConnect === "true" ? disconnection() : navigation.navigate("Connexion") }} text={isConnect === "true" ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} /> */}
                    
                     <View>
-                        <UserList disconnection={disconnection} navigation={navigation} isConnect={isConnect} setUserOpen={setUserOpen}/>
+                        <UserList disconnection={disconnection} navigation={navigation} isConnect={isConnect} setUserOpen={setUserOpen} setLanguage={props.setLanguage} language={props.language}/>
                     </View>
 
                 </View>

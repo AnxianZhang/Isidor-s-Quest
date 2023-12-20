@@ -17,7 +17,12 @@
         "about": "About Us",
         "connect": "Sign in",
         "disconnect": "Log out",
-        "buttonPlay": "Play"
+        "buttonPlay": "Play",
+        "buttonLanguage" : "Select language",
+        "userProfile" : "Profile",
+        "connected" : "Connected",
+        "disconnected" : "Disconnected",
+        "etat" : "●"
     },
     "connexion": {
         "connection": "Connection",
@@ -99,5 +104,13 @@
         "aPropos": "About us",
         "gcu": "Terms & Conditions",
         "copyRight": "All rights reserved"
+    },
+    "UserData" :{
+        "title": "Personal informations",
+        "name": "First name",
+        "familyName": "Last Name",
+        "pseudo": "Nickname",
+        "btnEnv": "Validate",
+        "btnEdit": "Update"
     }
 }
