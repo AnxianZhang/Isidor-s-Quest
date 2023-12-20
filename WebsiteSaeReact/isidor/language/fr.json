@@ -16,8 +16,13 @@
     "Header" : {
         "about" : "A propos",
         "connect" : "Se connecter",
-        "disconnect" : "Se deconnecter",
-        "buttonPlay" : "Jouer"
+        "disconnect" : "Se déconnecter",
+        "buttonPlay" : "Jouer",
+        "buttonLanguage" : "Sélectionnez langue",
+        "userProfile" : "Profil",
+        "connected" : "Connecté",
+        "disconnected" : "Débranché",
+        "etat" : "●"
     },
     "connexion" : {
         "connection" : "Connexion",
@@ -99,5 +104,13 @@
         "aPropos": "À propos",
         "gcu": "CGU & Mentions légales",
         "copyRight": "Tous droits réservés"
+    },
+    "UserData" :{
+        "title": "Informations personnelles",
+        "name": "Prenom",
+        "familyName": "Nom",
+        "pseudo": "Pseudo",
+        "btnEnv": "Valider",
+        "btnEdit": "Mise à jour"
     }
 }

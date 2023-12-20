@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import LogoSae from "../assets/LogoSae.png";
 import World from "../assets/world.png"
+import IconUser from "../assets/user.png"
 import ButtonText from './ButtonText';
 import ButtonImage from './ButtonImage';
 import { useNavigation } from '@react-navigation/native';
@@ -9,14 +10,17 @@ import Play from "../assets/Play.png";
 import { useIsFocused } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
 import List from './List';
+import UserList from './UserList';
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
+import { changeLanguage } from '../function/languageSelect';
 
 const Header = (props) => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [open, setOpen] = useState(false);
+    const [userOpen, setUserOpen] = useState(false);
     const [isConnect, setIsConnect] = useState("false");
     const windowWidth = useScreenWidthDimention();
     useEffect(() => {
@@ -97,11 +101,18 @@ const Header = (props) => {
                 <View>
                     <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
                     {open &&
-                    <View style={styles.listContainer}><List /></View>
+                        <View style={styles.listContainer}>
+                            <List onSelect={(selectedItem) => { setOpen(false); changeLanguage(selectedItem); }} setLanguage={props.setLanguage} language={props.language}/>
+                        </View>
                     }
                 </View>
                 <View style={styles.containConnect}>
-                    <ButtonText onPress={() => { isConnect === "true" ? disconnection() : navigation.navigate("Connexion") }} text={isConnect === "true" ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} />
+                    {/* <ButtonText onPress={() => { isConnect === "true" ? disconnection() : navigation.navigate("Connexion") }} text={isConnect === "true" ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} /> */}
+                   
+                    <View>
+                        <UserList disconnection={disconnection} navigation={navigation} isConnect={isConnect} setUserOpen={setUserOpen} setLanguage={props.setLanguage} language={props.language}/>
+                    </View>
+
                 </View>
                 <View>
                     <TouchableOpacity onPress={() => NavigationGestion()}>

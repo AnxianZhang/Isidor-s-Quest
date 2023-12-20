@@ -16,14 +16,13 @@ app.use(
 );
 app.use(cookieParser());
 const cors = require('cors');
-const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment} = require("./Controller/userController");
+const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment, getUserData, changeUserData} = require("./Controller/userController");
 const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
 const { saveGameData } = require('./Controller/gameController');
-
 
 app.use(cors({
   origin: 'http://localhost:19006',
@@ -51,6 +50,8 @@ app.post("/disconnection", disconnection);
 app.get("/verifyPayment", VerifySuccessPayment);
 app.get("/transactionCardSuccess", transactionCardSuccess);
 app.post("/PostSaveGame", saveGameData);
+app.get("/getData",getUserData);
+app.post("/changeData",changeUserData)
 const port = 3005
 
 const contactPort = 5000

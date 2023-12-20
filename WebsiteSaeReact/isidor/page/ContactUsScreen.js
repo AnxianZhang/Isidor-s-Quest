@@ -79,7 +79,8 @@ const ContactUsScreen = ({language}) => {
 
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-
+    const textInputWidthStyle = windowWidthByHook > 500? 400 : "100%"
+    const buttonWidthStyle = windowWidthByHook > 500? 400 : "200%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
@@ -90,7 +91,7 @@ const ContactUsScreen = ({language}) => {
                     </View>
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={GLOBAL_STYLES.form.fields}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
                             value={name}
                             placeholder={selectLanguage.Contact.name}
                             onChangeText={(text) => handleInputChange('name', text)}
@@ -98,7 +99,7 @@ const ContactUsScreen = ({language}) => {
                     </View>
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={GLOBAL_STYLES.form.fields}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
                             value={email}
                             placeholder={selectLanguage.Contact.email}
                             onChangeText={(text) => handleInputChange('email', text)}
@@ -106,7 +107,7 @@ const ContactUsScreen = ({language}) => {
                     </View>
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={GLOBAL_STYLES.form.textarea}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.textarea, { width: textInputWidthStyle})}
                             value={message}
                             placeholder={selectLanguage.Contact.message}
                             onChangeText={(text) => handleInputChange('message', text)}
@@ -117,7 +118,7 @@ const ContactUsScreen = ({language}) => {
                         <TouchableOpacity 
                             onPress={handleSubmit} 
                             disabled={disable}
-                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}
+                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: buttonWidthStyle })}
                         >
                             <Text style={styles.EnvoyerButtonText}>{status}</Text>
                         </TouchableOpacity>

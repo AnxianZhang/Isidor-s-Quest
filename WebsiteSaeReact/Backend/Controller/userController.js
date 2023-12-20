@@ -42,6 +42,66 @@ const Connexion = async (req, res) => {
   }
 }
 
+const getUserData = async (req, res) => {
+    try{
+      await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
+      const pseudo = req.session.pseudo
+      const currentUser = await User.findOne(
+        { pseudo: pseudo }
+      ).exec();
+    // console.log(req.session)
+  
+      if (currentUser == null)
+        return res.status(502).send('Utilisateur non trouvé');
+      return res.status(200).json(currentUser)
+    }catch (error) {
+      console.error('erreur durant getUserData', error);
+      res.status(500).send("erreur lors de la récupération des données au niveau du backend");
+    }
+};
+
+const changeUserData = async (req, res) => {
+  try{
+    await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
+    // const pseudo = req.session.pseudo
+    const datas = req.body
+
+    const currentUser = await User.findOne(
+      { email: datas.email }
+    ).exec();
+    if (currentUser == null){
+      return res.status(502).send('Utilisateur non trouvé');
+    }
+
+    // console.log(datas)
+    // const existUserMail = await User.findOne({ email: datas.email }).exec();
+    const existUserPseudo = await User.findOne({ pseudo: datas.pseudo }).exec();
+    if (existUserPseudo !== null) {
+      return res.status(402).send("Ce pseudo est déja pris");
+    }
+
+    const result = await User.updateOne(
+      { email: datas.email },
+      { $set: { 
+        prenom: datas.prenom ,
+        nomFamille: datas.nomFamille ,
+        pseudo: datas.pseudo 
+      }}
+    ).exec()
+    // console.log(datas.prenom)
+    // console.log(datas.email)
+    // console.log(result)
+
+    if (result.acknowledged)
+      req.session.pseudo=datas.pseudo 
+      return res.status(200).send('UserData change avec succes')
+  }catch (error) {
+    console.error('erreur durant changeUserData', error);
+    res.status(500).send("erreur lors de la modification data des données au niveau du backend");
+  }
+
+};
+
 const changePwd = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
@@ -99,5 +159,7 @@ module.exports = {
   changePwd,
   isConnect,
   disconnection,
-  VerifySuccessPayment
+  VerifySuccessPayment,
+  getUserData,
+  changeUserData
 };

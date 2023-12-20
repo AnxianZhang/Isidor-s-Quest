@@ -12,6 +12,7 @@ import VerificationScreen from './page/VerificationUserCodeScreen';
 import SucessPaymentScreen from './page/SuccessPaymentScreen';
 import CancelPaymentScreen from './page/CancelPaymentScreen';
 import ContactUsScreen from './page/ContactUsScreen';
+import UserDataScreen from './page/UserDataScreen';
 import ForgotPass from './page/ForgotPass';
 import ChangePwd from './page/ChangePwd';
 import ChangePwdSuccess from './page/ChangePwdSuccess';
@@ -38,6 +39,7 @@ export default function App() {
         <Stack.Screen name="Success" options={{ headerShown: false }}>{() => (<SucessPaymentScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Cancel" options={{ headerShown: false }}>{() => (<CancelPaymentScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="Contact" options={{ headerShown: false }}>{() => (<ContactUsScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="UserData" options={{ headerShown: false }}>{() => (<UserDataScreen language={selectLanguage} />)}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
