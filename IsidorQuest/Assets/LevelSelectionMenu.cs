@@ -24,7 +24,6 @@ public class LevelSelectionMenu : MonoBehaviour
     public void lunchWorld1LvlOne()
     {
         closeMenu();
-        Debug.Log(Player.hasChangeSceen);
         SceneManager.LoadScene("WorldOneLvl1");
         //CurrentSceenManager.instance.removeDontDestoyObjects();
     }

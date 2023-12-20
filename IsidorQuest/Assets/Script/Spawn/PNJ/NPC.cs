@@ -24,7 +24,11 @@ public abstract class NPC : MonoBehaviour
             this.menuToOpen.SetActive(!this.menuToOpen.activeInHierarchy);
             this.interactText.enabled = !this.interactText.enabled;
             Time.timeScale = !this.interactText.enabled ? 0 : 1;
-            PauseMenu.setIsInSkillTreeMenu(!this.interactText.enabled);
+            PauseMenu.setIsInSkillTreeMenu(true);
+        }
+        else
+        {
+            PauseMenu.setIsInSkillTreeMenu(false);
         }
     }
 

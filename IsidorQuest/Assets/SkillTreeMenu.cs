@@ -54,7 +54,6 @@ public class SkillTreeMenu : MonoBehaviour
 
     private void initPlayerSkillsLvl()
     {
-        Debug.Log(this.player.skills);
         SetSkillText(ref this.HpLvl, this.player.skills.lifeLvl);
         SetSkillText(ref this.defenceLvl, this.player.skills.defenceLvl);
         SetSkillText(ref this.attackLvl, this.player.skills.damageDealLvl);

@@ -47,17 +47,14 @@ public class CurrentSceenManager : MonoBehaviour
     public void removeDontDestoyObjects()
     {
         List<DontDestroy> toRemove = new List<DontDestroy>();
-        Debug.Log(this.objectToDestroy.Count);
         for (int i = 0; i < this.objectToDestroy.Count; ++i)
         {
             if (!Player.hasChangeSceen)
             {
                 this.objectToDestroy[i].removeDontDestroy();
-                Debug.Log("hello");
             }
             else if (!this.objectToDestroy[i].hasChangeSceen)
             {
-                Debug.Log("hola");
                 this.objectToDestroy[i].destroy();
                 toRemove.Add(this.objectToDestroy[i]);
             }
