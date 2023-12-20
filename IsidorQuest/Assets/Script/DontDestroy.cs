@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DontDestroy : MonoBehaviour
 {
+    public bool hasChangeSceen { get; set; }
+
     private string objID;
     private DontDestroy[] toNotDestroy;
     private void Awake()
@@ -29,5 +31,11 @@ public class DontDestroy : MonoBehaviour
     public void removeDontDestroy()
     {
         SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+    }
+
+    public void destroy()
+    {
+        Debug.Log(gameObject.name.Equals("CoinUI") ? CoinUI.getCoins() : "");
+        Destroy(gameObject);
     }
 }

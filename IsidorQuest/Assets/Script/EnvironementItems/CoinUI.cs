@@ -12,7 +12,9 @@ public class CoinUI : MonoBehaviour
 
     void Start()
     {
-        CurrentCoinQuantity = startCoinQuantity;
+        if (!Player.hasChangeSceen)
+            CurrentCoinQuantity = startCoinQuantity;
+        //Debug.Log("coin: " + CurrentCoinQuantity);
     }
 
     void Update()

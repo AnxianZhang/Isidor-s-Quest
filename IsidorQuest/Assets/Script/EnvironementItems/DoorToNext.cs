@@ -15,6 +15,7 @@ public class DoorToNext : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
+            Debug.Log("for dev");
             gm.doorSoundPlay();
             isDoor = true;
             this.goToNextLvlMenu.SetActive(true);

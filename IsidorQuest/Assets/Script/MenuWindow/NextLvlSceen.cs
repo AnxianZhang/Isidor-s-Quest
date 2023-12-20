@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class NextLvlSceen : MonoBehaviour
 {
     private GameObject nextLvlSreen;
+    private bool isAlreadyExec;
 
     private void Start()
     {
@@ -29,6 +30,13 @@ public class NextLvlSceen : MonoBehaviour
     public void village()
     {
         resume();
+        Player.hasChangeSceen = true;
+        if (!this.isAlreadyExec)
+        {
+            foreach (DontDestroy dd in Object.FindObjectsOfType<DontDestroy>())
+                dd.hasChangeSceen = true;
+            this.isAlreadyExec = true;
+        }
         SceneManager.LoadScene("Village");
     }
 

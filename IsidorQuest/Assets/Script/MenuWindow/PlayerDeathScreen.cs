@@ -30,7 +30,7 @@ public class PlayerDeathScreen : MonoBehaviour
 
     private void executeRemoveObjects()
     {
-        if (CurrentSceenManager.instance.getIsPlayerPresentByDefault())
+        if (CurrentSceenManager.instance.getIsPlayerPresentByDefault() && !Player.hasChangeSceen)
         {
             CurrentSceenManager.instance.removeDontDestoyObjects();
         }
@@ -44,7 +44,7 @@ public class PlayerDeathScreen : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
         this.player.revive(
-            CurrentSceenManager.instance.getIsPlayerPresentByDefault(), 
+            CurrentSceenManager.instance.getIsPlayerPresentByDefault() && !Player.hasChangeSceen, 
             CurrentSceenManager.instance.getPlayerLifeWhenEnteringTheSceen()
         );
         this.isDisplayBoxCalled = false;

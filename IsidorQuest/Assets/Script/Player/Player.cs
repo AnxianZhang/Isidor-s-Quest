@@ -7,6 +7,7 @@ using UnityEngine;
 
 public abstract class Player : PlayerMovement
 {
+    public static bool hasChangeSceen { get; set; }
     protected int blinks = 2;
     protected float time = 0.02f;
     protected Rigidbody2D rB;
