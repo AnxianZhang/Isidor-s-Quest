@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Linq;
 
 
 public class CurrentSceenManager : MonoBehaviour
@@ -11,7 +13,7 @@ public class CurrentSceenManager : MonoBehaviour
     private int playerLifeWhenEnteringTheSceen;
 
     [SerializeField] private bool isPlayerPresentByDefault;
-    private DontDestroy[] objectToDestroy;
+    private List<DontDestroy> objectToDestroy;
     public StoringData storeData;
     private void Awake()
     {
@@ -25,7 +27,7 @@ public class CurrentSceenManager : MonoBehaviour
 
     private void Start()
     {
-        this.objectToDestroy = Object.FindObjectsOfType<DontDestroy>();
+        this.objectToDestroy = new List<DontDestroy>(Object.FindObjectsOfType<DontDestroy>().ToList());
         this.playerLifeWhenEnteringTheSceen = GameObject.Find(storeData.CharacterName).GetComponent<Player>().currentLife;
         //this.goldRecoltedInSceen = GameObject.
 
@@ -44,17 +46,24 @@ public class CurrentSceenManager : MonoBehaviour
 
     public void removeDontDestoyObjects()
     {
-        Debug.Log(objectToDestroy.Length);
-        foreach (DontDestroy dd in this.objectToDestroy)
+        List<DontDestroy> toRemove = new List<DontDestroy>();
+        for (int i = 0; i < this.objectToDestroy.Count; ++i)
         {
             if (!Player.hasChangeSceen)
             {
-                dd.removeDontDestroy();
-                Debug.Log("hello");
+                this.objectToDestroy[i].removeDontDestroy();
             }
-            else if (!dd.hasChangeSceen)
-                dd.destroy();
+            else if (!this.objectToDestroy[i].hasChangeSceen)
+            {
+                this.objectToDestroy[i].destroy();
+                toRemove.Add(this.objectToDestroy[i]);
+            }
         }
+
+        if (toRemove.Count() != 0)
+            for (int i = 0; i < toRemove.Count; ++i)
+                this.objectToDestroy.Remove(toRemove[i]);
+
     }
 
     public int getPlayerLifeWhenEnteringTheSceen()

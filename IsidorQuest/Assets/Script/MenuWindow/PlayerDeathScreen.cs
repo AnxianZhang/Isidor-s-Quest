@@ -54,6 +54,7 @@ public class PlayerDeathScreen : MonoBehaviour
     public void mainMenuButton()
     {
         Time.timeScale = 1f;
+        Player.hasChangeSceen = false; // for removing dont destroys
         CurrentSceenManager.instance.removeDontDestoyObjects();
         SceneManager.LoadScene("HomeMenu");
     }

@@ -35,10 +35,7 @@ public class ChargeBarAttack : MonoBehaviour
 
     private void inactive()
     {
-        if (this.AttackChargePlayer.isDeath)
-        {
-            this.chargeBarCanvas.enabled = false;
-        }
+        this.chargeBarCanvas.enabled = !this.AttackChargePlayer.isDeath;
     }
 
     private float CalculatePlayerLife()

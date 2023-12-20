@@ -28,6 +28,7 @@ public class PauseMenu : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !this.settingsMenu.activeInHierarchy && !this.pM.isDeath && !isInSkillTreeMenu)
         {
+            Debug.Log("inpause");
             if (isPaused) resume();
             else pause();
         }
