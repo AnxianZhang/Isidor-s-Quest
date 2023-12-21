@@ -29,10 +29,14 @@ public class SkillTreeMenu : MonoBehaviour
 
     [Header("Player UI")]
     [SerializeField] private GameObject charactereDesign;
+    [SerializeField] private Text coinQuantity;
 
     private GameObject upgradeSkillsMenu;
     private Player player;
     private Text interactText;
+
+    private GameObject playerHealAndCoinsUI;
+
 
     private void initPlayerStats()
     {
@@ -40,6 +44,8 @@ public class SkillTreeMenu : MonoBehaviour
         this.playerDefence.text = (this.player.defence * 100).ToString() + "%";
         this.playerAttack.text = this.player.damageDeal.ToString();
         this.playerSpeed.text = this.player.getMoveSpeed().ToString();
+
+        this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
     }
 
     private void SetSkillText(ref Text textComponent, int skillLevel)
@@ -75,6 +81,8 @@ public class SkillTreeMenu : MonoBehaviour
         this.initPlayerSkillsLvl();
 
         this.charactereDesign.GetComponent<Image>().sprite = this.player.GetComponent<SpriteRenderer>().sprite;
+
+        this.coinQuantity.text = CoinUI.getCoins().ToString();
     }
 
     private int parseInt(string text)
@@ -98,6 +106,7 @@ public class SkillTreeMenu : MonoBehaviour
 
     public void quitButton()
     {
+        this.playerHealAndCoinsUI.SetActive(true);
         this.upgradeSkillsMenu.SetActive(false);
         this.interactText.enabled = true;
         Time.timeScale = 1f;
@@ -114,6 +123,7 @@ public class SkillTreeMenu : MonoBehaviour
             lvlText.text = "lv." + ++upgradeLvl + " / 10";
             upgradePlayer.Invoke();
             CoinUI.removeCoins(costAmount);
+            this.coinQuantity.text = CoinUI.getCoins().ToString();
         }
     }
 

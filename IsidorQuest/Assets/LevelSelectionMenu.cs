@@ -6,18 +6,20 @@ public class LevelSelectionMenu : MonoBehaviour
 {
     private GameObject nextLvlMenu;
     private Text interactText;
-
+    private GameObject playerHealAndCoinsUI;
 
     private void Start()
     {
         this.nextLvlMenu = transform.GetChild(2).gameObject;
         this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
+        this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
     }
 
     private void closeMenu()
     {
         this.nextLvlMenu.SetActive(false);
         this.interactText.enabled = true;
+        this.playerHealAndCoinsUI.SetActive(true);
         Time.timeScale = 1f;
     }
 

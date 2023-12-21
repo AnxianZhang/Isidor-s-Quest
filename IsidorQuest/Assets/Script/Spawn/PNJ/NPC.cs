@@ -8,6 +8,7 @@ public abstract class NPC : MonoBehaviour
     private Text interactText;
 
     private bool canPlayerInteract;
+    private GameObject playerHealAndCoinsUI;
 
     protected abstract string textToShow();
 
@@ -15,6 +16,7 @@ public abstract class NPC : MonoBehaviour
     protected void Start()
     {
         this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
+        this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
     }
 
     protected void Update()
@@ -24,6 +26,7 @@ public abstract class NPC : MonoBehaviour
             this.menuToOpen.SetActive(!this.menuToOpen.activeInHierarchy);
             this.interactText.enabled = !this.interactText.enabled;
             Time.timeScale = !this.interactText.enabled ? 0 : 1;
+            this.playerHealAndCoinsUI.SetActive(!this.menuToOpen.activeInHierarchy);
             PauseMenu.setIsInSkillTreeMenu(true);
         }
         else
