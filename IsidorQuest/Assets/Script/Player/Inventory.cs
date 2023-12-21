@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,6 +34,13 @@ public class Inventory : MonoBehaviour
         inventory[index] = item;
         item.transform.SetParent(gameObject.transform);
         return true;
+    }
+
+    public void removeItem(GameObject item)
+    {
+        inventory[Array.IndexOf(inventory, item)] = null;
+        item.transform.SetParent(null);
+        SceneManager.MoveGameObjectToScene(item, SceneManager.GetActiveScene());
     }
 
     public GameObject[] GetInv(){

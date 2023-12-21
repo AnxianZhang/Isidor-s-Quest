@@ -36,7 +36,7 @@ public abstract class Player : PlayerMovement
 
     public void upgradeMoveSpeed()
     {
-        base.setMoveSpeed((float)(base.getMoveSpeed() * 1.01));
+        boostSpeed(1.01f, '*');
         ++this.skills.moveSpeedLvl;
     }
 
@@ -61,6 +61,11 @@ public abstract class Player : PlayerMovement
 
     public bool pickUp(GameObject item){
         return inventory.AddItem(item);
+    }
+
+    public void useObject(GameObject item)
+    {
+        this.inventory.removeItem(item);
     }
 
     protected void playerActions()
@@ -156,5 +161,21 @@ public abstract class Player : PlayerMovement
         {
             currentLife = maxLife;
         }
+    }
+
+    public void boostForce(float percentage, char myOperator)
+    {
+        if (myOperator.Equals('*'))
+            this.damageDeal = (int)Math.Round(this.damageDeal * percentage);
+        else
+            this.damageDeal = (int)Math.Round(this.damageDeal / percentage);
+    }
+
+    public void boostSpeed(float percentage, char myOperator)
+    {
+        if (myOperator.Equals('*'))
+            base.setMoveSpeed((float)(base.getMoveSpeed() * percentage));
+        else
+            base.setMoveSpeed((float)(base.getMoveSpeed() / percentage));
     }
 }

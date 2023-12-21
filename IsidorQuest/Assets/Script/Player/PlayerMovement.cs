@@ -158,6 +158,14 @@ public abstract class PlayerMovement : MonoBehaviour
         this.moveSpeed = value;
     }
 
+    public void jumpBoost(float amount, char myOperator)
+    {
+        if (myOperator.Equals('*'))
+            this.jumpForce *= amount;
+        else
+            this.jumpForce /= amount;
+    }
+
     void CheckStatus()
     {
         climbing = animator.GetBool("isLander");
