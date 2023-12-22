@@ -13,17 +13,21 @@ public abstract class PotionItem : InventoryItem
         this.mainPlayer = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
     }
 
+    public void makeItDisapeard()
+    {
+        Debug.Log("hola");
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        foreach (BoxCollider2D b in gameObject.GetComponents<BoxCollider2D>())
+            b.enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && other.GetType().ToString().Equals("UnityEngine.CapsuleCollider2D"))
         {
             if (mainPlayer.pickUp(gameObject))
-            {
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                foreach (BoxCollider2D b in gameObject.GetComponents<BoxCollider2D>())
-                    b.enabled = false;
-                gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            }
+                makeItDisapeard();
         }
         if (other.tag == "water")
         {

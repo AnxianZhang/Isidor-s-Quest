@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 
 
-public class SkillTreeMenu : MonoBehaviour
+public class SkillTreeMenu : MenuUsingCoin
 {
     private const int INCREMENT_COST = 5;
     private const int MAX_SKILL_LVL = 10;
@@ -29,13 +29,13 @@ public class SkillTreeMenu : MonoBehaviour
 
     [Header("Player UI")]
     [SerializeField] private GameObject charactereDesign;
-    [SerializeField] private Text coinQuantity;
+    //[SerializeField] private Text coinQuantity;
 
-    private GameObject upgradeSkillsMenu;
+    //private GameObject upgradeSkillsMenu;
     private Player player;
-    private Text interactText;
+    //private Text interactText;
 
-    private GameObject playerHealAndCoinsUI;
+    //private GameObject playerHealAndCoinsUI;
 
 
     private void initPlayerStats()
@@ -45,7 +45,7 @@ public class SkillTreeMenu : MonoBehaviour
         this.playerAttack.text = this.player.damageDeal.ToString();
         this.playerSpeed.text = this.player.getMoveSpeed().ToString();
 
-        this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
+        //base.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
     }
 
     private void SetSkillText(ref Text textComponent, int skillLevel)
@@ -71,21 +71,23 @@ public class SkillTreeMenu : MonoBehaviour
         SetCostText(ref this.upgradingSpeedCost, this.player.skills.moveSpeedLvl);
     }
 
-    void Start()
+    new void Start()
     {
-        this.upgradeSkillsMenu = transform.GetChild(1).gameObject;
+        base.Start();
+        base.myMenu = transform.GetChild(1).gameObject;
+        base.initCoinQuantity();
         this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
+        //this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
 
         this.initPlayerStats();
         this.initPlayerSkillsLvl();
 
         this.charactereDesign.GetComponent<Image>().sprite = this.player.GetComponent<SpriteRenderer>().sprite;
 
-        this.coinQuantity.text = CoinUI.getCoins().ToString();
+        //this.coinQuantity.text = CoinUI.getCoins().ToString();
     }
 
-    private int parseInt(string text)
+/*    private int parseInt(string text)
     {
         string extractedNumber = new(text.Where(char.IsDigit).ToArray());
 
@@ -102,28 +104,34 @@ public class SkillTreeMenu : MonoBehaviour
     private bool hasEnoughCoin(int toCompare)
     {
         return CoinUI.getCoins() >= toCompare;
-    }
+    }*/
 
-    public void quitButton()
+/*    public void quitButton()
     {
-        this.playerHealAndCoinsUI.SetActive(true);
-        this.upgradeSkillsMenu.SetActive(false);
-        this.interactText.enabled = true;
+        base.playerHealAndCoinsUI.SetActive(true);
+        base.myMenu.SetActive(false);
+        base.interactText.enabled = true;
         Time.timeScale = 1f;
-    }
+    }*/
 
     private void upgradeStat(ref Text costText, ref Text lvlText, Action upgradePlayer)
     {
-        int costAmount = extractNumber(costText.text);
-        int upgradeLvl = extractNumber(lvlText.text);
+        int costAmount = base.extractNumber(costText.text);
+        int upgradeLvl = base.extractNumber(lvlText.text);
 
-        if (hasEnoughCoin(costAmount) && upgradeLvl < MAX_SKILL_LVL)
+        if (base.hasEnoughCoin(costAmount) && upgradeLvl < MAX_SKILL_LVL)
         {
             costText.text = "Cost: " + (costAmount + INCREMENT_COST);
             lvlText.text = "lv." + ++upgradeLvl + " / 10";
             upgradePlayer.Invoke();
-            CoinUI.removeCoins(costAmount);
-            this.coinQuantity.text = CoinUI.getCoins().ToString();
+            base.removeCoins(costAmount);
+            //CoinUI.removeCoins(costAmount);
+            //base.initCoinQuantity();
+            //this.coinQuantity.text = CoinUI.getCoins().ToString();
+        }
+        else
+        {
+            // msg telling the player don't have enougth gold
         }
     }
 

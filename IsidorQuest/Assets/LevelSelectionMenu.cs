@@ -2,42 +2,43 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSelectionMenu : MonoBehaviour
+public class LevelSelectionMenu : MenuInSpawn
 {
-    private GameObject nextLvlMenu;
-    private Text interactText;
-    private GameObject playerHealAndCoinsUI;
+    //private GameObject nextLvlMenu;
+    //private Text interactText;
+    //private GameObject playerHealAndCoinsUI;
 
-    private void Start()
+    private new void Start()
     {
-        this.nextLvlMenu = transform.GetChild(2).gameObject;
-        this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
-        this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
+        base.Start();
+        this.myMenu = transform.GetChild(2).gameObject;
+        //this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
+        //this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
     }
 
-    private void closeMenu()
+/*    private void closeMenu()
     {
         this.nextLvlMenu.SetActive(false);
-        this.interactText.enabled = true;
-        this.playerHealAndCoinsUI.SetActive(true);
+        base.interactText.enabled = true;
+        base.playerHealAndCoinsUI.SetActive(true);
         Time.timeScale = 1f;
-    }
+    }*/
 
     public void lunchWorld1LvlOne()
     {
-        closeMenu();
+        base.closeMenu();
         SceneManager.LoadScene("WorldOneLvl1");
         //CurrentSceenManager.instance.removeDontDestoyObjects();
     }
 
     public void lunchWorld1LvlTwo()
     {
-        closeMenu();
+        base.closeMenu();
         SceneManager.LoadScene("WorldOneLvl2");
     }
 
-    public void quitButton()
+  /*  public void quitButton()
     {
-        closeMenu();
-    }
+        base.closeMenu();
+    }*/
 }

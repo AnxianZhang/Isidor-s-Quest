@@ -1,27 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using System.Linq;
+
 
 public class Inventory : MonoBehaviour
 {
-
-    
     private int inventorySize = 4;
     private GameObject[] inventory;
 
-    // Start is called before the first frame update
     void Start()
     {
         inventory = new GameObject[inventorySize];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-//Add the item in the inventory, if the inventory is full return false
+    //Add the item in the inventory, if the inventory is full return false
     public bool AddItem(GameObject item){
         int index = 0;
         foreach (GameObject slot in inventory) {
@@ -45,6 +38,11 @@ public class Inventory : MonoBehaviour
 
     public GameObject[] GetInv(){
         return inventory;
+    }
+
+    public bool isFull()
+    {
+        return this.inventory.Count(item => item == null) > 0;
     }
 
     public void UseItem(int index)
