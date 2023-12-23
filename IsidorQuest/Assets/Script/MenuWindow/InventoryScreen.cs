@@ -46,7 +46,10 @@ public class InventoryScreen : MonoBehaviour
             Image sprite = slotsSprite[index].GetComponent<Image>();
             Button button = slotsSprite[index].GetComponent<Button>();
             if(items != null){
-                if(!updated[index]){
+                if (!updated[index]){
+                    Debug.Log("updateInventory");
+                    Debug.Log("item: " + items);
+                    Debug.Log("has an event: " + updated[index]);
                     sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
                     button.onClick.AddListener(() => {useItem(button.transform.parent.GetSiblingIndex()-1);});
                     button.interactable = true;
@@ -56,6 +59,7 @@ public class InventoryScreen : MonoBehaviour
             else{
                 sprite.sprite = null;
                 button.interactable = false;
+                button.onClick.RemoveAllListeners();
                 updated[index] = false;
             }
             index++;

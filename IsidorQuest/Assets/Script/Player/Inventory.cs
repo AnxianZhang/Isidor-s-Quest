@@ -25,8 +25,9 @@ public class Inventory : MonoBehaviour
         }
         if(index == inventorySize) return false;
         inventory[index] = item;
+        Debug.Log("in AddItem");
         Debug.Log(index);
-        Debug.Log(inventory[index]); 
+        Debug.Log(inventory[index]); // s'ajoute bien
         item.transform.SetParent(gameObject.transform);
         return true;
     }
@@ -49,6 +50,8 @@ public class Inventory : MonoBehaviour
 
     public void UseItem(int index)
     {
+        Debug.Log("in UseItem"); // x2
+        Debug.Log("idx: " + index + "item: "+ inventory[index]);
         inventory[index].GetComponent<InventoryItem>().onUse();
     }
 

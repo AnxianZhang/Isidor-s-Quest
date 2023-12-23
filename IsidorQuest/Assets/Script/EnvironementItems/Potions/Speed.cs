@@ -13,8 +13,8 @@ public class Speed : PotionItem
 
     private IEnumerator boostSpeed()
     {
-        base.mainPlayer.boostSpeed(this.speedAmount, '*');
         base.mainPlayer.useObject(gameObject);
+        base.mainPlayer.boostSpeed(this.speedAmount, '*');
         yield return new WaitForSeconds(5);
         base.mainPlayer.boostSpeed(this.speedAmount, '/');
         Destroy(gameObject);
