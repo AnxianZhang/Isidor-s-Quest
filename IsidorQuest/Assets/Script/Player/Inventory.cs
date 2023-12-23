@@ -25,6 +25,8 @@ public class Inventory : MonoBehaviour
         }
         if(index == inventorySize) return false;
         inventory[index] = item;
+        Debug.Log(index);
+        Debug.Log(inventory[index]); 
         item.transform.SetParent(gameObject.transform);
         return true;
     }

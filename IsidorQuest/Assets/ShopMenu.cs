@@ -48,4 +48,19 @@ public class ShopMenu : MenuUsingCoin
     {
         buy(ref this.healPotionText, ref this.heal);
     }
+
+    public void bySpeed()
+    {
+        buy(ref this.speedPotionText, ref this.speed);
+    }
+
+    public void byJump()
+    {
+        buy(ref this.jumpPotionText, ref this.jump);
+    }
+
+    public void bySrength()
+    {
+        buy(ref this.strengthPotionText, ref this.strength);
+    }
 }
