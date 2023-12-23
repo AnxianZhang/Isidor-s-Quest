@@ -80,9 +80,10 @@ const HomeScreen = ({ language }) => {
     const gameTitleTextFontSizeStyle = windowWidthByHook > 1350 ? 70 : 50;
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
     const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "12%" : "8%" : "5%" : 30
-    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? 700 : 800
+    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? windowWidthByHook <= 400 ? 750 : 680 : 700
     const emptyBoxThirdHeightStyle = windowWidthByHook <= 650 ? 600 : 700
-    const emptyBoxFourthHeightStyle = windowWidthByHook <= 650 ? 350 : 600
+    const emptyBoxFourthHeightStyle = windowWidthByHook <= 650 ? 300 : 250
+    const emptyBoxFinFourthHeightStyle = windowWidthByHook <= 650 ? 100 : 0
     const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
     const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 130 : 110 : 100
     const dispoDescripFlexDirect = windowWidthByHook <= 650 ? "column-reverse" : "row"
@@ -122,7 +123,7 @@ const HomeScreen = ({ language }) => {
                                     source={Guerrier}
                                     style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><span style={{color: "#C3503C"}}>{selectLanguage.Home.typeOneGuerrier}</span>{selectLanguage.Home.typeOneDesc}</Text>
+                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><Text style={{color: "#C3503C"}}>{selectLanguage.Home.typeOneGuerrier}</Text>{selectLanguage.Home.typeOneDesc}</Text>
                             </View>
 
                             <View style={styles.flexrow}>
@@ -130,7 +131,7 @@ const HomeScreen = ({ language }) => {
                                     source={Archer}
                                     style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><span style={{color: "#5BD94C"}}>{selectLanguage.Home.typeTwoArcher}</span>{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
+                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><Text style={{color: "#5BD94C"}}>{selectLanguage.Home.typeTwoArcher}</Text>{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
                             </View>
                         </View>
                     </View>
@@ -150,6 +151,7 @@ const HomeScreen = ({ language }) => {
                             </View>
                         </View>
                     </View>
+                    <View style={{ height: emptyBoxFinFourthHeightStyle }}></View> {/* empty box */}
                 </BackgroundPicture> 
             <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
             </ScrollView>
