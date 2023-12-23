@@ -6,10 +6,10 @@ import En from "../language/en.json"
 
 var language = Fr;
 const changeLanguage = (lang)=> {
-    if(lang === "Fr"){
+    if(lang === "Francais"){
         language = Fr;
     }
-    if(lang === "En"){
+    if(lang === "English"){
        language = En;
     }
     console.log(language);

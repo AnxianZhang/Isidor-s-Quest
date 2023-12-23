@@ -105,7 +105,7 @@ const HomeScreen = ({ language }) => {
                         <ButtonImage onPress={() => firstItemRef.current.scrollTo({y: 1300, animated: true})} source={{ uri: Previous }} style={styles.previousLogo} />
                     </View>
                     
-                    <View style={{ height: emptyBoxHeightStyle }}></View> {/* empty box */}
+                    <View style={{ height: emptyBoxHeightStyle }}></View> 
                     <View style={StyleSheet.compose(styles.SecondPartContainer, { paddingHorizontal: SecondPartContainerPaddingHorizontalStyle, })}>
                         <View style={styles.GameDescriptionContainer}>
                             <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.gameTitle}</Text>
@@ -113,7 +113,7 @@ const HomeScreen = ({ language }) => {
                         </View>
                     </View>
 
-                    <View style={{ height: emptyBoxThirdHeightStyle }}></View> {/* empty box */}
+                    <View style={{ height: emptyBoxThirdHeightStyle }}></View> 
                     <View style={StyleSheet.compose(styles.ThirdPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
                         <View style={styles.PlayerDescriptionContainer}>
                             <Text style={StyleSheet.compose(styles.playerDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
@@ -136,7 +136,7 @@ const HomeScreen = ({ language }) => {
                         </View>
                     </View>
 
-                    <View style={{ height: emptyBoxFourthHeightStyle }}></View> {/* empty box */}
+                    <View style={{ height: emptyBoxFourthHeightStyle }}></View>
                     <View style={StyleSheet.compose(styles.FourthPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
                         <View style={StyleSheet.compose(styles.DispoDescriptionContainer, { flexDirection: dispoDescripFlexDirect })}>
                             <View style={{flex: 0.4}}>
@@ -151,7 +151,7 @@ const HomeScreen = ({ language }) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ height: emptyBoxFinFourthHeightStyle }}></View> {/* empty box */}
+                    <View style={{ height: emptyBoxFinFourthHeightStyle }}></View> 
                 </BackgroundPicture> 
             <Footer backColor={"#7094CB"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
             </ScrollView>

@@ -18,7 +18,6 @@
         "connect": "Sign in",
         "disconnect": "Log out",
         "buttonPlay": "Play",
-        "buttonLanguage" : "Select language",
         "userProfile" : "Profile",
         "connected" : "Connected",
         "disconnected" : "Disconnected",

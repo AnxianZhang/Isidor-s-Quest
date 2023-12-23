@@ -99,12 +99,12 @@ const Header = (props) => {
             </View>
             <View style={styles.headerLastElement}>
                 <View>
-                    <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} />
-                    {open &&
-                        <View style={styles.listContainer}>
-                            <List onSelect={(selectedItem) => { setOpen(false); changeLanguage(selectedItem); }} setLanguage={props.setLanguage} language={props.language}/>
-                        </View>
-                    }
+                    {/* <ButtonImage onPress={() => setOpen(!open)} source={{ uri: World }} style={styles.worldPicture} /> */}
+                    {/* {open && */}
+                        {/* <View style={styles.listContainer}> */}
+                            <List onSelect={(selectedItem) => { setOpen(!open); changeLanguage(selectedItem); }} setLanguage={props.setLanguage} language={props.language}/>
+                        {/* </View> */}
+                    {/* } */}
                 </View>
                 <View style={styles.containConnect}>
                     {/* <ButtonText onPress={() => { isConnect === "true" ? disconnection() : navigation.navigate("Connexion") }} text={isConnect === "true" ? props.language.Header.disconnect : props.language.Header.connect} styleText={styles.headerText} /> */}
