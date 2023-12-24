@@ -1,4 +1,4 @@
-import { Text, View, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import React from 'react'
 import SelectDropdown from 'react-native-select-dropdown';
 import IconUser from "../assets/user.png";
@@ -37,7 +37,6 @@ const UserList = (props)=> {
         <SelectDropdown
             data={props.isConnect === "true" ? [props.language.Header.userProfile, props.language.Header.disconnect] : [props.language.Header.connect]}
             onSelect={(selectedItem, index) => {
-            // changeLanguage(selectedItem);
                 handleDropdownSelect(selectedItem)
             }}
             dropdownStyle={styles.dropdownContainer}

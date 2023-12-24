@@ -80,6 +80,7 @@ const ContactUsScreen = ({language}) => {
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
     const textInputWidthStyle = windowWidthByHook > 500? 400 : "100%"
+    const textAreaWidthStyle = windowWidthByHook > 500? 400 : "115%"
     const buttonWidthStyle = windowWidthByHook > 500? 400 : "200%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
@@ -107,7 +108,7 @@ const ContactUsScreen = ({language}) => {
                     </View>
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={StyleSheet.compose(GLOBAL_STYLES.form.textarea, { width: textInputWidthStyle})}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.textarea, { width: textAreaWidthStyle, alignSelf: "center"})}
                             value={message}
                             placeholder={selectLanguage.Contact.message}
                             onChangeText={(text) => handleInputChange('message', text)}

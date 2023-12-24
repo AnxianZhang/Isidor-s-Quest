@@ -18,7 +18,6 @@
         "connect" : "Se connecter",
         "disconnect" : "Se déconnecter",
         "buttonPlay" : "Jouer",
-        "buttonLanguage" : "Sélectionnez langue",
         "userProfile" : "Profil",
         "connected" : "Connecté",
         "disconnected" : "Débranché",
@@ -111,6 +110,11 @@
         "familyName": "Nom",
         "pseudo": "Pseudo",
         "btnEnv": "Valider",
-        "btnEdit": "Mise à jour"
+        "btnEdit": "Mise à jour",
+        "notifOk": "Changement réussi",
+        "notifPseudo": "Ce pseudo est déjà pris",
+        "notifNull": "Vous n'avez rien changé",
+        "notifErr": "Échec du changement de données"
+
     }
 }

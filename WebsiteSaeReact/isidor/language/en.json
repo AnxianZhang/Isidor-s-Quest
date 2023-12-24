@@ -18,7 +18,6 @@
         "connect": "Sign in",
         "disconnect": "Log out",
         "buttonPlay": "Play",
-        "buttonLanguage" : "Select language",
         "userProfile" : "Profile",
         "connected" : "Connected",
         "disconnected" : "Disconnected",
@@ -111,6 +110,10 @@
         "familyName": "Last Name",
         "pseudo": "Nickname",
         "btnEnv": "Validate",
-        "btnEdit": "Update"
+        "btnEdit": "Update",
+        "notifOk": "Change successful",
+        "notifPseudo": "This nickname is already taken",
+        "notifNull": "You haven't changed anything",
+        "notifErr": "Failed to change data"
     }
 }

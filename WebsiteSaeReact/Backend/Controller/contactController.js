@@ -14,15 +14,6 @@ const contactEmail = nodemailer.createTransport({
     }
 });
 
-const verifyContactEmail = async () => {
-    try {
-        await contactEmail.verify();
-        console.log("Ready to Send");
-    } catch (error) {
-        console.error("Error verifying email:", error);
-    }
-};
-
 const mailSend = async(req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -35,7 +26,19 @@ const mailSend = async(req, res) => {
                 <p>Email: ${email}</p>
                 <p>Message: ${message}</p>`,
     };
+    const mailCli = {
+        from: '"no-reply" <foo@example.com>', // Sender address
+        to: email, // Receiver address from req.body.email
+        subject: 'Confirmation du message pour Isidor\'s Team',
+        html: `<p>Madame, Monsieur,<br>Nous vous informons de la bonne réception de votre message.</p>
+                <p>---<br>Isidor\'s Team<br>=========================================================================================================</p>
+                <p>Voici, pour votre information, le contenu du message que vous avez saisi :</p>
+                <p>Votre identité :<br>${name}</p>
+                <p>Votre message :<br>${message}</p>`,
+    };
+
     try {
+        await contactEmail.sendMail(mailCli);
         await contactEmail.sendMail(mail);
         res.json({ status: "Message Sent" });
     } catch (error) {
