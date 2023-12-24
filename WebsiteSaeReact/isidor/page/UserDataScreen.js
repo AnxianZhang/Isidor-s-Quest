@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import { useIsFocused } from '@react-navigation/native';
 const UserDataScreen = ({language}) => {
     const [selectLanguage, setSelectLanguage] = useState(language); 
     useEffect(()=>{
@@ -15,12 +16,43 @@ const UserDataScreen = ({language}) => {
     const [nomFamille, setNomFamille] = useState('');
     const [pseudo, setPseudo] = useState('');
     const [email, setEmail] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const [notif, setNotif] = useState('');
+    const isFocused = useIsFocused();
+
     useEffect(() => {
         if (!isEditing) {
             getUserData();
         }
-    }, []);
+    }, [isFocused])
     
+    const handleEditing = () => {
+        if (isEditing) {
+            sendDataForUpdate();
+        }
+        setIsEditing(!isEditing);
+        setNotif('');
+    };
+
+    const handleInputChange = (input, value) => {
+        switch (input) {
+            case 'prenom':
+                setPrenom(value);
+                setNotif('');
+                break;
+            case 'nomFamille':
+                setNomFamille(value);
+                setNotif('');
+                break;
+            case 'pseudo':
+                setPseudo(value);
+                setNotif('');
+                break;
+            default:
+                break;
+        }
+    };
+
     const getUserData = async () => {
         try {
             const response = await fetch('http://localhost:3005/getData', {
@@ -50,31 +82,7 @@ const UserDataScreen = ({language}) => {
             console.error('Erreur lors de la récupération des données :', error);
         }
     };
-
-    const handleInputChange = (input, value) => {
-        switch (input) {
-            case 'prenom':
-                setPrenom(value);
-                break;
-            case 'nomFamille':
-                setNomFamille(value);
-                break;
-            case 'pseudo':
-                setPseudo(value);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const [isEditing, setIsEditing] = useState(false);
-    const handleEditing = () => {
-        if (isEditing) {
-            sendDataForUpdate();
-        }
-        setIsEditing(!isEditing);
-    };
-
+                    
     const sendDataForUpdate = async () => {
         try {
             const response = await fetch('http://localhost:3005/changeData', {
@@ -91,15 +99,27 @@ const UserDataScreen = ({language}) => {
                 }),
             }).then(res => res.status)
 
-            if (response !== 200) {
+            getUserData()
+            if (response == 200) {
                 console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                setNotif(selectLanguage.UserData.notifOk);
                 return;
             }
-            getUserData();
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données :', error);
+            if (response == 402) {
+                console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                setNotif(selectLanguage.UserData.notifPseudo);
                 return;
             }
+            if (response == 403) {
+                console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                setNotif(selectLanguage.UserData.notifNull);
+                return;
+            }
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données :', error);
+            setNotif(selectLanguage.UserData.notifErr);
+            return;
+        }
     };
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -148,12 +168,14 @@ const UserDataScreen = ({language}) => {
 
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity 
+                            disabled={isEditing === true ?(prenom&&nomFamille&&pseudo?false:true):false}
                             onPress={handleEditing} 
-                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: isEditing === true ? "#5BD94C" : "#E55839", width: buttonWidthStyle })}
+                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: isEditing === true ?(prenom&&nomFamille&&pseudo?"#5BD94C":"#a9a9a9"):"#E55839", width: buttonWidthStyle })}
                         >
                             <Text style={styles.EnvoyerButtonText}>{ isEditing === true ? selectLanguage.UserData.btnEnv : selectLanguage.UserData.btnEdit }</Text>
                         </TouchableOpacity>
                     </View>
+                    {notif && <Text style={GLOBAL_STYLES.form.notification}>{notif}</Text>}
                 </View>
             </View>
             <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>

@@ -76,8 +76,14 @@ const changeUserData = async (req, res) => {
     // console.log(datas)
     // const existUserMail = await User.findOne({ email: datas.email }).exec();
     const existUserPseudo = await User.findOne({ pseudo: datas.pseudo }).exec();
-    if (existUserPseudo !== null) {
+    if (existUserPseudo != null&&existUserPseudo.email!=datas.email) {
       return res.status(402).send("Ce pseudo est déja pris");
+    }
+    if (currentUser.email==datas.email&&
+      currentUser.prenom==datas.prenom&&
+      currentUser.nomFamille==datas.nomFamille&&
+      currentUser.pseudo==datas.pseudo) {
+      return res.status(403).send("Pas de modification");
     }
 
     const result = await User.updateOne(

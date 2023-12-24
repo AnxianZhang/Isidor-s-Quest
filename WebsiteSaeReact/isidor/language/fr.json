@@ -110,6 +110,11 @@
         "familyName": "Nom",
         "pseudo": "Pseudo",
         "btnEnv": "Valider",
-        "btnEdit": "Mise à jour"
+        "btnEdit": "Mise à jour",
+        "notifOk": "Changement réussi",
+        "notifPseudo": "Ce pseudo est déjà pris",
+        "notifNull": "Vous n'avez rien changé",
+        "notifErr": "Échec du changement de données"
+
     }
 }
