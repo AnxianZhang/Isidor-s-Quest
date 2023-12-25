@@ -25,9 +25,9 @@ public class Inventory : MonoBehaviour
         }
         if(index == inventorySize) return false;
         inventory[index] = item;
-        Debug.Log("in AddItem");
+/*        Debug.Log("in AddItem");
         Debug.Log(index);
-        Debug.Log(inventory[index]); // s'ajoute bien
+        Debug.Log(inventory[index]); // s'ajoute bien*/
         item.transform.SetParent(gameObject.transform);
         return true;
     }
