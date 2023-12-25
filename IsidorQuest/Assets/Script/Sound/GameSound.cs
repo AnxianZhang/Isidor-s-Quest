@@ -16,6 +16,7 @@ public class GameSound : MonoBehaviour
     [SerializeField] private AudioSource snakeSound;
     [SerializeField] private AudioSource golemSound;
     [SerializeField] private AudioSource playerDamage;
+    [SerializeField] private AudioSource potionDrink;
     void Start()
     {
         
@@ -87,5 +88,12 @@ public class GameSound : MonoBehaviour
     }
     public bool playerDamageIsPlaying(){
         return playerDamage.isPlaying;
+    }
+
+    public void playerDrinkSound(){
+        potionDrink.Play();
+    }
+    public bool playerDrinkIsPlaying(){
+        return potionDrink.isPlaying;
     }
 }

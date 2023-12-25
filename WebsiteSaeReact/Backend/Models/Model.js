@@ -16,7 +16,7 @@ const codeSchema = new mongoose.Schema({
  });
 
  const gameSchema = new mongoose.Schema({
-    //pseudo : String,
+    pseudo : String,
     levelName : String,
     chooseCharacter : String,
     coins : Number,
@@ -25,6 +25,13 @@ const codeSchema = new mongoose.Schema({
     successPercentLevel : Number
  });
  
+ const userGameSchema = new mongoose.Schema({
+    pseudo : String,
+    coins : Number,
+    Archer : {levelStrength : Number, levelDefence : Number,  levelSpeed : Number,levelLife : Number},
+    Warrior : {levelStrength : Number, levelDefence : Number,  levelSpeed : Number,levelLife : Number},
+ });
+
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
   };
@@ -36,9 +43,10 @@ userSchema.methods.validPassword = function(password) {
 const User = mongoose.model('User', userSchema, "User");
 const Code = mongoose.model('Code', codeSchema, "Code");
 const Game = mongoose.model('Game', gameSchema, "Game");
-
+const UserGame = mongoose.model('UserGame', userGameSchema, "UserGame");
 module.exports =  {
     User,
     Code,
-    Game
+    Game,
+    UserGame
 }

@@ -127,7 +127,10 @@ public abstract class Player : PlayerMovement
 
     public void Attack(int degat, Vector3 enemyPosition)
     {
-        this.currentLife -= degat;
+        float newDefence = 1 - this.defence;
+        int newDegat = (int) Math.Round(degat * newDefence, 0);
+        print(newDegat);
+        this.currentLife -= newDegat;
         float res = enemyPosition.x - transform.position.x;
         if (!gm.playerDamageIsPlaying())
         {

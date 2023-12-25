@@ -13,6 +13,9 @@ public class Speed : PotionItem
 
     private IEnumerator boostSpeed()
     {
+        if(!base.gm.playerDrinkIsPlaying()){
+            base.gm.playerDrinkSound();
+        }
         base.mainPlayer.useObject(gameObject);
         base.mainPlayer.boostSpeed(this.speedAmount, '*');
         yield return new WaitForSeconds(5);

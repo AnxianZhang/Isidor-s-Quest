@@ -13,6 +13,9 @@ public class Force : PotionItem
 
     private IEnumerator boostStrength()
     {
+        if(!base.gm.playerDrinkIsPlaying()){
+            base.gm.playerDrinkSound();
+        }
         base.mainPlayer.boostForce(this.strengthAmount, '*');
         base.mainPlayer.useObject(gameObject);
         yield return new WaitForSeconds(5);

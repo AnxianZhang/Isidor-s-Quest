@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const { User } = require("../Models/Model")
-
+const { User, UserGame } = require("../Models/Model")
+var localStorage = require('localStorage')
 
 const Inscription = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
+    localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
     const newUser = new User({
       prenom: data.prenom,
       nomFamille: data.nomFamille,
@@ -13,9 +14,16 @@ const Inscription = async (req, res) => {
       pseudo: data.pseudo,
       isPay: false
     });
+    const newUserGame = new UserGame({
+        pseudo : data.pseudo,
+        coins : 0,
+        Archer : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1},
+        Warrior : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1}
+    })
     newUser.password = newUser.generateHash(data.password);
     req.session.pseudo = data.pseudo;
     await newUser.save();
+    await newUserGame.save();
     return res.status(200).send('Données enregistrées avec succès');
   } catch (error) {
     console.error('erreur durant l inscription', error);
@@ -27,6 +35,7 @@ const Connexion = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
+    localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
     if (findUserPseudo === null) {
       return res.status(401).send("Nom d'utilisateur/Mot de passe incorrect");
@@ -99,7 +108,8 @@ const changeUserData = async (req, res) => {
     // console.log(result)
 
     if (result.acknowledged)
-      req.session.pseudo=datas.pseudo 
+      req.session.pseudo=datas.pseudo
+      localStorage.setItem('isConnect', JSON.stringify({pseudo : datas.pseudo}));
       return res.status(200).send('UserData change avec succes')
   }catch (error) {
     console.error('erreur durant changeUserData', error);
@@ -138,6 +148,7 @@ const changePwd = async (req, res) => {
 
 const isConnect = async (req, res) => {
   if (req.session.pseudo == null) {
+    localStorage.removeItem("isConnect");
     return res.status(200).send(false);
   }
   else {
@@ -146,6 +157,7 @@ const isConnect = async (req, res) => {
 }
 
 const disconnection = async (req, res) => {
+  localStorage.removeItem("isConnect");
   req.session.pseudo = null;
   return res.status(200).send(false);
 }

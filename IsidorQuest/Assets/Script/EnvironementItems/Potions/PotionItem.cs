@@ -6,11 +6,13 @@ public abstract class PotionItem : InventoryItem
 {
     protected Player mainPlayer { get; set; }
     public StoringData storeData;
+    protected GameSound gm;
 
 
     void Start()
     {
         this.mainPlayer = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
+        this.gm = GameObject.Find("SoundManager").GetComponent<GameSound>();
     }
 
     public void makeItDisapeard()

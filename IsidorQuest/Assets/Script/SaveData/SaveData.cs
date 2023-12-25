@@ -18,6 +18,17 @@ public class SaveData : MonoBehaviour
         public bool reussie;
         public double successPercentLevel;
     }
+
+    [System.Serializable]
+    public class SaveUserGameDatas
+    {
+        public int coins;
+        public string chooseCharacter;
+        public int levelStrength; 
+        public int levelDefence;   
+        public int levelSpeed;
+        public int levelLife; 
+    }
     private bool isWrite = true;
     private GameObject door;
     private GameObject mainPlayer;
@@ -42,6 +53,7 @@ public class SaveData : MonoBehaviour
             double percentSuccessLevel = getLevelPercent(this.SpawnPoint.GetComponent<Transform>().position.x, this.mainPlayer.GetComponent<Transform>().position.x, this.door.GetComponent<Transform>().position.x);
             int coinQuantity = CoinUI.getCoins();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
         if (door.GetComponent<DoorToNext>().isDoor && isWrite)
@@ -50,6 +62,7 @@ public class SaveData : MonoBehaviour
             string currentSceneName = currentScene.name;
             int coinQuantity = CoinUI.getCoins();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }
@@ -105,6 +118,30 @@ public class SaveData : MonoBehaviour
             health = health,
             reussie = reussie,
             successPercentLevel = percentSuccess
+        };
+
+        string json = JsonUtility.ToJson(data);
+        using (UnityWebRequest www = UnityWebRequest.PostWwwForm(url, json))
+        {
+            www.SetRequestHeader("content-type", "application/json");
+            www.uploadHandler.contentType = "application/json";
+            www.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json));
+
+            yield return www.SendWebRequest();
+        }
+    }
+
+    public IEnumerator UserSaveProfile(string url, int coins, string chooseCharacter, int levelStrength, int levelDefence, int levelLife, int levelSpeed)
+    {
+        isWrite = false;
+        SaveUserGameDatas data = new SaveUserGameDatas
+        {
+           coins = coins,
+           chooseCharacter = chooseCharacter,
+           levelStrength = levelStrength,
+           levelDefence = levelDefence,
+           levelLife = levelLife,
+           levelSpeed = levelSpeed,
         };
 
         string json = JsonUtility.ToJson(data);

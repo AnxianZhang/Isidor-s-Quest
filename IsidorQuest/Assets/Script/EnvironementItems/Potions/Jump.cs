@@ -12,6 +12,9 @@ public class Jump : PotionItem
 
     private IEnumerator boostJump()
     {
+        if(!base.gm.playerDrinkIsPlaying()){
+            base.gm.playerDrinkSound();
+        }
         base.mainPlayer.jumpBoost(this.jumpAmount, '*');
         base.mainPlayer.useObject(gameObject);
         yield return new WaitForSeconds(5);
