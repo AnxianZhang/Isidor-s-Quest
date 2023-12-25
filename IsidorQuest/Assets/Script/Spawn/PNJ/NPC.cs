@@ -11,7 +11,7 @@ public abstract class NPC : MonoBehaviour
     private GameObject playerHealAndCoinsUI;
 
     protected abstract string textToShow();
-
+    protected virtual void otherAction() { }
 
     protected void Start()
     {
@@ -28,6 +28,7 @@ public abstract class NPC : MonoBehaviour
             Time.timeScale = !this.interactText.enabled ? 0 : 1;
             this.playerHealAndCoinsUI.SetActive(!this.menuToOpen.activeInHierarchy);
             PauseMenu.setIsInSkillTreeMenu(!this.interactText.enabled);
+            otherAction();
         }
     }
 

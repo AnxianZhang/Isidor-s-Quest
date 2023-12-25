@@ -43,15 +43,19 @@ public class InventoryScreen : MonoBehaviour
         GameObject[] inv =  inventory.GetInv();
         int index = 0;
         foreach (GameObject items in inv) {
+            Debug.Log("index" + index);
             Image sprite = slotsSprite[index].GetComponent<Image>();
             Button button = slotsSprite[index].GetComponent<Button>();
             if(items != null){
                 if (!updated[index]){
-                    Debug.Log("updateInventory");
+/*                    Debug.Log("updateInventory");
                     Debug.Log("item: " + items);
-                    Debug.Log("has an event: " + updated[index]);
+                    Debug.Log("has an event: " + updated[index]);*/
                     sprite.sprite = items.GetComponent<SpriteRenderer>().sprite;
-                    button.onClick.AddListener(() => {useItem(button.transform.parent.GetSiblingIndex()-1);});
+                    button.onClick.AddListener(() => {
+                        if (!OwnChest.isInOwnChest)
+                            useItem(button.transform.parent.GetSiblingIndex()-1);
+                    });
                     button.interactable = true;
                     updated[index] = true;
                 } 
