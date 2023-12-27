@@ -12,6 +12,7 @@ TagManager:
   - Msg
   - HealthPotion
   - Inventory
+  - SlotSprite
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Ladder
   - Market
   - PNJ
-  - 
+  - OnlyEnemy
   - 
   - 
   - 

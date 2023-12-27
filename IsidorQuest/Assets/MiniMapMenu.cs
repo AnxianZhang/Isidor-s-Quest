@@ -18,15 +18,15 @@ public class MiniMapMenu : MonoBehaviour
 
     public void ZoomIn()
     {
-/*        Debug.Log("hollo");
-*/        cam.orthographicSize -= 2f;
-        if (cam.orthographicSize < MinH) { cam.orthographicSize = MinH; }
+        //Debug.Log("hollo");
+        cam.orthographicSize += 2f;
+        if (cam.orthographicSize > MaxH) { cam.orthographicSize = MaxH; }
     }
     public void ZoomOut()
     {
         //Debug.Log("siba");
-        cam.orthographicSize += 2f;
-        if (cam.orthographicSize > MaxH) { cam.orthographicSize = MaxH; }
+         cam.orthographicSize -= 2f;
+        if (cam.orthographicSize < MinH) { cam.orthographicSize = MinH; }
 
     }
 }
