@@ -118,7 +118,7 @@ const Header = (props) => {
                     <TouchableOpacity onPress={() => NavigationGestion()}>
                         <View style={styles.buttonContent}>
                             <Image source={{ uri: Play }} style={styles.playLogo} />
-                            {windowWidth > 750 && <Text style={styles.headerText}>{props.language.Home.buttonPlay}</Text>}
+                            {windowWidth > 750 && <Text style={[styles.headerText, GLOBAL_STYLES.pixSanRegular]}>{props.language.Home.buttonPlay}</Text>}
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     // },
     headerText: {
         fontSize: 24,
-        fontFamily: "regular",
         color: "white",
     },
     headerLastElement: {

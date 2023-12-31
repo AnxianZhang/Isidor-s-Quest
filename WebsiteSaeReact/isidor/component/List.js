@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import World from "../assets/world.png"
 import Fr from "../language/fr.json";
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
+import { GLOBAL_STYLES } from '../style/global';
 
 const List = (props) => {
 // const List = ({ onSelect }) => {
@@ -29,7 +30,7 @@ const List = (props) => {
          }}
          dropdownStyle={styles.dropdownContainer}
          buttonStyle={styles.buttonStyle}
-         buttonTextStyle={styles.buttonTextStyle}
+         buttonTextStyle={[styles.buttonTextStyle, GLOBAL_STYLES.pixSanRegular]}
          defaultButtonText={langStatusRespon}
          buttonTextAfterSelection={() => {
             return langStatusRespon;
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
    },
    buttonTextStyle:{
        fontSize: 24,
-       fontFamily: "regular",
        color: "white",
    },
    worldPicture: {

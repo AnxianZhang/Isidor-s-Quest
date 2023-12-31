@@ -5,6 +5,7 @@ import IconUser from "../assets/user.png";
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { getLanguage } from '../function/languageSelect';
 import { useEffect } from 'react';
+import { GLOBAL_STYLES } from '../style/global';
 
 const UserList = (props)=> {
     useEffect(()=>{
@@ -41,7 +42,7 @@ const UserList = (props)=> {
             }}
             dropdownStyle={styles.dropdownContainer}
             buttonStyle={styles.buttonStyle}
-            buttonTextStyle={StyleSheet.compose(styles.buttonTextStyle,{color: colorBtnTxt})}
+            buttonTextStyle={[styles.buttonTextStyle,{color: colorBtnTxt}, GLOBAL_STYLES.pixSanRegular]}
             defaultButtonText={userStatusRespon}
             buttonTextAfterSelection={() => {
                 return userStatusRespon;
@@ -70,7 +71,6 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle:{
         fontSize: 24,
-        fontFamily: "regular",
         // color: "white",
     }
  })

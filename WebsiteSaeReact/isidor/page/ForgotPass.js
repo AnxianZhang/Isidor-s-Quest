@@ -58,7 +58,7 @@ const ForgotPass = ({ language }) => {
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View>
-                <View style={{ height: 522 }}>
+                <View style={{ height: 550 }}>
                     <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 300}]}>
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>

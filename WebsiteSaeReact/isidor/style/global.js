@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const GLOBAL_STYLES = StyleSheet.create({
+    pixSanRegular:{
+        fontFamily: 'pixSanRegular',
+    },
     backcolor: {
         flex: 1,
         backgroundColor: "#7094CB"

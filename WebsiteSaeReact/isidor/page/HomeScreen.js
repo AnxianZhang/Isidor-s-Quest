@@ -19,6 +19,7 @@ import PC from "../assets/pc.png"
 import { getLanguage } from '../function/languageSelect';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
+import { GLOBAL_STYLES } from '../style/global';
 
 const windowHeight = Dimensions.get('window').height;
 const HomeScreen = ({ language }) => {
@@ -84,7 +85,7 @@ const HomeScreen = ({ language }) => {
     const emptyBoxThirdHeightStyle = windowWidthByHook <= 650 ? 600 : 700
     const emptyBoxFourthHeightStyle = windowWidthByHook <= 650 ? 300 : 250
     const emptyBoxFinFourthHeightStyle = windowWidthByHook <= 650 ? 100 : 0
-    const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [45, 30] : [40, 25] : [35, 20]
+    const [gameDescriptionFontTitleSize, gameDescriptionTextFontSize] = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? [40, 25] : [38, 23] : [35, 20]
     const playerImgSize = windowWidthByHook > 750 ? windowWidthByHook > 1610 ? 130 : 110 : 100
     const dispoDescripFlexDirect = windowWidthByHook <= 650 ? "column-reverse" : "row"
     return (
@@ -93,13 +94,13 @@ const HomeScreen = ({ language }) => {
                 <BackgroundPicture source={BackgroundGame}  style={styles.image}>
                     <Header setIsConnect={setIsConnect} setLanguage={setSelectLanguage} language={selectLanguage} />
                     <View style={styles.gameTitle}>
-                        <Text style={StyleSheet.compose(styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, })}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
+                        <Text style={[styles.gameTitleText, { fontSize: gameTitleTextFontSizeStyle, }, GLOBAL_STYLES.pixSanRegular]}>Isidor's Quest:{"\n"}Chasing the Glow</Text>
                     </View>
                     <View style={styles.containButtonPlay}>
                         <TouchableOpacity onPress={() => NavigationGestion()}>
                             <View style={styles.buttonContent}>
                                 <Image source={{ uri: Play }} style={styles.playLogo} />
-                                <Text style={styles.headerText}>{selectLanguage.Home.buttonPlay}</Text>
+                                <Text style={[styles.headerText, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.buttonPlay}</Text>
                             </View>
                         </TouchableOpacity>
                         <ButtonImage onPress={() => firstItemRef.current.scrollTo({y: 1300, animated: true})} source={{ uri: Previous }} style={styles.previousLogo} />
@@ -108,22 +109,22 @@ const HomeScreen = ({ language }) => {
                     <View style={{ height: emptyBoxHeightStyle }}></View> 
                     <View style={StyleSheet.compose(styles.SecondPartContainer, { paddingHorizontal: SecondPartContainerPaddingHorizontalStyle, })}>
                         <View style={styles.GameDescriptionContainer}>
-                            <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.gameTitle}</Text>
-                            <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.gameDescPartOne}{"\n\n"}{selectLanguage.Home.gameDescPartTwo}</Text>
+                            <Text style={[styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize }, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.gameTitle}</Text>
+                            <Text style={[styles.gameDescription, { fontSize: gameDescriptionTextFontSize }, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.gameDescPartOne}{"\n\n"}{selectLanguage.Home.gameDescPartTwo}</Text>
                         </View>
                     </View>
 
                     <View style={{ height: emptyBoxThirdHeightStyle }}></View> 
                     <View style={StyleSheet.compose(styles.ThirdPartContainer, { paddingHorizontal: ThirdAndFourthPartContainerPaddingHorizontalStyle})}>
                         <View style={styles.PlayerDescriptionContainer}>
-                            <Text style={StyleSheet.compose(styles.playerDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.playerTitle}</Text>
+                            <Text style={[styles.playerDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize }, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.playerTitle}</Text>
                             
                             <View style={styles.flexrow}>
                                 <Image 
                                     source={Guerrier}
                                     style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><Text style={{color: "#C3503C"}}>{selectLanguage.Home.typeOneGuerrier}</Text>{selectLanguage.Home.typeOneDesc}</Text>
+                                <Text style={[styles.playerDescription, { fontSize: gameDescriptionTextFontSize }, GLOBAL_STYLES.pixSanRegular]}><Text style={{color: "#C3503C"}}>{selectLanguage.Home.typeOneGuerrier}</Text>{selectLanguage.Home.typeOneDesc}</Text>
                             </View>
 
                             <View style={styles.flexrow}>
@@ -131,7 +132,7 @@ const HomeScreen = ({ language }) => {
                                     source={Archer}
                                     style = {{ width: playerImgSize, height: playerImgSize }}
                                 ></Image>
-                                <Text style={StyleSheet.compose(styles.playerDescription, { fontSize: gameDescriptionTextFontSize })}><Text style={{color: "#5BD94C"}}>{selectLanguage.Home.typeTwoArcher}</Text>{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
+                                <Text style={[styles.playerDescription, { fontSize: gameDescriptionTextFontSize }, GLOBAL_STYLES.pixSanRegular]}><Text style={{color: "#5BD94C"}}>{selectLanguage.Home.typeTwoArcher}</Text>{selectLanguage.Home.typeTwoDescPartOne}{"\n"}{selectLanguage.Home.typeTwoDescPartTwo}</Text>
                             </View>
                         </View>
                     </View>
@@ -146,8 +147,8 @@ const HomeScreen = ({ language }) => {
                             </View>
 
                             <View style={StyleSheet.compose(styles.flexcom, { flex: 0.6})}>
-                                <Text style={StyleSheet.compose(styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize })}>{selectLanguage.Home.dispoTitle}</Text>
-                                <Text style={StyleSheet.compose(styles.gameDescription, { fontSize: gameDescriptionTextFontSize })}>{selectLanguage.Home.dispoDesc}</Text>
+                                <Text style={[styles.gameDescriptionTitleText, { fontSize: gameDescriptionFontTitleSize }, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.dispoTitle}</Text>
+                                <Text style={[styles.gameDescription, { fontSize: gameDescriptionTextFontSize }, GLOBAL_STYLES.pixSanRegular]}>{selectLanguage.Home.dispoDesc}</Text>
                             </View>
                         </View>
                     </View>
@@ -179,7 +180,6 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     gameTitleText: {
-        fontFamily: "Regular",
         color: "white",
         textAlign: 'center',
     },
@@ -218,26 +218,24 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     gameDescriptionTitleText: {
-        fontFamily: "Bold",
         color: "#FFFFFF",
         marginVertical: 10
     },
     gameDescription: {
-        fontFamily: "Light",
-        color: "white",
+        color: "#FFFFFF",
         marginVertical: 20
     },
     headerText: {
         fontSize: 24,
-        fontFamily: "regular",
-        color: "white",
+        color: "#FFFFFF",
     },
     ThirdPartContainer: {
         flex: 1,
     },
     flexrow : {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        margin: 10,
     },
     flexcom : {
         flexDirection: "column",
@@ -252,14 +250,12 @@ const styles = StyleSheet.create({
         paddingBottom: 60,
     },
     playerDescriptionTitleText: {
-        fontFamily: "Bold",
-        color: "#FFFFFF",
+        color: "#DCDCDC",
         marginVertical: 10,
         textAlign: "center"
     },
     playerDescription: {
-        fontFamily: "Light",
-        color: "black",
+        color: "#DCDCDC",
     },
     FourthPartContainer: {
         flex: 1,

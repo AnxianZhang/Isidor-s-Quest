@@ -32,7 +32,9 @@ const Footer = ({ backColor, ...props}) => {
                     </View>
                 </View>
                 <View style={styles.copyRight}>
-                    <Text style={[styles.text, { marginVertical: 25, textAlign: "center" }]}>&copy; Isidor's Quest - 2023 -- {props.language.Footer.copyRight}.</Text>
+                    <Text style={[styles.text, { marginVertical: 25, textAlign: "center" }, GLOBAL_STYLES.pixSanRegular]}>
+                        <Text style={[styles.text, {fontFamily: "light"}]}>&copy;</Text>
+                        Isidor's Quest - 2023 - 2024 -- {props.language.Footer.copyRight}.</Text>
                 </View>
             </View>
         </View>
@@ -60,11 +62,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#f1f1f1",
         marginVertical: 5,
-        marginHorizontal: 15
+        marginHorizontal: 5,
     },
     copyRight: {
         borderTopWidth: 1,
         borderTopColor: "#4A4F56",
         alignItems: "center",
+        flexDirection: 'row',
+        justifyContent: 'center',
     }
 })

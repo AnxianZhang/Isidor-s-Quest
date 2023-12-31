@@ -1,11 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';//Navigation des différent page de l'application
 import { createNativeStackNavigator } from '@react-navigation/native-stack';//Navigation des différent page de l'application
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import HomeScreen from './page/HomeScreen';
 import RegisterScreen from './page/RegisterScreen';
 import ConnexionScreen from './page/ConnexionScreen';
 import UnityCompile from './page/UnityCompilerScreen';
 import APropos from './page/APropos';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import fr from "./language/fr.json"
 import PaymentCardScreen from './page/PaymentScreen';
 import VerificationScreen from './page/VerificationUserCodeScreen';
@@ -16,15 +18,33 @@ import UserDataScreen from './page/UserDataScreen';
 import ForgotPass from './page/ForgotPass';
 import ChangePwd from './page/ChangePwd';
 import ChangePwdSuccess from './page/ChangePwdSuccess';
+
 const Stack = createNativeStackNavigator();
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   const [selectLanguage, setSelectLanguage] = useState(fr);
 
   const linking = {
 
   };
+
+  const [fontsLoaded, fontError] = useFonts({
+    pixSanRegular: require('./assets/fonts/PixelifySans-Regular.ttf'),
+    // pixSanBold: require('./assets/fonts/PixelifySans-Bold.ttf'),
+    // VT323: require('./assets/fonts/VT323-Regular.ttf'),
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError)
+      await SplashScreen.hideAsync();
+  }, [fontsLoaded, fontError])
+
+  if (!fontsLoaded && !fontError)
+    return null
+
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer linking={linking} onReady={onLayoutRootView}>
       <Stack.Navigator>
         <Stack.Screen name="Home" options={{ headerShown: false }}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="APropos" options={{ headerShown: false }}>{() => (<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
