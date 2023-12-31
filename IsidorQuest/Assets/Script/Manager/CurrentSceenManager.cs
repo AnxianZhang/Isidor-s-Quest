@@ -23,6 +23,13 @@ public class CurrentSceenManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        if (SceneManager.GetActiveScene().name.Equals("WorldOneLvl1"))
+        {
+            foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+                if (!player.activeInHierarchy)
+                    Destroy(player);
+        }
     }
 
     private void Start()
@@ -44,9 +51,9 @@ public class CurrentSceenManager : MonoBehaviour
             }
     }*/
 
-    public void removeDontDestoyObjects()
+    public void removeDontDestoyObjects(bool isPressionOnMainMenuBUtton = false)
     {
-        List<DontDestroy> toRemove = new List<DontDestroy>();
+        List<DontDestroy> toRemove = new();
         for (int i = 0; i < this.objectToDestroy.Count; ++i)
         {
             if (!Player.hasChangeSceen)
@@ -55,6 +62,8 @@ public class CurrentSceenManager : MonoBehaviour
             }
             else if (!this.objectToDestroy[i].hasChangeSceen)
             {
+                Debug.Log("lmao");
+
                 this.objectToDestroy[i].destroy();
                 toRemove.Add(this.objectToDestroy[i]);
             }

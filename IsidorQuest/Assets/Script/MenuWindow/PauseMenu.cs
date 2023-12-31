@@ -55,7 +55,8 @@ public class PauseMenu : MonoBehaviour
     public void mainMenu()
     {
         resume();
-        CurrentSceenManager.instance.removeDontDestoyObjects();
+        Player.hasChangeSceen = false;
+        CurrentSceenManager.instance.removeDontDestoyObjects(true);
         SceneManager.LoadScene("HomeMenu");
     }
 
