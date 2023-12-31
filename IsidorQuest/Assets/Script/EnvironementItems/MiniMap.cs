@@ -29,7 +29,7 @@ public class MiniMap : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        if (currentSceneName == "Village")
+        if (currentSceneName == "Village" || currentSceneName == "HomeMenu" || currentSceneName == "SelectCharacter")
         {
             MiniMapUI.SetActive(false);
         }
