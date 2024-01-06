@@ -9,13 +9,13 @@ describe('<Field>', () => {
         expect(fieldComponent).toBeTruthy()
     });
 
-    it('should be able to type', () => {
+    it('should be able to type', async() => {
         const mockOnChange = jest.fn()
 
         const { getByPlaceholderText } = render(<Field placeholder="Holla SAE" value="" onChangeText={mockOnChange} />)
         const fieldComponent = getByPlaceholderText(/Holla SAE/i)
 
-        fireEvent.changeText(fieldComponent, "I love SAE")
+        await waitFor(() => {fireEvent.changeText(fieldComponent, "I love SAE")})
         //console.log(fieldComponent)
         // await waitFor(() => {
         // expect(mockOnChange).toHaveBeenCalled()

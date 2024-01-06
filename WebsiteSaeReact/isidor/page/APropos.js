@@ -38,7 +38,7 @@ const APropos = ({ language }) => {
 
     useEffect(() => {
         setSelectLanguage(getLanguage)
-    })
+    },  [getLanguage])
 
     const flexDirectionStyle = screenWidth <= 1400 ? "column" : "row"
     const marginStyle = screenWidth <= 1024 ? 0 : 50
