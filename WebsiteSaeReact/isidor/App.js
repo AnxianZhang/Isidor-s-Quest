@@ -1,5 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';//Navigation des différent page de l'application
-import { createNativeStackNavigator } from '@react-navigation/native-stack';//Navigation des différent page de l'application
+import { NavigationContainer } from '@react-navigation/native';//Navigation stack des différent page de l'application
+import { createNativeStackNavigator } from '@react-navigation/native-stack';//Navigation Stack des différent page de l'application
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import HomeScreen from './page/HomeScreen';
