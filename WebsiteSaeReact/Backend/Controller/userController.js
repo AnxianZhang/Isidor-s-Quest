@@ -69,6 +69,29 @@ const getUserData = async (req, res) => {
     }
 };
 
+const getUserDataPayAndConnect = async (req, res) => {
+  try{
+    await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
+    const pseudo = req.session.pseudo
+    const currentUser = await User.findOne(
+      { pseudo: pseudo }
+    ).exec();
+
+    if (currentUser == null){
+      return res.status(502).send('Utilisateur non trouvé');
+    }
+    if(currentUser.isPay === true){
+      return res.status(200).json(currentUser);
+    }
+    else{
+      return res.status(501).send("Compte non payé");
+    }
+  }catch (error) {
+    console.error('erreur durant getUserData', error);
+    res.status(500).send("erreur lors de la récupération des données au niveau du backend");
+  }
+};
+
 const changeUserData = async (req, res) => {
   try{
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
@@ -179,5 +202,6 @@ module.exports = {
   disconnection,
   VerifySuccessPayment,
   getUserData,
-  changeUserData
+  changeUserData,
+  getUserDataPayAndConnect
 };

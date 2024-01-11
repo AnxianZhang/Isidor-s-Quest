@@ -16,7 +16,7 @@ app.use(
 );
 app.use(cookieParser());
 const cors = require('cors');
-const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment, getUserData, changeUserData} = require("./Controller/userController");
+const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment, getUserData, changeUserData, getUserDataPayAndConnect} = require("./Controller/userController");
 const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/codeController");
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
@@ -53,6 +53,7 @@ app.post("/PostSaveGame", saveGameData);
 app.get("/getData",getUserData);
 app.post("/changeData",changeUserData);
 app.post("/SaveUserGameProfile", userSave)
+app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
 const port = 3005
 
 const contactPort = 5000
