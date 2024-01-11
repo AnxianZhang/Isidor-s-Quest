@@ -32,7 +32,7 @@ const UserList = (props)=> {
     };
     const windowWidthByHook = useScreenWidthDimention()
     const userStatus = props.isConnect === "true" ? props.language.Header.connected:props.language.Header.disconnected
-    const userStatusRespon = windowWidthByHook <= 650 ? props.language.Header.etat: userStatus
+    const userStatusRespon = windowWidthByHook <= 890 ? props.language.Header.etat: userStatus
     const colorBtnTxt = props.isConnect === "true" ? "#90EE90" : "#FDBCB4"
     return(
         <SelectDropdown

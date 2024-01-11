@@ -81,7 +81,7 @@ const HomeScreen = ({ language }) => {
     const gameTitleTextFontSizeStyle = windowWidthByHook > 1350 ? 70 : 50;
     const SecondPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "24%" : "20%" : "15%" : 0
     const ThirdAndFourthPartContainerPaddingHorizontalStyle = windowWidthByHook > 1100 ? windowWidthByHook > 1400 ? windowWidthByHook > 1860 ? "12%" : "8%" : "5%" : 30
-    const emptyBoxHeightStyle = windowWidthByHook <= 650 ? windowWidthByHook <= 400 ? 750 : 680 : 700
+    const emptyBoxHeightStyle = windowWidthByHook <= 500 ? windowWidthByHook <= 425 ? 910 : 800 : 700
     const emptyBoxThirdHeightStyle = windowWidthByHook <= 650 ? 600 : 700
     const emptyBoxFourthHeightStyle = windowWidthByHook <= 650 ? 300 : 250
     const emptyBoxFinFourthHeightStyle = windowWidthByHook <= 650 ? 100 : 0

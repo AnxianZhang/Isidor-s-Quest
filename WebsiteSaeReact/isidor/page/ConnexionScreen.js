@@ -80,6 +80,8 @@ const ConnexionScreen = ({ language }) => {
 
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
+    const textInputWidthStyle = windowWidthByHook > 500? 400 : "90%"
+    const buttonWidthStyle = windowWidthByHook > 500? 400 : "200%"
 
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
@@ -89,11 +91,11 @@ const ConnexionScreen = ({ language }) => {
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.connexion.connection}</Text>
                     </View>
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1 })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1 })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
-                            <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}>
+                            <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: buttonWidthStyle })}>
                                 <Text style={styles.ConnexionButtonText}>{selectLanguage.connexion.connect}</Text>
                             </View>
                         </TouchableOpacity>
@@ -131,10 +133,11 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     InputStyle: {
-        paddingTop: 40
+        paddingTop: 40,
+        alignItems:"center"
     },
     ButtonContainer: {
-        alignItems: "center",
+        alignItems:"center",
         paddingTop: 40,
     },
     ConnexionButtonText: {
@@ -147,6 +150,7 @@ const styles = StyleSheet.create({
         width: 400,
         height: 42,
         borderRadius: 20,
+        alignSelf:"center"
     },
     forgetPassword: {
         alignItems: "center",
