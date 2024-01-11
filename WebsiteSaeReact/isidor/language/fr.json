@@ -19,8 +19,8 @@
         "disconnect" : "Se déconnecter",
         "buttonPlay" : "Jouer",
         "userProfile" : "Profil",
-        "connected" : "Connecter",
-        "disconnected" : "Déconnecter",
+        "connected" : "Connecté",
+        "disconnected" : "Déconnecté",
         "etat" : "●"
     },
     "connexion" : {
