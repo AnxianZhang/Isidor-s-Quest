@@ -16,7 +16,7 @@ public class OwnChest : NPC
     private new void Start()
     {
         base.Start();
-        this.inventoryMenu = GameObject.FindGameObjectWithTag("Menus").transform.GetChild(4).gameObject;
+        this.inventoryMenu = GameObject.FindGameObjectWithTag("Menus").transform.GetChild(5).gameObject;
     }
 
     protected override void otherAction()

@@ -20,7 +20,7 @@ public class PauseMenu : MonoBehaviour
     public StoringData storeData;
     private void Start()
     {
-        this.pauseMenu = gameObject.transform.GetChild(1).gameObject;
+        this.pauseMenu = gameObject.transform.GetChild(2).gameObject;
         this.pM = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
     }
 

@@ -6,7 +6,7 @@ public class DoorToNext : MonoBehaviour
     public bool isDoor { get; protected set; }
     void Start(){
         this.gm = GameObject.FindWithTag("SoundManager").GetComponent<GameSound>();
-        this.goToNextLvlMenu = GameObject.FindGameObjectWithTag("Menus").transform.GetChild(3).gameObject;
+        this.goToNextLvlMenu = GameObject.FindGameObjectWithTag("Menus").transform.GetChild(4).gameObject;
         isDoor = false;
     }
 

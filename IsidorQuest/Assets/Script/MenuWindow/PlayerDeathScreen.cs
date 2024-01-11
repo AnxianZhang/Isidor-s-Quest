@@ -11,7 +11,7 @@ public class PlayerDeathScreen : MonoBehaviour
     private void Start()
     {
         this.player = GameObject.Find(storeData.CharacterName).GetComponent<Player>();
-        this.deathMenu = gameObject.transform.GetChild(2).gameObject;
+        this.deathMenu = gameObject.transform.GetChild(3).gameObject;
     }
 
     void Update()

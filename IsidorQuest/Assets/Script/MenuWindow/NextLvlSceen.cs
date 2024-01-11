@@ -9,7 +9,7 @@ public class NextLvlSceen : MonoBehaviour
 
     private void Start()
     {
-        this.nextLvlSreen = gameObject.transform.GetChild(3).gameObject;
+        this.nextLvlSreen = gameObject.transform.GetChild(4).gameObject;
     }
 
     private void resume()
