@@ -39,7 +39,7 @@ describe('<ConnexionScreen>', () => {
         const sendButton = getByTestId('ConnexionScreen:Send:Button')
 
         fireEvent.changeText(pseudoInput, "^(xt)^")
-        fireEvent.changeText(passWordInput, "xtaax")
+        fireEvent.changeText(passWordInput, "toto")
         fireEvent.press(sendButton)
 
         await waitFor(() => {
@@ -64,7 +64,7 @@ it('should return username/password is incorrect', async () => {
     const sendButton = getByTestId('ConnexionScreen:Send:Button')
 
     fireEvent.changeText(pseudoInput, "^(00)^")
-    fireEvent.changeText(passWordInput, "xx123456")
+    fireEvent.changeText(passWordInput, "123")
     fireEvent.press(sendButton)
 
     await waitFor(() => {
@@ -87,7 +87,7 @@ it('should return username/password is incorrect', async () => {
     const sendButton = getByTestId('ConnexionScreen:Send:Button')
 
     fireEvent.changeText(pseudoInput, "^(xt)^")
-    fireEvent.changeText(passWordInput, "xx123456")
+    fireEvent.changeText(passWordInput, "789")
     fireEvent.press(sendButton)
 
     await waitFor(() => {
