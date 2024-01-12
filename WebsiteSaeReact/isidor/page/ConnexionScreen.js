@@ -94,8 +94,8 @@ const ConnexionScreen = ({ language }) => {
                     <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
                     <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                     <View style={styles.ButtonContainer}>
-                        <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
-                            <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: buttonWidthStyle })}>
+                        <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable} testID='ConnexionScreen:Send:Button'>
+                            <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}>
                                 <Text style={styles.ConnexionButtonText}>{selectLanguage.connexion.connect}</Text>
                             </View>
                         </TouchableOpacity>

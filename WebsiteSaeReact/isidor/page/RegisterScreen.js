@@ -63,25 +63,25 @@ const RegisterScreen = ({ language }) => {
                     },
                     body: JSON.stringify(data)
                 });
-                const result = await response.status;
+                const result = response.status;
                 if (result === 401) {
                     setEmail("");
                     setErrorEmail(selectLanguage.Register.haveAnAccount);
                 }
                 else {
                     setErrorEmail("");
-                }
-                if (result === 402) {
-                    setPseudo("");
-                    setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
-                }
-                else {
-                    setErrorPseudo("");
-                }
-                if (result === 200) {
-                    setErrorEmail("");
-                    setErrorPseudo("");
-                    navigation.navigate("VerifyCode", { data: data });
+                    if (result === 402) {
+                        setPseudo("");
+                        setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
+                    }
+                    else {
+                        setErrorPseudo("");
+                        if (result === 200) {
+                            setErrorEmail("");
+                            setErrorPseudo("");
+                            navigation.navigate("VerifyCode", { data: data });
+                        }
+                    }
                 }
             }
             catch (error) {
@@ -115,7 +115,7 @@ const RegisterScreen = ({ language }) => {
                         </View>
                         <Seperator />
                         <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>
+                            <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable} testID='RegiesterScreen:Send:Button'>
                                 <View style={StyleSheet.compose(GLOBAL_STYLES.form.buttonContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" })}>
                                     <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Register.next}</Text>
                                 </View>
