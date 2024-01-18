@@ -41,7 +41,7 @@ const userSave = async (req, res) => {
         };
         const updatedUser = await UserGame.findOneAndUpdate(
           { pseudo : JSON.parse(localStorage.getItem('isConnect')).pseudo }, 
-          { coins : datas.coins, Warrior : WarriorLevel }, 
+          { coins : datas.coins, Archer : ArcherLevel }, 
           { new: true } 
         ).exec();
       }
