@@ -126,6 +126,13 @@ const changeUserData = async (req, res) => {
         pseudo: datas.pseudo 
       }}
     ).exec()
+
+     await UserGame.updateOne(
+      { pseudo: currentUser.pseudo },
+      { $set: { 
+        pseudo: datas.pseudo 
+      }}
+    ).exec()
     // console.log(datas.prenom)
     // console.log(datas.email)
     // console.log(result)

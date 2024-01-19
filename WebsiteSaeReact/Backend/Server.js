@@ -25,7 +25,7 @@ const {userPay, successPayment} = require("./Controller/PaymentSuccessController
 const { saveGameData, userSave } = require('./Controller/gameController');
 
 app.use(cors({
-  origin: ['http://localhost:19006', "http://127.0.0.1:5500"],
+  origin: ['http://localhost:19006', "http://localhost:5500"],
   credentials: true,
   allowedHeaders: ['Content-Type'],
 }));
