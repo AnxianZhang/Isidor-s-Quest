@@ -93,11 +93,13 @@ const VerifyCode = async (req, res) => {
     const findCodeEmail = await Code.findOne({ email: data.email }).sort({ ExpirationDate: -1 }).limit(1).exec();
     const date = new Date();
     if (date > findCodeEmail.ExpirationDate && findCodeEmail.code === data.code) {
+      await Code.deleteOne({email: data.email, code: findCodeEmail.code})
       return res.status(401).send("Votre code est expiré");
     }
     if (findCodeEmail.code !== data.code) {
       return res.status(402).send("Code incorrect");
     }
+    await Code.deleteOne({email: data.email, code: findCodeEmail.code})
     return res.status(200).send("Code correct");
   }
   catch (error) {
