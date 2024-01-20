@@ -101,17 +101,17 @@ const UserDataScreen = ({language}) => {
 
             getUserData()
             if (response == 200) {
-                console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                console.log('Statut :', response.status);
                 setNotif(selectLanguage.UserData.notifOk);
                 return;
             }
             if (response == 402) {
-                console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                console.log('Statut :', response.status);
                 setNotif(selectLanguage.UserData.notifPseudo);
                 return;
             }
             if (response == 403) {
-                console.error('Erreur lors de la modification des données frontend. Statut :', response.status);
+                console.log('Statut :', response.status);
                 setNotif(selectLanguage.UserData.notifNull);
                 return;
             }
