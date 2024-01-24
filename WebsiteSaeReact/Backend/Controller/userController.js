@@ -7,6 +7,7 @@ const Inscription = async (req, res) => {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
     localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
+
     const newUser = new User({
       prenom: data.prenom,
       nomFamille: data.nomFamille,

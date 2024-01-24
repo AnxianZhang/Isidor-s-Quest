@@ -59,14 +59,16 @@
         "errorPasswordCaseOne": "Password doesn't match",
         "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
         "pseudoAlreadyExist" :"This username is already taken",
-        "next" : "Next"
+        "next" : "Next",
+        "regex": "The code need to have: An upper and lower case letter, contain one digite, a symbole within @ ! % * ? & and at least a length of 8"
+
     },
     "Code" : {
         "codeText" : "Enter the code",
         "confirmCodeText" : "Confirm the code",
         "codeVerification" : "Code verification",
         "register": "Register",
-        "errorCodeCaseOne" : "Code doesn't match",
+        "notSame" : "Code doesn't match",
         "errorExpireDate" : "Your code has expired",
         "errorCode" : "Incorrect code",
         "verifCodeChange" : "Verify"
@@ -115,5 +117,6 @@
         "notifPseudo": "This nickname is already taken",
         "notifNull": "You haven't changed anything",
         "notifErr": "Failed to change data"
-    }
+    },
+    "lengthErr" : "The length of characters must be under or equal to 50"
 }

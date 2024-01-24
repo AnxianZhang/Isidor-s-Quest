@@ -25,6 +25,7 @@ const RegisterScreen = ({ language }) => {
     const [errorEmail, setErrorEmail] = useState("");
     const [errorPseudo, setErrorPseudo] = useState("");
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+    const [error, setError] = useState("")
     const [disable, setDisable] = useState(true)
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     useEffect(() => {
@@ -41,18 +42,18 @@ const RegisterScreen = ({ language }) => {
     })
 
     const sendDataToDatabase = async () => {
-        if (password !== confirmPassword) {
-            setConfirmPassword("");
-            setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
-        }
-        else {
+        // if (password !== confirmPassword) {
+        //     setConfirmPassword("");
+        // }
+        // else {
             setErrorConfirmPassword("")
             const data = {
                 prenom: prenom,
                 nomFamille: nomFamille,
                 email: email,
                 pseudo: pseudo,
-                password: password
+                password: password,
+                confirmPass: confirmPassword,
             }
             try {
                 const response = await fetch('http://localhost:3005/SendCode', {
@@ -64,8 +65,12 @@ const RegisterScreen = ({ language }) => {
                     body: JSON.stringify(data)
                 });
                 const result = response.status;
+                if (result === 406){
+                    setError(selectLanguage.lengthErr)
+                }
                 if (result === 401) {
                     setEmail("");
+                    setError("")
                     setErrorEmail(selectLanguage.Register.haveAnAccount);
                 }
                 else {
@@ -74,10 +79,19 @@ const RegisterScreen = ({ language }) => {
                         setPseudo("");
                         setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
                     }
+                    else if (result === 403){
+                        setConfirmPassword('')
+                        setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
+                    }
+                    else if (result === 405){
+                        setConfirmPassword('')
+                        setErrorConfirmPassword(selectLanguage.Register.regex)
+                    }
                     else {
                         setErrorPseudo("");
                         if (result === 200) {
                             setErrorEmail("");
+                            setError("")
                             setErrorPseudo("");
                             navigation.navigate("VerifyCode", { data: data });
                         }
@@ -87,7 +101,7 @@ const RegisterScreen = ({ language }) => {
             catch (error) {
                 console.error('Erreur lors de l\'envoi des données au backend', error);
             }
-        }
+        // }
     }
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -110,6 +124,7 @@ const RegisterScreen = ({ language }) => {
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorPseudo.length > 0 ? errorPseudo : selectLanguage.Register.pseudo} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : selectLanguage.Register.confirmPassword} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
+                        <Text style = {{color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center'}}>{errorConfirmPassword || error ? errorConfirmPassword + error : ""}</Text>
                         <View style={styles.generalContidionBox}>
                             <Text style={styles.generalContidionText}>{selectLanguage.Register.generalCondition}</Text>
                         </View>

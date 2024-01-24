@@ -59,6 +59,7 @@
         "errorPasswordCaseOne" : "Le mot de passe ne correspond pas",
         "haveAnAccount" : "Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé",
         "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
+        "regex": "Le code doit contenir : une lettre majuscule et une lettre minuscule, au moins un chiffre, un symbole parmi @ ! % * ? & et avoir une longueur d'au moins 8 caractères.",
         "next" : "Continuer"
     },
     "Code" : {
@@ -66,7 +67,7 @@
         "confirmCodeText" : "confirmer le code",
         "codeVerification" : "Verification du code",
         "register" : "S'inscrire",
-        "errorCodeCaseOne" : "Le code entré ne correspond pas",
+        "notSame" : "Le code entré ne correspond pas",
         "errorExpireDate" : "Votre code est expiré",
         "errorCode" : "Code incorrect",
         "verifCodeChange" : "Verifier"
@@ -116,5 +117,6 @@
         "notifNull": "Vous n'avez rien changé",
         "notifErr": "Échec du changement de données"
 
-    }
+    },
+    "lengthErr" : "La longueur des champs doivent être inferieur ou égale à 50"
 }

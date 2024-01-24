@@ -1,7 +1,9 @@
 const { Code, User } = require("../Models/Model");
 const nodemailer = require("nodemailer");
 const mongoose = require('mongoose');
+const {isAllUnder64Character} = require('../Models/Utile')
 
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%*?&])[A-Za-z\d@!%*?&]{8,}$/;
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -56,12 +58,27 @@ const SendCode = async (req, res) => {
     const data = req.body;
     const findUserMail = await User.findOne({ email: data.email }).exec();
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
+
+    if (!isAllUnder64Character(data)){
+      return res.status(406).send("input doivent etre <= 64")
+    }
+
     if (findUserMail !== null) {
       return res.status(401).send("Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé");
     }
     if (findUserPseudo !== null) {
       return res.status(402).send("Ce nom d'utilisateur est déja pris");
     }
+
+    if (data.password !== data.confirmPass)
+      return res.status(403).send("Les mot de passes ne correspondent pas")
+
+    if (!passwordRegex.test(data.password)){
+      return res.status(405).send("le mot de passe doit respecter les exigence")
+    }
+
+
+
     let code = Math.floor(100000 + Math.random() * 900000);
     let today = new Date();
     let expireDate = today.setHours(today.getHours() + 1);
