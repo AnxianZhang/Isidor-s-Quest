@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { User, UserGame } = require("../Models/Model")
+const { User, UserGame, Game } = require("../Models/Model")
 var localStorage = require('localStorage')
 
 const Inscription = async (req, res) => {
@@ -128,6 +128,13 @@ const changeUserData = async (req, res) => {
     ).exec()
 
      await UserGame.updateOne(
+      { pseudo: currentUser.pseudo },
+      { $set: { 
+        pseudo: datas.pseudo 
+      }}
+    ).exec()
+
+    await Game.updateMany(
       { pseudo: currentUser.pseudo },
       { $set: { 
         pseudo: datas.pseudo 
