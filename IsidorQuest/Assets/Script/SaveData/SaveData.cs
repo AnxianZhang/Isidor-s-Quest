@@ -24,15 +24,21 @@ public class SaveData : MonoBehaviour
     {
         public int coins;
         public string chooseCharacter;
+        public string ActualLevel;
         public int levelStrength; 
         public int levelDefence;   
         public int levelSpeed;
-        public int levelLife; 
+        public int levelLife;
+        public int item1; 
+        public int item2; 
+        public int item3; 
+        public int item4; 
     }
     private bool isWrite = true;
     private GameObject door;
     private GameObject mainPlayer;
     private GameObject SpawnPoint;
+    private Inventory inventory;
     private CoinUI coin;
     public StoringData storeData;
     // Start is called before the first frame update
@@ -40,10 +46,17 @@ public class SaveData : MonoBehaviour
     {
         this.mainPlayer = GameObject.Find(storeData.CharacterName);
         this.coin = GameObject.Find("Coin").GetComponent<CoinUI>();
+        this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         this.SpawnPoint = GameObject.Find("SpawnPoint");
         this.door = GameObject.Find("Door");
     }
-
+    private static string GetSceneNameFromScenePath(string scenePath)
+    {
+        var sceneNameStart = scenePath.LastIndexOf("/", StringComparison.Ordinal) + 1;
+        var sceneNameEnd = scenePath.LastIndexOf(".", StringComparison.Ordinal);
+        var sceneNameLength = sceneNameEnd - sceneNameStart;
+        return scenePath.Substring(sceneNameStart, sceneNameLength);
+    }
     void Update()
     {
         if (mainPlayer.GetComponent<Player>().isDeath && isWrite)
@@ -52,21 +65,54 @@ public class SaveData : MonoBehaviour
             string currentSceneName = currentScene.name;
             double percentSuccessLevel = getLevelPercent(this.SpawnPoint.GetComponent<Transform>().position.x, this.mainPlayer.GetComponent<Transform>().position.x, this.door.GetComponent<Transform>().position.x);
             int coinQuantity = CoinUI.getCoins();
+            int[] inventoryNumbers = inventoryNumber();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
         if (door.GetComponent<DoorToNext>().isDoor && isWrite)
         {
             var currentScene = SceneManager.GetActiveScene();
             string currentSceneName = currentScene.name;
+            string nextScene;
+            if(currentScene.buildIndex + 1 < SceneManager.sceneCountInBuildSettings){
+                var nextSceneIndex = currentScene.buildIndex + 1;
+                nextScene = GetSceneNameFromScenePath(SceneUtility.GetScenePathByBuildIndex(nextSceneIndex));
+                print(nextScene);
+            }
+            else{
+                nextScene = currentScene.name;
+            }
+            int[] inventoryNumbers = inventoryNumber();
             int coinQuantity = CoinUI.getCoins();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextScene, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }
 
+    private int[] inventoryNumber(){
+        GameObject[] inventorys = this.inventory.GetInv();
+        int[] inventoryNumbers = new int[this.inventory.GetLenInv()];
+        for(int i = 0; i < this.inventory.GetLenInv(); i++){
+            if(inventorys[i] != null){
+                if(String.Equals(inventorys[i].name.Replace("(Clone)", ""), "InstanteHeal")){
+                    inventoryNumbers[i] = 1;
+                }
+                if(String.Equals(inventorys[i].name.Replace("(Clone)", ""), "Jump")){
+                    inventoryNumbers[i] = 2;
+                }
+                if(String.Equals(inventorys[i].name.Replace("(Clone)", ""), "Speed")){
+                    inventoryNumbers[i] = 3;
+                }
+                if(String.Equals(inventorys[i].name.Replace("(Clone)", ""), "Strength")){
+                    inventoryNumbers[i] = 4;
+                }
+            }
+            print(inventoryNumbers[i]);
+        }
+        return inventoryNumbers;
+    }
     private double getLevelPercent(float spawnPoint, float characterPoint, float doorPoint)
     {
         float newSpawnPoint = spawnPoint;
@@ -131,17 +177,22 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    public IEnumerator UserSaveProfile(string url, int coins, string chooseCharacter, int levelStrength, int levelDefence, int levelLife, int levelSpeed)
+    public IEnumerator UserSaveProfile(string url, int coins, string level, string chooseCharacter, int levelStrength, int levelDefence, int levelLife, int levelSpeed, int items1, int items2, int items3, int items4)
     {
         isWrite = false;
         SaveUserGameDatas data = new SaveUserGameDatas
         {
            coins = coins,
            chooseCharacter = chooseCharacter,
+           ActualLevel = level,
            levelStrength = levelStrength,
            levelDefence = levelDefence,
            levelLife = levelLife,
            levelSpeed = levelSpeed,
+           item1 = items1,
+           item2 = items2,
+           item3 = items3,
+           item4 = items4
         };
 
         string json = JsonUtility.ToJson(data);
