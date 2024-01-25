@@ -70,7 +70,7 @@ public class SaveData : MonoBehaviour
             StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
-        if (door.GetComponent<DoorToNext>().isDoor && isWrite)
+        if (door != null && door.GetComponent<DoorToNext>().isDoor && isWrite)
         {
             var currentScene = SceneManager.GetActiveScene();
             string currentSceneName = currentScene.name;
@@ -90,7 +90,14 @@ public class SaveData : MonoBehaviour
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }
-
+    public void saveData(){
+        var currentScene = SceneManager.GetActiveScene();
+        string currentSceneName = currentScene.name;
+        int coinQuantity = CoinUI.getCoins();
+        print(coinQuantity);
+        int[] inventoryNumbers = inventoryNumber();
+        StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
+    }
     private int[] inventoryNumber(){
         GameObject[] inventorys = this.inventory.GetInv();
         int[] inventoryNumbers = new int[this.inventory.GetLenInv()];
@@ -109,7 +116,6 @@ public class SaveData : MonoBehaviour
                     inventoryNumbers[i] = 4;
                 }
             }
-            print(inventoryNumbers[i]);
         }
         return inventoryNumbers;
     }

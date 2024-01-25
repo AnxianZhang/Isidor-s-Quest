@@ -79,7 +79,20 @@ const userSave = async (req, res) => {
   } 
 };
 
+const getUserGameData = async(req, res)=> {
+  try{
+    await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
+    const currentUser = await UserGame.findOne({
+      pseudo: JSON.parse(localStorage.getItem('isConnect')).pseudo,
+    }).exec();
+    return res.status(200).json(currentUser);
+  }
+  catch(e){
+    return res.status(500).send('Une erreur s\'est produite lors de la recuperation des données');
+  }
+}
 module.exports = {
     saveGameData,
-    userSave
+    userSave,
+    getUserGameData
 }

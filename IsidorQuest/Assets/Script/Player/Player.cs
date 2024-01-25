@@ -157,6 +157,14 @@ public abstract class Player : PlayerMovement
         }
     }
 
+    public void isPotion(Collision2D col)
+    {
+        if (col.gameObject.tag.Equals("HealthPotion"))
+        {
+            print("potion");
+        }
+    }
+
     public void addHealth(int hp)
     {
         currentLife += hp;

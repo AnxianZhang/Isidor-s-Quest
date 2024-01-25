@@ -22,7 +22,7 @@ const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
-const { saveGameData, userSave } = require('./Controller/gameController');
+const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
 
 app.use(cors({
   origin: ['http://localhost:19006', "http://localhost:5500"],
@@ -54,6 +54,7 @@ app.get("/getData",getUserData);
 app.post("/changeData",changeUserData);
 app.post("/SaveUserGameProfile", userSave)
 app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
+app.get("/getUserGameData", getUserGameData)
 const port = 3005
 
 const contactPort = 5000

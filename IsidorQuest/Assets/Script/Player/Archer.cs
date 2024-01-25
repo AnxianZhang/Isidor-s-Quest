@@ -40,6 +40,7 @@ public class Archer : Player
     void OnCollisionEnter2D(Collision2D col)
     {
         base.isInWater(col);
+        base.isPotion(col);
     }
 
     public void AttackEnemy(GameObject enemy)

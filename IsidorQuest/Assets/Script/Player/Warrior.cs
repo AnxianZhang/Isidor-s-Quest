@@ -68,6 +68,7 @@ public class Warrior : Player
     void OnCollisionEnter2D(Collision2D col)
     {
         base.isInWater(col);
+        base.isPotion(col);
     }
 
     private new void OnDrawGizmos()
