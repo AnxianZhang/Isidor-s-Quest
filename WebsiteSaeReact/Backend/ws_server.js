@@ -1,3 +1,5 @@
+const { json } = require("express");
+const { MemoryStore } = require("express-session");
 const WebSocket = require("ws");
 
 const server = new WebSocket.Server({port : 8080});
@@ -12,18 +14,24 @@ const server = new WebSocket.Server({port : 8080});
 const dataPos = [];
 
 server.on("connection", (ws) => {
+    console.log("user connected to websocket")
+    ws.on('disconnection', ()=>{
+        console.log("the user is now disconected")
+    })
 
     ws.on("message", (message) => {
         try{
-            data = JSON.parse(message);
-            if(data.scene != null){
-                ws.send(searchData(data.scene));
-            }
-            addData(data);
+            // console.log(JSON.parse(message))
+            ws.send(message.toString('utf-8'))
+            // data = JSON.parse(message);
+            // if(data.scene != null){
+            //     ws.send(searchData(data.scene));
+            // }
+            // addData(data);
         }catch (e){
             ws.send("Not a valid argument");
+            console.log(e)
         }
-
     })
 })
 
