@@ -19,8 +19,12 @@ server.on("connection", (ws) => {
             if(data.scene != null){
                 ws.send(searchData(data.scene));
             }
-            addData(data);
+            else{
+                addData(data);
+                ws.send(JSON.stringify(data)); // on ne peut pas renvoyer un json
+            }
         }catch (e){
+            console.error(e);
             ws.send("Not a valid argument");
         }
 
@@ -35,7 +39,6 @@ function addData(data){
     if(!dataIsValid(data)){
         throw new SyntaxError();
     }
-
 }
 
 function searchData(scene){
