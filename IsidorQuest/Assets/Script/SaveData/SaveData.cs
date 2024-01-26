@@ -48,7 +48,7 @@ public class SaveData : MonoBehaviour
         this.coin = GameObject.Find("Coin").GetComponent<CoinUI>();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         this.SpawnPoint = GameObject.Find("SpawnPoint");
-        this.door = GameObject.Find("Door");
+        this.door = SceneManager.GetActiveScene().name == "Village" ? GameObject.Find("LvlTeleporter") : GameObject.Find("Door");
     }
     private static string GetSceneNameFromScenePath(string scenePath)
     {
@@ -70,7 +70,8 @@ public class SaveData : MonoBehaviour
             StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
-        if (door != null && door.GetComponent<DoorToNext>().isDoor && isWrite)
+        bool transportOk = SceneManager.GetActiveScene().name == "Village" ? this.door.GetComponent<NPC>().getCanPlayerInteract() : door.GetComponent<DoorToNext>().isDoor;
+        if (transportOk && isWrite)
         {
             var currentScene = SceneManager.GetActiveScene();
             string currentSceneName = currentScene.name;

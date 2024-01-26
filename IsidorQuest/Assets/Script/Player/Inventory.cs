@@ -2,16 +2,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
-
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
     private int inventorySize = 4;
     private GameObject[] inventory;
+    private GetData getData;
 
     void Start()
     {
+        this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         inventory = new GameObject[inventorySize];
+        List<int> liste = this.getData.getInventory();
+        for(int i = 0; i < liste.Count; i++){
+             if(liste[i] != 0){
+                if(liste[i] == 1){
+                    inventory[i] = GameObject.Find("InstanteHeal(Clone)");
+                }
+                if(liste[i] == 2){
+                    inventory[i] = GameObject.Find("Jump(Clone)");
+                }
+                if(liste[i] == 3){
+                    inventory[i] = GameObject.Find("Speed(Clone)");
+                }
+                if(liste[i] == 4){
+                    inventory[i] = GameObject.Find("Strength(Clone)");
+                }
+            }
+        }
     }
 
     //Add the item in the inventory, if the inventory is full return false
