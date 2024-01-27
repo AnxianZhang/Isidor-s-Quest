@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a065e6facb87914e9fcced1efa7ec40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instantHeal: {fileID: 7747916445488077446, guid: 36d7cbc68ad41c344bd2b54422125666, type: 3}
+  Jump: {fileID: 5905418604671310944, guid: a1416505f24ca044e93131c036cb91f6, type: 3}
+  Speed: {fileID: 2076566219943460304, guid: acd6c7c5d56a1e443adfa78dd60f4adf, type: 3}
+  Strength: {fileID: 6868318464966396780, guid: a7b0dbabbfe1a994bb3c973fcd084b2b, type: 3}
 --- !u!114 &6590764337896009584
 MonoBehaviour:
   m_ObjectHideFlags: 0

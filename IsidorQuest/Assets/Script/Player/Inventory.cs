@@ -9,29 +9,39 @@ public class Inventory : MonoBehaviour
     private int inventorySize = 4;
     private GameObject[] inventory;
     private GetData getData;
+    [SerializeField] private GameObject instantHeal;
+    [SerializeField] private GameObject Jump;
+    [SerializeField] private GameObject Speed;
+    [SerializeField] private GameObject Strength;
+
+
+
 
     void Start()
     {
         this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         inventory = new GameObject[inventorySize];
         List<int> liste = this.getData.getInventory();
+        print("inventaire");
         for(int i = 0; i < liste.Count; i++){
              if(liste[i] != 0){
                 if(liste[i] == 1){
-                    inventory[i] = GameObject.Find("InstanteHeal(Clone)");
+                    Instantiate(instantHeal);
                 }
                 if(liste[i] == 2){
-                    inventory[i] = GameObject.Find("Jump(Clone)");
+                    Instantiate(Jump);
                 }
                 if(liste[i] == 3){
-                    inventory[i] = GameObject.Find("Speed(Clone)");
+                    Instantiate(Speed);
                 }
                 if(liste[i] == 4){
-                    inventory[i] = GameObject.Find("Strength(Clone)");
+                    Instantiate(Strength);
                 }
             }
         }
     }
+
+
 
     //Add the item in the inventory, if the inventory is full return false
     public bool AddItem(GameObject item){

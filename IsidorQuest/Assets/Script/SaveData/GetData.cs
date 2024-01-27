@@ -122,7 +122,6 @@ public class GetData : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     data = SaveUserGameDatas.CreateFromJSON(webRequest.downloadHandler.text);
-                    print(webRequest.downloadHandler.text);
                     break;
             }
         }
