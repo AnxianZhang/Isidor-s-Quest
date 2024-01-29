@@ -24,14 +24,23 @@ public abstract class Player : PlayerMovement
     protected bool isWater;
     protected bool isHit;
     private Inventory inventory;
-
+    private GetData getData;
     protected abstract void doPlayerAttaque();
 
     protected new void Start()
     {
         base.Start();
+        this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         this.skills = new SkillsLvl();
+        setSkillLevelPlayer();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+    }
+
+    private void setSkillLevelPlayer(){
+        this.skills.damageDealLvl = this.getData.getLevelStrength();
+        this.skills.defenceLvl = this.getData.getLevelDefence();
+        this.skills.lifeLvl = this.getData.getLevelLife();
+        this.skills.moveSpeedLvl = this.getData.getLevelSpeed(); 
     }
 
     public void upgradeMoveSpeed()

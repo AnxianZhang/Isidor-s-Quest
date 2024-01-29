@@ -40,6 +40,7 @@ public class GetData : MonoBehaviour
         public int item4;
     }
     private SaveUserGameDatas data;
+
     private GameObject door;
     private GameObject mainPlayer;
     public StoringData storeData;
@@ -65,24 +66,10 @@ public class GetData : MonoBehaviour
             {
                 setObject();
             }
-            if (mainPlayer != null && mainPlayer.GetComponent<Player>().isDeath)
-            {
-                StartCoroutine(GetRequest("http://localhost:5000/getUserGameData"));
-                isRead = false;
-            }
-            else
-            {
-                isRead = true;
-            }
             bool transportOk = SceneManager.GetActiveScene().name == "Village" ? this.door.GetComponent<NPC>().getCanPlayerInteract() : door.GetComponent<DoorToNext>().isDoor;
             if (door != null && transportOk)
             {
                 StartCoroutine(GetRequest("http://localhost:5000/getUserGameData"));
-                isRead = false;
-            }
-            else
-            {
-                isRead = true;
             }
         }
     }
@@ -90,6 +77,42 @@ public class GetData : MonoBehaviour
     public int getCoins()
     {
         return data.coins;
+    }
+
+    public int getLevelStrength(){
+        if(storeData.CharacterName == "Warrior"){
+            return data.Warrior.levelStrength;
+        }
+        else{
+            return data.Archer.levelStrength;
+        }
+    }
+
+    public int getLevelDefence(){
+        if(storeData.CharacterName == "Warrior"){
+            return data.Warrior.levelDefence;
+        }
+        else{
+            return data.Archer.levelDefence;
+        }
+    }
+
+    public int getLevelLife(){
+        if(storeData.CharacterName == "Warrior"){
+            return data.Warrior.levelLife;
+        }
+        else{
+            return data.Archer.levelLife;
+        }
+    }
+
+    public int getLevelSpeed(){
+        if(storeData.CharacterName == "Warrior"){
+            return data.Warrior.levelSpeed;
+        }
+        else{
+            return data.Archer.levelSpeed;
+        }
     }
 
     public List<int> getInventory()

@@ -21,8 +21,11 @@ public class Inventory : MonoBehaviour
     {
         this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         inventory = new GameObject[inventorySize];
+        setInventory();
+    }
+
+    private void setInventory(){
         List<int> liste = this.getData.getInventory();
-        print("inventaire");
         for(int i = 0; i < liste.Count; i++){
              if(liste[i] != 0){
                 if(liste[i] == 1){
@@ -40,8 +43,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
-
 
     //Add the item in the inventory, if the inventory is full return false
     public bool AddItem(GameObject item){

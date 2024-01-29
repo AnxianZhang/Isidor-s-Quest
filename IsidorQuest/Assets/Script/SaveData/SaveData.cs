@@ -41,14 +41,20 @@ public class SaveData : MonoBehaviour
     private Inventory inventory;
     private CoinUI coin;
     public StoringData storeData;
+    private GameObject shop;
+    private GameObject skillTree;
+    private int cpt;
     // Start is called before the first frame update
     void Start()
     {
+        this.cpt = 1;
         this.mainPlayer = GameObject.Find(storeData.CharacterName);
         this.coin = GameObject.Find("Coin").GetComponent<CoinUI>();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         this.SpawnPoint = GameObject.Find("SpawnPoint");
         this.door = SceneManager.GetActiveScene().name == "Village" ? GameObject.Find("LvlTeleporter") : GameObject.Find("Door");
+        this.shop = GameObject.Find("ShopDisign");
+        this.skillTree = GameObject.Find("SkillTreePNJ");
     }
     private static string GetSceneNameFromScenePath(string scenePath)
     {
@@ -65,13 +71,14 @@ public class SaveData : MonoBehaviour
             string currentSceneName = currentScene.name;
             double percentSuccessLevel = getLevelPercent(this.SpawnPoint.GetComponent<Transform>().position.x, this.mainPlayer.GetComponent<Transform>().position.x, this.door.GetComponent<Transform>().position.x);
             int coinQuantity = CoinUI.getCoins();
-            int[] inventoryNumbers = inventoryNumber();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
         bool transportOk = SceneManager.GetActiveScene().name == "Village" ? this.door.GetComponent<NPC>().getCanPlayerInteract() : door.GetComponent<DoorToNext>().isDoor;
-        if (transportOk && isWrite)
+        if(SceneManager.GetActiveScene().name == "Village" && !transportOk && !this.shop.GetComponent<NPC>().getCanPlayerInteract() && !this.skillTree.GetComponent<NPC>().getCanPlayerInteract()){
+            isWrite = true;
+        }
+        if (transportOk && isWrite || this.shop != null && this.shop.GetComponent<NPC>().getCanPlayerInteract() && isWrite || this.skillTree != null && this.skillTree.GetComponent<NPC>().getCanPlayerInteract() && isWrite)
         {
             var currentScene = SceneManager.GetActiveScene();
             string currentSceneName = currentScene.name;
@@ -87,18 +94,11 @@ public class SaveData : MonoBehaviour
             int[] inventoryNumbers = inventoryNumber();
             int coinQuantity = CoinUI.getCoins();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextScene, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextScene, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }
-    public void saveData(){
-        var currentScene = SceneManager.GetActiveScene();
-        string currentSceneName = currentScene.name;
-        int coinQuantity = CoinUI.getCoins();
-        print(coinQuantity);
-        int[] inventoryNumbers = inventoryNumber();
-        StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, currentSceneName, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl, inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
-    }
+    
     private int[] inventoryNumber(){
         GameObject[] inventorys = this.inventory.GetInv();
         int[] inventoryNumbers = new int[this.inventory.GetLenInv()];
