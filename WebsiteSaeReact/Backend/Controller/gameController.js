@@ -39,9 +39,15 @@ const userSave = async (req, res) => {
           levelSpeed: datas.levelSpeed,
           levelLife: datas.levelLife,
         };
+        const inventaire = {
+          item1: datas.item1,
+          item2: datas.item2,
+          item3: datas.item3,
+          item4: datas.item4,
+        };
         const updatedUser = await UserGame.findOneAndUpdate(
           { pseudo : JSON.parse(localStorage.getItem('isConnect')).pseudo }, 
-          { coins : datas.coins, Archer : ArcherLevel }, 
+          { coins : datas.coins, Archer : ArcherLevel, ActualLevel :  datas.ActualLevel, inventory : inventaire}, 
           { new: true } 
         ).exec();
       }
@@ -53,9 +59,15 @@ const userSave = async (req, res) => {
           levelSpeed: datas.levelSpeed,
           levelLife: datas.levelLife,
         };
+        const inventaire = {
+          item1: datas.item1,
+          item2: datas.item2,
+          item3: datas.item3,
+          item4: datas.item4,
+        };
         const updatedUser = await UserGame.findOneAndUpdate(
           { pseudo : JSON.parse(localStorage.getItem('isConnect')).pseudo }, 
-          { coins : datas.coins, Warrior : WarriorLevel }, 
+          { coins : datas.coins, Warrior : WarriorLevel,  ActualLevel :  datas.ActualLevel, inventory : inventaire }, 
           { new: true } 
         ).exec();
       }
@@ -67,7 +79,20 @@ const userSave = async (req, res) => {
   } 
 };
 
+const getUserGameData = async(req, res)=> {
+  try{
+    await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
+    const currentUser = await UserGame.findOne({
+      pseudo: JSON.parse(localStorage.getItem('isConnect')).pseudo,
+    }).exec();
+    return res.status(200).json(currentUser);
+  }
+  catch(e){
+    return res.status(500).send('Une erreur s\'est produite lors de la recuperation des données');
+  }
+}
 module.exports = {
     saveGameData,
-    userSave
+    userSave,
+    getUserGameData
 }

@@ -21,13 +21,29 @@ public class Warrior : Player
     {
         
         base.Start();
+        setPlayerCompetenciesSkills();
+        this.ennemyCollider = null;
+    }
+
+    private void setPlayerCompetenciesSkills(){
         base.maxLife = 100;
         base.defence = .10f;
         base.currentLife = base.maxLife;
         base.damageDeal = 20;
         base.cooldown = 2f;
-
-        this.ennemyCollider = null;
+        for(int i = 0; i < base.skills.damageDealLvl - 1; i++){
+            base.damageDeal = (int)Math.Round(base.damageDeal * 1.10f);
+        }
+        for(int i = 0; i < base.skills.defenceLvl - 1; i++){
+            base.defence += .02f;
+        }
+         for(int i = 0; i < base.skills.lifeLvl - 1; i++){
+            base.maxLife = (int)Math.Round(base.maxLife * 1.10f);
+            base.currentLife = (int)Math.Round(base.currentLife * 1.10f);
+        }
+        for(int i = 0; i < base.skills.moveSpeedLvl - 1; i++){
+            base.boostSpeed(1.01f, '*');
+        }
     }
 
     public new void Update()
@@ -68,6 +84,7 @@ public class Warrior : Player
     void OnCollisionEnter2D(Collision2D col)
     {
         base.isInWater(col);
+        base.isPotion(col);
     }
 
     private new void OnDrawGizmos()

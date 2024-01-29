@@ -30,7 +30,9 @@ public class DontDestroy : MonoBehaviour
 
     public void removeDontDestroy()
     {
-        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        if(gameObject.name != "GetData"){
+            SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+        }
     }
 
     public void destroy()

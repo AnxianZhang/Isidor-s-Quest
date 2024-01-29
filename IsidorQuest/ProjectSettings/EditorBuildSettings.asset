@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/HomeMenu.unity
     guid: 93c7c1be12de80145be8663bbd969126
   - enabled: 1
-    path: Assets/Scenes/Village.unity
-    guid: cc1d91c3307119b4497727950b7f4028
-  - enabled: 1
     path: Assets/Scenes/SelectCharacter.unity
     guid: 97dad19ad592de5409d789f375b592a5
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: cc1d91c3307119b4497727950b7f4028
   - enabled: 1
     path: Assets/Scenes/WorldOneLvl1.unity
     guid: 2cda990e2423bbf4892e6590ba056729

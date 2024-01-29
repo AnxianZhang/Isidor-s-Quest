@@ -2,16 +2,46 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using System.Linq;
-
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
     private int inventorySize = 4;
     private GameObject[] inventory;
+    private GetData getData;
+    [SerializeField] private GameObject instantHeal;
+    [SerializeField] private GameObject Jump;
+    [SerializeField] private GameObject Speed;
+    [SerializeField] private GameObject Strength;
+
+
+
 
     void Start()
     {
+        this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         inventory = new GameObject[inventorySize];
+        setInventory();
+    }
+
+    private void setInventory(){
+        List<int> liste = this.getData.getInventory();
+        for(int i = 0; i < liste.Count; i++){
+             if(liste[i] != 0){
+                if(liste[i] == 1){
+                    Instantiate(instantHeal);
+                }
+                if(liste[i] == 2){
+                    Instantiate(Jump);
+                }
+                if(liste[i] == 3){
+                    Instantiate(Speed);
+                }
+                if(liste[i] == 4){
+                    Instantiate(Strength);
+                }
+            }
+        }
     }
 
     //Add the item in the inventory, if the inventory is full return false

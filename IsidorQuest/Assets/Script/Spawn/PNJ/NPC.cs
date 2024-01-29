@@ -43,6 +43,10 @@ public abstract class NPC : MonoBehaviour
 
     }
 
+    public bool getCanPlayerInteract(){
+        return this.canPlayerInteract;
+    }
+
     protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player" && this.interactText)

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { User, UserGame } = require("../Models/Model")
+const { User, UserGame, Game } = require("../Models/Model")
 var localStorage = require('localStorage')
 
 const Inscription = async (req, res) => {
@@ -17,9 +17,11 @@ const Inscription = async (req, res) => {
     });
     const newUserGame = new UserGame({
         pseudo : data.pseudo,
-        coins : 0,
+        coins : 0, 
         Archer : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1},
-        Warrior : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1}
+        Warrior : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1},
+        inventory : {item1 : null, item2 : null, item3 : null, item4 : null},
+        ActualLevel : "WorldOneLvl1"
     })
     newUser.password = newUser.generateHash(data.password);
     req.session.pseudo = data.pseudo;
@@ -129,6 +131,13 @@ const changeUserData = async (req, res) => {
     ).exec()
 
      await UserGame.updateOne(
+      { pseudo: currentUser.pseudo },
+      { $set: { 
+        pseudo: datas.pseudo 
+      }}
+    ).exec()
+
+    await Game.updateMany(
       { pseudo: currentUser.pseudo },
       { $set: { 
         pseudo: datas.pseudo 
