@@ -119,5 +119,6 @@
 
     },
     "lengthErr" : "La longueur des champs doivent être inferieur ou égale à 50",
-    "unvalidEmail" : "Veuillez rentrez un email valide"
+    "unvalidEmail" : "Veuillez rentrez un email valide",
+    "forbidenCarac" : "Les caracteres: { } $ [ ] \" ' : ; < > sont interdits"
 }

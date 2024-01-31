@@ -18,6 +18,8 @@ const UserDataScreen = ({language}) => {
     const [email, setEmail] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [notif, setNotif] = useState('');
+    const [err, setErr] = useState('')
+
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -115,6 +117,17 @@ const UserDataScreen = ({language}) => {
                 setNotif(selectLanguage.UserData.notifNull);
                 return;
             }
+
+            if (response === 406){
+                setErr(selectLanguage.lengthErr)
+                return
+            }
+
+            if (response === 408){
+                setErr(selectLanguage.forbidenCarac)
+                return
+            }
+
         } catch (error) {
             console.error('Erreur lors de la récupération des données :', error);
             setNotif(selectLanguage.UserData.notifErr);
@@ -165,6 +178,7 @@ const UserDataScreen = ({language}) => {
                             editable={isEditing}
                         />
                     </View>
+                    {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
 
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity 

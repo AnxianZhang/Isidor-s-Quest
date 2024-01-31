@@ -1,4 +1,7 @@
 const nodemailer = require("nodemailer");
+const { isAllUnder50Character, containSpeCaracters } = require('../Models/Utile')
+
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const contactEmail = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -9,15 +12,25 @@ const contactEmail = nodemailer.createTransport({
         pass: 'qbimqevwqdqgviaz',
     },
     tls: {
-    // more security avec true (certificat TLS)
-    rejectUnauthorized: false
+        // more security avec true (certificat TLS)
+        rejectUnauthorized: false
     }
 });
 
-const mailSend = async(req, res) => {
+const mailSend = async (req, res) => {
+    if (containSpeCaracters(req.body)) {
+        return res.status(408).send("forbiden carac")
+    }
+
+    if (!isAllUnder50Character(req.body))
+        return res.status(406).send("input doivent etre <= 64")
+
+    if (!emailRegex.test(req.body.email))
+        return res.status(405).send("email non conform !")
+
     const name = req.body.name;
     const email = req.body.email;
-    const message = req.body.message; 
+    const message = req.body.message;
     const mail = {
         from: '"no-reply" <foo@example.com>',
         to: "isidorquest@gmail.com",

@@ -54,6 +54,12 @@ const ConnexionScreen = ({ language }) => {
                 setError(selectLanguage.lengthErr)
                 return
             }
+
+            if (result === 408){
+                setError(selectLanguage.forbidenCarac)
+                return
+            }
+            
             setError('')
             if (result === 401) {
                 setPseudo("");

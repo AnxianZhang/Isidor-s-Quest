@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const { User, UserGame, Game } = require("../Models/Model")
-const {isAllUnder50Character} = require('../Models/Utile')
+const { isAllUnder50Character, containSpeCaracters } = require('../Models/Utile')
 var localStorage = require('localStorage')
 
 const Inscription = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
-    localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
+    localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
 
     const newUser = new User({
       prenom: data.prenom,
@@ -17,12 +17,12 @@ const Inscription = async (req, res) => {
       isPay: false
     });
     const newUserGame = new UserGame({
-        pseudo : data.pseudo,
-        coins : 0, 
-        Archer : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1},
-        Warrior : {levelStrength : 1, levelDefence : 1,  levelSpeed : 1,levelLife : 1},
-        inventory : {item1 : null, item2 : null, item3 : null, item4 : null},
-        ActualLevel : "WorldOneLvl1"
+      pseudo: data.pseudo,
+      coins: 0,
+      Archer: { levelStrength: 1, levelDefence: 1, levelSpeed: 1, levelLife: 1 },
+      Warrior: { levelStrength: 1, levelDefence: 1, levelSpeed: 1, levelLife: 1 },
+      inventory: { item1: null, item2: null, item3: null, item4: null },
+      ActualLevel: "WorldOneLvl1"
     })
     newUser.password = newUser.generateHash(data.password);
     req.session.pseudo = data.pseudo;
@@ -39,11 +39,15 @@ const Connexion = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
-    
+
     if (!isAllUnder50Character(data))
       return res.status(406).send("input doivent etre <= 64")
-    
-    localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
+
+    if (containSpeCaracters(data)) {
+      return res.status(408).send("forbiden carac")
+    }
+
+    localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
     if (findUserPseudo === null) {
       return res.status(401).send("Nom d'utilisateur/Mot de passe incorrect");
@@ -60,48 +64,48 @@ const Connexion = async (req, res) => {
 }
 
 const getUserData = async (req, res) => {
-    try{
-      await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
-      const pseudo = req.session.pseudo
-      const currentUser = await User.findOne(
-        { pseudo: pseudo }
-      ).exec();
+  try {
+    await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
+    const pseudo = req.session.pseudo
+    const currentUser = await User.findOne(
+      { pseudo: pseudo }
+    ).exec();
     // console.log(req.session)
-  
-      if (currentUser == null)
-        return res.status(502).send('Utilisateur non trouvé');
-      return res.status(200).json(currentUser)
-    }catch (error) {
-      console.error('erreur durant getUserData', error);
-      res.status(500).send("erreur lors de la récupération des données au niveau du backend");
-    }
+
+    if (currentUser == null)
+      return res.status(502).send('Utilisateur non trouvé');
+    return res.status(200).json(currentUser)
+  } catch (error) {
+    console.error('erreur durant getUserData', error);
+    res.status(500).send("erreur lors de la récupération des données au niveau du backend");
+  }
 };
 
 const getUserDataPayAndConnect = async (req, res) => {
-  try{
+  try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
     const pseudo = req.session.pseudo
     const currentUser = await User.findOne(
       { pseudo: pseudo }
     ).exec();
 
-    if (currentUser == null){
+    if (currentUser == null) {
       return res.status(502).send('Utilisateur non trouvé');
     }
-    if(currentUser.isPay === true){
+    if (currentUser.isPay === true) {
       return res.status(200).json(currentUser);
     }
-    else{
+    else {
       return res.status(501).send("Compte non payé");
     }
-  }catch (error) {
+  } catch (error) {
     console.error('erreur durant getUserData', error);
     res.status(500).send("erreur lors de la récupération des données au niveau du backend");
   }
 };
 
 const changeUserData = async (req, res) => {
-  try{
+  try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
     // const pseudo = req.session.pseudo
     const datas = req.body
@@ -109,54 +113,67 @@ const changeUserData = async (req, res) => {
     const currentUser = await User.findOne(
       { email: datas.email }
     ).exec();
-    if (currentUser == null){
+    if (currentUser == null) {
       return res.status(502).send('Utilisateur non trouvé');
     }
+
+    if (containSpeCaracters(datas)) {
+      return res.status(408).send("forbiden carac")
+    }
+
+    if (!isAllUnder50Character(datas))
+      return res.status(406).send("input doivent etre <= 64")
 
     // console.log(datas)
     // const existUserMail = await User.findOne({ email: datas.email }).exec();
     const existUserPseudo = await User.findOne({ pseudo: datas.pseudo }).exec();
-    if (existUserPseudo != null&&existUserPseudo.email!=datas.email) {
+    if (existUserPseudo != null && existUserPseudo.email != datas.email) {
       return res.status(402).send("Ce pseudo est déja pris");
     }
-    if (currentUser.email==datas.email&&
-      currentUser.prenom==datas.prenom&&
-      currentUser.nomFamille==datas.nomFamille&&
-      currentUser.pseudo==datas.pseudo) {
+    if (currentUser.email == datas.email &&
+      currentUser.prenom == datas.prenom &&
+      currentUser.nomFamille == datas.nomFamille &&
+      currentUser.pseudo == datas.pseudo) {
       return res.status(403).send("Pas de modification");
     }
 
     const result = await User.updateOne(
       { email: datas.email },
-      { $set: { 
-        prenom: datas.prenom ,
-        nomFamille: datas.nomFamille ,
-        pseudo: datas.pseudo 
-      }}
+      {
+        $set: {
+          prenom: datas.prenom,
+          nomFamille: datas.nomFamille,
+          pseudo: datas.pseudo
+        }
+      }
     ).exec()
 
-     await UserGame.updateOne(
+    await UserGame.updateOne(
       { pseudo: currentUser.pseudo },
-      { $set: { 
-        pseudo: datas.pseudo 
-      }}
+      {
+        $set: {
+          pseudo: datas.pseudo
+        }
+      }
     ).exec()
 
     await Game.updateMany(
       { pseudo: currentUser.pseudo },
-      { $set: { 
-        pseudo: datas.pseudo 
-      }}
+      {
+        $set: {
+          pseudo: datas.pseudo
+        }
+      }
     ).exec()
     // console.log(datas.prenom)
     // console.log(datas.email)
     // console.log(result)
 
     if (result.acknowledged)
-      req.session.pseudo=datas.pseudo
-      localStorage.setItem('isConnect', JSON.stringify({pseudo : datas.pseudo}));
-      return res.status(200).send('UserData change avec succes')
-  }catch (error) {
+      req.session.pseudo = datas.pseudo
+    localStorage.setItem('isConnect', JSON.stringify({ pseudo: datas.pseudo }));
+    return res.status(200).send('UserData change avec succes')
+  } catch (error) {
     console.error('erreur durant changeUserData', error);
     res.status(500).send("erreur lors de la modification data des données au niveau du backend");
   }
@@ -167,6 +184,13 @@ const changePwd = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
     const datas = req.body
+
+    if (containSpeCaracters(datas)) {
+      return res.status(408).send("forbiden carac")
+    }
+
+    if (!isAllUnder50Character(datas))
+      return res.status(406).send("input doivent etre <= 64")
 
     if (datas.pass !== datas.confirmPass)
       return res.status(401).send('Les deux mots de pass ne correspondent pas')

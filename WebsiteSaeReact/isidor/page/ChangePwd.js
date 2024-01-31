@@ -15,7 +15,7 @@ const ChangePwd = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language)
     const [pass, setPass] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    const [passError, setPassError] = useState('')
+    const [error, setError] = useState('')
     const [disable, setDisable] = useState(false)
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -38,7 +38,7 @@ const ChangePwd = ({ language }) => {
                 confirmPass: confirmPass,
             }
         } catch (e) {
-            setPassError(selectLanguage.changePwd.goToConnection)
+            setError(selectLanguage.changePwd.goToConnection)
             setPass('')
             setConfirmPass('')
             return
@@ -53,26 +53,33 @@ const ChangePwd = ({ language }) => {
             body: JSON.stringify(datas),
         }).then(res => res.status)
 
+        setPass('')
+        setConfirmPass('')
         if (result === 401) {
-            setPassError(selectLanguage.changePwd.notCorresponding)
-            setPass('')
-            setConfirmPass('')
+            setError(selectLanguage.changePwd.notCorresponding)
+            // setPass('')
+            // setConfirmPass('')
         }
+        else if (result === 408) {
+            setError(selectLanguage.forbidenCarac)
+        }
+        else if (result === 406)
+            setError(selectLanguage.lengthErr)
         else if (result === 402) {
-            setPassError(selectLanguage.changePwd.timeOut)
-            setPass('')
-            setConfirmPass('')
+            setError(selectLanguage.changePwd.timeOut)
+            // setPass('')
+            // setConfirmPass('')
         }
         else {
-            setPass('')
-            setConfirmPass('')
-            setPassError('')
+            // setPass('')
+            // setConfirmPass('')
+            setError('')
             navigation.navigate('ChangePwdSuccess', { data: datas })
         }
     }
 
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-    const textInputAndButtonWidthStyle = windowWidthByHook > 500? 400 : "100%"
+    const textInputAndButtonWidthStyle = windowWidthByHook > 500 ? 400 : "100%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
@@ -81,23 +88,23 @@ const ChangePwd = ({ language }) => {
                     <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title, { fontSize: windowWidthByHook < 750 ? 30 : 40 }]}>{selectLanguage.changePwd.title}</Text>
                     <View style={{ paddingTop: 30 }}>
                         <Field
-                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
-                            placeholderTextColor={passError.length ? "#E55839" : "#000000"}
+                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle })}
+                            placeholderTextColor={error.length ? "#E55839" : "#000000"}
                             placeholder={selectLanguage.changePwd.newPass}
                             onChangeText={setPass}
                             value={pass}
                             secureTextEntry={true}
                         />
                         <Field
-                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
+                            TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle })}
                             fieldsViewStyle={styles.maringTop}
-                            placeholderTextColor={passError.length ? "#E55839" : "#000000"}
+                            placeholderTextColor={error.length ? "#E55839" : "#000000"}
                             placeholder={selectLanguage.changePwd.confirmNewPass}
                             onChangeText={setConfirmPass}
                             value={confirmPass}
                             secureTextEntry={true}
                         />
-                        {passError.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{passError}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
+                        {error.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{error}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
                         <View style={[styles.ButtonContainer]}>
                             <TouchableOpacity
                                 onPress={handleSubmit}

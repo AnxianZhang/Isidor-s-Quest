@@ -15,20 +15,21 @@ const windowWidth = Dimensions.get('window').width;
 
 const VerificationScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
-    const [code, setCode] = useState();
-    const [confirmCode, setConfirmCode] = useState();
+    const [code, setCode] = useState('');
+    const [confirmCode, setConfirmCode] = useState('');
     const [errorCode, setErrorCode] = useState("");
     const [errorConfirmCode, setErrorConfirmCode] = useState("");
     const [disable, setDisable] = useState(true);
+    const [err, setErr] = useState('')
     const navigation = useNavigation();
     const route = useRoute();
-    let number = /^(0|[1-9][0-9]*)$/
+    //let number = /^(0|[1-9][0-9]*)$/
     useEffect(() => {
         setSelectLanguage(getLanguage);
     })
 
     useEffect(() => {
-        if (!code || !confirmCode || !number.test(code) || !number.test(confirmCode)) {
+        if (!code || !confirmCode) {
             setDisable(true);
         }
         else {
@@ -54,7 +55,7 @@ const VerificationScreen = ({ language }) => {
                 },
                 body: JSON.stringify(data)
             });
-            const result = await response.status;
+            const result = response.status;
             if (result === 200) {
                 navigation.navigate("Home");
             }
@@ -73,7 +74,7 @@ const VerificationScreen = ({ language }) => {
             setErrorConfirmCode("");
             const data = {
                 email: route.params.data.email,
-                code: parseInt(code)
+                code: code
             }
             try {
                 const response = await fetch('http://localhost:3005/VerifyCode', {
@@ -84,7 +85,18 @@ const VerificationScreen = ({ language }) => {
                     },
                     body: JSON.stringify(data)
                 });
-                const result = await response.status;
+                const result = response.status;
+
+                if (result === 406){
+                    setErr(selectLanguage.lengthErr)
+                    return
+                }
+
+                if (result === 408){
+                    setErr(selectLanguage.forbidenCarac)
+                    return
+                }
+
                 if (result === 401) {
                     setCode("");
                     setConfirmCode("");
@@ -136,6 +148,8 @@ const VerificationScreen = ({ language }) => {
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorCode.length > 0 && "#E55839", borderWidth: errorCode.length > 0 && 1 }]} placeholder={errorCode.length > 0 ? errorCode : selectLanguage.Code.codeText} placeholderTextColor={errorCode.length ? "#E55839" : "#000000"} onChangeText={setCode} value={code} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorConfirmCode.length > 0 && "#E55839", borderWidh: errorConfirmCode.length > 0 && 1 }]} placeholder={errorConfirmCode.length > 0 ? errorConfirmCode : selectLanguage.Code.confirmCodeText} placeholderTextColor={errorConfirmCode.length ? "#E55839" : "#000000"} onChangeText={setConfirmCode} value={confirmCode} secureTextEntry={false} />
                     </View>
+                    {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10, textAlign: 'center'}}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
+
                     <Seperator />
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable}>

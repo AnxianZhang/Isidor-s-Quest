@@ -45,9 +45,15 @@ const ForgotPass = ({ language }) => {
             setError(selectLanguage.lengthErr)
             return
         }
-        if (response === 407){
+        if (response === 405){
             setError(selectLanguage.unvalidEmail)
+            return
         }
+        if (response === 408){
+            setError(selectLanguage.forbidenCarac)
+            return
+        }
+        
         setError('')
         if (response === 200){
             // setErrorEmail('')

@@ -8,7 +8,6 @@ import Footer from '../component/Footer';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { GLOBAL_STYLES } from '../style/global';
 const windowHeight = Dimensions.get('window').height;
-// const windowWidth = Dimensions.get('window').width;
 
 const ContactUsScreen = ({language}) => {
     const [selectLanguage, setSelectLanguage] = useState(language); 
@@ -16,7 +15,7 @@ const ContactUsScreen = ({language}) => {
         setSelectLanguage(getLanguage);
     })
     const [disable, setDisable] = useState(true)
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -24,9 +23,11 @@ const ContactUsScreen = ({language}) => {
     const [status, setStatus] = useState(selectLanguage.Contact.send);
 
     const [notif, setNotif] = useState('');
+
+    const [err, setErr] = useState('')
     
     useEffect(() => {
-        const isValid = name && email && message && reg.test(email);
+        const isValid = name && email && message
         setDisable(!isValid);
     }, [name, email, message]);
 
@@ -59,15 +60,33 @@ const ContactUsScreen = ({language}) => {
                     "Content-Type": "application/json;charset=utf-8",
                 },
                 body: JSON.stringify({ name, email, message }),
-            });
+            }).then(res => res.status)
             setStatus(selectLanguage.Contact.send);
 
-            let result = await response.json();
-            console.log(result.status);
+            if (response === 401) {
+                setErr(selectLanguage.changePwd.notCorresponding)
+                return
+            }
 
-            setName('');
-            setEmail('');
-            setMessage('');
+            if (response === 408) {
+                setErr(selectLanguage.forbidenCarac)
+                return
+            }
+
+            if (response === 405){
+                setErr(selectLanguage.unvalidEmail)
+                return
+            }
+
+            if (response === 406){
+                setErr(selectLanguage.lengthErr)
+                return
+            }
+
+            setName('')
+            setEmail('')
+            setMessage('')
+            setErr('')
 
             setNotif(selectLanguage.Contact.sendOK);
         } catch (error) {
@@ -115,6 +134,7 @@ const ContactUsScreen = ({language}) => {
                             multiline={true}
                         />
                     </View>
+                    {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity 
                             onPress={handleSubmit} 

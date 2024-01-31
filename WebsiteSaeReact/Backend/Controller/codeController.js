@@ -1,7 +1,7 @@
 const { Code, User } = require("../Models/Model");
 const nodemailer = require("nodemailer");
 const mongoose = require('mongoose');
-const { isAllUnder50Character } = require('../Models/Utile')
+const { isAllUnder50Character, containSpeCaracters } = require('../Models/Utile')
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%*?&])[A-Za-z\d@!%*?&]{8,}$/;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,11 +27,15 @@ const sendCodeForRetrivePass = async (req, res) => {
       { email: data.email }
     ).exec()
 
-    if (!isAllUnder50Character(data))
+    if (containSpeCaracters([data.email])) {
+      return res.status(408).send("forbiden carac")
+    }
+
+    if (!isAllUnder50Character([data.email]))
       return res.status(406).send("input doivent etre <= 64")
 
     if (!emailRegex.test(data.email)) {
-      return res.status(407).send("email non conform !")
+      return res.status(405).send("email non conform !")
     }
 
     if (findUser == null)
@@ -70,6 +74,10 @@ const SendCode = async (req, res) => {
 
     if (!isAllUnder50Character(data)) {
       return res.status(406).send("input doivent etre <= 64")
+    }
+
+    if (containSpeCaracters(data)) {
+      return res.status(408).send("forbiden carac")
     }
 
     if (findUserMail !== null) {
@@ -122,7 +130,16 @@ const VerifyCode = async (req, res) => {
       await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
       return res.status(401).send("Votre code est expiré");
     }
-    if (findCodeEmail.code !== data.code) {
+
+    if (!isAllUnder50Character(data)) {
+      return res.status(406).send("input doivent etre <= 64")
+    }
+
+    if (containSpeCaracters(data)) {
+      return res.status(408).send("forbiden carac")
+    }
+
+    if (findCodeEmail.code !== parseInt(data.code)) {
       return res.status(402).send("Code incorrect");
     }
     await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
