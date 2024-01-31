@@ -105,6 +105,9 @@
         "gcu": "CGU & Mentions légales",
         "copyRight": "Tous droits réservés"
     },
+    "Captcha" : {
+        "errorCaptcha" : "Vous devez confirmer que vous etez un humain"
+    },
     "UserData" :{
         "title": "Informations personnelles",
         "name": "Prenom",

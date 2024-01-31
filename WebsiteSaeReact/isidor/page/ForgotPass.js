@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
@@ -7,6 +7,7 @@ import { getLanguage } from '../function/languageSelect';
 import Header from '../component/Header';
 import Field from '../component/Field';
 import { useNavigation } from '@react-navigation/native';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ForgotPass = ({ language }) => {
 
@@ -17,10 +18,47 @@ const ForgotPass = ({ language }) => {
     const [disable, setDisable] = useState(false)
     const [error, setError] = useState("")
     const windowWidthByHook = useScreenWidthDimention()
+    const [errorCaptcha, setErrorCaptcha] = useState("")
+    const captchaRef = useRef(null)
 
     useEffect(() => {
         setSelectLanguage(getLanguage)
     })
+
+    const handleSubmitCaptcha = () =>{
+        sendDataCaptch(captchaRef.current.getValue());
+        captchaRef.current.reset();
+    }
+
+    const sendDataCaptch = async (token) => {
+        const data = {
+            token : token
+        }
+        console.log(token);
+        try {
+            const response = await fetch('http://localhost:3005/captchaResponse', {
+                method: 'POST',
+                credentials : "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = response.status;
+            const text = await response.text();
+            console.log(text);
+            if(result === 200){
+                setErrorCaptcha("");
+                handleSubmit();
+            }
+            else{
+                setErrorCaptcha(selectLanguage.Captcha.errorCaptcha);
+            }
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des données au backend', error);
+        }
+}
 
     // useEffect(()=>{
     //     // setDisable(!(email && reg.test(email)))
@@ -73,7 +111,7 @@ const ForgotPass = ({ language }) => {
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View>
                 <View style={{ height: 550 }}>
-                    <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 300}]}>
+                    <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 400}]}>
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>
                             <Field
@@ -84,10 +122,19 @@ const ForgotPass = ({ language }) => {
                                 value={email}
                                 secureTextEntry={false}
                             />
-                            {error ? <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{error}</Text> : <Text style={{fontSize: 20, marginVertical: 20}}> </Text>}
+                            {error !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{error}</Text> }
+                            {email !== "" &&
+                            <View style={styles.GoogleCaptchaContainer}>
+                            <ReCAPTCHA
+                            sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D" 
+                            ref={captchaRef}
+                            />
+                            {errorCaptcha !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10}}>{errorCaptcha}</Text>}
+                        </View>
+                        }
                             <View style={styles.ButtonContainer}>
                                 <TouchableOpacity
-                                    onPress={handleSubmit}
+                                    onPress={handleSubmitCaptcha}
                                     disabled={disable}
                                     style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839", width: textInputAndButtonWidthStyle })}
                                 >
@@ -110,6 +157,7 @@ const styles = StyleSheet.create({
 
     ButtonContainer: {
         alignItems: "center",
+        paddingTop : 10
         // marginTop: 10,
     },
 
@@ -124,6 +172,13 @@ const styles = StyleSheet.create({
         width: 400,
         height: 42,
         borderRadius: 20,
+    },
+
+    GoogleCaptchaContainer : {
+        paddingTop : 20,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom : 20
     }
 })
 
