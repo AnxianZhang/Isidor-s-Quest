@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
 import Header from '../component/Header';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Field from '../component/Field';
 import Seperator from '../component/Seperator';
 import { useNavigation } from '@react-navigation/native';
@@ -10,7 +10,8 @@ import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
-
+import ReCAPTCHA from "react-google-recaptcha";
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 const RegisterScreen = ({ language }) => {
@@ -26,7 +27,9 @@ const RegisterScreen = ({ language }) => {
     const [errorPseudo, setErrorPseudo] = useState("");
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
     const [error, setError] = useState("")
+    const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
+    const [token, setToken] = useState(captchaRef.current);
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     useEffect(() => {
         if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || reg.test(email) === false) {
@@ -35,11 +38,50 @@ const RegisterScreen = ({ language }) => {
         else {
             setDisable(false);
         }
+        
     })
+    
+
+    const handleSubmit = (e) =>{
+        //e.preventDefault();
+        setToken(captchaRef.current.getValue());
+        sendDataCaptch(captchaRef.current.getValue());
+        captchaRef.current.reset();
+    }
 
     useEffect(() => {
         setSelectLanguage(getLanguage);
     })
+
+    const sendDataCaptch = async (token) => {
+            const data = {
+                token : token
+            }
+            console.log(token);
+            try {
+                const response = await fetch('http://localhost:3005/captchaResponse', {
+                    method: 'POST',
+                    credentials : "include",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                const result = response.status;
+                const text = await response.text();
+                console.log(text);
+                if(result === 200){
+                    sendDataToDatabase();
+                }
+                else{
+                    navigation.navigate("Home");
+                }
+            }
+            catch (error) {
+                console.error('Erreur lors de l\'envoi des données au backend', error);
+            }
+        // }
+    }
 
     const sendDataToDatabase = async () => {
         // if (password !== confirmPassword) {
@@ -130,8 +172,16 @@ const RegisterScreen = ({ language }) => {
                             <Text style={styles.generalContidionText}>{selectLanguage.Register.generalCondition}</Text>
                         </View>
                         <Seperator />
+                        {disable === false &&
+                        <View style={styles.GoogleCaptchaContainer}>
+                            <ReCAPTCHA
+                            sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D" 
+                            ref={captchaRef}
+                            />
+                        </View>
+                        }
                         <View style={styles.ButtonContainer}>
-                            <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable} testID='RegiesterScreen:Send:Button'>
+                            <TouchableOpacity onPress={() => handleSubmit()} disabled={disable} testID='RegiesterScreen:Send:Button'>
                                 <View style={StyleSheet.compose(GLOBAL_STYLES.form.buttonContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" })}>
                                     <Text style={GLOBAL_STYLES.form.buttonText}>{selectLanguage.Register.next}</Text>
                                 </View>
@@ -151,7 +201,7 @@ const styles = StyleSheet.create({
         height: 900,
     },
     FormulaireBox: {
-        height: 700,
+        height: 800,
         borderRadius: 50,
         backgroundColor: "#443955"
 
@@ -175,6 +225,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 20
     },
+    GoogleCaptchaContainer : {
+        paddingTop : 20,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom : 20
+    }
 });
 
 export default RegisterScreen;

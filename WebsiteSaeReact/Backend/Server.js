@@ -23,7 +23,7 @@ const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentC
 const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
 const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
-
+const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
 app.use(cors({
   origin: ['http://localhost:19006', "http://localhost:5500"],
   credentials: true,
@@ -55,6 +55,7 @@ app.post("/changeData",changeUserData);
 app.post("/SaveUserGameProfile", userSave)
 app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
 app.get("/getUserGameData", getUserGameData)
+app.post("/captchaResponse", CaptchaGoogle)
 const port = 3005
 
 const contactPort = 5000
