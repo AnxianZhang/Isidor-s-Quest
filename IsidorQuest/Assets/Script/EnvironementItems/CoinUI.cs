@@ -3,16 +3,13 @@ using UnityEngine.UI;
 
 public class CoinUI : MonoBehaviour
 {
-    public int startCoinQuantity;
     public Text coinQuantity;
-
     public static int CurrentCoinQuantity;
-
+    private GetData getData;
     void Start()
     {
-        if (!Player.hasChangeSceen)
-            CurrentCoinQuantity = startCoinQuantity;
-        //Debug.Log("coin: " + CurrentCoinQuantity);
+        this.getData = GameObject.Find("GetData").GetComponent<GetData>();
+        CurrentCoinQuantity = this.getData.getCoins();
     }
 
     void Update()

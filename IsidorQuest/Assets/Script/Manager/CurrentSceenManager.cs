@@ -62,8 +62,6 @@ public class CurrentSceenManager : MonoBehaviour
             }
             else if (!this.objectToDestroy[i].hasChangeSceen)
             {
-                Debug.Log("lmao");
-
                 this.objectToDestroy[i].destroy();
                 toRemove.Add(this.objectToDestroy[i]);
             }

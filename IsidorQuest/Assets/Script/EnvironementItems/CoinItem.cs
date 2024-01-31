@@ -5,9 +5,11 @@ using UnityEngine;
 public class CoinItem : MonoBehaviour
 {
     private GameSound gm;
+    private SaveData sv;
     void Start()
     {
         this.gm = GameObject.FindWithTag("SoundManager").GetComponent<GameSound>();
+        this.sv = GameObject.Find("SavingData").GetComponent<SaveData>();
     }
 
     // Update is called once per frame
@@ -22,6 +24,7 @@ public class CoinItem : MonoBehaviour
             gm.collectCoinPlay();
             CoinUI.CurrentCoinQuantity++;
             CurrentSceenManager.instance.incrementGoldRecoltedInCurrentSceen();
+            //sv.saveData();
             Destroy(gameObject);
         }
         if (other.tag == "water"){
