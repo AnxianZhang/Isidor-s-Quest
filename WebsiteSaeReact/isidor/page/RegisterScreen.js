@@ -67,10 +67,11 @@ const RegisterScreen = ({ language }) => {
                 const result = response.status;
                 if (result === 406){
                     setError(selectLanguage.lengthErr)
+                    return
                 }
+                setError("")
                 if (result === 401) {
                     setEmail("");
-                    setError("")
                     setErrorEmail(selectLanguage.Register.haveAnAccount);
                 }
                 else {

@@ -118,5 +118,6 @@
         "notifNull": "You haven't changed anything",
         "notifErr": "Failed to change data"
     },
-    "lengthErr" : "The length of characters must be under or equal to 50"
+    "lengthErr" : "The length of characters must be under or equal to 50",
+    "unvalidEmail" : "Please enter a valid mail"
 }

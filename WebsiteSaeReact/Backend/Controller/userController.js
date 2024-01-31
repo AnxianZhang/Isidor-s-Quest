@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { User, UserGame } = require("../Models/Model")
+const {isAllUnder50Character} = require('../Models/Utile')
 var localStorage = require('localStorage')
 
 const Inscription = async (req, res) => {
@@ -36,6 +37,10 @@ const Connexion = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
+    
+    if (!isAllUnder50Character(data))
+      return res.status(406).send("input doivent etre <= 64")
+    
     localStorage.setItem('isConnect', JSON.stringify({pseudo : data.pseudo}));
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
     if (findUserPseudo === null) {

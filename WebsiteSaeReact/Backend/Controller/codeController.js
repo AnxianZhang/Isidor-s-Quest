@@ -1,9 +1,10 @@
 const { Code, User } = require("../Models/Model");
 const nodemailer = require("nodemailer");
 const mongoose = require('mongoose');
-const {isAllUnder64Character} = require('../Models/Utile')
+const { isAllUnder50Character } = require('../Models/Utile')
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%*?&])[A-Za-z\d@!%*?&]{8,}$/;
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -20,10 +21,18 @@ const transporter = nodemailer.createTransport({
 
 const sendCodeForRetrivePass = async (req, res) => {
   try {
+    const data = req.body
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor')
     const findUser = await User.findOne(
-      { email: req.body.email }
+      { email: data.email }
     ).exec()
+
+    if (!isAllUnder50Character(data))
+      return res.status(406).send("input doivent etre <= 64")
+
+    if (!emailRegex.test(data.email)) {
+      return res.status(407).send("email non conform !")
+    }
 
     if (findUser == null)
       return res.status(401).send("Ce mail n'a pas de compte Isidor associé !")
@@ -59,7 +68,7 @@ const SendCode = async (req, res) => {
     const findUserMail = await User.findOne({ email: data.email }).exec();
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
 
-    if (!isAllUnder64Character(data)){
+    if (!isAllUnder50Character(data)) {
       return res.status(406).send("input doivent etre <= 64")
     }
 
@@ -73,7 +82,7 @@ const SendCode = async (req, res) => {
     if (data.password !== data.confirmPass)
       return res.status(403).send("Les mot de passes ne correspondent pas")
 
-    if (!passwordRegex.test(data.password)){
+    if (!passwordRegex.test(data.password)) {
       return res.status(405).send("le mot de passe doit respecter les exigence")
     }
 
@@ -110,13 +119,13 @@ const VerifyCode = async (req, res) => {
     const findCodeEmail = await Code.findOne({ email: data.email }).sort({ ExpirationDate: -1 }).limit(1).exec();
     const date = new Date();
     if (date > findCodeEmail.ExpirationDate && findCodeEmail.code === data.code) {
-      await Code.deleteOne({email: data.email, code: findCodeEmail.code})
+      await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
       return res.status(401).send("Votre code est expiré");
     }
     if (findCodeEmail.code !== data.code) {
       return res.status(402).send("Code incorrect");
     }
-    await Code.deleteOne({email: data.email, code: findCodeEmail.code})
+    await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
     return res.status(200).send("Code correct");
   }
   catch (error) {

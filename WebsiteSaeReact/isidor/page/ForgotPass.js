@@ -9,22 +9,22 @@ import Field from '../component/Field';
 import { useNavigation } from '@react-navigation/native';
 
 const ForgotPass = ({ language }) => {
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     const navigation = useNavigation()
     const [selectLanguage, setSelectLanguage] = useState(language)
     const [email, setEmail] = useState("")
     const [errorEmail, setErrorEmail] = useState("")
     const [disable, setDisable] = useState(false)
+    const [error, setError] = useState("")
     const windowWidthByHook = useScreenWidthDimention()
 
     useEffect(() => {
         setSelectLanguage(getLanguage)
     })
 
-    useEffect(()=>{
-        setDisable(!(email && reg.test(email)))
-    }, [email])
+    // useEffect(()=>{
+    //     // setDisable(!(email && reg.test(email)))
+    // }, [email])
 
     const handleSubmit = async () => {
         const data = {
@@ -41,13 +41,21 @@ const ForgotPass = ({ language }) => {
             body: JSON.stringify(data),
         }).then(res => res.status)
 
+        if (response === 406){
+            setError(selectLanguage.lengthErr)
+            return
+        }
+        if (response === 407){
+            setError(selectLanguage.unvalidEmail)
+        }
+        setError('')
         if (response === 200){
-            setErrorEmail('')
+            // setErrorEmail('')
             navigation.navigate('VerifyCode', {data: data})
         }
         else{
             setEmail('')
-            setErrorEmail(selectLanguage.forgotPass.noAccount)
+            setError(selectLanguage.forgotPass.noAccount)
         }
     }
 
@@ -64,13 +72,13 @@ const ForgotPass = ({ language }) => {
                         <View style={styles.InputStyle}>
                             <Field
                                 TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
-                                placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"}
+                                placeholderTextColor={error.length ? "#E55839" : "#000000"}
                                 placeholder="Email"
                                 onChangeText={setEmail}
                                 value={email}
                                 secureTextEntry={false}
                             />
-                            {errorEmail ? <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{errorEmail}</Text> : <Text style={{fontSize: 20, marginVertical: 20}}> </Text>}
+                            {error ? <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{error}</Text> : <Text style={{fontSize: 20, marginVertical: 20}}> </Text>}
                             <View style={styles.ButtonContainer}>
                                 <TouchableOpacity
                                     onPress={handleSubmit}
