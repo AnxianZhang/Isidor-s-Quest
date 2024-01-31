@@ -6,9 +6,9 @@ const CaptchaGoogle = async (req, res) => {
         `https://www.google.com/recaptcha/api/siteverify?secret=6LdTH2IpAAAAACCHdjFtGp7xhFTzH9gsyyXFDuZt&response=${token}`
       );
       if (response.data.success) {
-        return res.status(200).send("Human 👨 👩");
+        return res.status(200).send("Humain");
       } else {
-        res.send("Robot 🤖");
+        return res.status(401).send("Robot");
       } 
 
     } catch (error) {

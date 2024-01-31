@@ -11,7 +11,7 @@ import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 const RegisterScreen = ({ language }) => {
@@ -27,9 +27,10 @@ const RegisterScreen = ({ language }) => {
     const [errorPseudo, setErrorPseudo] = useState("");
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
     const [error, setError] = useState("")
+    const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
-    const [token, setToken] = useState(captchaRef.current);
+ 
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     useEffect(() => {
         if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || reg.test(email) === false) {
@@ -42,9 +43,7 @@ const RegisterScreen = ({ language }) => {
     })
     
 
-    const handleSubmit = (e) =>{
-        //e.preventDefault();
-        setToken(captchaRef.current.getValue());
+    const handleSubmit = () =>{
         sendDataCaptch(captchaRef.current.getValue());
         captchaRef.current.reset();
     }
@@ -71,16 +70,16 @@ const RegisterScreen = ({ language }) => {
                 const text = await response.text();
                 console.log(text);
                 if(result === 200){
+                    setErrorCaptcha("");
                     sendDataToDatabase();
                 }
                 else{
-                    navigation.navigate("Home");
+                    setErrorCaptcha(selectLanguage.Captcha.errorCaptcha);
                 }
             }
             catch (error) {
                 console.error('Erreur lors de l\'envoi des données au backend', error);
             }
-        // }
     }
 
     const sendDataToDatabase = async () => {
@@ -178,6 +177,7 @@ const RegisterScreen = ({ language }) => {
                             sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D" 
                             ref={captchaRef}
                             />
+                            {errorCaptcha !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{errorCaptcha}</Text>}
                         </View>
                         }
                         <View style={styles.ButtonContainer}>

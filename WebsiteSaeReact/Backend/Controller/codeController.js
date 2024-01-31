@@ -26,17 +26,18 @@ const sendCodeForRetrivePass = async (req, res) => {
     const findUser = await User.findOne(
       { email: data.email }
     ).exec()
-
-    if (!isAllUnder50Character(data))
+    
+    if (data.email.length > 50){
       return res.status(406).send("input doivent etre <= 64")
-
+    }
     if (!emailRegex.test(data.email)) {
       return res.status(407).send("email non conform !")
     }
 
-    if (findUser == null)
+    if (findUser == null){
       return res.status(401).send("Ce mail n'a pas de compte Isidor associé !")
-
+    }
+      
     const CODE = Math.floor(100000 + Math.random() * 900000)
     const today = new Date()
     const expireDate = today.setHours(today.getHours() + 1)
@@ -53,7 +54,6 @@ const sendCodeForRetrivePass = async (req, res) => {
       code: CODE,
       ExpirationDate: expireDate,
     }).save()
-
     return res.status(200).send()
 
   } catch (error) {
