@@ -1,4 +1,4 @@
-const specialCaractersRegex = /[\{\}\[\]\"\'\:\;\<\>]/;
+const specialCaractersRegex = /[\{\}\[\]\"\'\:\;\<\>\(\)]/;
 
 
 const isAllUnder50Character = list => {
