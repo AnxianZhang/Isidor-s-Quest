@@ -53,13 +53,15 @@ const sendCodeForRetrivePass = async (req, res) => {
       text: "Votre code pour l'initialisation du mot de passe: " + CODE,
     })
 
-    const newCode = await new Code({
+    const newCode = new Code({
       email: req.body.email,
-      code: CODE,
       ExpirationDate: expireDate,
-    }).save()
-    return res.status(200).send()
+    })
 
+    newCode.code = newCode.generateHashCode(CODE);
+    await newCode.save();
+    return res.status(200).send()
+    
   } catch (error) {
     console.error("sendCodeForRetrivePass Error:", error)
   }
@@ -108,9 +110,9 @@ const SendCode = async (req, res) => {
     });
     const newCode = new Code({
       email: data.email,
-      code: code,
       ExpirationDate: expireDate,
     })
+    newCode.code = newCode.generateHashCode(code);
     await newCode.save();
     return res.status(200).send("Mail bien envoyé")
   }
@@ -139,7 +141,7 @@ const VerifyCode = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
-    if (findCodeEmail.code !== parseInt(data.code)) {
+    if (!findCodeEmail.validCode(data.code)) {
       return res.status(402).send("Code incorrect");
     }
     await Code.deleteOne({ email: data.email, code: findCodeEmail.code })

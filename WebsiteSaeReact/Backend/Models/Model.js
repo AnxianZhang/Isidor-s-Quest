@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
 
 const codeSchema = new mongoose.Schema({
     email : String,
-    code : Number,
+    code : String,
     ExpirationDate : Date,
  });
 
@@ -40,6 +40,15 @@ userSchema.methods.generateHash = function(password) {
   
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
+};
+
+codeSchema.methods.generateHashCode = function(code) {
+  var hashCode = code.toString();
+  return bcrypt.hashSync(hashCode, bcrypt.genSaltSync(8), null);
+};
+
+codeSchema.methods.validCode = function(code) {
+  return bcrypt.compareSync(code, this.code);
 };
 
 const User = mongoose.model('User', userSchema, "User");
