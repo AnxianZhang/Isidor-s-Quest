@@ -22,16 +22,18 @@ server.on("connection", (ws) => {
     ws.on("message", (message) => {
         try{
             data = JSON.parse(message);
-            if(data.scene != null){
-                ws.send(searchData(data.scene));
-            }
-            else{
-                addData(data);
-            }
+            ws.send(message.toString('utf-8'))
+
+            // if(data.scene != null){
+            //     ws.send(searchData(data.scene));
+            // }
+            // else{
+            //     addData(data);
+            // }
         }catch (e){
-            console.error(e);
-            ws.send("Not a valid argument");
-            console.log(e)
+            // console.error(e);
+            // ws.send("Not a valid argument");
+            // console.log(e)
         }
     })
 })
