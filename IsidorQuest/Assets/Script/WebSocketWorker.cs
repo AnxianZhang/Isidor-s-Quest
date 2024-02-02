@@ -16,8 +16,8 @@ public class WebSocketWorker
         ws.OnMessage += (sender, e) =>
         {
             Position position = JsonUtility.FromJson<Position>(e.Data);
-/*            Debug.Log(position.characterClass);
-            Debug.Log(e.Data);*/
+            //Debug.Log(position.characterClass);
+            Debug.Log(e.Data);
         };
     }
 

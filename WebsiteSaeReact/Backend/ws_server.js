@@ -22,24 +22,26 @@ server.on("connection", (ws) => {
     ws.on("message", (message) => {
         try{
             data = JSON.parse(message);
-            ws.send(message.toString('utf-8'))
-
-            // if(data.scene != null){
-            //     ws.send(searchData(data.scene));
-            // }
-            // else{
-            //     addData(data);
-            // }
+            // ws.send(message)
+            console.log(data)
+            if(data.currentScene != null){
+                const i = searchData(data.currentScene)
+                console.log(i)
+                ws.send(i)
+            }
+            else{
+                addData(data);
+            }
         }catch (e){
-            // console.error(e);
-            // ws.send("Not a valid argument");
-            // console.log(e)
+            console.error(e);
+            ws.send("Not a valid argument");
+            console.log(e)
         }
     })
 })
 
 function dataIsValid(data){
-    return data.pseudo != null && data.character != null && data.position != null && data.currentScene != null;
+    return data.pseudo != null && data.characterClass != null && data.position != null && data.currentScene != null;
 }
 
 function addData(data){
@@ -68,7 +70,6 @@ function searchData(scene){
     })
 
     return JSON.stringify(res);
-
 }
 
 function deleteData(playerName){
