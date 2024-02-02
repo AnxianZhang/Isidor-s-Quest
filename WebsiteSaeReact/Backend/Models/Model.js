@@ -28,7 +28,7 @@ const codeSchema = new mongoose.Schema({
  const userGameSchema = new mongoose.Schema({
     pseudo : String,
     coins : Number,
-    ActualLevel : String,
+    ActualLevel : Number,
     Archer : {levelStrength : Number, levelDefence : Number,  levelSpeed : Number,levelLife : Number},
     Warrior : {levelStrength : Number, levelDefence : Number,  levelSpeed : Number,levelLife : Number},
    inventory : {item1 : Number, item2 : Number, item3 : Number, item4 : Number}

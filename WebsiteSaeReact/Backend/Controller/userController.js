@@ -22,7 +22,7 @@ const Inscription = async (req, res) => {
       Archer: { levelStrength: 1, levelDefence: 1, levelSpeed: 1, levelLife: 1 },
       Warrior: { levelStrength: 1, levelDefence: 1, levelSpeed: 1, levelLife: 1 },
       inventory: { item1: null, item2: null, item3: null, item4: null },
-      ActualLevel: "WorldOneLvl1"
+      ActualLevel: 3
     })
     newUser.password = newUser.generateHash(data.password);
     req.session.pseudo = data.pseudo;

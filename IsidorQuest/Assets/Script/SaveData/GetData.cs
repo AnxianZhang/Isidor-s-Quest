@@ -12,7 +12,7 @@ public class GetData : MonoBehaviour
     {
         public int coins;
         public string chooseCharacter;
-        public string ActualLevel;
+        public int ActualLevel;
         public CharacterData Archer;
         public CharacterData Warrior;
         public InventoryData inventory;
@@ -79,6 +79,11 @@ public class GetData : MonoBehaviour
         return data.coins;
     }
 
+    public int getActualLevel()
+    {
+        return data.ActualLevel;
+    }
+
     public int getLevelStrength(){
         if(storeData.CharacterName == "Warrior"){
             return data.Warrior.levelStrength;
@@ -124,6 +129,7 @@ public class GetData : MonoBehaviour
         list.Add(data.inventory.item4);
         return list;
     }
+
 
     IEnumerator GetRequest(string uri)
     {

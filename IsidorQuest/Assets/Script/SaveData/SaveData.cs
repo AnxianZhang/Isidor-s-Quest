@@ -24,7 +24,7 @@ public class SaveData : MonoBehaviour
     {
         public int coins;
         public string chooseCharacter;
-        public string ActualLevel;
+        public int ActualLevel;
         public int levelStrength; 
         public int levelDefence;   
         public int levelSpeed;
@@ -41,6 +41,7 @@ public class SaveData : MonoBehaviour
     private Inventory inventory;
     private CoinUI coin;
     public StoringData storeData;
+    private GetData gm;
     private GameObject shop;
     private GameObject skillTree;
     private int cpt;
@@ -55,6 +56,7 @@ public class SaveData : MonoBehaviour
         this.door = SceneManager.GetActiveScene().name == "Village" ? GameObject.Find("LvlTeleporter") : GameObject.Find("Door");
         this.shop = GameObject.Find("ShopDisign");
         this.skillTree = GameObject.Find("SkillTreePNJ");
+        this.gm = GameObject.Find("GetData").GetComponent<GetData>();
     }
     private static string GetSceneNameFromScenePath(string scenePath)
     {
@@ -82,19 +84,17 @@ public class SaveData : MonoBehaviour
         {
             var currentScene = SceneManager.GetActiveScene();
             string currentSceneName = currentScene.name;
-            string nextScene;
-            if(currentScene.buildIndex + 1 < SceneManager.sceneCountInBuildSettings){
-                var nextSceneIndex = currentScene.buildIndex + 1;
-                nextScene = GetSceneNameFromScenePath(SceneUtility.GetScenePathByBuildIndex(nextSceneIndex));
-                print(nextScene);
+            int nextSceneIndex;
+            if(currentScene.buildIndex + 1 < SceneManager.sceneCountInBuildSettings && currentScene.buildIndex + 1 > gm.getActualLevel()){
+                nextSceneIndex = currentScene.buildIndex + 1;
             }
             else{
-                nextScene = currentScene.name;
+                nextSceneIndex = gm.getActualLevel();
             }
             int[] inventoryNumbers = inventoryNumber();
             int coinQuantity = CoinUI.getCoins();
             StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextScene, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextSceneIndex, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }
@@ -184,7 +184,7 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    public IEnumerator UserSaveProfile(string url, int coins, string level, string chooseCharacter, int levelStrength, int levelDefence, int levelLife, int levelSpeed, int items1, int items2, int items3, int items4)
+    public IEnumerator UserSaveProfile(string url, int coins, int level, string chooseCharacter, int levelStrength, int levelDefence, int levelLife, int levelSpeed, int items1, int items2, int items3, int items4)
     {
         isWrite = false;
         SaveUserGameDatas data = new SaveUserGameDatas

@@ -7,10 +7,12 @@ public class LevelSelectionMenu : MenuInSpawn
     //private GameObject nextLvlMenu;
     //private Text interactText;
     //private GameObject playerHealAndCoinsUI;
+    private GetData gm;
 
     private new void Start()
     {
         base.Start();
+        this.gm = GameObject.Find("GetData").GetComponent<GetData>();
         this.myMenu = transform.GetChild(2).gameObject;
         //this.interactText = GameObject.FindGameObjectWithTag("Msg").GetComponent<Text>();
         //this.playerHealAndCoinsUI = GameObject.Find("CanvasUI");
@@ -34,7 +36,9 @@ public class LevelSelectionMenu : MenuInSpawn
     public void lunchWorld1LvlTwo()
     {
         base.closeMenu();
-        SceneManager.LoadScene("WorldOneLvl2");
+        if(gm.getActualLevel() >= 4){
+            SceneManager.LoadScene("WorldOneLvl2");
+        }
     }
 
   /*  public void quitButton()
