@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-class Position
+public class Position
 {
     public string pseudo;
     public string characterClass;

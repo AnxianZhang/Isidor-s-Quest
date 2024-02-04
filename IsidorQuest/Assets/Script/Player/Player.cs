@@ -1,8 +1,7 @@
 ﻿using Assets.Script.Player;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public abstract class Player : PlayerMovement
@@ -11,6 +10,8 @@ public abstract class Player : PlayerMovement
     protected int blinks = 2;
     protected float time = 0.02f;
     protected Rigidbody2D rB;
+
+    public string pseudo { get; set; }
     public int damageDeal { get; protected set; }
     public int maxLife { get; protected set; }
     public int currentLife { get; protected set; }
@@ -25,13 +26,18 @@ public abstract class Player : PlayerMovement
     protected bool isHit;
     private Inventory inventory;
     private GetData getData;
+
+    private WebSocketWorker webSocketWorker;
+
     protected abstract void doPlayerAttaque();
 
     protected new void Start()
     {
         base.Start();
+        this.webSocketWorker = new WebSocketWorker();
         this.getData = GameObject.Find("GetData").GetComponent<GetData>();
         this.skills = new SkillsLvl();
+        this.pseudo = this.getData.getPseudo();
         setSkillLevelPlayer();
         this.inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
@@ -77,9 +83,17 @@ public abstract class Player : PlayerMovement
         this.inventory.removeItem(item);
     }
 
+    private void sendSocket()
+    {
+        float[] playerCurrentPosition = new float[] { transform.position.x, transform.position.y };
+        Position p = new(this.pseudo, gameObject.name, playerCurrentPosition, SceneManager.GetActiveScene().name);
+        //this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
+    }
+
     protected void playerActions()
     {
         base.Update();
+        sendSocket();
         if ((this.isWater || this.currentLife <= 0))
         {
             Death();

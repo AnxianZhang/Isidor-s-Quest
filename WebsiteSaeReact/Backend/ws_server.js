@@ -21,16 +21,12 @@ server.on("connection", (ws) => {
 
     ws.on("message", (message) => {
         try{
-            data = JSON.parse(message);
+            const data = JSON.parse(message);
             // ws.send(message)
-            console.log(data)
-            if(data.currentScene != null){
-                const i = searchData(data.currentScene)
-                console.log(i)
-                ws.send(i)
-            }
-            else{
-                addData(data);
+            if(dataIsValid(data)){
+                // const i = searchData(data.currentScene)
+                // console.log(i)
+                ws.send(JSON.stringify(data))
             }
         }catch (e){
             console.error(e);

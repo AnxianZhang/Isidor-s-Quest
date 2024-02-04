@@ -16,12 +16,12 @@ public class WebSocketWorker
         ws.OnMessage += (sender, e) =>
         {
             Position position = JsonUtility.FromJson<Position>(e.Data);
-            //Debug.Log(position.characterClass);
-            Debug.Log(e.Data);
+            MultiPlayerManager.GetMultiPlayerManager().canBeAdd(position);
+            Debug.Log("toto");
         };
     }
 
-    public void sendPosition (string msg)
+    public void sendPosition(string msg)
     {
         this.ws.Send(msg);
     }

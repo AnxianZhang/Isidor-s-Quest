@@ -17,7 +17,6 @@ public abstract class PotionItem : InventoryItem
 
     public void makeItDisapeard()
     {
-        Debug.Log("hola");
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         foreach (BoxCollider2D b in gameObject.GetComponents<BoxCollider2D>())
             b.enabled = false;

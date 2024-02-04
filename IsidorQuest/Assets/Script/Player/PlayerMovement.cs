@@ -1,6 +1,5 @@
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public abstract class PlayerMovement : MonoBehaviour
 {
@@ -36,12 +35,8 @@ public abstract class PlayerMovement : MonoBehaviour
     protected GameSound gm;
     private float originalGravityScale;
 
-    private WebSocketWorker webSocketWorker;
-
     public void Start()
     {
-        this.webSocketWorker = new WebSocketWorker();
-
         this.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         this.rigidBody = gameObject.GetComponent<Rigidbody2D>();
         this.animator = gameObject.GetComponent<Animator>();
@@ -52,10 +47,6 @@ public abstract class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
-        float [] playerCurrentPosition = new float[] { transform.position.x, transform.position.y };
-        Position p = new ("", gameObject.name, playerCurrentPosition, SceneManager.GetActiveScene().name);
-        this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
-
         this.hMovement = Input.GetAxis("Horizontal") * moveSpeed;
 
         this.vMovement = 0f;

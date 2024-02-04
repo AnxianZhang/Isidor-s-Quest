@@ -11,6 +11,7 @@ public class GetData : MonoBehaviour
     public class SaveUserGameDatas
     {
         public int coins;
+        public string pseudo;
         public string chooseCharacter;
         public string ActualLevel;
         public CharacterData Archer;
@@ -113,6 +114,11 @@ public class GetData : MonoBehaviour
         else{
             return data.Archer.levelSpeed;
         }
+    }
+
+    public string getPseudo()
+    {
+        return data.pseudo;
     }
 
     public List<int> getInventory()

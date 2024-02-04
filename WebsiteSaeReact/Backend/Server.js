@@ -25,7 +25,7 @@ const {userPay, successPayment} = require("./Controller/PaymentSuccessController
 const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
 const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
 app.use(cors({
-  origin: ['http://localhost:19006', "http://localhost:5500"],
+  origin: ['http://localhost:19006', "http://localhost:5500", "http://localhost:80", "http://localhosts"],
   credentials: true,
   allowedHeaders: ['Content-Type'],
 }));
