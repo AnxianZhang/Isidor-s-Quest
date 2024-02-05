@@ -1,7 +1,20 @@
 const express = require('express');
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+
+const cors = require('cors');
+const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment, getUserData, changeUserData, getUserDataPayAndConnect} = require("./Controller/userController");
+const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/codeController");
+const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
+const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
+const {mailSend} = require("./Controller/contactController")
+const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
+const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
+const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
+const {get2FAQRcode} = require("./Controller/2FA")
+
 const app = express();
+
 app.use(
   session({
     secret: "isidor",
@@ -15,15 +28,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-const cors = require('cors');
-const {Inscription, Connexion, changePwd, isConnect, disconnection, VerifySuccessPayment, getUserData, changeUserData, getUserDataPayAndConnect} = require("./Controller/userController");
-const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/codeController");
-const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
-const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
-const {mailSend} = require("./Controller/contactController")
-const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
-const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
-const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
+
 app.use(cors({
   origin: ['http://localhost:19006', "http://localhost:5500"],
   credentials: true,
@@ -56,6 +61,7 @@ app.post("/SaveUserGameProfile", userSave)
 app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
 app.get("/getUserGameData", getUserGameData)
 app.post("/captchaResponse", CaptchaGoogle)
+app.post("/qrCode", get2FAQRcode)
 const port = 3005
 
 const contactPort = 5000
