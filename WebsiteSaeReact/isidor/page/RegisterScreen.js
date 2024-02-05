@@ -117,7 +117,10 @@ const RegisterScreen = ({ language }) => {
                     return
                 }
                 if(result === 410){
-                    console.log(text);
+                    setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
+                }
+                else{
+                    setErrorCaptcha("");
                 } 
                 
                 setError("")

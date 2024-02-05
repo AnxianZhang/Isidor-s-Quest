@@ -57,6 +57,7 @@
         "confirmPassword" : "Confirmer mot de passe",
         "generalCondition" : "En cliquant sur S’inscrire, vous acceptez nos Conditions générales",
         "errorPasswordCaseOne" : "Le mot de passe ne correspond pas",
+        "errorOneAccountByDay" :"Une inscription par jour",
         "haveAnAccount" : "Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé",
         "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
         "regex": "Le code doit contenir : une lettre majuscule et une lettre minuscule, au moins un chiffre, un symbole parmi @ ! % * ? & et avoir une longueur d'au moins 8 caractères.",

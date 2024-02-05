@@ -57,6 +57,7 @@
         "confirmPassword": "Confirm Password",
         "generalCondition": "By clicking Sign Up, you agree to our Terms and Conditions",
         "errorPasswordCaseOne": "Password doesn't match",
+        "errorOneAccountByDay" :"One register by day",
         "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
         "pseudoAlreadyExist" :"This username is already taken",
         "next" : "Next",
