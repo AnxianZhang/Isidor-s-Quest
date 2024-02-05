@@ -106,6 +106,7 @@ const RegisterScreen = ({ language }) => {
                     body: JSON.stringify(data)
                 });
                 const result = response.status;
+                const text = await response.text();
                 if (result === 406){
                     setError(selectLanguage.lengthErr)
                     return
@@ -115,6 +116,9 @@ const RegisterScreen = ({ language }) => {
                     setError(selectLanguage.forbidenCarac)
                     return
                 }
+                if(result === 410){
+                    console.log(text);
+                } 
                 
                 setError("")
                 if (result === 401) {

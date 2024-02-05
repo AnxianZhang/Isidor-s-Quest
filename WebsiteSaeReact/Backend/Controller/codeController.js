@@ -2,6 +2,7 @@ const { Code, User } = require("../Models/Model");
 const nodemailer = require("nodemailer");
 const mongoose = require('mongoose');
 const { isAllUnder50Character, containSpeCaracters } = require('../Models/Utile')
+const IP = require('ip');
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%*?&])[A-Za-z\d@!%*?&]{8,}$/;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -71,6 +72,8 @@ const SendCode = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
+    const ipAddress = IP.address();
+    const findUserByIpAdress = await User.find({ userIpAdress : ipAddress, ExpirationDate : {$gt : new Date()}}).exec();
     const findUserMail = await User.findOne({ email: data.email }).exec();
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
 
@@ -81,7 +84,11 @@ const SendCode = async (req, res) => {
     if (containSpeCaracters(data)) {
       return res.status(408).send("forbiden carac")
     }
-
+    //findUserByIpAdress.validIpAdress(ipAddress)
+    if(findUserByIpAdress.length !== 0){
+      console.log(findUserByIpAdress);
+      return res.status(410).send("Une création de compte par jour");
+    }
     if (findUserMail !== null) {
       return res.status(401).send("Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé");
     }

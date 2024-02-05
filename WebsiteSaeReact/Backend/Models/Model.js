@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
    email : String,
    pseudo : String,
    password : String,
-   isPay : Boolean
+   isPay : Boolean,
+   userIpAdress : String,
+   ExpirationDate : Date
 });
 
 const codeSchema = new mongoose.Schema({
@@ -50,6 +52,15 @@ codeSchema.methods.generateHashCode = function(code) {
 codeSchema.methods.validCode = function(code) {
   return bcrypt.compareSync(code, this.code);
 };
+
+/*userSchema.methods.generateHashIpAdress = function(ipAdress) {
+  var hashIpAdress = ipAdress.toString();
+  return bcrypt.hashSync(hashIpAdress, bcrypt.genSaltSync(8), null);
+};
+
+userSchema.methods.validIpAdress = function(ipAdress) {
+  return bcrypt.compareSync(ipAdress, this.userIpAdress);
+};*/
 
 const User = mongoose.model('User', userSchema, "User");
 const Code = mongoose.model('Code', codeSchema, "Code");

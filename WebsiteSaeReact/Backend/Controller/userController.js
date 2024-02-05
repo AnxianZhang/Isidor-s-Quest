@@ -2,19 +2,24 @@ const mongoose = require('mongoose');
 const { User, UserGame, Game } = require("../Models/Model")
 const { isAllUnder50Character, containSpeCaracters } = require('../Models/Utile')
 var localStorage = require('localStorage')
+const IP = require('ip');
 
 const Inscription = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
     localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
-
+    const ipAddress = IP.address();
+    const date  = new Date();
+    date.setDate(date.getDate() + 1);
     const newUser = new User({
       prenom: data.prenom,
       nomFamille: data.nomFamille,
       email: data.email,
       pseudo: data.pseudo,
-      isPay: false
+      isPay: false,
+      userIpAdress : ipAddress,
+      ExpirationDate : date
     });
     const newUserGame = new UserGame({
       pseudo: data.pseudo,
@@ -25,6 +30,7 @@ const Inscription = async (req, res) => {
       ActualLevel: 3
     })
     newUser.password = newUser.generateHash(data.password);
+    //newUser.userIpAdress = newUser.generateHashIpAdress(ipAddress);
     req.session.pseudo = data.pseudo;
     await newUser.save();
     await newUserGame.save();
@@ -39,7 +45,6 @@ const Connexion = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
-
     if (!isAllUnder50Character(data))
       return res.status(406).send("input doivent etre <= 64")
 
