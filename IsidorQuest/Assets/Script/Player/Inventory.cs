@@ -13,13 +13,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject Jump;
     [SerializeField] private GameObject Speed;
     [SerializeField] private GameObject Strength;
-
-
+    private Transform mainPlayer;
+    public StoringData storeData;
 
 
     void Start()
     {
         this.getData = GameObject.Find("GetData").GetComponent<GetData>();
+        this.mainPlayer = GameObject.Find(storeData.CharacterName).GetComponent<Transform>();
         inventory = new GameObject[inventorySize];
         setInventory();
     }
@@ -29,15 +30,19 @@ public class Inventory : MonoBehaviour
         for(int i = 0; i < liste.Count; i++){
              if(liste[i] != 0){
                 if(liste[i] == 1){
+                    instantHeal.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
                     Instantiate(instantHeal);
                 }
                 if(liste[i] == 2){
+                    Jump.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
                     Instantiate(Jump);
                 }
                 if(liste[i] == 3){
+                    Speed.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
                     Instantiate(Speed);
                 }
                 if(liste[i] == 4){
+                    Strength.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
                     Instantiate(Strength);
                 }
             }

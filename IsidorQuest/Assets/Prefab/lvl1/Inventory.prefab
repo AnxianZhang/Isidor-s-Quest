@@ -49,6 +49,7 @@ MonoBehaviour:
   Jump: {fileID: 5905418604671310944, guid: a1416505f24ca044e93131c036cb91f6, type: 3}
   Speed: {fileID: 2076566219943460304, guid: acd6c7c5d56a1e443adfa78dd60f4adf, type: 3}
   Strength: {fileID: 6868318464966396780, guid: a7b0dbabbfe1a994bb3c973fcd084b2b, type: 3}
+  storeData: {fileID: 11400000, guid: 98fc1989adf45af4fbb7843e2a90b918, type: 2}
 --- !u!114 &6590764337896009584
 MonoBehaviour:
   m_ObjectHideFlags: 0
