@@ -27,24 +27,32 @@ public class Inventory : MonoBehaviour
 
     private void setInventory(){
         List<int> liste = this.getData.getInventory();
+        GameObject potionGO = null;
         for(int i = 0; i < liste.Count; i++){
              if(liste[i] != 0){
                 if(liste[i] == 1){
-                    instantHeal.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    Instantiate(instantHeal);
+                     potionGO = Instantiate(instantHeal, this.transform);
+                    //instantHeal.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
+                    //Instantiate(instantHeal);
                 }
                 if(liste[i] == 2){
-                    Jump.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    Instantiate(Jump);
+                    potionGO = Instantiate(Jump, this.transform);
+                    //Jump.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
+                    //Instantiate(Jump);
                 }
                 if(liste[i] == 3){
-                    Speed.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    Instantiate(Speed);
+                    potionGO = Instantiate(Speed, this.transform);
+                    //Speed.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
+                    //Instantiate(Speed);
                 }
                 if(liste[i] == 4){
-                    Strength.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    Instantiate(Strength);
+                    potionGO = Instantiate(Strength, this.transform);
+                    //Strength.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
+                    //Instantiate(Strength);
                 }
+                
+                potionGO.GetComponent<PotionItem>().makeItDisapeard();
+                AddItem(potionGO);
             }
         }
     }
@@ -63,7 +71,7 @@ public class Inventory : MonoBehaviour
 /*        Debug.Log("in AddItem");
         Debug.Log(index);
         Debug.Log(inventory[index]); // s'ajoute bien*/
-        item.transform.SetParent(gameObject.transform);
+        //item.transform.SetParent(gameObject.transform);
         return true;
     }
 
