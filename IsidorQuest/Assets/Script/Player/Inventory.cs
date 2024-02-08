@@ -32,23 +32,15 @@ public class Inventory : MonoBehaviour
              if(liste[i] != 0){
                 if(liste[i] == 1){
                      potionGO = Instantiate(instantHeal, this.transform);
-                    //instantHeal.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    //Instantiate(instantHeal);
                 }
                 if(liste[i] == 2){
                     potionGO = Instantiate(Jump, this.transform);
-                    //Jump.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    //Instantiate(Jump);
                 }
                 if(liste[i] == 3){
                     potionGO = Instantiate(Speed, this.transform);
-                    //Speed.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    //Instantiate(Speed);
                 }
                 if(liste[i] == 4){
                     potionGO = Instantiate(Strength, this.transform);
-                    //Strength.transform.position = new Vector3(this.mainPlayer.position.x, this.mainPlayer.position.y + 1.0f, 0f);
-                    //Instantiate(Strength);
                 }
                 
                 potionGO.GetComponent<PotionItem>().makeItDisapeard();
