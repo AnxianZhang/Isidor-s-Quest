@@ -74,6 +74,9 @@
         "errorCode" : "Incorrect code",
         "verifCodeChange" : "Verify"
     },
+    "scanQR" : {
+        "title" : "Please scan the QR code \non Google Authenticator"
+    },
     "propos": {
         "nav": "Table of contents :",
         "title": "About us",

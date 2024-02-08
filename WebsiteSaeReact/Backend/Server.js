@@ -11,7 +11,7 @@ const {mailSend} = require("./Controller/contactController")
 const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
 const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
 const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
-const {get2FAQRcode} = require("./Controller/2FA")
+const {get2FAQRcode, verif2FA} = require("./Controller/2FA")
 
 const app = express();
 
@@ -62,6 +62,8 @@ app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
 app.get("/getUserGameData", getUserGameData)
 app.post("/captchaResponse", CaptchaGoogle)
 app.post("/qrCode", get2FAQRcode)
+app.post("/verif2FA", verif2FA)
+
 const port = 3005
 
 const contactPort = 5000

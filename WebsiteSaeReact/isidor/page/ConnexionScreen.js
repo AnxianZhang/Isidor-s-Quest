@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Header from '../component/Header';
 import Field from '../component/Field';
 import { Dimensions } from 'react-native';
@@ -24,9 +24,7 @@ const ConnexionScreen = ({ language }) => {
 
     useEffect(() => {
         setSelectLanguage(getLanguage);
-    })
 
-    useEffect(() => {
         if (pseudo === "" || password === "") {
             setDisable(true);
         }
@@ -34,6 +32,15 @@ const ConnexionScreen = ({ language }) => {
             setDisable(false);
         }
     })
+
+    // useEffect(() => {
+    //     if (pseudo === "" || password === "") {
+    //         setDisable(true);
+    //     }
+    //     else {
+    //         setDisable(false);
+    //     }
+    // })
 
     const sendDataToDatabase = async () => {
         const data = {
@@ -43,23 +50,23 @@ const ConnexionScreen = ({ language }) => {
         try {
             const response = await fetch('http://localhost:3005/connexion', {
                 method: 'POST',
-                credentials : "include",
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
             const result = response.status;
-            if (result === 406){
+            if (result === 406) {
                 setError(selectLanguage.lengthErr)
                 return
             }
 
-            if (result === 408){
+            if (result === 408) {
                 setError(selectLanguage.forbidenCarac)
                 return
             }
-            
+
             setError('')
             if (result === 401) {
                 setPseudo("");
@@ -82,7 +89,7 @@ const ConnexionScreen = ({ language }) => {
                 console.log("naviguer");
                 setErrorPassword("");
                 setErrorPseudo("");
-                navigation.navigate("Home");
+                navigation.navigate("2FA", {pseudo: pseudo});
             }
         }
         catch (error) {
@@ -92,20 +99,19 @@ const ConnexionScreen = ({ language }) => {
 
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-    const textInputWidthStyle = windowWidthByHook > 500? 400 : "90%"
-    const buttonWidthStyle = windowWidthByHook > 500? 400 : "200%"
-
+    const textInputWidthStyle = windowWidthByHook > 500 ? 400 : "90%"
+    const buttonWidthStyle = windowWidthByHook > 500 ? 400 : "200%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
-            <View style={styles.FormContainer}>
+            <View style={[styles.FormContainer]}>
                 <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle })}>
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.connexion.connection}</Text>
                     </View>
                     <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
                     <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
-                    <Text style = {{color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center'}}>{error && error}</Text>
+                    <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{error && error}</Text>
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable} testID='ConnexionScreen:Send:Button'>
                             <View style={StyleSheet.compose(styles.ButtonConnectContainer, { backgroundColor: disable ? "#a9a9a9" : "#E55839" })}>
@@ -133,6 +139,11 @@ const ConnexionScreen = ({ language }) => {
     )
 }
 const styles = StyleSheet.create({
+    qrCode: {
+        position: 'absolute',
+        backgroundColor: "#443955",
+        borderRadius: 25,
+    },
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
@@ -147,10 +158,10 @@ const styles = StyleSheet.create({
     },
     InputStyle: {
         paddingTop: 40,
-        alignItems:"center"
+        alignItems: "center"
     },
     ButtonContainer: {
-        alignItems:"center",
+        alignItems: "center",
         paddingTop: 40,
     },
     ConnexionButtonText: {
@@ -163,7 +174,7 @@ const styles = StyleSheet.create({
         width: 400,
         height: 42,
         borderRadius: 20,
-        alignSelf:"center"
+        alignSelf: "center"
     },
     forgetPassword: {
         alignItems: "center",

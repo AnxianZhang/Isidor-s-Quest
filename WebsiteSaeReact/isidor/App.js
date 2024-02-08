@@ -18,6 +18,7 @@ import UserDataScreen from './page/UserDataScreen';
 import ForgotPass from './page/ForgotPass';
 import ChangePwd from './page/ChangePwd';
 import ChangePwdSuccess from './page/ChangePwdSuccess';
+import FAPage from './page/FAPage';
 
 const Stack = createNativeStackNavigator();
 SplashScreen.preventAutoHideAsync();
@@ -49,6 +50,7 @@ export default function App() {
         <Stack.Screen name="Home" options={{ headerShown: false }}>{() => (<HomeScreen language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="APropos" options={{ headerShown: false }}>{() => (<APropos language={selectLanguage}></APropos>)}</Stack.Screen>
         <Stack.Screen name="Connexion" options={{ headerShown: false }}>{() => (<ConnexionScreen language={selectLanguage} />)}</Stack.Screen>
+        <Stack.Screen name="2FA" options={{ headerShown: false }}>{() => (<FAPage language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="ForgotPass" options={{ headerShown: false }}>{() => (<ForgotPass language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="ChangePwd" options={{ headerShown: false }}>{() => (<ChangePwd language={selectLanguage} />)}</Stack.Screen>
         <Stack.Screen name="ChangePwdSuccess" options={{ headerShown: false }}>{() => (<ChangePwdSuccess language={selectLanguage} />)}</Stack.Screen>

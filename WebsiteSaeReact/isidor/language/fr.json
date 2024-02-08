@@ -32,6 +32,9 @@
         "password" : "Mot de passe",
         "errorConnection" : "Nom d'utilisateur/Mot de passe incorrect"
     },
+    "scanQR" : {
+        "title" : "Veuillez scanner le QR code \nsur Google Authenticator"
+    },
     "forgotPass" : {
         "noAccount" : "Ce mail n'a pas de compte Isidor associé !",
         "title" : "Saisissez votre mail:",
