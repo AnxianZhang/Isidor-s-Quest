@@ -71,7 +71,7 @@ public class Inventory : MonoBehaviour
 /*        Debug.Log("in AddItem");
         Debug.Log(index);
         Debug.Log(inventory[index]); // s'ajoute bien*/
-        //item.transform.SetParent(gameObject.transform);
+        item.transform.SetParent(gameObject.transform);
         return true;
     }
 
