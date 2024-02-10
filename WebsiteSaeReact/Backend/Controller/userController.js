@@ -52,7 +52,7 @@ const Connexion = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
-    localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
+    // localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
     if (findUserPseudo === null) {
       return res.status(401).send("Nom d'utilisateur/Mot de passe incorrect");
@@ -60,7 +60,8 @@ const Connexion = async (req, res) => {
     if (!findUserPseudo.validPassword(data.password)) {
       return res.status(402).send("Nom d'utilisateur/Mot de passe incorrect");
     }
-    req.session.pseudo = data.pseudo;
+    //req.session.pseudo = data.pseudo;
+    req.session.canGoTo2FA = true
     return res.status(200).send("connexion reussie");
   } catch (error) {
     console.error('erreur durant la connexion', error);
