@@ -34,19 +34,26 @@ const FAPage = ({ language }) => {
     }
 
     const get2FAQRcode = async () => {
-        console.log("in get 2FA QR code")
         const data = {
             pseudo: route.params && route.params.pseudo,
         }
 
         try {
-            /* il ne faut pas qu'il y ait d'erreur dans le 1er requtes, sinon, la 2eme (lors de la connexion) il ne va repu le qrcode */
             const response = await makeRequestTo(data, 'http://localhost:3005/qrCode')
-            if (response.status === 401)
-                navigation.navigate("Connexion")
-            else
-                setQrcode((await response.json()).qrCode)
-            } catch (err) {
+            
+            switch (response.status) {
+                case 401:
+                    navigation.navigate("Connexion")
+                    break
+                case 402:
+                    navigation.navigate("Home")
+                    break
+
+                default: // status 200
+                    setQrcode((await response.json()).qrCode)
+                    break
+            }
+        } catch (err) {
             console.log("error when making request in qrCode with: " + err)
         }
     }
@@ -61,7 +68,36 @@ const FAPage = ({ language }) => {
     })
 
     const verifCode = async () => {
+        const data = {
+            code: code,
+            pseudo: route.params && route.params.pseudo,
+        }
 
+        try {
+            const response = await makeRequestTo(data, 'http://localhost:3005/verif2FA')
+            
+            switch (response.status) {
+                case 401:
+                    setError(selectLanguage.Code.notSame)
+                    break
+                case 402:
+                    setError(selectLanguage.scanQR.refesh)
+                case 406:
+                    setError(selectLanguage.lengthErr)
+                    break
+                case 408:
+                    setError(selectLanguage.forbidenCarac)
+                    break
+
+                default: // status 200
+                    setError("")
+                    navigation.navigate("Home")
+                    break
+            }
+
+        } catch (err) {
+            console.log("error when making request in verifCode with: " + err)
+        }
     }
 
     const textInputAndButtonWidthStyle = windowWidthByHook > 500 ? 400 : "100%"
@@ -81,6 +117,7 @@ const FAPage = ({ language }) => {
                         value={code}
                         secureTextEntry={false}
                     />
+                    <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{error && error}</Text>
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => verifCode()}>
                             <View style={GLOBAL_STYLES.form.buttonContainer}>

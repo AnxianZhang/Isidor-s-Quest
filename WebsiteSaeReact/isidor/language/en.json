@@ -75,7 +75,8 @@
         "verifCodeChange" : "Verify"
     },
     "scanQR" : {
-        "title" : "Please scan the QR code \non Google Authenticator"
+        "title" : "Please scan the QR code \non Google Authenticator",
+        "refesh" : "QR code expired, please refresh the page"
     },
     "propos": {
         "nav": "Table of contents :",
