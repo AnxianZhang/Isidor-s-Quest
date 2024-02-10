@@ -30,7 +30,7 @@ const RegisterScreen = ({ language }) => {
     const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
- 
+
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     useEffect(() => {
         if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || reg.test(email) === false) {
@@ -39,11 +39,11 @@ const RegisterScreen = ({ language }) => {
         else {
             setDisable(false);
         }
-        
-    })
-    
 
-    const handleSubmit = () =>{
+    })
+
+
+    const handleSubmit = () => {
         sendDataCaptch(captchaRef.current.getValue());
         captchaRef.current.reset();
     }
@@ -53,33 +53,33 @@ const RegisterScreen = ({ language }) => {
     })
 
     const sendDataCaptch = async (token) => {
-            const data = {
-                token : token
+        const data = {
+            token: token
+        }
+        console.log(token);
+        try {
+            const response = await fetch('http://localhost:3005/captchaResponse', {
+                method: 'POST',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = response.status;
+            const text = await response.text();
+            console.log(text);
+            if (result === 200) {
+                setErrorCaptcha("");
+                sendDataToDatabase();
             }
-            console.log(token);
-            try {
-                const response = await fetch('http://localhost:3005/captchaResponse', {
-                    method: 'POST',
-                    credentials : "include",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                const result = response.status;
-                const text = await response.text();
-                console.log(text);
-                if(result === 200){
-                    setErrorCaptcha("");
-                    sendDataToDatabase();
-                }
-                else{
-                    setErrorCaptcha(selectLanguage.Captcha.errorCaptcha);
-                }
+            else {
+                setErrorCaptcha(selectLanguage.Captcha.errorCaptcha);
             }
-            catch (error) {
-                console.error('Erreur lors de l\'envoi des données au backend', error);
-            }
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des données au backend', error);
+        }
     }
 
     const sendDataToDatabase = async () => {
@@ -87,81 +87,81 @@ const RegisterScreen = ({ language }) => {
         //     setConfirmPassword("");
         // }
         // else {
-            setErrorConfirmPassword("")
-            const data = {
-                prenom: prenom,
-                nomFamille: nomFamille,
-                email: email,
-                pseudo: pseudo,
-                password: password,
-                confirmPass: confirmPassword,
+        setErrorConfirmPassword("")
+        const data = {
+            prenom: prenom,
+            nomFamille: nomFamille,
+            email: email,
+            pseudo: pseudo,
+            password: password,
+            confirmPass: confirmPassword,
+        }
+        try {
+            const response = await fetch('http://localhost:3005/SendCode', {
+                method: 'POST',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = response.status;
+            const text = await response.text();
+            if (result === 406) {
+                setError(selectLanguage.lengthErr)
+                return
             }
-            try {
-                const response = await fetch('http://localhost:3005/SendCode', {
-                    method: 'POST',
-                    credentials : "include",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                const result = response.status;
-                const text = await response.text();
-                if (result === 406){
-                    setError(selectLanguage.lengthErr)
-                    return
-                }
 
-                if (result === 408){
-                    setError(selectLanguage.forbidenCarac)
-                    return
+            if (result === 408) {
+                setError(selectLanguage.forbidenCarac)
+                return
+            }
+            if (result === 410) {
+                setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
+            }
+            else {
+                setErrorCaptcha("");
+            }
+
+            setError("")
+            if (result === 401) {
+                setEmail("");
+                setErrorEmail(selectLanguage.Register.haveAnAccount);
+            }
+            else {
+                setErrorEmail("");
+                if (result === 402) {
+                    setPseudo("");
+                    setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
                 }
-                if(result === 410){
-                    setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
+                else if (result === 403) {
+                    setConfirmPassword('')
+                    setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
                 }
-                else{
-                    setErrorCaptcha("");
-                } 
-                
-                setError("")
-                if (result === 401) {
-                    setEmail("");
-                    setErrorEmail(selectLanguage.Register.haveAnAccount);
+                else if (result === 405) {
+                    setConfirmPassword('')
+                    setErrorConfirmPassword(selectLanguage.Register.regex)
                 }
                 else {
-                    setErrorEmail("");
-                    if (result === 402) {
-                        setPseudo("");
-                        setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
-                    }
-                    else if (result === 403){
-                        setConfirmPassword('')
-                        setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
-                    }
-                    else if (result === 405){
-                        setConfirmPassword('')
-                        setErrorConfirmPassword(selectLanguage.Register.regex)
-                    }
-                    else {
+                    setErrorPseudo("");
+                    if (result === 200) {
+                        setErrorEmail("");
+                        setError("")
                         setErrorPseudo("");
-                        if (result === 200) {
-                            setErrorEmail("");
-                            setError("")
-                            setErrorPseudo("");
-                            navigation.navigate("VerifyCode", { data: data });
-                        }
+                        navigation.navigate("VerifyCode", { data: data });
                     }
                 }
             }
-            catch (error) {
-                console.error('Erreur lors de l\'envoi des données au backend', error);
-            }
+        }
+        catch (error) {
+            console.error('Erreur lors de l\'envoi des données au backend', error);
+        }
         // }
     }
 
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-    const textInputWidthStyle = windowWidthByHook > 500? 400 : "90%"
+    const textInputWidthStyle = windowWidthByHook > 500 ? 400 : "90%"
 
 
     return (
@@ -173,26 +173,24 @@ const RegisterScreen = ({ language }) => {
                         <View style={GLOBAL_STYLES.form.title}>
                             <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Register.register}</Text>
                         </View>
-                        <Field fieldsViewStyle={[styles.InputStyle, { paddingTop: 40, }]} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})} placeholder={selectLanguage.Register.familyName} onChangeText={setNomFamille} value={nomFamille} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})} placeholder={selectLanguage.Register.name} onChangeText={setPrenom} value={prenom} secureTextEntry={false} />
+                        <Field fieldsViewStyle={[styles.InputStyle, { paddingTop: 40, }]} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.familyName} onChangeText={setNomFamille} value={nomFamille} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.name} onChangeText={setPrenom} value={prenom} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorEmail.length > 0 && "#E55839", borderWidth: errorEmail.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorEmail.length > 0 ? errorEmail : selectLanguage.Register.email} placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"} onChangeText={setEmail} value={email} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorPseudo.length > 0 ? errorPseudo : selectLanguage.Register.pseudo} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : selectLanguage.Register.confirmPassword} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
-                        <Text style = {{color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center'}}>{errorConfirmPassword || error ? errorConfirmPassword + error : ""}</Text>
+                        <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{errorConfirmPassword || error ? errorConfirmPassword + error : ""}</Text>
                         <View style={styles.generalContidionBox}>
                             <Text style={styles.generalContidionText}>{selectLanguage.Register.generalCondition}</Text>
                         </View>
                         <Seperator />
-                        {disable === false &&
                         <View style={styles.GoogleCaptchaContainer}>
                             <ReCAPTCHA
-                            sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D" 
-                            ref={captchaRef}
+                                sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D"
+                                ref={captchaRef}
                             />
-                            {errorCaptcha !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{errorCaptcha}</Text>}
+                            {errorCaptcha !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorCaptcha}</Text>}
                         </View>
-                        }
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => handleSubmit()} disabled={disable} testID='RegiesterScreen:Send:Button'>
                                 <View style={StyleSheet.compose(GLOBAL_STYLES.form.buttonContainer, { backgroundColor: disable ? "#a9a9a9" : "#5BD94C" })}>
@@ -238,11 +236,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 20
     },
-    GoogleCaptchaContainer : {
-        paddingTop : 20,
+    GoogleCaptchaContainer: {
+        paddingTop: 20,
         alignItems: "center",
         justifyContent: "center",
-        paddingBottom : 20
+        paddingBottom: 20
     }
 });
 

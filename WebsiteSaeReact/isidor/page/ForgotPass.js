@@ -25,20 +25,20 @@ const ForgotPass = ({ language }) => {
         setSelectLanguage(getLanguage)
     })
 
-    const handleSubmitCaptcha = () =>{
+    const handleSubmitCaptcha = () => {
         sendDataCaptch(captchaRef.current.getValue());
         captchaRef.current.reset();
     }
 
     const sendDataCaptch = async (token) => {
         const data = {
-            token : token
+            token: token
         }
         console.log(token);
         try {
             const response = await fetch('http://localhost:3005/captchaResponse', {
                 method: 'POST',
-                credentials : "include",
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -47,18 +47,18 @@ const ForgotPass = ({ language }) => {
             const result = response.status;
             const text = await response.text();
             console.log(text);
-            if(result === 200){
+            if (result === 200) {
                 setErrorCaptcha("");
                 handleSubmit();
             }
-            else{
+            else {
                 setErrorCaptcha(selectLanguage.Captcha.errorCaptcha);
             }
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
-}
+    }
 
     // useEffect(()=>{
     //     // setDisable(!(email && reg.test(email)))
@@ -73,65 +73,63 @@ const ForgotPass = ({ language }) => {
         let response = await fetch('http://localhost:3005/sendCodeForRetrivePass', {
             method: 'POST',
             credentials: 'include', // authentification datas, like cookies
-            headers:{
+            headers: {
                 'Content-Type': 'application/json;charset=utf-8',
             },
             body: JSON.stringify(data),
         }).then(res => res.status)
 
-        if (response === 406){
+        if (response === 406) {
             setError(selectLanguage.lengthErr)
             return
         }
-        if (response === 405){
+        if (response === 405) {
             setError(selectLanguage.unvalidEmail)
             return
         }
-        if (response === 408){
+        if (response === 408) {
             setError(selectLanguage.forbidenCarac)
             return
         }
-        
+
         setError('')
-        if (response === 200){
+        if (response === 200) {
             // setErrorEmail('')
-            navigation.navigate('VerifyCode', {data: data})
+            navigation.navigate('VerifyCode', { data: data })
         }
-        else{
+        else {
             setEmail('')
             setError(selectLanguage.forgotPass.noAccount)
         }
     }
 
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-    const textInputAndButtonWidthStyle = windowWidthByHook > 500? 400 : "100%"
-    
+    const textInputAndButtonWidthStyle = windowWidthByHook > 500 ? 400 : "100%"
+
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View>
                 <View style={{ height: 550 }}>
-                    <View style={[GLOBAL_STYLES.container, {width: formulaireBoxWidthStyle, height: 400}]}>
+                    <View style={[GLOBAL_STYLES.container, { width: formulaireBoxWidthStyle, height: 400 }]}>
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>
                             <Field
-                                TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle})}
+                                TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputAndButtonWidthStyle })}
                                 placeholderTextColor={error.length ? "#E55839" : "#000000"}
                                 placeholder="Email"
                                 onChangeText={setEmail}
                                 value={email}
                                 secureTextEntry={false}
                             />
-                            {error !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20}}>{error}</Text> }
-                            {email !== "" &&
+                            {error !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{error}</Text>}
                             <View style={styles.GoogleCaptchaContainer}>
-                            <ReCAPTCHA
-                            sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D" 
-                            ref={captchaRef}
-                            />
-                            {errorCaptcha !== "" && <Text style={{fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10}}>{errorCaptcha}</Text>}
-                        </View>
-                        }
+                                <ReCAPTCHA
+                                    sitekey="6LdTH2IpAAAAAEhqPfCpvstQ7pgYvTrJ_5q_Vn7D"
+                                    ref={captchaRef}
+                                />
+                                {errorCaptcha !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{errorCaptcha}</Text>}
+                            </View>
                             <View style={styles.ButtonContainer}>
                                 <TouchableOpacity
                                     onPress={handleSubmitCaptcha}
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
 
     ButtonContainer: {
         alignItems: "center",
-        paddingTop : 10
+        paddingTop: 10
         // marginTop: 10,
     },
 
@@ -174,11 +172,11 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
-    GoogleCaptchaContainer : {
-        paddingTop : 20,
+    GoogleCaptchaContainer: {
+        paddingTop: 20,
         alignItems: "center",
         justifyContent: "center",
-        paddingBottom : 20
+        paddingBottom: 20
     }
 })
 
