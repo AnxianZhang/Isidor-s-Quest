@@ -7,11 +7,12 @@ import { GLOBAL_STYLES } from '../style/global';
 import Field from '../component/Field';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Seperator from '../component/Seperator';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 
 const FAPage = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const [qrCode, setQrcode] = useState("")
+    const isFocused = useIsFocused()
     const [code, setCode] = useState("")
     const [error, setError] = useState("")
     const navigation = useNavigation()
@@ -33,6 +34,7 @@ const FAPage = ({ language }) => {
     }
 
     const get2FAQRcode = async () => {
+        console.log("in get 2FA QR code")
         const data = {
             pseudo: route.params && route.params.pseudo,
         }
@@ -44,15 +46,15 @@ const FAPage = ({ language }) => {
                 navigation.navigate("Connexion")
             else
                 setQrcode((await response.json()).qrCode)
-            console.log(qrCode)
-        } catch (err) {
+            } catch (err) {
             console.log("error when making request in qrCode with: " + err)
         }
     }
 
     useEffect(() => {
-        get2FAQRcode()
-    }, [])
+        if (isFocused)
+            get2FAQRcode()
+    }, [isFocused])
 
     useEffect(() => {
         setSelectLanguage(getLanguage)

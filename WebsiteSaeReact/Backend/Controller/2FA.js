@@ -29,6 +29,8 @@ const saveSecretToDataBase = async (secret, pseudo) => {
 const get2FAQRcode = async (req, res) => {
     const reqData = req.body
 
+    console.log("in get 2FA qr code")
+
     if (!req.session.canGoTo2FA || !reqData.pseudo){
         console.log("nop")
         return res.status(401).send('shoudnt be in 2FA')
