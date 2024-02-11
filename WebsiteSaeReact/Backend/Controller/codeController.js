@@ -44,8 +44,8 @@ const sendCodeForRetrivePass = async (req, res) => {
     }
       
     const CODE = Math.floor(100000 + Math.random() * 900000)
-    const today = new Date()
-    const expireDate = today.setHours(today.getHours() + 1)
+    let today = new Date()
+    let expireDate = today.setMinutes(today.getMinutes() + 1)
 
     await transporter.sendMail({
       from: "no-reply <foo@example.com>",
@@ -107,7 +107,8 @@ const SendCode = async (req, res) => {
 
     let code = Math.floor(100000 + Math.random() * 900000);
     let today = new Date();
-    let expireDate = today.setHours(today.getHours() + 1);
+    let expireDate = today.setMinutes(today.getMinutes() + 1);
+
     console.log(code);
     await transporter.sendMail({
       from: '"no-reply" <foo@example.com>',
@@ -134,8 +135,13 @@ const VerifyCode = async (req, res) => {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
     const findCodeEmail = await Code.findOne({ email: data.email }).sort({ ExpirationDate: -1 }).limit(1).exec();
-    const date = new Date();
-    if (date > findCodeEmail.ExpirationDate && findCodeEmail.code === data.code) {
+    const date = new Date()
+    // console.log("is expired: ")
+    // console.log(date)
+    // console.log(findCodeEmail.ExpirationDate)
+    // console.log(date > findCodeEmail.ExpirationDate)
+    if (date > findCodeEmail.ExpirationDate && findCodeEmail.validCode(data.code)) {
+      console.log("in")
       await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
       return res.status(401).send("Votre code est expiré");
     }

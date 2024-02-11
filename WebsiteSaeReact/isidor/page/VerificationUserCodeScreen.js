@@ -102,22 +102,17 @@ const VerificationScreen = ({ language }) => {
                     setConfirmCode("");
                     setErrorCode(selectLanguage.Code.errorExpireDate);
                     setErrorConfirmCode(selectLanguage.Code.errorExpireDate)
+                    return
                 }
-                else {
-                    setErrorCode("");
-                    setErrorConfirmCode("");
-                }
+
                 if (result === 402) {
                     setCode("");
                     setConfirmCode("");
                     setErrorCode(selectLanguage.Code.errorCode);
                     setErrorConfirmCode(selectLanguage.Code.errorCode);
+                    return
+                }
 
-                }
-                else {
-                    setErrorCode("");
-                    setErrorConfirmCode("");
-                }
                 if (result === 200) {
                     setErrorCode("");
                     setErrorConfirmCode("");
