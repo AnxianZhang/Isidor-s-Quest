@@ -128,5 +128,5 @@
     },
     "lengthErr" : "The length of characters must be under or equal to 50",
     "unvalidEmail" : "Please enter a valid mail",
-    "forbidenCarac" : "Those caracters: { } $ [ ] \" ' : ; < > are forbidden"
+    "forbidenCarac" : "Those caracters: { } $ [ ] \" ' : ; < > and admin are forbidden"
 }

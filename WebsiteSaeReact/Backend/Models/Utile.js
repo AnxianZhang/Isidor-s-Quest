@@ -6,7 +6,12 @@ const isAllUnder50Character = list => {
 }
 
 const containSpeCaracters = list => {
-    return Object.values(list).filter(inputValue => specialCaractersRegex.test(inputValue)).length !== 0
+    const filteredValues = Object.values(list).filter(inputValue => {
+        const includesAdmin = inputValue.includes("admin")
+        return specialCaractersRegex.test(inputValue) || includesAdmin
+    })
+
+    return filteredValues.length !== 0
 }
 
 module.exports = {
