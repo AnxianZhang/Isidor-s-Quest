@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Archer : Player
 {
@@ -67,5 +68,10 @@ public class Archer : Player
     public void AttackEnemy(GameObject enemy)
     {
         enemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
+    }
+
+    public void AttackLayer(GameObject layer, Collider2D col, Vector3 vec)
+    {
+        layer.GetComponent<DestructibleLayer>().Attack(col, vec);
     }
 }

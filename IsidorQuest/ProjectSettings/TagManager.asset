@@ -13,6 +13,7 @@ TagManager:
   - HealthPotion
   - Inventory
   - SlotSprite
+  - DestructibleLayer
   layers:
   - Default
   - TransparentFX

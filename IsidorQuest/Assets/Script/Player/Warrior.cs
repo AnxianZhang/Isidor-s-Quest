@@ -53,21 +53,28 @@ public class Warrior : Player
 
     protected override void doPlayerAttaque()
     {
-        if (this.ennemyCollider != null)
-        {
+        if (this.ennemyCollider != null){
             GameObject ennemy = this.ennemyCollider.gameObject;
-
-            float res = ennemy.transform.position.y - transform.position.y;
-            float resSprite = ennemy.transform.position.x - transform.position.x;
-            bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
-            if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
+            Debug.Log(ennemy.CompareTag("DestructibleLayer"));
+            if (ennemy.CompareTag("DestructibleLayer"))
             {
-                if(!gm.isHitSoundPlaying()){
-                    gm.hitSoundPlay();
+                ennemy.GetComponent<DestructibleLayer>().Attack(ennemyCollider, this.transform.position);
+                Debug.Log("Warrior : doPlayerAttaque - DestructibleLayer");
+            }
+            else{
+                Debug.Log("Warrior : doPlayerAttaque - else");
+                float res = ennemy.transform.position.y - transform.position.y;
+                float resSprite = ennemy.transform.position.x - transform.position.x;
+                bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
+                if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
+                {
+                    if(!gm.isHitSoundPlaying()){
+                        gm.hitSoundPlay();
+                    }
+                    ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
+                    base.lastAttackedAt = Time.time;
+                    base.isHit = true;
                 }
-                ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
-                base.lastAttackedAt = Time.time;
-                base.isHit = true;
             }
         }
     }

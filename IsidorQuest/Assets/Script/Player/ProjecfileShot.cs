@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,6 +59,11 @@ public class ProjecfileShot : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy"))
         {
             ((Archer)mainPlayer).AttackEnemy(GameObject.Find(col.gameObject.name));
+            Destroy(gameObject);
+        }
+        else if (col.gameObject.CompareTag("DestructibleLayer"))
+        {
+            ((Archer)mainPlayer).AttackLayer(GameObject.Find(col.gameObject.name), col.collider, this.transform.position);
             Destroy(gameObject);
         }
         else
