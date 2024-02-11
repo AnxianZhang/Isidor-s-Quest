@@ -232,9 +232,9 @@ const isConnect = async (req, res) => {
 }
 
 const disconnection = async (req, res) => {
-  localStorage.removeItem("isConnect");
-  req.session.pseudo = null;
-  return res.status(200).send(false);
+  localStorage.removeItem("isConnect")
+  req.session.destroy()
+  return res.status(200).send(false)
 }
 
 const VerifySuccessPayment = async (req, res) => {
