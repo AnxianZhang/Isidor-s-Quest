@@ -222,12 +222,12 @@ MonoBehaviour:
   climbSpeed: 5
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8193
   groundCheck: {fileID: 3643314712215295026}
   attaqueRange: {fileID: 2861693598155570286}
   scallingLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8320
 --- !u!114 &6030635790871563671
 MonoBehaviour:
   m_ObjectHideFlags: 0

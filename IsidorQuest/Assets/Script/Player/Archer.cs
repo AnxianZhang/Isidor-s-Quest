@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Archer : Player
 {
@@ -49,11 +50,11 @@ public class Archer : Player
         gm.ProjectileSoundPlay();
         if (spriteRenderer.flipX == true)
         {
-            Instantiate(this.projectile, new Vector3(this.launchLeft.position.x, this.launchLeft.position.y, 1.0f), transform.rotation);
+            Instantiate(this.projectile, new Vector3(this.launchLeft.position.x + 0.5f, this.launchLeft.position.y, 1.0f), transform.rotation);
         }
         else
         {
-            Instantiate(this.projectile, this.launchRight.position, transform.rotation);
+            Instantiate(this.projectile, new Vector3(this.launchRight.position.x - 0.5f, this.launchRight.position.y, this.launchRight.position.z), transform.rotation);
         }
         lastAttackedAt = Time.time;
     }
@@ -67,5 +68,10 @@ public class Archer : Player
     public void AttackEnemy(GameObject enemy)
     {
         enemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
+    }
+
+    public void AttackLayer(GameObject layer, Collider2D col, Vector3 vec)
+    {
+        layer.GetComponent<DestructibleLayer>().Attack(col, vec);
     }
 }
