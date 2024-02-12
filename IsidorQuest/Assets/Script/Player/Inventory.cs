@@ -13,33 +13,38 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject Jump;
     [SerializeField] private GameObject Speed;
     [SerializeField] private GameObject Strength;
-
-
+    private Transform mainPlayer;
+    public StoringData storeData;
 
 
     void Start()
     {
         this.getData = GameObject.Find("GetData").GetComponent<GetData>();
+        this.mainPlayer = GameObject.Find(storeData.CharacterName).GetComponent<Transform>();
         inventory = new GameObject[inventorySize];
         setInventory();
     }
 
     private void setInventory(){
         List<int> liste = this.getData.getInventory();
+        GameObject potionGO = null;
         for(int i = 0; i < liste.Count; i++){
              if(liste[i] != 0){
                 if(liste[i] == 1){
-                    Instantiate(instantHeal);
+                     potionGO = Instantiate(instantHeal, this.transform);
                 }
                 if(liste[i] == 2){
-                    Instantiate(Jump);
+                    potionGO = Instantiate(Jump, this.transform);
                 }
                 if(liste[i] == 3){
-                    Instantiate(Speed);
+                    potionGO = Instantiate(Speed, this.transform);
                 }
                 if(liste[i] == 4){
-                    Instantiate(Strength);
+                    potionGO = Instantiate(Strength, this.transform);
                 }
+                
+                potionGO.GetComponent<PotionItem>().makeItDisapeard();
+                AddItem(potionGO);
             }
         }
     }

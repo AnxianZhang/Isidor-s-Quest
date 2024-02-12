@@ -61,14 +61,14 @@ codeSchema.methods.validCode = function (code) {
   return bcrypt.compareSync(code, this.code);
 };
 
-/*userSchema.methods.generateHashIpAdress = function(ipAdress) {
+userSchema.methods.generateHashIpAdress = function(ipAdress) {
   var hashIpAdress = ipAdress.toString();
   return bcrypt.hashSync(hashIpAdress, bcrypt.genSaltSync(8), null);
 };
 
 userSchema.methods.validIpAdress = function(ipAdress) {
   return bcrypt.compareSync(ipAdress, this.userIpAdress);
-};*/
+};
 
 const User = mongoose.model('User', userSchema, "User");
 const Code = mongoose.model('Code', codeSchema, "Code");

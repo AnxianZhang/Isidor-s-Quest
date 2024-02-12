@@ -18,7 +18,7 @@ const Inscription = async (req, res) => {
       email: data.email,
       pseudo: data.pseudo,
       isPay: false,
-      userIpAdress : ipAddress,
+      //userIpAdress : ipAddress,
       ExpirationDate : date
     });
     const newUserGame = new UserGame({
@@ -30,7 +30,7 @@ const Inscription = async (req, res) => {
       ActualLevel: 3
     })
     newUser.password = newUser.generateHash(data.password);
-    //newUser.userIpAdress = newUser.generateHashIpAdress(ipAddress);
+    newUser.userIpAdress = newUser.generateHashIpAdress(ipAddress);
     req.session.pseudo = data.pseudo;
     await newUser.save();
     await newUserGame.save();

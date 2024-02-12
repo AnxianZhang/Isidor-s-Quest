@@ -32,17 +32,17 @@ const sendCodeForRetrivePass = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
-    if (!isAllUnder50Character([data.email])){
+    if (!isAllUnder50Character([data.email])) {
       return res.status(406).send("input doivent etre <= 64")
     }
     if (!emailRegex.test(data.email)) {
       return res.status(405).send("email non conform !")
     }
 
-    if (findUser == null){
+    if (findUser == null) {
       return res.status(401).send("Ce mail n'a pas de compte Isidor associé !")
     }
-      
+
     const CODE = Math.floor(100000 + Math.random() * 900000)
     let today = new Date()
     let expireDate = today.setMinutes(today.getMinutes() + 1)
@@ -62,7 +62,7 @@ const sendCodeForRetrivePass = async (req, res) => {
     newCode.code = newCode.generateHashCode(CODE);
     await newCode.save();
     return res.status(200).send()
-    
+
   } catch (error) {
     console.error("sendCodeForRetrivePass Error:", error)
   }
@@ -73,7 +73,7 @@ const SendCode = async (req, res) => {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
     const data = req.body;
     const ipAddress = IP.address();
-    const findUserByIpAdress = await User.find({ userIpAdress : ipAddress, ExpirationDate : {$gt : new Date()}}).exec();
+    const findUserByIpAdress = await User.find({ ExpirationDate: { $gt: new Date() } }).exec();
     const findUserMail = await User.findOne({ email: data.email }).exec();
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
 
@@ -84,10 +84,13 @@ const SendCode = async (req, res) => {
     if (containSpeCaracters(data)) {
       return res.status(408).send("forbiden carac")
     }
-    //findUserByIpAdress.validIpAdress(ipAddress)
-    if(findUserByIpAdress.length !== 0){
-      console.log(findUserByIpAdress);
-      return res.status(410).send("Une création de compte par jour");
+    if (findUserByIpAdress.length > 0) {
+      for (const resultat of findUserByIpAdress) {
+        if (resultat.validIpAdress(ipAddress)) {
+          console.log(findUserByIpAdress);
+          return res.status(410).send("Une création de compte par jour");
+        }
+      }
     }
     if (findUserMail !== null) {
       return res.status(401).send("Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé");
@@ -102,8 +105,6 @@ const SendCode = async (req, res) => {
     if (!passwordRegex.test(data.password)) {
       return res.status(405).send("le mot de passe doit respecter les exigence")
     }
-
-
 
     let code = Math.floor(100000 + Math.random() * 900000);
     let today = new Date();
@@ -154,7 +155,23 @@ const VerifyCode = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
+    if(req.session.expirationDate && new Date() < req.session.expirationDate){
+      return res.status(409).send("bloqué, revenez plus tard");
+    }
+
     if (!findCodeEmail.validCode(data.code)) {
+      if(!req.session.error ||req.session.error == null){
+        req.session.error = 1;
+      }
+      else{
+        req.session.error = req.session.error + 1;
+      }
+      if(req.session.error && req.session.error == 5){
+        let dateExpiration = new Date();
+        dateExpiration = dateExpiration.setMinutes(dateExpiration.getMinutes() + 10);
+        req.session.error = null;
+        req.session.expirationDate = dateExpiration;
+      }
       return res.status(402).send("Code incorrect");
     }
     await Code.deleteOne({ email: data.email, code: findCodeEmail.code })
