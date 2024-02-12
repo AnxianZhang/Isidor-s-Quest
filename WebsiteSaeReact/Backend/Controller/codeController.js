@@ -149,7 +149,23 @@ const VerifyCode = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
+    if(req.session.expirationDate && new Date() < req.session.expirationDate){
+      return res.status(409).send("bloqué, revenez plus tard");
+    }
+
     if (!findCodeEmail.validCode(data.code)) {
+      if(!req.session.error ||req.session.error == null){
+        req.session.error = 1;
+      }
+      else{
+        req.session.error = req.session.error + 1;
+      }
+      if(req.session.error && req.session.error == 5){
+        let dateExpiration = new Date();
+        dateExpiration = dateExpiration.setMinutes(dateExpiration.getMinutes() + 10);
+        req.session.error = null;
+        req.session.expirationDate = dateExpiration;
+      }
       return res.status(402).send("Code incorrect");
     }
     await Code.deleteOne({ email: data.email, code: findCodeEmail.code })

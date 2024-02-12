@@ -15,8 +15,8 @@ const windowWidth = Dimensions.get('window').width;
 
 const VerificationScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
-    const [code, setCode] = useState('');
-    const [confirmCode, setConfirmCode] = useState('');
+    const [code, setCode] = useState("");
+    const [confirmCode, setConfirmCode] = useState("");
     const [errorCode, setErrorCode] = useState("");
     const [errorConfirmCode, setErrorConfirmCode] = useState("");
     const [disable, setDisable] = useState(true);
@@ -68,7 +68,7 @@ const VerificationScreen = ({ language }) => {
     const sendDataToDatabase = async () => {
         if (code !== confirmCode) {
             setConfirmCode("");
-            setErrorConfirmCode(selectLanguage.Code.errorCodeCaseOne);
+            setErrorConfirmCode(selectLanguage.Code.notSame);
         }
         else {
             setErrorConfirmCode("");
@@ -86,7 +86,7 @@ const VerificationScreen = ({ language }) => {
                     body: JSON.stringify(data)
                 });
                 const result = response.status;
-
+                
                 if (result === 406){
                     setErr(selectLanguage.lengthErr)
                     return
@@ -96,7 +96,6 @@ const VerificationScreen = ({ language }) => {
                     setErr(selectLanguage.forbidenCarac)
                     return
                 }
-
                 if (result === 401) {
                     setCode("");
                     setConfirmCode("");
@@ -115,6 +114,16 @@ const VerificationScreen = ({ language }) => {
 
                 }
                 else {
+                    setErrorCode("");
+                    setErrorConfirmCode("");
+                }
+                if(result === 409){
+                    setCode("");
+                    setConfirmCode("");
+                    setErrorCode(selectLanguage.Code.block);
+                    setErrorConfirmCode(selectLanguage.Code.block);
+                }
+                else{
                     setErrorCode("");
                     setErrorConfirmCode("");
                 }
@@ -146,7 +155,7 @@ const VerificationScreen = ({ language }) => {
                     </View>
                     <View style={styles.ContainField}>
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorCode.length > 0 && "#E55839", borderWidth: errorCode.length > 0 && 1 }]} placeholder={errorCode.length > 0 ? errorCode : selectLanguage.Code.codeText} placeholderTextColor={errorCode.length ? "#E55839" : "#000000"} onChangeText={setCode} value={code} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorConfirmCode.length > 0 && "#E55839", borderWidh: errorConfirmCode.length > 0 && 1 }]} placeholder={errorConfirmCode.length > 0 ? errorConfirmCode : selectLanguage.Code.confirmCodeText} placeholderTextColor={errorConfirmCode.length ? "#E55839" : "#000000"} onChangeText={setConfirmCode} value={confirmCode} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorConfirmCode.length > 0 && "#E55839", borderWidth: errorConfirmCode.length > 0 && 1 }]} placeholder={errorConfirmCode.length > 0 ? errorConfirmCode : selectLanguage.Code.codeText} placeholderTextColor={errorConfirmCode.length ? "#E55839" : "#000000"} onChangeText={setConfirmCode} value={confirmCode} secureTextEntry={false} />
                     </View>
                     {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10, textAlign: 'center'}}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
 

@@ -72,7 +72,8 @@
         "notSame" : "Code doesn't match",
         "errorExpireDate" : "Your code has expired",
         "errorCode" : "Incorrect code",
-        "verifCodeChange" : "Verify"
+        "verifCodeChange" : "Verify",
+        "block" : "Blocked for 10 minutes"
     },
     "propos": {
         "nav": "Table of contents :",
