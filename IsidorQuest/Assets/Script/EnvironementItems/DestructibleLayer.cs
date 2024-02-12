@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class DestructibleLayer : MonoBehaviour
 {
     private float offsetX = 0.5f;
-    private float offsetY = 1f;
+    private float offsetY = 0.5f;
 
     private Tilemap destructibleTilemap;
 
@@ -35,7 +35,7 @@ public class DestructibleLayer : MonoBehaviour
 
         Debug.Log("hitPos : " + hitPos);
 
-        pos = new Vector3(hitPos.x + offsetX, hitPos.y - offsetY, 0f);
+        pos = new Vector3(hitPos.x + offsetX, hitPos.y- offsetY, 0f);
         Debug.Log("pos : " + pos);
 
         Vector3Int cellPos = destructibleTilemap.WorldToCell(pos);

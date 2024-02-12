@@ -254,7 +254,7 @@ MonoBehaviour:
   climbSpeed: 7
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8193
   groundCheck: {fileID: 7910409576319320132}
   projectile: {fileID: 1619751857681051284, guid: 85933b64524725a45a40ebd3604a396f, type: 3}
   launchRight: {fileID: 5832411376378212233}
