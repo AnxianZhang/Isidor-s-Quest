@@ -41,8 +41,17 @@ public class LevelSelectionMenu : MenuInSpawn
         }
     }
 
-  /*  public void quitButton()
+    public void lunchWorld1LvlThree()
     {
         base.closeMenu();
-    }*/
+        if (gm.getActualLevel() >= 5)
+        {
+            SceneManager.LoadScene("WorldOneLvl3");
+        }
+    }
+
+    /*  public void quitButton()
+      {
+          base.closeMenu();
+      }*/
 }
