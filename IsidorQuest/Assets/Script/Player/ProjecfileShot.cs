@@ -63,6 +63,7 @@ public class ProjecfileShot : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("DestructibleLayer"))
         {
+            Debug.Log("ProjectfileShot : OnCollisionEnter2D :" + this.transform.position);
             ((Archer)mainPlayer).AttackLayer(GameObject.Find(col.gameObject.name), col.collider, this.transform.position);
             Destroy(gameObject);
         }

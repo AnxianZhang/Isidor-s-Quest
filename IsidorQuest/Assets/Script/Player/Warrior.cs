@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class Warrior : Player
 {
@@ -12,17 +13,20 @@ public class Warrior : Player
 
     [SerializeField] private Transform attaqueRange;
     [SerializeField] private LayerMask scallingLayer;
+    [SerializeField] private LayerMask destructibleLayer;
 
     private bool isEnnemyInRange;
     private Collider2D ennemyCollider;
+    private Collider2D boxCollider;
 
-   
+
     public new void Start()
     {
         
         base.Start();
         setPlayerCompetenciesSkills();
         this.ennemyCollider = null;
+        this.boxCollider = null;
     }
 
     private void setPlayerCompetenciesSkills(){
@@ -55,26 +59,45 @@ public class Warrior : Player
     {
         if (this.ennemyCollider != null){
             GameObject ennemy = this.ennemyCollider.gameObject;
-            Debug.Log(ennemy.CompareTag("DestructibleLayer"));
-            if (ennemy.CompareTag("DestructibleLayer"))
+            float res = ennemy.transform.position.y - transform.position.y;
+            float resSprite = ennemy.transform.position.x - transform.position.x;
+            bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
+            
+            if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
             {
-                ennemy.GetComponent<DestructibleLayer>().Attack(ennemyCollider, this.transform.position);
-                Debug.Log("Warrior : doPlayerAttaque - DestructibleLayer");
-            }
-            else{
-                Debug.Log("Warrior : doPlayerAttaque - else");
-                float res = ennemy.transform.position.y - transform.position.y;
-                float resSprite = ennemy.transform.position.x - transform.position.x;
-                bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
-                if (Vector2.Distance(ennemy.transform.position, transform.position) <= ATTACK_RANGE_RADIUS && res < DIAG_RANGE_RADIUS && res > -DIAG_RANGE_RADIUS && tourner)
-                {
-                    if(!gm.isHitSoundPlaying()){
-                        gm.hitSoundPlay();
-                    }
-                    ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
-                    base.lastAttackedAt = Time.time;
-                    base.isHit = true;
+                if(!gm.isHitSoundPlaying()){
+                    gm.hitSoundPlay();
                 }
+                ennemy.GetComponent<Enemy>().Attack(base.damageDeal, transform.position);
+                base.lastAttackedAt = Time.time;
+                base.isHit = true;
+            }
+            
+        }
+        else if (boxCollider!=null)
+        {
+
+            GameObject box = this.boxCollider.gameObject;
+            Debug.Log(box.CompareTag("DestructibleLayer"));
+
+            if (box.CompareTag("DestructibleLayer"))
+            {
+                float resSprite = box.transform.position.x - transform.position.x;
+                bool tourner = resSprite < 0 && spriteRenderer.flipX || resSprite >= 0 && !spriteRenderer.flipX;
+                if (tourner)
+                {
+                    box.GetComponent<DestructibleLayer>().Attack(boxCollider, new Vector3(this.transform.position.x - 1f, this.transform.position.y - 1, this.transform.position.z));
+                    Debug.Log("Warrior : doPlayerAttaque tourner : " + new Vector3(this.transform.position.x - 1f, this.transform.position.y - 1, this.transform.position.z));
+
+                }
+                else
+                {
+                    box.GetComponent<DestructibleLayer>().Attack(boxCollider, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z));
+                    Debug.Log("Warrior : doPlayerAttaque : " + new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z));
+
+                }
+
+
             }
         }
     }
@@ -85,6 +108,7 @@ public class Warrior : Player
 
         // detect when an ennemy enter in the attack range of the warior
         this.ennemyCollider = Physics2D.OverlapCircle(this.attaqueRange.position, ATTACK_RANGE_RADIUS, this.scallingLayer);
+        this.boxCollider = Physics2D.OverlapCircle(this.attaqueRange.position, 0.65f, this.destructibleLayer);
 
     }
 

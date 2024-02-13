@@ -227,7 +227,10 @@ MonoBehaviour:
   attaqueRange: {fileID: 2861693598155570286}
   scallingLayer:
     serializedVersion: 2
-    m_Bits: 8320
+    m_Bits: 128
+  destructibleLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &6030635790871563671
 MonoBehaviour:
   m_ObjectHideFlags: 0
