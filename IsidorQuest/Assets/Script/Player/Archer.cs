@@ -59,7 +59,7 @@ public class Archer : Player
         lastAttackedAt = Time.time;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+       void OnCollisionEnter2D(Collision2D col)
     {
         base.isInWater(col);
         base.isPotion(col);

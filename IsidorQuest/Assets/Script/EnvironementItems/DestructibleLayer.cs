@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 
 public class DestructibleLayer : MonoBehaviour
 {
-    private float offsetX = 0.5f;
-    private float offsetY = 0.5f;
+    private float offsetX = 0.4f;
+    private float offsetY = 0.25f;
 
     private Tilemap destructibleTilemap;
 
@@ -35,14 +35,41 @@ public class DestructibleLayer : MonoBehaviour
 
         Debug.Log("hitPos : " + hitPos);
 
-        pos = new Vector3(hitPos.x + offsetX, hitPos.y- offsetY, 0f);
+        pos = new Vector3Int(
+            Mathf.RoundToInt(hitPos.x),
+            Mathf.RoundToInt(hitPos.y),
+            Mathf.RoundToInt(0f));
+        
         Debug.Log("pos : " + pos);
 
         Vector3Int cellPos = destructibleTilemap.WorldToCell(pos);
         Debug.Log("cellPos : " + cellPos);
 
         destructibleTilemap.SetTile(cellPos, null);
-        cellPos = destructibleTilemap.WorldToCell(new Vector3(hitPos.x + offsetX, hitPos.y, 0f));
+
+        cellPos = destructibleTilemap.WorldToCell(
+            new Vector3Int(
+            Mathf.RoundToInt(hitPos.x + offsetX),
+            Mathf.RoundToInt(hitPos.y + offsetY),
+            Mathf.RoundToInt(0f)));
+        destructibleTilemap.SetTile(cellPos, null);
+        cellPos = destructibleTilemap.WorldToCell(
+            new Vector3Int(
+            Mathf.RoundToInt(hitPos.x + offsetX),
+            Mathf.RoundToInt(hitPos.y),
+            Mathf.RoundToInt(0f)));
+        destructibleTilemap.SetTile(cellPos, null);
+        cellPos = destructibleTilemap.WorldToCell(
+            new Vector3Int(
+            Mathf.RoundToInt(hitPos.x - offsetX),
+            Mathf.RoundToInt(hitPos.y),
+            Mathf.RoundToInt(0f)));
+        destructibleTilemap.SetTile(cellPos, null);
+        cellPos = destructibleTilemap.WorldToCell(
+            new Vector3Int(
+            Mathf.RoundToInt(hitPos.x),
+            Mathf.RoundToInt(hitPos.y + offsetY),
+            Mathf.RoundToInt(0f)));
         destructibleTilemap.SetTile(cellPos, null);
     }
 }
