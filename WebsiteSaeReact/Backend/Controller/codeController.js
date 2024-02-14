@@ -112,7 +112,12 @@ const SendCode = async (req, res) => {
     if(new Date(data.bhirthday) >= new Date()){
       return res.status(412).send("Date anniversaire incorrect");
     }
-
+    if(new Date().getFullYear() - new Date(data.bhirthday).getFullYear() < 18){
+      return res.status(413).send("Vous devez être majeur");
+    }
+    if(new Date().getFullYear() - new Date(data.bhirthday).getFullYear() >= 123){
+      return res.status(414).send("Votre vrai date de naissance");
+    }
     let code = Math.floor(100000 + Math.random() * 900000);
     let today = new Date();
     let expireDate = today.setMinutes(today.getMinutes() + 1);

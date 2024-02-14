@@ -66,7 +66,9 @@
         "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
         "regex": "Le code doit contenir : une lettre majuscule et une lettre minuscule, au moins un chiffre, un symbole parmi @ ! % * ? & et avoir une longueur d'au moins 8 caractères.",
         "next" : "Continuer",
-        "bhirthday" : "erreur date de naissance"
+        "bhirthday" : "erreur date de naissance",
+        "errorBhirthayFalse1" : "Vous devez être majeur",
+        "errorBhirthayFalse2" : "Votre vraie date de naissance"
     },
     "Code" : {
         "codeText" : "Entrez le code",

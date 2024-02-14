@@ -122,6 +122,14 @@ const RegisterScreen = ({ language }) => {
                 setErrorDate(selectLanguage.Register.bhirthday)
                 return
             }
+            if(result === 413){
+                setErrorDate(selectLanguage.Register.errorBhirthayFalse1)
+                return
+            }
+            if(result === 414){
+                setErrorDate(selectLanguage.Register.errorBhirthayFalse2)
+                return
+            }
             if (result === 410) {
                 setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
             }

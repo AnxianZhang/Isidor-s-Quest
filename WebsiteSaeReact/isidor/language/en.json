@@ -62,7 +62,9 @@
         "pseudoAlreadyExist" :"This username is already taken",
         "next" : "Next",
         "regex": "The code need to have: An upper and lower case letter, contain one digite, a symbole within @ ! % * ? & and at least a length of 8",
-        "bhirthday" : "bhirthday date error"
+        "bhirthday" : "bhirthday date error",
+        "errorBhirthayFalse1" : "You must be of legal age",
+        "errorBhirthayFalse2" : "Your real date of birth"
     },
     "Code" : {
         "codeText" : "Enter the code",
