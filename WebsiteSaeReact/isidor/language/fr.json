@@ -65,7 +65,8 @@
         "haveAnAccount" : "Vous possèder déja un compte, si vous avez oublié le mot de passe, vous pouvez le reinitialisé",
         "pseudoAlreadyExist" : "Ce nom d'utilisateur est déja pris",
         "regex": "Le code doit contenir : une lettre majuscule et une lettre minuscule, au moins un chiffre, un symbole parmi @ ! % * ? & et avoir une longueur d'au moins 8 caractères.",
-        "next" : "Continuer"
+        "next" : "Continuer",
+        "bhirthday" : "erreur date de naissance"
     },
     "Code" : {
         "codeText" : "Entrez le code",
@@ -129,5 +130,6 @@
     },
     "lengthErr" : "La longueur des champs doivent être inferieur ou égale à 50",
     "unvalidEmail" : "Veuillez rentrez un email valide",
-    "forbidenCarac" : "Les caracteres: { } $ [ ] \" ' : ; < > et admin sont interdits"
+    "forbidenCarac" : "Les caracteres: { } $ [ ] \" ' : ; < > et admin sont interdits",
+    "unvalidBirthday" : "Date anniversaire incorrect"
 }

@@ -8,7 +8,7 @@ import Header from '../component/Header';
 import Field from '../component/Field';
 import { useNavigation } from '@react-navigation/native';
 import ReCAPTCHA from "react-google-recaptcha";
-
+import MyWebDatePicker from '../component/DatePicker';
 const ForgotPass = ({ language }) => {
 
     const navigation = useNavigation()
@@ -20,7 +20,7 @@ const ForgotPass = ({ language }) => {
     const windowWidthByHook = useScreenWidthDimention()
     const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
-
+    const [date, setDate] =useState(new Date(Date.now()))
     useEffect(() => {
         setSelectLanguage(getLanguage)
     })
@@ -67,6 +67,7 @@ const ForgotPass = ({ language }) => {
     const handleSubmit = async () => {
         const data = {
             email: email,
+            birthday : date,
             isForgotPass: true,
         }
 
@@ -91,6 +92,10 @@ const ForgotPass = ({ language }) => {
             setError(selectLanguage.forbidenCarac)
             return
         }
+        if(response === 409){
+            setError(selectLanguage.unvalidBirthday)
+            return
+        }
 
         setError('')
         if (response === 200) {
@@ -110,8 +115,8 @@ const ForgotPass = ({ language }) => {
         <ScrollView style={GLOBAL_STYLES.backcolor}>
             <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}></Header>
             <View>
-                <View style={{ height: 550 }}>
-                    <View style={[GLOBAL_STYLES.container, { width: formulaireBoxWidthStyle, height: 400 }]}>
+                <View style={{ height: 700 }}>
+                    <View style={[GLOBAL_STYLES.container, { width: formulaireBoxWidthStyle, height: 500 }]}>
                         <Text style={[GLOBAL_STYLES.form.text, GLOBAL_STYLES.form.title]}>{selectLanguage.forgotPass.title}</Text>
                         <View style={styles.InputStyle}>
                             <Field
@@ -122,6 +127,9 @@ const ForgotPass = ({ language }) => {
                                 value={email}
                                 secureTextEntry={false}
                             />
+                            <View style={styles.InputStyle}>
+                            <MyWebDatePicker date={date} setDate={setDate} errorDate={error}/>
+                            </View>
                             {error !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{error}</Text>}
                             <View style={styles.GoogleCaptchaContainer}>
                                 <ReCAPTCHA

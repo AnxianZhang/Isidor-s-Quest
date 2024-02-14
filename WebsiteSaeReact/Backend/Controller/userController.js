@@ -11,6 +11,7 @@ const Inscription = async (req, res) => {
     localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
     const ipAddress = IP.address();
     const date  = new Date();
+    const birthdayDate = new Date(data.bhirthday);
     date.setDate(date.getDate() + 1);
     const newUser = new User({
       prenom: data.prenom,
@@ -18,7 +19,7 @@ const Inscription = async (req, res) => {
       email: data.email,
       pseudo: data.pseudo,
       isPay: false,
-      //userIpAdress : ipAddress,
+      birthday : birthdayDate,
       ExpirationDate : date
     });
     const newUserGame = new UserGame({

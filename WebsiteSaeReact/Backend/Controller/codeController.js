@@ -42,6 +42,11 @@ const sendCodeForRetrivePass = async (req, res) => {
     if (findUser == null) {
       return res.status(401).send("Ce mail n'a pas de compte Isidor associé !")
     }
+    console.log(findUser.birthday)
+    console.log(new Date(data.birthday))
+    if(findUser.birthday.getFullYear() !== new Date(data.birthday).getFullYear() || findUser.birthday.getDate() !== new Date(data.birthday).getDate() || findUser.birthday.getMonth() !== new Date(data.birthday).getMonth()){
+      return res.status(409).send("Date anniversaire incorrect")
+    }
 
     const CODE = Math.floor(100000 + Math.random() * 900000)
     let today = new Date()
@@ -76,7 +81,6 @@ const SendCode = async (req, res) => {
     const findUserByIpAdress = await User.find({ ExpirationDate: { $gt: new Date() } }).exec();
     const findUserMail = await User.findOne({ email: data.email }).exec();
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
-
     if (!isAllUnder50Character(data)) {
       return res.status(406).send("input doivent etre <= 64")
     }
@@ -104,6 +108,9 @@ const SendCode = async (req, res) => {
 
     if (!passwordRegex.test(data.password)) {
       return res.status(405).send("le mot de passe doit respecter les exigence")
+    }
+    if(new Date(data.bhirthday) >= new Date()){
+      return res.status(412).send("Date anniversaire incorrect");
     }
 
     let code = Math.floor(100000 + Math.random() * 900000);

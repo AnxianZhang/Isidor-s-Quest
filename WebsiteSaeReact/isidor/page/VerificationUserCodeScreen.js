@@ -38,12 +38,14 @@ const VerificationScreen = ({ language }) => {
     })
 
     const RegisterUser = async () => {
+        console.log(route.params.data.bhirthday)
         const data = {
             prenom: route.params.data.prenom,
             nomFamille: route.params.data.nomFamille,
             email: route.params.data.email,
             pseudo: route.params.data.pseudo,
-            password: route.params.data.password
+            password: route.params.data.password,
+            bhirthday : route.params.data.bhirthday
 
        }
         try {

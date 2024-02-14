@@ -11,7 +11,7 @@ import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import Footer from '../component/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-
+import MyWebDatePicker from '../component/DatePicker';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 const RegisterScreen = ({ language }) => {
@@ -30,7 +30,8 @@ const RegisterScreen = ({ language }) => {
     const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
-
+    const [date, setDate] = useState(new Date(Date.now()))
+    const [errorDate, setErrorDate] = useState("");
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     useEffect(() => {
         if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || reg.test(email) === false) {
@@ -95,6 +96,7 @@ const RegisterScreen = ({ language }) => {
             pseudo: pseudo,
             password: password,
             confirmPass: confirmPassword,
+            bhirthday : date
         }
         try {
             const response = await fetch('http://localhost:3005/SendCode', {
@@ -114,6 +116,10 @@ const RegisterScreen = ({ language }) => {
 
             if (result === 408) {
                 setError(selectLanguage.forbidenCarac)
+                return
+            }
+            if(result === 412){
+                setErrorDate(selectLanguage.Register.bhirthday)
                 return
             }
             if (result === 410) {
@@ -179,6 +185,9 @@ const RegisterScreen = ({ language }) => {
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorPseudo.length > 0 ? errorPseudo : selectLanguage.Register.pseudo} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : selectLanguage.Register.confirmPassword} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
+                        <View style={styles.InputStyle}>
+                        <MyWebDatePicker date={date} setDate={setDate} errorDate={errorDate}/>
+                        </View>
                         <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{errorConfirmPassword || error ? errorConfirmPassword + error : ""}</Text>
                         <View style={styles.generalContidionBox}>
                             <Text style={styles.generalContidionText}>{selectLanguage.Register.generalCondition}</Text>
@@ -190,6 +199,7 @@ const RegisterScreen = ({ language }) => {
                                 ref={captchaRef}
                             />
                             {errorCaptcha !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorCaptcha}</Text>}
+                            {errorDate !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorDate}</Text>}
                         </View>
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => handleSubmit()} disabled={disable} testID='RegiesterScreen:Send:Button'>
@@ -209,10 +219,10 @@ const styles = StyleSheet.create({
     FormContainer: {
         alignItems: "center",
         justifyContent: "center",
-        height: 900,
+        height: 1200,
     },
     FormulaireBox: {
-        height: 800,
+        height: 1000,
         borderRadius: 50,
         backgroundColor: "#443955"
 

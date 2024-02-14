@@ -61,8 +61,8 @@
         "haveAnAccount":"You already have an account, if you have forgotten the password, you can reset it",
         "pseudoAlreadyExist" :"This username is already taken",
         "next" : "Next",
-        "regex": "The code need to have: An upper and lower case letter, contain one digite, a symbole within @ ! % * ? & and at least a length of 8"
-
+        "regex": "The code need to have: An upper and lower case letter, contain one digite, a symbole within @ ! % * ? & and at least a length of 8",
+        "bhirthday" : "bhirthday date error"
     },
     "Code" : {
         "codeText" : "Enter the code",
@@ -129,5 +129,6 @@
     },
     "lengthErr" : "The length of characters must be under or equal to 50",
     "unvalidEmail" : "Please enter a valid mail",
-    "forbidenCarac" : "Those caracters: { } $ [ ] \" ' : ; < > and admin are forbidden"
+    "forbidenCarac" : "Those caracters: { } $ [ ] \" ' : ; < > and admin are forbidden",
+    "unvalidBirthday" : "birthday date invalid "
 }

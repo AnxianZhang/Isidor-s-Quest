@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   isPay: Boolean,
   userIpAdress: String,
+  birthday : Date,
   ExpirationDate: Date
 });
 
