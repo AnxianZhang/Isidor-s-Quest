@@ -87,7 +87,7 @@ public abstract class Player : PlayerMovement
     {
         float[] playerCurrentPosition = new float[] { transform.position.x, transform.position.y };
         Position p = new(this.pseudo, gameObject.name, playerCurrentPosition, SceneManager.GetActiveScene().name);
-        //this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
+        this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
     }
 
     protected void playerActions()

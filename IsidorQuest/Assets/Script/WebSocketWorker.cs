@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
-using WebSocketSharp;
-using Assets.Script.Player;
+
+using HybridWebSocket;
 
 public class WebSocketWorker
 {
@@ -11,18 +12,21 @@ public class WebSocketWorker
 
     public WebSocketWorker()
     {
-        this.ws = new WebSocket(URL);
-        ws.Connect();
-        ws.OnMessage += (sender, e) =>
+        this.ws = WebSocketFactory.CreateInstance(URL);
+
+        ws.OnMessage += (byte[] msg) =>
         {
-            Position position = JsonUtility.FromJson<Position>(e.Data);
-            MultiPlayerManager.GetMultiPlayerManager().canBeAdd(position);
+            //Position position = JsonUtility.FromJson<Position>(Encoding.UTF8.GetString(msg));
+            //MultiPlayerManager.GetMultiPlayerManager().canBeAdd(position);
             Debug.Log("toto");
         };
+
+        
+        ws.Connect();
     }
 
     public void sendPosition(string msg)
     {
-        this.ws.Send(msg);
+        this.ws.Send(Encoding.UTF8.GetBytes(msg));
     }
 }
