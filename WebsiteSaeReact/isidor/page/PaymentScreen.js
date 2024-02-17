@@ -25,7 +25,7 @@ const PaymentCardScreen = ({ language }) => {
             email: email
         }
         try {
-            const response = await fetch('http://localhost:3005/charge', {
+            const response = await fetch('http://localhost:3005/paiement/stripe', {
                 method: 'POST',
                 credentials : "include",
                 headers: {
@@ -47,7 +47,7 @@ const PaymentCardScreen = ({ language }) => {
 
     const Payer = async () => {
         try {
-            const response = await fetch('http://localhost:3005/pay', {
+            const response = await fetch('http://localhost:3005/paiement/paypal', {
                 method: 'POST',
                 credentials : "include",
                 headers: {

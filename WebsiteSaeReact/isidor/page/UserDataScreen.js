@@ -57,7 +57,7 @@ const UserDataScreen = ({language}) => {
 
     const getUserData = async () => {
         try {
-            const response = await fetch('http://localhost:3005/getData', {
+            const response = await fetch('http://localhost:3005/user/info', {
             method: 'GET',
             credentials : "include",
             headers: {
@@ -87,7 +87,7 @@ const UserDataScreen = ({language}) => {
                     
     const sendDataForUpdate = async () => {
         try {
-            const response = await fetch('http://localhost:3005/changeData', {
+            const response = await fetch('http://localhost:3005/user/change', {
                 method: 'POST',
                 credentials : "include",
                 headers: {

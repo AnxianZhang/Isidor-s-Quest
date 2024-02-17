@@ -32,8 +32,8 @@ const Header = (props) => {
     })
 
     const getData = async () => {
-        const response = await fetch('http://localhost:3005/isConnect', {
-            method: 'POST',
+        const response = await fetch('http://localhost:3005/user/connect', {
+            method: 'GET',
             credentials : "include",
             headers: {
                 'Content-Type': 'application/json'
@@ -49,8 +49,8 @@ const Header = (props) => {
         }
         if (isConnect == "true") {
             try {
-                const response = await fetch('http://localhost:3005/isPay', {
-                    method: 'POST',
+                const response = await fetch('http://localhost:3005/paiement/pay', {
+                    method: 'GET',
                     credentials : "include",
                     headers: {
                         'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ const Header = (props) => {
     }
     const disconnection = async () => {
         try {
-            await fetch('http://localhost:3005/disconnection', {
+            await fetch('http://localhost:3005/user/disconnection', {
                 method: 'POST',
                 credentials : "include",
                 headers: {

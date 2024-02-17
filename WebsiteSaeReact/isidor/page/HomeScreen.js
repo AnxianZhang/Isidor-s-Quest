@@ -42,8 +42,8 @@ const HomeScreen = ({ language }) => {
         }
         if (isConnect == "true") {
             try {
-                const response = await fetch('http://localhost:3005/isPay', {
-                    method: 'POST',
+                const response = await fetch('http://localhost:3005/paiement/pay', {
+                    method: 'GET',
                     credentials : "include",
                     headers: {
                         'Content-Type': 'application/json'
@@ -66,8 +66,8 @@ const HomeScreen = ({ language }) => {
 
    
     const getData = async () => {
-        const response = await fetch('http://localhost:3005/isConnect', {
-            method: 'POST',
+        const response = await fetch('http://localhost:3005/user/connect', {
+            method: 'GET',
             credentials : "include",
             headers: {
                 'Content-Type': 'application/json'

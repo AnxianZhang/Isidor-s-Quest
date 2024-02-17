@@ -20,8 +20,8 @@ const UnityCompile = ({ language }) => {
 
   const getData = async()=>{
     try {
-        const res = await fetch('http://localhost:3005/getUserPayAndConnect', {
-            method: 'POST',
+        const res = await fetch('http://localhost:3005/user/paymentConnect', {
+            method: 'GET',
             credentials : "include",
             headers: {
                 'Content-Type': 'application/json'

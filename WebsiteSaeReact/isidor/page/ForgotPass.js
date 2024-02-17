@@ -36,7 +36,7 @@ const ForgotPass = ({ language }) => {
         }
         console.log(token);
         try {
-            const response = await fetch('http://localhost:3005/captchaResponse', {
+            const response = await fetch('http://localhost:3005/google/captcha', {
                 method: 'POST',
                 credentials: "include",
                 headers: {
@@ -71,7 +71,7 @@ const ForgotPass = ({ language }) => {
             isForgotPass: true,
         }
 
-        let response = await fetch('http://localhost:3005/sendCodeForRetrivePass', {
+        let response = await fetch('http://localhost:3005/code/reset', {
             method: 'POST',
             credentials: 'include', // authentification datas, like cookies
             headers: {

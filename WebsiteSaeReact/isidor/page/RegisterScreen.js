@@ -59,7 +59,7 @@ const RegisterScreen = ({ language }) => {
         }
         console.log(token);
         try {
-            const response = await fetch('http://localhost:3005/captchaResponse', {
+            const response = await fetch('http://localhost:3005/google/captcha', {
                 method: 'POST',
                 credentials: "include",
                 headers: {
@@ -99,7 +99,7 @@ const RegisterScreen = ({ language }) => {
             bhirthday : date
         }
         try {
-            const response = await fetch('http://localhost:3005/SendCode', {
+            const response = await fetch('http://localhost:3005/user/verificationAccount', {
                 method: 'POST',
                 credentials: "include",
                 headers: {

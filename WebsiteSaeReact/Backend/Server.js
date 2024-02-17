@@ -8,7 +8,7 @@ const {SendCode, VerifyCode, sendCodeForRetrivePass} = require("./Controller/cod
 const {Paypal,TransactionSuccess} = require("./Controller/paymentController");
 const {PaymentByStripe, transactionCardSuccess} = require("./Controller/PaymentCardController");
 const {mailSend} = require("./Controller/contactController")
-const {userPay, successPayment} = require("./Controller/PaymentSuccessController");
+const {userPay,  successPayment} = require("./Controller/PaymentSuccessController");
 const { saveGameData, userSave, getUserGameData } = require('./Controller/gameController');
 const {CaptchaGoogle} = require("./Controller/googleCaptchaController");
 const {get2FAQRcode, verif2FA} = require("./Controller/2FA")
@@ -37,32 +37,32 @@ app.use(cors({
   
 app.use(express.json());
 
-app.post("/inscription", Inscription);
-app.post("/connexion", Connexion)
-app.post("/sendCodeForRetrivePass", sendCodeForRetrivePass);
-app.post("/changePwd", changePwd);
-app.post("/SendCode", SendCode);
-app.post("/VerifyCode", VerifyCode);
-app.post('/pay', Paypal);  
-app.get('/success', TransactionSuccess);
-app.get('/cancel', (req, res) => res.status(400).send('Cancelled'));
-app.post("/charge", PaymentByStripe);
-app.post("/contact", mailSend);
-app.post("/successPayment", successPayment)
-app.post("/isPay", userPay);
-app.post("/isConnect", isConnect);
-app.post("/disconnection", disconnection);
-app.get("/verifyPayment", VerifySuccessPayment);
-app.get("/transactionCardSuccess", transactionCardSuccess);
-app.post("/PostSaveGame", saveGameData);
-app.get("/getData",getUserData);
-app.post("/changeData",changeUserData);
-app.post("/SaveUserGameProfile", userSave)
-app.post("/getUserPayAndConnect", getUserDataPayAndConnect)
-app.get("/getUserGameData", getUserGameData)
-app.post("/captchaResponse", CaptchaGoogle)
-app.post("/qrCode", get2FAQRcode)
-app.post("/verif2FA", verif2FA)
+app.post("/user/registration", Inscription);//ok
+app.post("/user/connexion", Connexion)//ok
+app.post("/code/reset", sendCodeForRetrivePass);//ok
+app.post("/user/resetPassword", changePwd);//ok
+app.post("/user/verificationAccount", SendCode);//ok
+app.post("/code/VerificationCode", VerifyCode);//ok
+app.post('/paiement/paypal', Paypal);//ok  
+app.get('/paiement/success', TransactionSuccess);//ok
+app.get('/paiement/cancel', (req, res) => res.status(400).send('Cancelled'));//ok
+app.post("/paiement/stripe", PaymentByStripe);//ok
+app.post("/contact/mail", mailSend);//ok
+app.get("/paiement/invoice",  successPayment)//ok
+app.get("/paiement/pay", userPay);//ok
+app.get("/user/connect", isConnect);//ok
+app.post("/user/disconnection", disconnection);//ok
+app.get("/user/verificationPayment", VerifySuccessPayment);//ok
+app.get("/paiement/transaction", transactionCardSuccess);//ok
+app.post("/game/save", saveGameData);//ok
+app.get("/user/info",getUserData);//ok
+app.post("/user/change",changeUserData);//ok
+app.post("/game/profile", userSave)//ok
+app.get("/user/paymentConnect", getUserDataPayAndConnect)//ok
+app.get("/game/userGame", getUserGameData)//ok
+app.post("/google/captcha", CaptchaGoogle)//mettre le token dans l'url//ok
+app.post("/authentification/qrCode", get2FAQRcode)//ok
+app.post("/authentification/verification", verif2FA)
 
 const port = 3005
 
