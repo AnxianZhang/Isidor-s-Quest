@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { GLOBAL_STYLES } from '../style/global';
@@ -17,16 +17,24 @@ const ChangePwd = ({ language }) => {
     const [confirmPass, setConfirmPass] = useState('')
     const [error, setError] = useState('')
     const [disable, setDisable] = useState(false)
+    const isFocused = useIsFocused()
 
     const windowWidthByHook = useScreenWidthDimention()
 
+    useEffect(() =>{
+        if (isFocused){
+            setPass("")
+            setConfirmPass('')
+            setError('')
+        }
+    }, [isFocused])
 
     useEffect(() => {
         setSelectLanguage(getLanguage)
     })
 
     useEffect(() => {
-        setDisable(!(pass && confirmPass && pass === confirmPass))
+        setDisable(!(pass && confirmPass))
     }, [pass, confirmPass])
 
     const handleSubmit = async () => {
@@ -55,26 +63,25 @@ const ChangePwd = ({ language }) => {
 
         setPass('')
         setConfirmPass('')
-        if (result === 401) {
-            setError(selectLanguage.changePwd.notCorresponding)
-            // setPass('')
-            // setConfirmPass('')
-        }
-        else if (result === 408) {
-            setError(selectLanguage.forbidenCarac)
-        }
-        else if (result === 406)
-            setError(selectLanguage.lengthErr)
-        else if (result === 402) {
-            setError(selectLanguage.changePwd.timeOut)
-            // setPass('')
-            // setConfirmPass('')
-        }
-        else {
-            // setPass('')
-            // setConfirmPass('')
-            setError('')
-            navigation.navigate('ChangePwdSuccess', { data: datas })
+
+        switch (result) {
+            case 401:
+                setError(selectLanguage.changePwd.notCorresponding)
+                break
+            case 408:
+                setError(selectLanguage.forbidenCarac)
+                break
+            case 406:
+                setError(selectLanguage.lengthErr)
+                break
+            case 402:
+                setError(selectLanguage.changePwd.timeOut)
+                break
+
+            default:
+                setError('')
+                navigation.navigate('ChangePwdSuccess', { data: datas })
+                break
         }
     }
 
