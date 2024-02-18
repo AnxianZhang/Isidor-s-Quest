@@ -55,11 +55,8 @@ const Connexion = async (req, res) => {
 
     // localStorage.setItem('isConnect', JSON.stringify({ pseudo: data.pseudo }));
     const findUserPseudo = await User.findOne({ pseudo: data.pseudo }).exec();
-    if (findUserPseudo === null) {
+    if (findUserPseudo === null || !findUserPseudo.validPassword(data.password)) {
       return res.status(401).send("Nom d'utilisateur/Mot de passe incorrect");
-    }
-    if (!findUserPseudo.validPassword(data.password)) {
-      return res.status(402).send("Nom d'utilisateur/Mot de passe incorrect");
     }
     //req.session.pseudo = data.pseudo;
     req.session.canGoTo2FA = true

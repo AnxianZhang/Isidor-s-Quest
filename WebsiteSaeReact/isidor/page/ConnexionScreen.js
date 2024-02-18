@@ -16,8 +16,6 @@ const ConnexionScreen = ({ language }) => {
     const [selectLanguage, setSelectLanguage] = useState(language);
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
-    const [errorPseudo, setErrorPseudo] = useState("");
-    const [errorPassword, setErrorPassword] = useState("");
     const [disable, setDisable] = useState(true);
     const [error, setError] = useState("")
     const navigation = useNavigation();
@@ -32,15 +30,6 @@ const ConnexionScreen = ({ language }) => {
             setDisable(false);
         }
     })
-
-    // useEffect(() => {
-    //     if (pseudo === "" || password === "") {
-    //         setDisable(true);
-    //     }
-    //     else {
-    //         setDisable(false);
-    //     }
-    // })
 
     const sendDataToDatabase = async () => {
         const data = {
@@ -57,39 +46,25 @@ const ConnexionScreen = ({ language }) => {
                 body: JSON.stringify(data)
             });
             const result = response.status;
-            if (result === 406) {
-                setError(selectLanguage.lengthErr)
-                return
-            }
 
-            if (result === 408) {
-                setError(selectLanguage.forbidenCarac)
-                return
-            }
+            setPseudo("");
+            setPassword("")
 
-            setError('')
-            if (result === 401) {
-                setPseudo("");
-                setPassword("")
-                setErrorPseudo(selectLanguage.connexion.errorConnection);
-                setErrorPassword(selectLanguage.connexion.errorConnection);
-            }
-            if (result === 402) {
-                setPseudo("");
-                setPassword("");
-                setErrorPseudo(selectLanguage.connexion.errorConnection);
-                setErrorPassword(selectLanguage.connexion.errorConnection);
-            }
-            if (result !== 401 && result !== 402) {
-                setErrorPassword("");
-                setErrorPseudo("");
-            }
-            console.log(result);
-            if (result === 200) {
-                console.log("naviguer");
-                setErrorPassword("");
-                setErrorPseudo("");
-                navigation.navigate("2FA", {pseudo: pseudo});
+            switch (result) {
+                case 406:
+                    setError(selectLanguage.lengthErr)
+                    break;
+                case 408:
+                    setError(selectLanguage.forbidenCarac)
+                    break
+                case 401:
+                    setError(selectLanguage.connexion.errorConnection)
+                    break;
+
+                default:
+                    setError("")
+                    navigation.navigate("2FA", { pseudo: pseudo });
+                    break;
             }
         }
         catch (error) {
@@ -109,8 +84,8 @@ const ConnexionScreen = ({ language }) => {
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.connexion.connection}</Text>
                     </View>
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} placeholder={errorPseudo.length ? errorPseudo : selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
-                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPassword.length > 0 && "#E55839", borderWidh: errorPassword.length > 0 && 1, width: textInputWidthStyle })} placeholderTextColor={errorPassword.length ? "#E55839" : "#000000"} placeholder={errorPassword.length ? errorPassword : selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields)} placeholderTextColor="#000000" placeholder={selectLanguage.connexion.pseudo} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
+                    <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields)} placeholderTextColor="#000000" placeholder={selectLanguage.connexion.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                     <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{error && error}</Text>
                     <View style={styles.ButtonContainer}>
                         <TouchableOpacity onPress={() => sendDataToDatabase()} disabled={disable} testID='ConnexionScreen:Send:Button'>
