@@ -45,13 +45,13 @@ const VerificationScreen = ({ language }) => {
             email: route.params.data.email,
             pseudo: route.params.data.pseudo,
             password: route.params.data.password,
-            bhirthday : route.params.data.bhirthday
+            bhirthday: route.params.data.bhirthday
 
-       }
+        }
         try {
             const response = await fetch('http://localhost:3005/inscription', {
                 method: 'POST',
-                credentials : "include",
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -81,52 +81,42 @@ const VerificationScreen = ({ language }) => {
             try {
                 const response = await fetch('http://localhost:3005/VerifyCode', {
                     method: 'POST',
-                    credentials : "include",
+                    credentials: "include",
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 });
                 const result = response.status;
-                
-                if (result === 406){
-                    setErr(selectLanguage.lengthErr)
-                    return
-                }
 
-                if (result === 408){
-                    setErr(selectLanguage.forbidenCarac)
-                    return
-                }
-                if (result === 401) {
-                    setCode("");
-                    setConfirmCode("");
-                    setErrorCode(selectLanguage.Code.errorExpireDate);
-                    setErrorConfirmCode(selectLanguage.Code.errorExpireDate)
-                    return
-                }
+                setErrorCode("");
+                setErrorConfirmCode("");
+                switch (result) {
+                    case 406:
+                        setErr(selectLanguage.lengthErr)
+                        break;
+                    case 408:
+                        setErr(selectLanguage.forbidenCarac)
+                        break;
+                    case 401:
+                        setErr(selectLanguage.Code.errorExpireDate);
+                        break;
+                    case 402:
+                        setErr(selectLanguage.Code.errorCode);
+                        break;
+                    case 409:
+                        setErr(selectLanguage.Code.block);
+                        break;
+                    case 200:
+                        setErr("");
+                        if (route.params.data.isForgotPass)
+                            navigation.navigate("ChangePwd", { data: data })
+                        else
+                            RegisterUser();
+                        break;
 
-                if (result === 402) {
-                    setCode("");
-                    setConfirmCode("");
-                    setErrorCode(selectLanguage.Code.errorCode);
-                    setErrorConfirmCode(selectLanguage.Code.errorCode);
-                    return
-                }
-                if(result === 409){
-                    setCode("");
-                    setConfirmCode("");
-                    setErrorCode(selectLanguage.Code.block);
-                    setErrorConfirmCode(selectLanguage.Code.block);
-                    return
-                }
-                if (result === 200) {
-                    setErrorCode("");
-                    setErrorConfirmCode("");
-                    if (route.params.data.isForgotPass)
-                        navigation.navigate("ChangePwd", {data: data})
-                    else 
-                        RegisterUser();
+                    default:
+                        break;
                 }
             }
             catch (error) {
@@ -150,7 +140,7 @@ const VerificationScreen = ({ language }) => {
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorCode.length > 0 && "#E55839", borderWidth: errorCode.length > 0 && 1 }]} placeholder={errorCode.length > 0 ? errorCode : selectLanguage.Code.codeText} placeholderTextColor={errorCode.length ? "#E55839" : "#000000"} onChangeText={setCode} value={code} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={[GLOBAL_STYLES.form.fields, { borderColor: errorConfirmCode.length > 0 && "#E55839", borderWidth: errorConfirmCode.length > 0 && 1 }]} placeholder={errorConfirmCode.length > 0 ? errorConfirmCode : selectLanguage.Code.codeText} placeholderTextColor={errorConfirmCode.length ? "#E55839" : "#000000"} onChangeText={setConfirmCode} value={confirmCode} secureTextEntry={false} />
                     </View>
-                    {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10, textAlign: 'center'}}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
+                    {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10, textAlign: 'center' }}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
 
                     <Seperator />
                     <View style={styles.ButtonContainer}>

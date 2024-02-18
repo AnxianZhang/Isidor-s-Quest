@@ -14,7 +14,6 @@ const ForgotPass = ({ language }) => {
     const navigation = useNavigation()
     const [selectLanguage, setSelectLanguage] = useState(language)
     const [email, setEmail] = useState("")
-    const [errorEmail, setErrorEmail] = useState("")
     const [disable, setDisable] = useState(false)
     const [error, setError] = useState("")
     const windowWidthByHook = useScreenWidthDimention()
@@ -90,6 +89,7 @@ const ForgotPass = ({ language }) => {
                 setError(selectLanguage.unvalidBirthday)
                 break;
             case 200:
+                setError("")
                 navigation.navigate('VerifyCode', { data: data })
                 break;
             default:
