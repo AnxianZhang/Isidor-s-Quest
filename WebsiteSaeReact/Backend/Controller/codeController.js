@@ -44,7 +44,7 @@ const sendCodeForRetrivePass = async (req, res) => {
     }
     console.log(findUser.birthday)
     console.log(new Date(data.birthday))
-    if(findUser.birthday.getFullYear() !== new Date(data.birthday).getFullYear() || findUser.birthday.getDate() !== new Date(data.birthday).getDate() || findUser.birthday.getMonth() !== new Date(data.birthday).getMonth()){
+    if (findUser.birthday.getFullYear() !== new Date(data.birthday).getFullYear() || findUser.birthday.getDate() !== new Date(data.birthday).getDate() || findUser.birthday.getMonth() !== new Date(data.birthday).getMonth()) {
       return res.status(409).send("Date anniversaire incorrect")
     }
 
@@ -109,13 +109,13 @@ const SendCode = async (req, res) => {
     if (!passwordRegex.test(data.password)) {
       return res.status(405).send("le mot de passe doit respecter les exigence")
     }
-    if(new Date(data.bhirthday) >= new Date()){
+    if (new Date(data.bhirthday) >= new Date()) {
       return res.status(412).send("Date anniversaire incorrect");
     }
-    if(new Date().getFullYear() - new Date(data.bhirthday).getFullYear() < 18){
+    if (new Date().getFullYear() - new Date(data.bhirthday).getFullYear() < 18) {
       return res.status(413).send("Vous devez être majeur");
     }
-    if(new Date().getFullYear() - new Date(data.bhirthday).getFullYear() >= 123){
+    if (new Date().getFullYear() - new Date(data.bhirthday).getFullYear() >= 123) {
       return res.status(414).send("Votre vrai date de naissance");
     }
     let code = Math.floor(100000 + Math.random() * 900000);
@@ -167,18 +167,18 @@ const VerifyCode = async (req, res) => {
       return res.status(408).send("forbiden carac")
     }
 
-    if(req.session.expirationDate && new Date() < req.session.expirationDate){
+    if (req.session.expirationDate && new Date() < req.session.expirationDate) {
       return res.status(409).send("bloqué, revenez plus tard");
     }
 
     if (!findCodeEmail.validCode(data.code)) {
-      if(!req.session.error ||req.session.error == null){
+      if (!req.session.error || req.session.error == null) {
         req.session.error = 1;
       }
-      else{
+      else {
         req.session.error = req.session.error + 1;
       }
-      if(req.session.error && req.session.error == 5){
+      if (req.session.error && req.session.error == 5) {
         let dateExpiration = new Date();
         dateExpiration = dateExpiration.setMinutes(dateExpiration.getMinutes() + 10);
         req.session.error = null;

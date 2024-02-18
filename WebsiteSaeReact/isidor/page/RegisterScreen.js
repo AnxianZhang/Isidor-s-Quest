@@ -23,18 +23,16 @@ const RegisterScreen = ({ language }) => {
     const [pseudo, setPseudo] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [errorEmail, setErrorEmail] = useState("");
-    const [errorPseudo, setErrorPseudo] = useState("");
     const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
     const [error, setError] = useState("")
     const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
     const [disable, setDisable] = useState(true)
     const [date, setDate] = useState(new Date(Date.now()))
-    const [errorDate, setErrorDate] = useState("");
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
     useEffect(() => {
-        if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || reg.test(email) === false) {
+        if (prenom === "" || nomFamille === "" || email === "" || pseudo === "" || password === "" || confirmPassword === "" || !reg.test(email)) {
             setDisable(true);
         }
         else {
@@ -42,7 +40,6 @@ const RegisterScreen = ({ language }) => {
         }
 
     })
-
 
     const handleSubmit = () => {
         sendDataCaptch(captchaRef.current.getValue());
@@ -84,10 +81,6 @@ const RegisterScreen = ({ language }) => {
     }
 
     const sendDataToDatabase = async () => {
-        // if (password !== confirmPassword) {
-        //     setConfirmPassword("");
-        // }
-        // else {
         setErrorConfirmPassword("")
         const data = {
             prenom: prenom,
@@ -96,7 +89,7 @@ const RegisterScreen = ({ language }) => {
             pseudo: pseudo,
             password: password,
             confirmPass: confirmPassword,
-            bhirthday : date
+            bhirthday: date
         }
         try {
             const response = await fetch('http://localhost:3005/SendCode', {
@@ -107,70 +100,60 @@ const RegisterScreen = ({ language }) => {
                 },
                 body: JSON.stringify(data)
             });
+
             const result = response.status;
             const text = await response.text();
-            if (result === 406) {
-                setError(selectLanguage.lengthErr)
-                return
-            }
-
-            if (result === 408) {
-                setError(selectLanguage.forbidenCarac)
-                return
-            }
-            if(result === 412){
-                setErrorDate(selectLanguage.Register.bhirthday)
-                return
-            }
-            if(result === 413){
-                setErrorDate(selectLanguage.Register.errorBhirthayFalse1)
-                return
-            }
-            if(result === 414){
-                setErrorDate(selectLanguage.Register.errorBhirthayFalse2)
-                return
-            }
-            if (result === 410) {
-                setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
-            }
-            else {
-                setErrorCaptcha("");
-            }
 
             setError("")
-            if (result === 401) {
-                setEmail("");
-                setErrorEmail(selectLanguage.Register.haveAnAccount);
-            }
-            else {
-                setErrorEmail("");
-                if (result === 402) {
+
+            switch (result) {
+                case 406:
+                    setError(selectLanguage.lengthErr)
+                    break;
+                case 408:
+                    setError(selectLanguage.forbidenCarac)
+                    break;
+                case 412:
+                    setError(selectLanguage.Register.bhirthday)
+                    break;
+                case 413:
+                    setError(selectLanguage.Register.errorBhirthayFalse1)
+                    break;
+                case 414:
+                    setError(selectLanguage.Register.errorBhirthayFalse2)
+                    break;
+                case 410:
+                    setErrorCaptcha(selectLanguage.Register.errorOneAccountByDay);
+                    break;
+                case 401:
+                    setEmail("");
+                    setError(selectLanguage.Register.haveAnAccount);
+                    break;
+                case 402:
                     setPseudo("");
-                    setErrorPseudo(selectLanguage.Register.pseudoAlreadyExist);
-                }
-                else if (result === 403) {
+                    setError(selectLanguage.Register.pseudoAlreadyExist);
+                    break;
+                case 403:
                     setConfirmPassword('')
-                    setErrorConfirmPassword(selectLanguage.Register.errorPasswordCaseOne);
-                }
-                else if (result === 405) {
+                    setError(selectLanguage.Register.errorPasswordCaseOne);
+                    break;
+                case 405:
                     setConfirmPassword('')
-                    setErrorConfirmPassword(selectLanguage.Register.regex)
-                }
-                else {
-                    setErrorPseudo("");
-                    if (result === 200) {
-                        setErrorEmail("");
-                        setError("")
-                        setErrorPseudo("");
-                        navigation.navigate("VerifyCode", { data: data });
-                    }
-                }
+                    setError(selectLanguage.Register.regex)
+                    break;
+                case 200:
+                    setError("")
+                    navigation.navigate("VerifyCode", { data: data });
+                    break;
+
+                default:
+                    setErrorCaptcha("");
+                    break;
             }
         }
         catch (error) {
             console.error('Erreur lors de l\'envoi des données au backend', error);
         }
-        // }
     }
 
     const windowWidthByHook = useScreenWidthDimention()
@@ -189,12 +172,12 @@ const RegisterScreen = ({ language }) => {
                         </View>
                         <Field fieldsViewStyle={[styles.InputStyle, { paddingTop: 40, }]} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.familyName} onChangeText={setNomFamille} value={nomFamille} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.name} onChangeText={setPrenom} value={prenom} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorEmail.length > 0 && "#E55839", borderWidth: errorEmail.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorEmail.length > 0 ? errorEmail : selectLanguage.Register.email} placeholderTextColor={errorEmail.length ? "#E55839" : "#000000"} onChangeText={setEmail} value={email} secureTextEntry={false} />
-                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorPseudo.length > 0 && "#E55839", borderWidh: errorPseudo.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorPseudo.length > 0 ? errorPseudo : selectLanguage.Register.pseudo} placeholderTextColor={errorPseudo.length ? "#E55839" : "#000000"} onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.email} placeholderTextColor="#000000" onChangeText={setEmail} value={email} secureTextEntry={false} />
+                        <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.pseudo} placeholderTextColor="#000000" onChangeText={setPseudo} value={pseudo} secureTextEntry={false} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })} placeholder={selectLanguage.Register.password} onChangeText={setPassword} value={password} secureTextEntry={true} />
                         <Field fieldsViewStyle={styles.InputStyle} TextInputStyle={StyleSheet.compose(GLOBAL_STYLES.form.fields, { borderColor: errorConfirmPassword.length > 0 && "#E55839", borderWidth: errorConfirmPassword.length > 0 && 1, width: textInputWidthStyle })} placeholder={errorConfirmPassword.length > 0 ? errorConfirmPassword : selectLanguage.Register.confirmPassword} placeholderTextColor={errorConfirmPassword.length ? "#E55839" : "#000000"} onChangeText={setConfirmPassword} value={confirmPassword} secureTextEntry={true} />
                         <View style={styles.InputStyle}>
-                        <MyWebDatePicker date={date} setDate={setDate} errorDate={errorDate}/>
+                            <MyWebDatePicker date={date} setDate={setDate} errorDate={error} />
                         </View>
                         <Text style={{ color: 'red', fontSize: 15, marginHorizontal: 50, textAlign: 'center' }}>{errorConfirmPassword || error ? errorConfirmPassword + error : ""}</Text>
                         <View style={styles.generalContidionBox}>
@@ -207,7 +190,7 @@ const RegisterScreen = ({ language }) => {
                                 ref={captchaRef}
                             />
                             {errorCaptcha !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorCaptcha}</Text>}
-                            {errorDate !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorDate}</Text>}
+                            {/* {errorDate !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{errorDate}</Text>} */}
                         </View>
                         <View style={styles.ButtonContainer}>
                             <TouchableOpacity onPress={() => handleSubmit()} disabled={disable} testID='RegiesterScreen:Send:Button'>
