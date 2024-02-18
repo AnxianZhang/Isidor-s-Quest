@@ -4,9 +4,10 @@ import useScreenWidthDimention from "../hook/useScreenWidthDimention";
 const MyWebDatePicker = (props) => {
   const windowWidthByHook = useScreenWidthDimention()
   const textInputWidthStyle = windowWidthByHook > 500 ? 350 : "80%"
+  console.log(props.date)
   return createElement('input', {
     type: 'date',
-    value: props.date.toISOString().split("T")[0],
+    value: props.date == "Invalid Date" ? "JJ/MM/AAAA" : props.date.toISOString().split("T")[0],
     onChange: (event) => {
       props.setDate(new Date(event.target.value))
     },
