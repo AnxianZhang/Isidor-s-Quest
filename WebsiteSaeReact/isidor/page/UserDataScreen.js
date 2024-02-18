@@ -7,9 +7,9 @@ import { getLanguage } from '../function/languageSelect';
 import { GLOBAL_STYLES } from '../style/global';
 import useScreenWidthDimention from '../hook/useScreenWidthDimention';
 import { useIsFocused } from '@react-navigation/native';
-const UserDataScreen = ({language}) => {
-    const [selectLanguage, setSelectLanguage] = useState(language); 
-    useEffect(()=>{
+const UserDataScreen = ({ language }) => {
+    const [selectLanguage, setSelectLanguage] = useState(language);
+    useEffect(() => {
         setSelectLanguage(getLanguage);
     })
     const [prenom, setPrenom] = useState('');
@@ -27,7 +27,7 @@ const UserDataScreen = ({language}) => {
             getUserData();
         }
     }, [isFocused])
-    
+
     const handleEditing = () => {
         if (isEditing) {
             sendDataForUpdate();
@@ -58,38 +58,38 @@ const UserDataScreen = ({language}) => {
     const getUserData = async () => {
         try {
             const response = await fetch('http://localhost:3005/getData', {
-            method: 'GET',
-            credentials : "include",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
-        if (response.status !== 200) {
-            console.error('Erreur lors de la récupération des données. Statut :', response.status);
-            // Gérez le statut 502 ou tout autre statut d'erreur ici
-            return;
-        }
-        const res = await response.text();
-        const result = JSON.parse(res);
-        // console.log(result);
-        // console.log(result.prenom);
+                method: 'GET',
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            if (response.status !== 200) {
+                console.error('Erreur lors de la récupération des données. Statut :', response.status);
+                // Gérez le statut 502 ou tout autre statut d'erreur ici
+                return;
+            }
+            const res = await response.text();
+            const result = JSON.parse(res);
+            // console.log(result);
+            // console.log(result.prenom);
 
-        setPrenom(result.prenom);
-        setNomFamille(result.nomFamille);
-        setPseudo(result.pseudo);
-        setEmail(result.email);
+            setPrenom(result.prenom);
+            setNomFamille(result.nomFamille);
+            setPseudo(result.pseudo);
+            setEmail(result.email);
 
-        // console.log({prenom});
+            // console.log({prenom});
         } catch (error) {
             console.error('Erreur lors de la récupération des données :', error);
         }
     };
-                    
+
     const sendDataForUpdate = async () => {
         try {
             const response = await fetch('http://localhost:3005/changeData', {
                 method: 'POST',
-                credentials : "include",
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
@@ -102,32 +102,29 @@ const UserDataScreen = ({language}) => {
             }).then(res => res.status)
 
             getUserData()
-            if (response == 200) {
-                console.log('Statut :', response.status);
-                setNotif(selectLanguage.UserData.notifOk);
-                return;
-            }
-            if (response == 402) {
-                console.log('Statut :', response.status);
-                setNotif(selectLanguage.UserData.notifPseudo);
-                return;
-            }
-            if (response == 403) {
-                console.log('Statut :', response.status);
-                setNotif(selectLanguage.UserData.notifNull);
-                return;
-            }
 
-            if (response === 406){
-                setErr(selectLanguage.lengthErr)
-                return
-            }
+            switch (response) {
+                case 200:
+                    setErr("")
+                    setNotif(selectLanguage.UserData.notifOk);
+                    break;
+                case 402:
+                    setNotif(selectLanguage.UserData.notifPseudo);
+                    break;
+                case 403:
+                    setNotif(selectLanguage.UserData.notifNull);
+                    break;
+                case 406:
+                    setErr(selectLanguage.lengthErr)
+                    break;
+                case 408:
+                    setErr(selectLanguage.forbidenCarac)
+                    break;
 
-            if (response === 408){
-                setErr(selectLanguage.forbidenCarac)
-                return
+                default:
+                    setErr("pd in code")
+                    break;
             }
-
         } catch (error) {
             console.error('Erreur lors de la récupération des données :', error);
             setNotif(selectLanguage.UserData.notifErr);
@@ -137,21 +134,21 @@ const UserDataScreen = ({language}) => {
 
     const windowWidthByHook = useScreenWidthDimention()
     const formulaireBoxWidthStyle = windowWidthByHook > 750 ? windowWidthByHook > 900 ? "50%" : "70%" : "90%"
-    const textInputWidthStyle = windowWidthByHook > 500? 400 : "100%"
-    const buttonWidthStyle = windowWidthByHook > 500? 400 : "200%"
+    const textInputWidthStyle = windowWidthByHook > 500 ? 400 : "100%"
+    const buttonWidthStyle = windowWidthByHook > 500 ? 400 : "200%"
     return (
         <ScrollView style={GLOBAL_STYLES.backcolor}>
-            <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage}/>
+            <Header style={GLOBAL_STYLES.header} setLanguage={setSelectLanguage} language={selectLanguage} />
             <View style={styles.FormContainer}>
-                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle})}>
+                <View style={StyleSheet.compose(styles.FormulaireBox, { width: formulaireBoxWidthStyle })}>
                     <View style={GLOBAL_STYLES.form.title}>
                         <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.UserData.title}</Text>
-                        <Text style={ {color: "white"}}>{email}</Text>
+                        <Text style={{ color: "white" }}>{email}</Text>
                     </View>
 
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })}
                             value={prenom}
                             placeholder={selectLanguage.UserData.name}
                             onChangeText={(text) => handleInputChange('prenom', text)}
@@ -161,7 +158,7 @@ const UserDataScreen = ({language}) => {
 
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })}
                             value={nomFamille}
                             placeholder={selectLanguage.UserData.familyName}
                             onChangeText={(text) => handleInputChange('nomFamille', text)}
@@ -171,7 +168,7 @@ const UserDataScreen = ({language}) => {
 
                     <View style={styles.InputStyle}>
                         <TextInput
-                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle})}
+                            style={StyleSheet.compose(GLOBAL_STYLES.form.fields, { width: textInputWidthStyle })}
                             value={pseudo}
                             placeholder={selectLanguage.UserData.pseudo}
                             onChangeText={(text) => handleInputChange('pseudo', text)}
@@ -181,19 +178,19 @@ const UserDataScreen = ({language}) => {
                     {err.length ? <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 10 }}>{err}</Text> : <Text style={{ fontSize: 20, marginVertical: 5 }}> </Text>}
 
                     <View style={styles.ButtonContainer}>
-                        <TouchableOpacity 
-                            disabled={isEditing === true ?(prenom&&nomFamille&&pseudo?false:true):false}
-                            onPress={handleEditing} 
-                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: isEditing === true ?(prenom&&nomFamille&&pseudo?"#5BD94C":"#a9a9a9"):"#E55839", width: buttonWidthStyle })}
+                        <TouchableOpacity
+                            disabled={isEditing === true ? (prenom && nomFamille && pseudo ? false : true) : false}
+                            onPress={handleEditing}
+                            style={StyleSheet.compose(styles.ButtonEnvoyerContainer, { backgroundColor: isEditing === true ? (prenom && nomFamille && pseudo ? "#5BD94C" : "#a9a9a9") : "#E55839", width: buttonWidthStyle })}
                         >
-                            <Text style={styles.EnvoyerButtonText}>{ isEditing === true ? selectLanguage.UserData.btnEnv : selectLanguage.UserData.btnEdit }</Text>
+                            <Text style={styles.EnvoyerButtonText}>{isEditing === true ? selectLanguage.UserData.btnEnv : selectLanguage.UserData.btnEdit}</Text>
                         </TouchableOpacity>
                     </View>
                     {notif && <Text style={GLOBAL_STYLES.form.notification}>{notif}</Text>}
                 </View>
             </View>
             <Footer backColor={"#443955"} setLanguage={setSelectLanguage} language={selectLanguage}></Footer>
-        </ScrollView> 
+        </ScrollView>
     );
 };
 

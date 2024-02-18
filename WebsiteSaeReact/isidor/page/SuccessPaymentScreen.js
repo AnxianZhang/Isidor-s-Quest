@@ -24,43 +24,43 @@ const SucessPaymentScreen = ({ language }) => {
 
     const sendDataToDatabase = async () => {
         let executeFunction;
-        getData().then(async function(result) {
-        if(result == "true"){
-        try {
-            const res = await fetch('http://localhost:3005/successPayment', {
-                method: 'POST',
-                credentials : "include",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-            const status = await res.status;
-            if (status == 200){
-                const text = await res.text();
-                setFactureLink(text);
+        getData().then(async function (result) {
+            if (result == "true") {
+                try {
+                    const res = await fetch('http://localhost:3005/successPayment', {
+                        method: 'POST',
+                        credentials: "include",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    });
+                    const status = await res.status;
+                    if (status == 200) {
+                        const text = await res.text();
+                        setFactureLink(text);
+                    }
+                }
+                catch (error) {
+                    console.error('Erreur lors de l\'envoi des données au backend', error);
+                }
             }
-        }
-        catch (error) {
-            console.error('Erreur lors de l\'envoi des données au backend', error);
-        }
-        }
-        else{
-            navigation.navigate("Home");
-        }
-    });
+            else {
+                navigation.navigate("Home");
+            }
+        });
     }
 
-    const getData = async()=>{
+    const getData = async () => {
         try {
             const res = await fetch('http://localhost:3005/verifyPayment', {
                 method: 'GET',
-                credentials : "include",
+                credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
             });
             const status = await res.status;
-            if (status == 200){
+            if (status == 200) {
                 const text = await res.text();
                 return text;
             }
@@ -77,17 +77,17 @@ const SucessPaymentScreen = ({ language }) => {
             <View style={styles.container}>
                 {factureLink != "" ?
                     <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Payment.SuccessCBPayment}</Text>
-                : 
+                    :
                     <Text style={GLOBAL_STYLES.form.text}>{selectLanguage.Payment.SuccessPaypalPayment}</Text>
                 }
                 {factureLink != "" &&
-                <View style={styles.buttonContain}> 
-                <TouchableOpacity onPress={() => { window.open(factureLink, '_blank'); }}>
-                    <View style={styles.buttonContent}>
-                        <Text style={styles.headerText}>{selectLanguage.Payment.factureLinkChargement}</Text>
+                    <View style={styles.buttonContain}>
+                        <TouchableOpacity onPress={() => { window.open(factureLink, '_blank'); }}>
+                            <View style={styles.buttonContent}>
+                                <Text style={styles.headerText}>{selectLanguage.Payment.factureLinkChargement}</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
-                </View>
                 }
             </View>
         </View>
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         color: "white",
     },
-    buttonContain : {
-        paddingTop : 10,
+    buttonContain: {
+        paddingTop: 10,
     }
 });
 
