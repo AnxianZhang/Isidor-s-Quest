@@ -20,7 +20,7 @@ const ForgotPass = ({ language }) => {
     const windowWidthByHook = useScreenWidthDimention()
     const [errorCaptcha, setErrorCaptcha] = useState("")
     const captchaRef = useRef(null)
-    const [date, setDate] =useState(new Date(Date.now()))
+    const [date, setDate] = useState(new Date(Date.now()))
     useEffect(() => {
         setSelectLanguage(getLanguage)
     })
@@ -60,14 +60,10 @@ const ForgotPass = ({ language }) => {
         }
     }
 
-    // useEffect(()=>{
-    //     // setDisable(!(email && reg.test(email)))
-    // }, [email])
-
     const handleSubmit = async () => {
         const data = {
             email: email,
-            birthday : date,
+            birthday: date,
             isForgotPass: true,
         }
 
@@ -80,31 +76,26 @@ const ForgotPass = ({ language }) => {
             body: JSON.stringify(data),
         }).then(res => res.status)
 
-        if (response === 406) {
-            setError(selectLanguage.lengthErr)
-            return
-        }
-        if (response === 405) {
-            setError(selectLanguage.unvalidEmail)
-            return
-        }
-        if (response === 408) {
-            setError(selectLanguage.forbidenCarac)
-            return
-        }
-        if(response === 409){
-            setError(selectLanguage.unvalidBirthday)
-            return
-        }
-
-        setError('')
-        if (response === 200) {
-            // setErrorEmail('')
-            navigation.navigate('VerifyCode', { data: data })
-        }
-        else {
-            setEmail('')
-            setError(selectLanguage.forgotPass.noAccount)
+        switch (response) {
+            case 406:
+                setError(selectLanguage.lengthErr)
+                break;
+            case 405:
+                setError(selectLanguage.unvalidEmail)
+                break;
+            case 408:
+                setError(selectLanguage.forbidenCarac)
+                break;
+            case 409:
+                setError(selectLanguage.unvalidBirthday)
+                break;
+            case 200:
+                navigation.navigate('VerifyCode', { data: data })
+                break;
+            default:
+                setEmail('')
+                setError(selectLanguage.forgotPass.noAccount)
+                break;
         }
     }
 
@@ -128,7 +119,7 @@ const ForgotPass = ({ language }) => {
                                 secureTextEntry={false}
                             />
                             <View style={styles.InputStyle}>
-                            <MyWebDatePicker date={date} setDate={setDate} errorDate={error}/>
+                                <MyWebDatePicker date={date} setDate={setDate} errorDate={error} />
                             </View>
                             {error !== "" && <Text style={{ fontSize: 15, marginVertical: 'auto', color: '#E55839', marginVertical: 20 }}>{error}</Text>}
                             <View style={styles.GoogleCaptchaContainer}>
