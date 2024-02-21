@@ -37,7 +37,7 @@ const ConnexionScreen = ({ language }) => {
             password: password
         }
         try {
-            const response = await fetch('http://localhost:3005/connexion', {
+            const response = await fetch('http://localhost:3005/user/connexion', {
                 method: 'POST',
                 credentials: "include",
                 headers: {

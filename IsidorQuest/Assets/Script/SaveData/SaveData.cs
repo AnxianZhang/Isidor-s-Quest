@@ -73,7 +73,7 @@ public class SaveData : MonoBehaviour
             string currentSceneName = currentScene.name;
             double percentSuccessLevel = getLevelPercent(this.SpawnPoint.GetComponent<Transform>().position.x, this.mainPlayer.GetComponent<Transform>().position.x, this.door.GetComponent<Transform>().position.x);
             int coinQuantity = CoinUI.getCoins();
-            StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel));
+            StartCoroutine(PostSaveGame("http://localhost:3005/game/save", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, false, percentSuccessLevel);
         }
         bool transportOk = SceneManager.GetActiveScene().name == "Village" ? this.door.GetComponent<NPC>().getCanPlayerInteract() : door.GetComponent<DoorToNext>().isDoor;
@@ -93,8 +93,8 @@ public class SaveData : MonoBehaviour
             }
             int[] inventoryNumbers = inventoryNumber();
             int coinQuantity = CoinUI.getCoins();
-            StartCoroutine(PostSaveGame("http://localhost:3005/PostSaveGame", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
-            StartCoroutine(UserSaveProfile("http://localhost:3005/SaveUserGameProfile", coinQuantity, nextSceneIndex, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
+            StartCoroutine(PostSaveGame("http://localhost:3005/game/save", currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00));
+            StartCoroutine(UserSaveProfile("http://localhost:3005/game/profile", coinQuantity, nextSceneIndex, this.mainPlayer.name, this.mainPlayer.GetComponent<Player>().skills.damageDealLvl, this.mainPlayer.GetComponent<Player>().skills.defenceLvl, this.mainPlayer.GetComponent<Player>().skills.lifeLvl, this.mainPlayer.GetComponent<Player>().skills.moveSpeedLvl,inventoryNumbers[0], inventoryNumbers[1], inventoryNumbers[2], inventoryNumbers[3]));
             SaveDataInLocal(currentSceneName, this.mainPlayer.name, coinQuantity, this.mainPlayer.GetComponent<Player>().currentLife, true, 100.00);
         }
     }

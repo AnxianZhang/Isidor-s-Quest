@@ -57,29 +57,28 @@ const UserDataScreen = ({ language }) => {
 
     const getUserData = async () => {
         try {
-            const response = await fetch('http://localhost:3005/getData', {
-                method: 'GET',
-                credentials: "include",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-            if (response.status !== 200) {
-                console.error('Erreur lors de la récupération des données. Statut :', response.status);
-                // Gérez le statut 502 ou tout autre statut d'erreur ici
-                return;
-            }
-            const res = await response.text();
-            const result = JSON.parse(res);
-            // console.log(result);
-            // console.log(result.prenom);
+            const response = await fetch('http://localhost:3005/user/info', {
+            method: 'GET',
+            credentials : "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        if (response.status !== 200) {
+            console.error('Erreur lors de la récupération des données. Statut :', response.status);
+            // Gérez le statut 502 ou tout autre statut d'erreur ici
+            return;
+        }
+        const res = await response.text();
+        const result = JSON.parse(res);
+        // console.log(result);
+        // console.log(result.prenom);
+        setPrenom(result.prenom);
+        setNomFamille(result.nomFamille);
+        setPseudo(result.pseudo);
+        setEmail(result.email);
 
-            setPrenom(result.prenom);
-            setNomFamille(result.nomFamille);
-            setPseudo(result.pseudo);
-            setEmail(result.email);
-
-            // console.log({prenom});
+        // console.log({prenom});
         } catch (error) {
             console.error('Erreur lors de la récupération des données :', error);
         }
@@ -87,7 +86,7 @@ const UserDataScreen = ({ language }) => {
 
     const sendDataForUpdate = async () => {
         try {
-            const response = await fetch('http://localhost:3005/changeData', {
+            const response = await fetch('http://localhost:3005/user/change', {
                 method: 'POST',
                 credentials: "include",
                 headers: {

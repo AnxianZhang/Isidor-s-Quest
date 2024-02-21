@@ -7,19 +7,6 @@ const IP = require('ip');
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!%*?&])[A-Za-z\d@!%*?&]{8,}$/;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: 'isidorquest@gmail.com',
-    pass: 'qbimqevwqdqgviaz',
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
 const sendCodeForRetrivePass = async (req, res) => {
   try {
     const data = req.body
@@ -42,9 +29,8 @@ const sendCodeForRetrivePass = async (req, res) => {
     if (findUser == null) {
       return res.status(401).send("Ce mail n'a pas de compte Isidor associé !")
     }
-    console.log(findUser.birthday)
-    console.log(new Date(data.birthday))
-    if (findUser.birthday.getFullYear() !== new Date(data.birthday).getFullYear() || findUser.birthday.getDate() !== new Date(data.birthday).getDate() || findUser.birthday.getMonth() !== new Date(data.birthday).getMonth()) {
+
+    if(findUser.birthday.getFullYear() !== new Date(data.birthday).getFullYear() || findUser.birthday.getDate() !== new Date(data.birthday).getDate() || findUser.birthday.getMonth() !== new Date(data.birthday).getMonth()){
       return res.status(409).send("Date anniversaire incorrect")
     }
 
@@ -52,12 +38,7 @@ const sendCodeForRetrivePass = async (req, res) => {
     let today = new Date()
     let expireDate = today.setMinutes(today.getMinutes() + 1)
 
-    await transporter.sendMail({
-      from: "no-reply <foo@example.com>",
-      to: req.body.email,
-      subject: "Code de verification",
-      text: "Votre code pour l'initialisation du mot de passe: " + CODE,
-    })
+    SendMail(req.body.email, CODE);
 
     const newCode = new Code({
       email: req.body.email,
@@ -73,6 +54,27 @@ const sendCodeForRetrivePass = async (req, res) => {
   }
 }
 
+const SendMail = async (email, CODE)=>{
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'isidorquest@gmail.com',
+      pass: 'qbimqevwqdqgviaz',
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  await transporter.sendMail({
+    from: "no-reply <foo@example.com>",
+    to: email,
+    subject: "Code de verification",
+    text: "Votre code pour l'initialisation du mot de passe: " + CODE,
+  })
+}
 const SendCode = async (req, res) => {
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/DatabaseIsidor');
@@ -123,12 +125,8 @@ const SendCode = async (req, res) => {
     let expireDate = today.setMinutes(today.getMinutes() + 1);
 
     console.log(code);
-    await transporter.sendMail({
-      from: '"no-reply" <foo@example.com>',
-      to: data.email, // list of receivers
-      subject: "Code de verification", // Subject line
-      text: "Voici le code à entrer sur le site : " + code, // plain text body
-    });
+    SendMail(data.email, code);
+    
     const newCode = new Code({
       email: data.email,
       ExpirationDate: expireDate,

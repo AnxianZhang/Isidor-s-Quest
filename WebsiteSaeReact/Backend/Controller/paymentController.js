@@ -14,7 +14,7 @@ const Paypal = (req, res) => {
           "payment_method": "paypal"
       },
       "redirect_urls": {
-          "return_url": "http://localhost:3005/success",
+          "return_url": "http://localhost:3005/paiement/success",
           "cancel_url": "http://localhost:19006/Cancel"
       },
       "transactions": [{

@@ -22,23 +22,23 @@ const UnityCompile = ({ language }) => {
 
   const getData = async () => {
     try {
-      const res = await fetch('http://localhost:3005/getUserPayAndConnect', {
-        method: 'POST',
-        credentials: "include",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      });
-      const status = await res.status;
-      const text = await res.text();
-      console.log(text)
-      console.log(status)
-      if (status === 501) {
-        navigation.navigate("Home")
-      }
-      if (status === 502) {
-        navigation.navigate("Home")
-      }
+        const res = await fetch('http://localhost:3005/user/paymentConnect', {
+            method: 'GET',
+            credentials : "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        const status = await res.status;
+        const text = await res.text();
+        console.log(text)
+        console.log(status)
+        if (status === 501){
+           navigation.navigate("Home")
+        }
+        if (status === 502){
+          navigation.navigate("Home")
+       }
     }
     catch (error) {
       console.error('Erreur lors de l\'envoi des données au backend', error);

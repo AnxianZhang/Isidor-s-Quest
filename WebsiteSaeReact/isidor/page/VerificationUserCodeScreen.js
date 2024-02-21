@@ -49,7 +49,7 @@ const VerificationScreen = ({ language }) => {
 
         }
         try {
-            const response = await fetch('http://localhost:3005/inscription', {
+            const response = await fetch('http://localhost:3005/user/registration', {
                 method: 'POST',
                 credentials: "include",
                 headers: {
@@ -79,7 +79,7 @@ const VerificationScreen = ({ language }) => {
                 code: code
             }
             try {
-                const response = await fetch('http://localhost:3005/VerifyCode', {
+                const response = await fetch('http://localhost:3005/code/VerificationCode', {
                     method: 'POST',
                     credentials: "include",
                     headers: {

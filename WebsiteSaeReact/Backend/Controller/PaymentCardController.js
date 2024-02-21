@@ -13,7 +13,7 @@ const PaymentByStripe = async (req, res) => {
               },
             ],
             mode: 'payment',
-            success_url: `http://localhost:3005/transactionCardSuccess`,
+            success_url: `http://localhost:3005/paiement/transaction`,
             cancel_url: `http://localhost:19006/Cancel`,
             invoice_creation : {
               enabled: true,

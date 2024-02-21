@@ -27,8 +27,8 @@ const SucessPaymentScreen = ({ language }) => {
         getData().then(async function (result) {
             if (result == "true") {
                 try {
-                    const res = await fetch('http://localhost:3005/successPayment', {
-                        method: 'POST',
+                    const res = await fetch('http://localhost:3005/paiement/invoice', {
+                        method: 'GET',
                         credentials: "include",
                         headers: {
                             'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ const SucessPaymentScreen = ({ language }) => {
 
     const getData = async () => {
         try {
-            const res = await fetch('http://localhost:3005/verifyPayment', {
+            const res = await fetch('http://localhost:3005/user/verificationPayment', {
                 method: 'GET',
                 credentials: "include",
                 headers: {

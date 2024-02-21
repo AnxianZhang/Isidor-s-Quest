@@ -52,7 +52,7 @@ const ChangePwd = ({ language }) => {
             return
         }
 
-        const result = await fetch('http://localhost:3005/changePwd', {
+        const result = await fetch('http://localhost:3005/user/resetPassword', {
             method: 'POST',
             credentials: 'include',
             headers: {

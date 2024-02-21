@@ -48,7 +48,7 @@ public class GetData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetRequest("http://localhost:5000/getUserGameData"));
+        StartCoroutine(GetRequest("http://localhost:5000/game/userGame"));
     }
 
     private void setObject()
@@ -69,7 +69,7 @@ public class GetData : MonoBehaviour
             bool transportOk = SceneManager.GetActiveScene().name == "Village" ? this.door.GetComponent<NPC>().getCanPlayerInteract() : door.GetComponent<DoorToNext>().isDoor;
             if (door != null && transportOk)
             {
-                StartCoroutine(GetRequest("http://localhost:5000/getUserGameData"));
+                StartCoroutine(GetRequest("http://localhost:5000/game/userGame"));
             }
         }
     }

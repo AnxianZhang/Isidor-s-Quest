@@ -39,7 +39,7 @@ const FAPage = ({ language }) => {
         }
 
         try {
-            const response = await makeRequestTo(data, 'http://localhost:3005/qrCode')
+            const response = await makeRequestTo(data, 'http://localhost:3005/authentification/qrCode')
             
             switch (response.status) {
                 case 401:
@@ -74,7 +74,7 @@ const FAPage = ({ language }) => {
         }
 
         try {
-            const response = await makeRequestTo(data, 'http://localhost:3005/verif2FA')
+            const response = await makeRequestTo(data, 'http://localhost:3005/authentification/verification')
             
             switch (response.status) {
                 case 401:

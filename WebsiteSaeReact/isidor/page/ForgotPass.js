@@ -30,18 +30,13 @@ const ForgotPass = ({ language }) => {
     }
 
     const sendDataCaptch = async (token) => {
-        const data = {
-            token: token
-        }
-        console.log(token);
         try {
-            const response = await fetch('http://localhost:3005/captchaResponse', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:3005/google/captcha?token=${token}`, {
+                method: 'GET',
                 credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
             });
             const result = response.status;
             const text = await response.text();
@@ -66,7 +61,7 @@ const ForgotPass = ({ language }) => {
             isForgotPass: true,
         }
 
-        let response = await fetch('http://localhost:3005/sendCodeForRetrivePass', {
+        let response = await fetch('http://localhost:3005/code/reset', {
             method: 'POST',
             credentials: 'include', // authentification datas, like cookies
             headers: {
