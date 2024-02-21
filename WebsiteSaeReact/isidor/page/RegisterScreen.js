@@ -54,18 +54,13 @@ const RegisterScreen = ({ language }) => {
     })
 
     const sendDataCaptch = async (token) => {
-        const data = {
-            token: token
-        }
-        console.log(token);
         try {
-            const response = await fetch('http://localhost:3005/google/captcha', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:3005/google/captcha?token=${token}`, {
+                method: 'GET',
                 credentials: "include",
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
             });
             const result = response.status;
             const text = await response.text();

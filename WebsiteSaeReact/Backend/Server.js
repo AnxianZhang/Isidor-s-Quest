@@ -37,31 +37,31 @@ app.use(cors({
   
 app.use(express.json());
 
-app.post("/user/registration", Inscription);//ok
-app.post("/user/connexion", Connexion)//ok
-app.post("/code/reset", sendCodeForRetrivePass);//ok
-app.post("/user/resetPassword", changePwd);//ok
-app.post("/user/verificationAccount", SendCode);//ok
-app.post("/code/VerificationCode", VerifyCode);//ok
-app.post('/paiement/paypal', Paypal);//ok  
-app.get('/paiement/success', TransactionSuccess);//ok
-app.get('/paiement/cancel', (req, res) => res.status(400).send('Cancelled'));//ok
-app.post("/paiement/stripe", PaymentByStripe);//ok
-app.post("/contact/mail", mailSend);//ok
-app.get("/paiement/invoice",  successPayment)//ok
-app.get("/paiement/pay", userPay);//ok
-app.get("/user/connect", isConnect);//ok
-app.post("/user/disconnection", disconnection);//ok
-app.get("/user/verificationPayment", VerifySuccessPayment);//ok
-app.get("/paiement/transaction", transactionCardSuccess);//ok
-app.post("/game/save", saveGameData);//ok
-app.get("/user/info",getUserData);//ok
-app.post("/user/change",changeUserData);//ok
-app.post("/game/profile", userSave)//ok
-app.get("/user/paymentConnect", getUserDataPayAndConnect)//ok
-app.get("/game/userGame", getUserGameData)//ok
-app.post("/google/captcha", CaptchaGoogle)//mettre le token dans l'url//ok
-app.post("/authentification/qrCode", get2FAQRcode)//ok
+app.post("/user/registration", Inscription);
+app.post("/user/connexion", Connexion)
+app.post("/code/reset", sendCodeForRetrivePass);
+app.post("/user/resetPassword", changePwd);
+app.post("/user/verificationAccount", SendCode);
+app.post("/code/VerificationCode", VerifyCode);
+app.post('/paiement/paypal', Paypal);
+app.get('/paiement/success', TransactionSuccess);
+app.get('/paiement/cancel', (req, res) => res.status(400).send('Cancelled'));
+app.post("/paiement/stripe", PaymentByStripe);
+app.post("/contact/mail", mailSend);
+app.get("/paiement/invoice",  successPayment)
+app.get("/paiement/pay", userPay);
+app.get("/user/connect", isConnect)
+app.post("/user/disconnection", disconnection);
+app.get("/user/verificationPayment", VerifySuccessPayment);
+app.get("/paiement/transaction", transactionCardSuccess);
+app.post("/game/save", saveGameData);
+app.get("/user/info",getUserData);
+app.post("/user/change",changeUserData);
+app.post("/game/profile", userSave)
+app.get("/user/paymentConnect", getUserDataPayAndConnect)
+app.get("/game/userGame", getUserGameData)
+app.get("/google/captcha", CaptchaGoogle)
+app.post("/authentification/qrCode", get2FAQRcode)
 app.post("/authentification/verification", verif2FA)
 
 const port = 3005
