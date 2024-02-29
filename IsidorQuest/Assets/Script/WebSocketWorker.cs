@@ -11,13 +11,13 @@ public class WebSocketWorker
 
     public WebSocketWorker()
     {
-        this.ws = new WebSocket(URL);
-        ws.Connect();
-        ws.OnMessage += (sender, e) =>
-        {
-            Position position = JsonUtility.FromJson<Position>(e.Data);
-            Debug.Log(position.characterClass);
-        };
+       // this.ws = new WebSocket(URL);
+        //ws.Connect();
+        //ws.OnMessage += (sender, e) =>
+        //{
+        //    Position position = JsonUtility.FromJson<Position>(e.Data);
+        //    Debug.Log(position.characterClass);
+        //};
     }
 
     public void sendPosition (string msg)
