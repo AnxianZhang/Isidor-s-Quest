@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Archer : Player
 {

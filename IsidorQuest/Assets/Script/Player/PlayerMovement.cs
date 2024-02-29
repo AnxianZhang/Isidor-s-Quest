@@ -55,7 +55,7 @@ public abstract class PlayerMovement : MonoBehaviour
         float [] playerCurrentPosition = new float[] { transform.position.x, transform.position.y };
         Position p = new ("", gameObject.name, playerCurrentPosition, SceneManager.GetActiveScene().name);
         
-        this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
+        //this.webSocketWorker.sendPosition(JsonUtility.ToJson(p));
 
         this.hMovement = Input.GetAxis("Horizontal") * moveSpeed;
 
