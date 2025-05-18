@@ -89,33 +89,61 @@ npm start
 cd ../isidor
 npm start
 ```
+> Une fois lancé, pressez `w` pour **ouvrir automatiquement le site web dans le navigateur**.
 
 ---
 
-### 4. Lancer le jeu 
+### 4. Connexion utilisateur
+
+Avant de lancer le jeu, certains prérequis sont nécessaires :
+
+* Avoir une **adresse email valide** (pour recevoir un code de vérification).
+* Installer l'application **Google Authenticator**.
+* Créer un compte et se connecter via le **site web** lancé.
+
+---
+
+### 5. Lancer le jeu 
+
+#### Option 1 – Depuis Unity (éditeur) :
+
+1. Ouvrir le projet **`IsidorQuest`** avec Unity.
+2. Dans l’explorateur de projet (fenêtre **Project**), chercher :
+
+   ```
+   Assets/Scenes/HomeMenu.unity
+   ```
+3. Double-cliquez sur la scène `HomeMenu.unity`.
+4. Cliquez sur le bouton **Play** (icône triangle en haut de l’écran) pour démarrer le jeu dans l'éditeur.
+
+#### Option 2 – Depuis WebGL (intégration web) :
+
+##### Étapes de build WebGL :
 
 1. Ouvrir le projet Unity (`IsidorQuest`) dans l’éditeur.
 2. Aller dans **File > Build Settings**, sélectionner **WebGL** comme plateforme.
-3. Cliquer sur **Build** : cela génère un dossier `Build` avec `index.html`.
+3. Cliquer sur **Build** : cela génère un dossier `isidor_build_web_jeu` (par exemple) contenant `index.html`.
 
-#### Deux façons de tester :
+##### Lancer :
+Aller dans le dossier où le build Unity WebGL a été généré (`isidor_build_web_jeu`) :
+1. Installer le serveur local (si ce n’est pas déjà fait) :
+  ```bash
+  npm install -g serve
+  ```
+2. Lancer le serveur sur le port 5500
+  ```bash
+  serve -l 5500
+  ```
+> Le jeu sera accessible à l’adresse : [http://localhost:5500](http://localhost:5500). Ce lien est utilisé dans le site lancé via une balise `iframe` :
 
-   * **Solution simple :** ouvre Unity et clique sur **Play** pour tester dans l’éditeur.
-   * **Solution WebGL (pour intégration avec le site) :** Depuis le dossier `Build`, exécuter :
-     ```bash
-     npm install -g serve
-     serve -s Build -l 5500
-     ```
-     > ⚠️ Le port **5500 est important** car il est utilisé dans le site web (`iframe src="http://localhost:5500"`). Ne changez pas ce port sans mettre à jour le code React.
+> ```html
+> <iframe src="http://localhost:5500"></iframe>
+> ```
 
-     Ensuite, dans un autre terminal, lancer le site :
-      ```bash
-      cd WebsiteSaeReact/isidor
-      npm start
-      ```
+> **Ne changez pas le port 5500**, sauf si vous mettez également à jour le code du site web qui l’utilise.
 
 ## Accès au jeu
-Un compte utilisateur et un paiement (fictif) sont nécessaires.
+Un compte utilisateur et **un paiement** (fictif) sont nécessaires.
 
 ### Données de test :
 
